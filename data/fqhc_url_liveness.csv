@@ -1,0 +1,1010 @@
+slug,fqhc_name,zip,website_source,original_url,is_alive,final_url,http_status,reason,checked_at
+arcadia-ca,APHCV - El Monte/Rosemead Health Center,91731,original,https://www.aphcv.org,true,https://www.aphcv.org/,200,ok,2026-05-28T18:01:27+00:00
+arcadia-ca,East Valley Community Health Center (EVCHC) El Monte,91731,places,http://www.evchc.org/,true,https://www.evchc.org/,200,ok,2026-05-28T18:01:27+00:00
+arcadia-ca,"ChapCare by AltaMed Medical Group  -  Monrovia, Lime",91016,original,https://www.altamed.org,true,https://www.altamed.org/,200,ok,2026-05-28T18:01:27+00:00
+anchorage-ak,Covenant House Alaska Health Clinic,99501,places,https://covenanthouseak.org/,true,https://covenanthouseak.org/,200,ok,2026-05-28T18:01:27+00:00
+arcadia-ca,Garfield Health Center El Monte Administrative Site,91731,places,http://garfieldmedicalcenter.com/,true,https://www.ahmchealth.com/gmc/?&sub=redirect-to-ahmchealth.com,200,ok,2026-05-28T18:01:28+00:00
+arcadia-ca,Buddhist Tzu Chi Medical Foundation - Administrative Site,91731,original,https://tzuchimedical.us,true,https://tzuchimedical.us/,200,ok,2026-05-28T18:01:28+00:00
+anchorage-ak,"EASTERN ALEUTIAN TRIBES, INC.",99503,original,https://www.eatribes.org,true,https://www.eatribes.org/,200,ok,2026-05-28T18:01:28+00:00
+anchorage-ak,"Anchorage Neighborhood Health Center, Inc.",99503,original,https://www.anhc.org,true,https://www.anhc.org/,200,ok,2026-05-28T18:01:28+00:00
+anchorage-ak,Big Lake Clinic,99623,places,https://www.centracare.com/locations/profile/big-lake-clinic,false,https://www.centracare.com/locations/profile/big-lake-clinic,403,http_403,2026-05-28T18:01:28+00:00
+arcadia-ca,"Center for Family Health & Education, Inc. dba Priority Care Medical Group El Monte 1",91733,original,https://www.cffhae.org,true,https://www.cffhae.org/,200,ok,2026-05-28T18:01:28+00:00
+anchorage-ak,ALEUTIAN/PRIBILOF ISLANDS ASSOCIATION,99518,original,https://www.apiai.org,true,https://www.apiai.org/,200,ok,2026-05-28T18:01:28+00:00
+altamonte-springs-fl,Community Health Center - Forest City Family & Dental Care,32810,places,https://www.chcfl.org/locations/forest-city/,true,https://www.chcfl.org/locations/forest-city/,200,ok,2026-05-28T18:01:28+00:00
+altamonte-springs-fl,Casselberry Health Center,32707,original,https://www.mytruehealth.org,true,https://www.mytruehealth.org/,200,ok,2026-05-28T18:01:29+00:00
+altamonte-springs-fl,Osceola Community Health Services at Buenaventura Lakes,34744,original,https://www.osceolahealthcare.org,true,https://www.osceolahealthcare.org/,200,ok,2026-05-28T18:01:29+00:00
+alexandria-va,Neighborhood Health at 2 East,22305,original,https://www.neighborhoodhealth.org,false,,,"conn_error:HTTPSConnectionPool(host='www.neighborhoodhealth.org', port=443): Max retries ex",2026-05-28T18:01:29+00:00
+anchorage-ak,Georgetown Clinic,99501,original,https://www.ykhc.org,true,https://www.ykhc.org/,200,ok,2026-05-28T18:01:30+00:00
+alexandria-va,Ingenuity Prep Public Charter School (SBMH),20032,places,http://www.ingenuityprep.org/,true,https://www.ingenuityprep.org/,200,ok,2026-05-28T18:01:30+00:00
+alexandria-va,Greater Baden Medical Service at Oxon Hill,20745,original,https://www.gbms.org,true,https://gbms.org/,200,ok,2026-05-28T18:01:31+00:00
+altamonte-springs-fl,Family Health Source Deltona,32725,original,https://www.myfhs.org,true,https://www.myfhs.org/,200,ok,2026-05-28T18:01:31+00:00
+alexandria-va,801 East Shelter-Medical Respite,20032,places,https://www.catholiccharitiesdc.org/program/801-east-mens-shelter/,true,https://www.catholiccharitiesdc.org/program/801-east-mens-shelter/,200,ok,2026-05-28T18:01:32+00:00
+altamonte-springs-fl,Evans High School Wellness Center,32808,places,http://www.obfh.org/,true,https://obfh.org/,200,ok,2026-05-28T18:01:32+00:00
+agoura-hills-ca,"Clinicas del Camino Real, Inc. - Simi Valley",93065,original,https://www.clinicas.org,false,https://www.clinicas.org/,403,http_403,2026-05-28T18:01:32+00:00
+agoura-hills-ca,Todos Para La Salud: Canoga Park,91303,places,https://www.todosclinic.org/,true,https://www.todosclinic.org/,200,ok,2026-05-28T18:01:33+00:00
+alexandria-va,Whitman-Walker Health New Max Robinson,20032,places,http://www.whitman-walker.org/,true,https://www.whitman-walker.org/,200,ok,2026-05-28T18:01:34+00:00
+agoura-hills-ca,Conejo Valley Family Medical Group,91360,places,http://www.vchca.org/,true,https://hca.venturacounty.gov/,200,ok,2026-05-28T18:01:34+00:00
+apopka-fl,COMMUNITY HEALTH CENTER - APOPKA FAMILY & OB CARE,32703,original,https://WWW.CHCFL.ORG,true,https://www.chcfl.org/,200,ok,2026-05-28T18:01:35+00:00
+apopka-fl,Evans High School Wellness Center,32808,places,http://www.obfh.org/,true,https://obfh.org/,200,ok,2026-05-28T18:01:35+00:00
+apopka-fl,Casselberry Health Center,32707,original,https://www.mytruehealth.org,true,https://www.mytruehealth.org/,200,ok,2026-05-28T18:01:35+00:00
+alexandria-va,Community of Hope Conway Health and Resource Center,20032,original,http://www.communityofhopedc.org,true,https://www.communityofhopedc.org/,200,ok,2026-05-28T18:01:35+00:00
+apopka-fl,Osceola Community Health Services at Backlot,34747,original,https://www.osceolahealthcare.org,true,https://www.osceolahealthcare.org/,200,ok,2026-05-28T18:01:35+00:00
+albany-ga,Hotz Scoggins Family Medical Center,31701,original,https://www.aaphc.org,true,https://www.aaphc.org/,200,ok,2026-05-28T18:01:36+00:00
+albany-ga,Pediatric Convenient Care,31763,places,https://ccthealth.org/pediatric-convenient-care-leesburg/,true,https://ccthealth.org/pediatric-convenient-care-leesburg/,200,ok,2026-05-28T18:01:37+00:00
+agoura-hills-ca,Tarzana Treatment Centers  -  Woodland Hills,91367,original,https://www.tarzanatc.org,true,https://www.tarzanatc.org/,200,ok,2026-05-28T18:01:37+00:00
+berkeley-ca,BERKELEY PRIMARY CARE,94704,original,https://WWW.LIFELONGMEDICAL.ORG,false,https://www.lifelongmedical.org/,403,http_403,2026-05-28T18:01:37+00:00
+apopka-fl,Family Health Source Deltona,32725,original,https://www.myfhs.org,true,https://www.myfhs.org/,200,ok,2026-05-28T18:01:37+00:00
+berkeley-ca,Children's Hospital Oakland Teen,94609,original,https://www.cho.org,false,,,dns_failure,2026-05-28T18:01:37+00:00
+berkeley-ca,El Cerrito High School-Based Health Center,94530,places,https://ecgauchos.wccusd.net/,true,https://ecgauchos.wccusd.net/,200,ok,2026-05-28T18:01:38+00:00
+berkeley-ca,La Clinica Dental at Children's Hospital Oakland,94609,original,http://www.laclinica.org,true,https://laclinica.org/,200,ok,2026-05-28T18:01:38+00:00
+berkeley-ca,ALAMEDA COUNTY HEALTH CARE SERVICES AGENCY -- HEALTH CARE FOR THE HOMELESS PROGRAM -- ADMINISTRATIVE OFFICES,94612,original,https://www.achch.org,true,https://health.alamedacountyca.gov/division/health-care-for-the-homeless/,200,ok,2026-05-28T18:01:39+00:00
+bedford-nh,Amoskeag Health at ProHealth,03101,places,http://www.amoskeaghealth.org/,true,https://www.amoskeaghealth.org/,200,ok,2026-05-28T18:01:39+00:00
+bedford-nh,Harbor Care Health and Wellness Center,03063,places,https://www.harborcarenh.org/,true,https://harborcarenh.org/,200,ok,2026-05-28T18:01:40+00:00
+bedford-nh,Healthy Together,03038,places,http://www.centerforlifemanagement.org/,true,https://centerforlifemanagement.org/,200,ok,2026-05-28T18:01:41+00:00
+bedford-nh,HCH Program at CMC Community Health Services Division,03102,original,https://www.catholicmedicalcenter.org,true,https://www.catholicmc.com/,200,ok,2026-05-28T18:01:41+00:00
+bedford-nh,Methuen Family Health Center,01844,places,https://methuenfamilyhealthcenter.org/,true,https://methuenfamilyhealthcenter.org/,200,ok,2026-05-28T18:01:41+00:00
+bedford-nh,Kathyrn P. Stoklosa Middle School,01854,original,https://www.lchealth.org,true,https://www.lchealth.org/,200,ok,2026-05-28T18:01:42+00:00
+bensalem-pa,Cottman Community Health Center,19149,original,https://www.spectrumhs.org,true,https://www.spectrumhs.org/,200,ok,2026-05-28T18:01:42+00:00
+bensalem-pa,BURLINGTON CITY HEALTH CENTER,08016,original,https://www.sjfmc.org,true,https://www.sjfmc.org/,200,ok,2026-05-28T18:01:43+00:00
+bensalem-pa,Philadelphia District Health Center #10,19149,original,http://www.phila.gov/health/index.html,true,https://www.phila.gov/departments/department-of-public-health/,200,ok,2026-05-28T18:01:43+00:00
+bensalem-pa,Rising Sun Health Center,19120,places,https://www.phmc.org/site/programs/health-care-centers/rising-sun,true,https://phmc.org/program/rising-sun-health-center/,200,ok,2026-05-28T18:01:43+00:00
+bensalem-pa,Parkview Women and Children's Health Center,19124,places,https://dvch.org/parkview-health-center/,true,https://dvch.org/parkview-health-center/,200,ok,2026-05-28T18:01:43+00:00
+baton-rouge-la,Homeless Drop-In Center,70802,original,https://www.haartinc.org,true,https://www.haartinc.org/,200,ok,2026-05-28T18:01:44+00:00
+baton-rouge-la,"CAPITOL CITY FAMILY HEALTH CENTER, INC.",70806,original,https://www.ccfhc.org,false,https://www.ccfhc.org/,200,thin_body_114b,2026-05-28T18:01:44+00:00
+bensalem-pa,FRANKFORD AVENUE HEALTH CENTER,19124,original,https://WWW.GPHAINC.ORG,true,https://gphainc.org/,200,ok,2026-05-28T18:01:46+00:00
+baton-rouge-la,WBR Primary Care,70767,places,http://www.rkmcare.org/?utm_source=google&utm_medium=wix_google_business_profile&utm_campaign=9282652974696587998,true,https://www.rkmcare.org/?utm_source=google&utm_medium=wix_google_business_profile&utm_campaign=9282652974696587998,200,ok,2026-05-28T18:01:46+00:00
+baton-rouge-la,"EXCELth, Inc. FHC - BATON ROUGE",70806,places,http://www.excelth.com/,true,https://www.excelth.com/,200,ok,2026-05-28T18:01:47+00:00
+baton-rouge-la,Southeast Community Health Systems-Zachary,70791,places,https://www.shchc.org/?utm_source=GMBSocialClimb&utm_medium=SoutheastCommunityHealthSystems,true,https://www.shchc.org/?utm_source=GMBSocialClimb&utm_medium=SoutheastCommunityHealthSystems,200,ok,2026-05-28T18:01:47+00:00
+barstow-ca,Mission City Community Network- Barstow II,92311,places,http://mccn.org/,true,https://mccn.org/,200,ok,2026-05-28T18:01:47+00:00
+barstow-ca,SAC Barstow,92311,places,https://www.sachealth.org/barstow-clinic/,true,https://www.sachealth.org/locations/sac-health-barstow,200,ok,2026-05-28T18:01:48+00:00
+baton-rouge-la,"Baton Rouge Primary Care Collaborative, Inc. - Primary",70811,places,http://www.brpcc.org/,true,https://www.brpcc.org/,200,ok,2026-05-28T18:01:48+00:00
+austin-tx,CommUnityCare Austin Resource Center for the Homeless,78701,original,http://www.communitycaretx.org,true,https://communitycaretx.org/,200,ok,2026-05-28T18:01:48+00:00
+austin-tx,Lone Star Circle of Care at Oak Springs,78702,original,https://www.lonestarcares.org,true,https://lonestarcares.org/,200,ok,2026-05-28T18:01:49+00:00
+austin-tx,People's Community Clinic,78722,original,https://www.austinpcc.org,true,https://www.austinpcc.org/,200,ok,2026-05-28T18:01:49+00:00
+austin-tx,Family Health Center at Elgin,78621,places,https://communityhealthtx.com/clinics/elgin/,true,https://communityhealthtx.com/clinics/elgin/,200,ok,2026-05-28T18:01:49+00:00
+athens-ga,"Athens Neighborhood Health Center, Inc.",30601,original,https://NA,false,,,dns_failure,2026-05-28T18:01:49+00:00
+agoura-hills-ca,LAC-CANOGA PARK HEALTH CENTER,91303,original,https://WWW.NEVHC.ORG,false,,,"conn_error:HTTPSConnectionPool(host='www.nevhc.org', port=443): Max retries exceeded with u",2026-05-28T18:01:49+00:00
+austin-tx,CommuniCare Health Centers - Kyle,78640,original,https://www.communicaresa.org,true,https://communicaresa.org/,200,ok,2026-05-28T18:01:50+00:00
+arlington-va,Neighborhood Health at Arlington CSB,22204,places,http://www.neighborhoodhealthva.org/,true,https://neighborhoodhealthva.org/,200,ok,2026-05-28T18:01:50+00:00
+arlington-va,Oyster Adams Bilingual School - Oyster Campus (SBMH),20008,places,http://oysteradamsbilingual.org/,true,http://oysteradamsbilingual.org/,200,ok,2026-05-28T18:01:51+00:00
+arlington-va,Downtown BID,20005,original,https://www.unityhealthcare.org,true,https://www.unityhealthcare.org/,200,ok,2026-05-28T18:01:51+00:00
+athens-ga,MedLink Athens,30606,original,https://www.medlinkga.org,true,https://medlinkga.org/,200,ok,2026-05-28T18:01:51+00:00
+arlington-va,Community of Hope Marie Reed Center,20009,original,https://www.communityofhopedc.org,true,https://www.communityofhopedc.org/,200,ok,2026-05-28T18:01:52+00:00
+athens-ga,"Four Corners Primary Care Centers, Hoschton",30548,places,https://fcpchealth.org/,true,https://fcpchealth.com/,200,ok,2026-05-28T18:01:52+00:00
+arlington-va,LA CLINICA DEL PUEBLO,20009,original,https://www.lcdp.org,true,https://www.lcdp.org/,200,ok,2026-05-28T18:01:52+00:00
+berkeley-ca,WILLIAM BYRON RUMFORD MED CLINIC,94702,original,https://wohc@wohc.org,false,,,"conn_error:HTTPSConnectionPool(host='wohc.org', port=443): Max retries exceeded with url: /",2026-05-28T18:01:53+00:00
+arlington-va,Whitman-Walker Health,20005,places,http://www.whitman-walker.org/,true,https://www.whitman-walker.org/,200,ok,2026-05-28T18:01:54+00:00
+boynton-beach-fl,Health Care District Community Health Center - Delray Beach,33445,original,https://www.hcdpbc.org/for-patients/primary-care-clinics,true,https://www.hcdpbc.org/for-patients/primary-care-clinics,200,ok,2026-05-28T18:01:54+00:00
+boynton-beach-fl,"Florida Community Health Centers, Inc.",33407,original,https://www.fchcinc.org,true,https://www.fchcinc.org/,200,ok,2026-05-28T18:01:55+00:00
+boynton-beach-fl,FAU/NCHA Westgate Community Health Center,33409,original,https://www.fau.edu/nursing,true,https://www.fau.edu/nursing/,200,ok,2026-05-28T18:01:55+00:00
+boynton-beach-fl,Annie L. Weaver Health Center,33060,original,https://WWW.BROWARDHEALTH.ORG/BODY.CFM?ID=846,false,https://www.browardhealth.org/BODY.CFM?ID=846,403,http_403,2026-05-28T18:01:55+00:00
+boynton-beach-fl,FoundCare Boynton Beach,33426,places,http://www.foundcare.org/,true,https://foundcare.org/,200,ok,2026-05-28T18:01:55+00:00
+boston-ma,WASHINGTON STREET CLINIC,02111,original,https://www.scchc.org,true,https://scchc.org/,200,ok,2026-05-28T18:01:56+00:00
+boston-ma,Connecticut River Valley Farmworker Health Program,02108,original,http://www.massleague.org/Programs/CRVFarmWorkerHealthProgram/AboutCRVFHP-InEnglish.php,false,https://www.massleague.org/Programs/CRVFarmWorkerHealthProgram/AboutCRVFHP-InEnglish.php,404,http_404,2026-05-28T18:01:56+00:00
+boston-ma,NORTH END WATERFRONT HEALTH,02113,original,https://www.northendwaterfronthealth.org,false,https://www.northendwaterfronthealth.org/,200,thin_body_114b,2026-05-28T18:01:56+00:00
+bonney-lake-wa,New Puyallup Clinic,98371,original,https://www.commhealth.org,true,https://www.commhealth.org/,200,ok,2026-05-28T18:01:57+00:00
+bonney-lake-wa,Sea Mar CHC - Puyallup 125th Street Ct. E.,98374,original,https://www.seamar.org,true,https://www.seamar.org/,200,ok,2026-05-28T18:01:57+00:00
+boston-ma,Bridge Over Troubled Waters,02111,places,http://www.bridgeotw.org/,true,https://bridgeotw.org/,200,ok,2026-05-28T18:01:57+00:00
+bonney-lake-wa,YMCA of Greater Seattle Arcadia Shelter and Drop-In Center,98002,places,https://www.seattleymca.org/social-impact-center/youth-young-adults/housing-options-shelter/arcadia,true,https://www.seattleymca.org/social-impact-center/youth-young-adults/housing-options-shelter/arcadia,200,ok,2026-05-28T18:01:58+00:00
+bonney-lake-wa,ICHS at Sound Auburn,98002,original,https://www.ichs.com,true,https://www.ichs.com/,200,ok,2026-05-28T18:01:58+00:00
+boston-ma,Seaport,02210,places,https://www.windsorcommunities.com/properties/waterside-place-by-windsor/?utm_campaign=GoogleMyBusiness,true,https://www.windsorcommunities.com/properties/waterside-place-by-windsor/?utm_campaign=GoogleMyBusiness,200,ok,2026-05-28T18:01:58+00:00
+bonney-lake-wa,Neighborcare Health at Rainier Beach,98118,original,https://www.neighborcare.org,true,https://www.neighborcare.org/,200,ok,2026-05-28T18:01:59+00:00
+bonney-lake-wa,HealthPoint Auburn,98002,original,https://www.healthpointchc.org,true,https://www.healthpointchc.org/,200,ok,2026-05-28T18:01:59+00:00
+bonita-springs-fl,Bonita Springs Health Center,34135,original,https://www.fhcswf.org,true,https://fhcswfl.org/,200,ok,2026-05-28T18:01:59+00:00
+bluffton-sc,"BEAUFORT-JASPER HAMPTON COMP HLTH SERVICES, INC.",29909,original,https://www.bjhchs.org,true,https://www.bjhchs.org/,200,ok,2026-05-28T18:02:00+00:00
+bonita-springs-fl,Healthcare Network North (Veterans Park),34109,original,https://www.HealthcareSWFL.org,true,https://healthcareswfl.org/,200,ok,2026-05-28T18:02:00+00:00
+bluffton-sc,Pennsylvania Avenue Resource Center (PARC),31404,original,https://www.jclewishealth.org,true,https://jclewishealth.org/,200,ok,2026-05-28T18:02:01+00:00
+bluffton-sc,"CURTIS V. COOPER PRIMARY HEALTH CARE, INC",31401,places,https://www.cvcphc.net/,true,https://www.cvcphc.net/,200,ok,2026-05-28T18:02:01+00:00
+bluffton-sc,Coastal Community Health - Savannah- Continuity Clinic,31404,original,https://www.coastalchs.org,true,https://coastalchs.org/,200,ok,2026-05-28T18:02:01+00:00
+bloomingdale-il,Legacy Medical Care - Addison,60101,original,https://www.legacymedicalcare.org,true,https://www.legacymedicalcare.org/,200,ok,2026-05-28T18:02:02+00:00
+bloomingdale-il,ACCESS Martin T. Russo Family Health Center,60108,original,https://www.accesscommunityhealth.net,true,https://www.achn.net/,200,ok,2026-05-28T18:02:02+00:00
+bloomingdale-il,1515 E Lake St,60133,original,https://www.greaterfamilyhealth.org,true,https://greaterfamilyhealth.org/,200,ok,2026-05-28T18:02:02+00:00
+bloomingdale-il,Hamdard Health Addison,60101,original,https://www.hamdardhealth.org/,true,https://www.hamdardhealth.org/,200,ok,2026-05-28T18:02:03+00:00
+bloomingdale-il,VNA Health Center- Mona Kea,60188,original,https://www.vnahealth.com,true,https://vnahealth.com/,200,ok,2026-05-28T18:02:03+00:00
+bloomfield-ct,Charter Oak Health Center Bloomfield,06002,original,https://www.thecharteroak.org,true,https://thecharteroak.org/,200,ok,2026-05-28T18:02:03+00:00
+bloomingdale-il,PCC Melrose Park Family Health Center,60160,places,https://www.pccwellness.org/locations/pcc-melrose-park-family-health-center/?utm_source=google&utm_campaign=google_business&utm_content=profile_link,true,https://www.pccwellness.org/locations/pcc-melrose-park-family-health-center/?utm_source=google&utm_campaign=google_business&utm_content=profile_link,200,ok,2026-05-28T18:02:05+00:00
+bloomfield-ct,InterCommunity Inc.,06112,places,https://www.intercommunityct.org/?utm_source=GMBSocialClimb&utm_medium=InterCommunityHealthCare,true,https://www.intercommunityct.org/?utm_source=GMBSocialClimb&utm_medium=InterCommunityHealthCare,200,ok,2026-05-28T18:02:05+00:00
+bloomfield-ct,Jumoke Academy SMaRT SBHC,06112,places,http://jumokeacademy.org/,true,https://jumokeacademy.org/,200,ok,2026-05-28T18:02:06+00:00
+bloomfield-ct,Community Health Services at Windsor,06095,places,http://www.chshartford.org/,true,https://www.chshartford.org/,200,ok,2026-05-28T18:02:07+00:00
+boynton-beach-fl,Genesis Community Health-Boynton Medical,33435,places,https://www.gencomhealth.org/,false,,,"conn_error:HTTPSConnectionPool(host='www.gencomhealth.org', port=443): Max retries exceeded",2026-05-28T18:02:08+00:00
+bloomfield-ct,Community Health Services,06120,original,http://www.chshartford.org,true,https://www.chshartford.org/,200,ok,2026-05-28T18:02:08+00:00
+bloomfield-ct,Wheeler Family Health and Wellness Center - 49,06105,original,https://www.wheelerclinic.org,true,https://www.wheelerhealth.org/,200,ok,2026-05-28T18:02:09+00:00
+bethlehem-pa,Star Community Health Dental - Bethlehem,18015,original,https://starcommunityhealth.org,true,https://www.starcommunityhealth.org/,200,ok,2026-05-28T18:02:09+00:00
+bethlehem-pa,Children's Clinic at Sheridan,18102,original,https://www.valleyhealthpartners.org/,true,https://www.valleyhealthpartners.org/,200,ok,2026-05-28T18:02:09+00:00
+bethlehem-pa,Community Health and Dental Care-Barto,19504,places,http://ch-dc.org/,true,http://ch-dc.org/,200,ok,2026-05-28T18:02:09+00:00
+bethesda-md,Friendship Place,20016,original,https://ww.unityhealthcare.org,false,,,dns_failure,2026-05-28T18:02:09+00:00
+bethlehem-pa,Neighborhood Health Centers of the Lehigh Valley- Bethlehem,18015,places,http://www.nhclv.org/,true,https://www.nhclv.org/,200,ok,2026-05-28T18:02:09+00:00
+bethesda-md,Jackson-Reed High School (SBMH),20016,original,https://profiles.dcps.dc.gov/Jackson-Reed+High+School,true,https://profiles.dcps.dc.gov/Jackson-Reed+High+School,200,ok,2026-05-28T18:02:10+00:00
+bethesda-md,"Community Clinic, Inc",20910,original,https://www.cciweb.org,false,,,"ssl_error:HTTPSConnectionPool(host='www.cciweb.org', port=443): Max retries exceeded with ",2026-05-28T18:02:10+00:00
+bethesda-md,La Casa Community Health Action Center,20010,original,https://www.lcdp.org,true,https://www.lcdp.org/,200,ok,2026-05-28T18:02:10+00:00
+carson-city-nv,Nevada Health Centers Carson City School Based,89703,original,https://www.nvhealthcenters.org,false,,,"ssl_error:HTTPSConnectionPool(host='www.nvhealthcenters.org', port=443): Max retries excee",2026-05-28T18:02:10+00:00
+bethesda-md,Roosevelt High School,20011,places,http://theodorerooseveltdc.org/,true,https://www.theodorerooseveltdc.org/,200,ok,2026-05-28T18:02:11+00:00
+carson-city-nv,El Dorado Community Health Center South Lake Tahoe,96150,places,https://edcchc.org/,true,https://edcchc.org/,200,ok,2026-05-28T18:02:11+00:00
+carson-city-nv,Western Sierra Medical Clinic - Kings Beach,96143,original,https://www.wsmcmed.org,true,https://wsmcmed.org/,200,ok,2026-05-28T18:02:11+00:00
+bethesda-md,Elizabeth Taylor Medical Center,20009,original,https://www.whitman-walker.org,true,https://www.whitman-walker.org/,200,ok,2026-05-28T18:02:13+00:00
+carmel-in,Aspire Indiana Health - Carmel,46032,places,http://www.aspireindiana.org/,true,https://www.aspireindiana.org/,200,ok,2026-05-28T18:02:13+00:00
+carmel-in,"INDIANA HEALTH CENTERS, INC.",46250,original,https://None,false,,,dns_failure,2026-05-28T18:02:13+00:00
+carmel-in,SHALOM HEALTH CARE CENTER -MERIDIAN STREET,46260,places,http://www.shalomhealthcenter.org/,true,https://www.shalomhealthcenter.org/,200,ok,2026-05-28T18:02:13+00:00
+carson-city-nv,Community Health Alliance Neil Road Health Center,89502,original,https://www.chanevada.org,true,https://www.chanevada.org/,200,ok,2026-05-28T18:02:14+00:00
+carmel-in,Eskenazi Health Center Pecar,46268,original,http://www.eskenazihealth.edu/find-a-location/pecar,false,https://www.eskenazihealth.edu/find-a-location/pecar,404,http_404,2026-05-28T18:02:14+00:00
+carmel-in,Adult and Child at Center for Inquiry School 84,46220,places,https://myips.org/josephbingham/,true,https://josephbingham.myips.org/,200,ok,2026-05-28T18:02:17+00:00
+cape-coral-fl,CAPE CORAL HEALTH CENTER,33990,original,https://www.fhcswf.org,true,https://fhcswfl.org/,200,ok,2026-05-28T18:02:18+00:00
+cape-coral-fl,Family Care North,34108,places,http://geraldlevensmd.com/,true,https://naplesfamilypractice.com/,200,ok,2026-05-28T18:02:18+00:00
+camarillo-ca,"Clinicas del Camino Real, Inc. - Paseo Camarillo",93010,original,https://www.clinicas.org,false,https://www.clinicas.org/,403,http_403,2026-05-28T18:02:19+00:00
+camarillo-ca,Las Posas Family Medical Group,93010,places,https://hca.venturacounty.gov/health-clinics/las-posas-family-medical-group/,true,https://hca.venturacounty.gov/health-clinics/las-posas-family-medical-group/,200,ok,2026-05-28T18:02:20+00:00
+burlington-nc,Piedmont Health SeniorCare Burlington Community Health Center,27217,original,https://www.piedmonthealth.org,true,https://piedmonthealth.org/,200,ok,2026-05-28T18:02:23+00:00
+burlington-nc,Kintegra at Clover Garden School,27217,original,https://www.kintegra.org,true,https://www.kintegra.org/,200,ok,2026-05-28T18:02:24+00:00
+burlington-nc,TAPM-Admin Office,27405,places,https://tapmedicine.com/,true,https://tapmedicine.com/,200,ok,2026-05-28T18:02:24+00:00
+burlington-nc,Piedmont Health Services,27314,places,https://piedmonthealth.org/locations/#prospect-hill,true,https://piedmonthealth.org/locations/#prospect-hill,200,ok,2026-05-28T18:02:25+00:00
+burlington-nc,Person Family Dental Center Caswell Site,27379,places,http://www.personfamilymedical.com/,true,https://www.personfamilymedical.com/,200,ok,2026-05-28T18:02:26+00:00
+burlington-nc,CFMC Urgent Care,27379,original,https://compassionhealthcare.org/urgent-care/,true,https://compassionhealthcare.org/urgent-care/,200,ok,2026-05-28T18:02:27+00:00
+burleson-tx,Southeast Community Health Center,76105,original,https://www.ntachc.org,true,https://ntachc.org/,200,ok,2026-05-28T18:02:28+00:00
+burleson-tx,HHM Health Arlington,76015,places,https://www.hhmhealth.org/?utm_source=GMBSocialClimb&utm_medium=ThePearlWomen%27sCenteratHHMHealthArlington,true,https://www.hhmhealth.org/?utm_source=GMBSocialClimb&utm_medium=ThePearlWomen%27sCenteratHHMHealthArlington,200,ok,2026-05-28T18:02:28+00:00
+burien-wa,Sea Mar CHC - Burien Ambaum Blvd. SW,98166,original,https://www.seamar.org,true,https://www.seamar.org/,200,ok,2026-05-28T18:02:29+00:00
+carmel-in,Jane Pauley Community Health Center at Castleton,46250,original,https://www.janepauleychc.com,false,,,"conn_error:HTTPSConnectionPool(host='www.janepauleychc.com', port=443): Max retries exceede",2026-05-28T18:02:29+00:00
+burien-wa,White Center Public Health Center,98106,places,https://kingcounty.gov/en/dept/dph/health-safety/health-centers-programs-services/public-health-centers/white-center,true,https://kingcounty.gov/en/dept/dph/health-safety/health-centers-programs-services/public-health-centers/white-center,200,ok,2026-05-28T18:02:30+00:00
+burien-wa,HealthPoint Highline Campus Health Center,98148,places,https://www.healthpointchc.org/find-clinics/highline-high-school-campus-health-center,true,https://www.healthpointchc.org/find-clinics/highline-high-school-campus-health-center,200,ok,2026-05-28T18:02:30+00:00
+burien-wa,Neighborcare Health at Rainier Beach,98118,original,https://www.neighborcare.org,true,https://www.neighborcare.org/,200,ok,2026-05-28T18:02:30+00:00
+burien-wa,ICHS - HOLLY PARK MEDICAL & DENTAL CLINIC,98118,original,https://www.ichs.com,true,https://www.ichs.com/,200,ok,2026-05-28T18:02:30+00:00
+brentwood-ca,BRENTWOOD HEALTH CENTER,94513,original,https://www.cchealth.org,false,https://www.cchealth.org/,403,http_403,2026-05-28T18:02:30+00:00
+burien-wa,SEATTLE INDIAN HEALTH BOARD,98144,original,https://www.sihb.org,true,https://www.sihb.org/,200,ok,2026-05-28T18:02:31+00:00
+brentwood-ca,La Clinica Oakley Behavioral Health,94561,original,http://www.laclinica.org/,true,https://laclinica.org/,200,ok,2026-05-28T18:02:31+00:00
+brentwood-ca,Isleton Elementary School,95641,original,https://ies-rdusd-ca.schoolloop.com/,false,,,"ssl_error:HTTPSConnectionPool(host='ies-rdusd-ca.schoolloop.com', port=443): Max retries e",2026-05-28T18:02:31+00:00
+bonita-springs-fl,Huntingdon Health Services Suite 201,33907,original,https://www.mcrhs.org,false,,,"conn_error:HTTPSConnectionPool(host='www.mcrhs.org', port=443): Max retries exceeded with u",2026-05-28T18:02:31+00:00
+brentwood-ca,Brighter Beginnings Family Health Clinic Antioch Lone Tree,94509,original,https://www.brighter-beginnings.org/,true,https://www.brighter-beginnings.org/,200,ok,2026-05-28T18:02:31+00:00
+brentwood-ca,Axis Site at Vineyard Resource Center,94551,places,http://www.openheartkitchen.org/,true,https://www.openheartkitchen.org/,200,ok,2026-05-28T18:02:31+00:00
+chandler-az,Chandler Pediatrics,85224,original,https://www.hhwaz.org,true,https://www.hhwaz.org/,200,ok,2026-05-28T18:02:31+00:00
+chandler-az,Sun Life Health - Chandler Center for Women,85224,places,https://www.sunlifehealth.org/,true,https://www.sunlifehealth.org/,200,ok,2026-05-28T18:02:31+00:00
+chandler-az,Valleywise Community Health Center - Chandler,85225,original,https://valleywisehealth.org/services/primary-care/,true,https://valleywisehealth.org/services/primary-care/,200,ok,2026-05-28T18:02:32+00:00
+chandler-az,Adelante Healthcare Mesa,85201,original,https://www.Adelante Healthcare.com,false,,,dns_failure,2026-05-28T18:02:32+00:00
+concord-ca,LA CLINICA MONUMENT,94518,original,https://www.laclinica.org,true,https://laclinica.org/,200,ok,2026-05-28T18:02:32+00:00
+chandler-az,Mountain Park Health Center - Tempe,85282,original,https://www.mountainparkhealth.org,true,https://mountainparkhealth.org/,200,ok,2026-05-28T18:02:32+00:00
+concord-ca,Brighter Beginnings Family Health Clinic Antioch Lone Tree,94509,original,https://www.brighter-beginnings.org/,true,https://www.brighter-beginnings.org/,200,ok,2026-05-28T18:02:32+00:00
+concord-ca,Willow Pass Wellness Center,94520,places,http://cchealth.org/,false,http://www.cchealth.org/,403,http_403,2026-05-28T18:02:32+00:00
+concord-ca,Children's Hospital Oakland Primary Care,94618,original,https://www.cho.org,false,,,dns_failure,2026-05-28T18:02:32+00:00
+chandler-az,Javelina Health Center,85210,original,https://www.terroshealth.org,true,https://terroshealth.org/,200,ok,2026-05-28T18:02:32+00:00
+concord-ca,LifeLong Rodeo Health Center,94572,places,https://www.lifelongmedical.org/locations/rodeo-health-center,false,https://www.lifelongmedical.org/locations/rodeo-health-center,403,http_403,2026-05-28T18:02:33+00:00
+columbia-tn,PrimeCare,38401,places,https://www.mauryregional.com/maury-regional-medical-group-landing-page/,false,https://www.mauryregional.com/maury-regional-medical-group-landing-page/,403,http_403,2026-05-28T18:02:33+00:00
+colorado-springs-co,"Health Center at Wahsatch, Behavioral Health Center",80903,original,https://www.peakvista.org,true,https://www.peakvista.org/,200,ok,2026-05-28T18:02:33+00:00
+clarksville-tn,"Community Medical Clinic, Oak Grove",42262,places,http://communitymedicalclinic.org/,true,https://www.communitymedicalclinic.org/,200,ok,2026-05-28T18:02:34+00:00
+clarksville-tn,CHCWK - Todd County Site,42234,original,https://www.facebook.com/CHCWKY/,true,https://www.facebook.com/CHCWKY/,200,ok,2026-05-28T18:02:34+00:00
+concord-ca,EASTMONT WELLNESS,94605,original,https://www.eastmontahs.org,true,http://www.alamedahealthsystem.org,200,ok,2026-05-28T18:02:35+00:00
+clarksville-tn,Blount Rural Health Center,42220,original,https://www.blountrhc.org,true,https://www.blountrhc.org/,200,ok,2026-05-28T18:02:35+00:00
+chico-ca,Ampla Health Family Dental and Medical,95926,original,https://www.amplahealth.org,true,https://www.amplahealth.org/,200,ok,2026-05-28T18:02:35+00:00
+clarksville-tn,Matthew Walker Health Center - Clarksville,37042,original,https://www.mwchc.org,true,https://mwchc.org/,200,ok,2026-05-28T18:02:35+00:00
+chino-valley-az,PRESCOTT,86305,original,https://www.yavapaihealth.com,true,https://www.yavapaihealth.com/,200,ok,2026-05-28T18:02:36+00:00
+chesterfield-mo,CareSTL Health Husky,63114,places,https://www.ritenourschools.org/programs/husky-health-center,true,https://www.ritenourschools.org/programs/husky-health-center,200,ok,2026-05-28T18:02:36+00:00
+chico-ca,Peach Tree  -  Chico Vision Center,95926,places,http://www.pickpeach.org/,true,https://pickpeach.org/,200,ok,2026-05-28T18:02:36+00:00
+chesterfield-mo,"Compass Health, Inc.",63304,places,https://compasshealthnetwork.org/locations/weldon-spring-dental/,true,https://compasshealthnetwork.org/locations/weldon-spring-dental/,200,ok,2026-05-28T18:02:37+00:00
+chesterfield-mo,South County Health Center,63127,original,https://clinics.stlouiscountymo.gov/,true,https://clinics.stlouiscountymo.gov/,200,ok,2026-05-28T18:02:37+00:00
+chesterfield-mo,People's Healthcare Services,63135,original,https://www.phcenters.org,true,https://phcenters.org/,200,ok,2026-05-28T18:02:37+00:00
+chesterfield-mo,Affinia Healthcare Ferguson,63135,original,https://www. affiniahealthcare.org,false,,,dns_failure,2026-05-28T18:02:37+00:00
+chesterfield-mo,FOREST PARK SOUTHEAST,63110,original,https://familycarehealthcenter.org,true,https://familycarehealthcenters.org,200,ok,2026-05-28T18:02:37+00:00
+dublin-oh,PrimaryOne Health 4661 Sawmill Road,43220,places,https://www.primaryonehealth.org/locations/,true,https://www.primaryonehealth.org/locations/,200,ok,2026-05-28T18:02:38+00:00
+dublin-oh,Community Refugee and Immigration Services (CRIS),43220,places,https://www.crisohio.org/,true,https://www.crisohio.org/,200,ok,2026-05-28T18:02:38+00:00
+dublin-oh,Heart of Ohio Family Health OB-GYN at St. Ann's,43081,places,https://www.mountcarmelhealth.com/location/mount-carmel-st-anns-obgyn-clinic,true,https://www.mountcarmelhealth.com/location/mount-carmel-st-anns-obgyn-clinic,200,ok,2026-05-28T18:02:38+00:00
+dublin-oh,Equitas Health Columbus Administration Office,43229,original,https://www.equitashealth.com,true,https://equitashealth.com/,200,ok,2026-05-28T18:02:38+00:00
+dublin-oh,Franklin Station Health Center,43215,places,http://www.cpoms.org/properties,true,https://www.cpoms.org/properties/,200,ok,2026-05-28T18:02:39+00:00
+deltona-fl,Enterprise Wellness Cottage,32725,places,https://www.mytruehealth.org/,true,https://www.mytruehealth.org/,200,ok,2026-05-28T18:02:39+00:00
+deltona-fl,Community Health Center - Forest City Family & Dental Care,32810,places,https://www.chcfl.org/locations/forest-city/,true,https://www.chcfl.org/locations/forest-city/,200,ok,2026-05-28T18:02:40+00:00
+deltona-fl,FACT Team,32119,original,https://smahealthcare.org/,true,https://smahealthcare.org/,200,ok,2026-05-28T18:02:40+00:00
+deltona-fl,AZA HEALTH,32114,original,https://WWW.AZAHEALTH.ORG,true,https://azahealth.org/,200,ok,2026-05-28T18:02:40+00:00
+davenport-fl,CFHC Davenport Primary Care,33837,places,https://cfhc.org/location/davenport/,true,https://cfhc.org/location/davenport/,200,ok,2026-05-28T18:02:41+00:00
+davenport-fl,Osceola Community Health Services at Backlot,34747,original,https://www.osceolahealthcare.org,true,https://www.osceolahealthcare.org/,200,ok,2026-05-28T18:02:41+00:00
+deltona-fl,Family Health Source Deltona,32725,original,https://www.myfhs.org,true,https://www.myfhs.org/,200,ok,2026-05-28T18:02:41+00:00
+dublin-oh,OSU Total Health Care Center Rardin,43201,places,https://wexnermedical.osu.edu/locations/primary-care-northwood-high?utm_campaign=med_general-awareness-evergreen_corp&utm_source=googlemybusiness&utm_medium=organic&utm_content=gmb_listing,true,https://wexnermedical.osu.edu/locations/primary-care-northwood-high?utm_campaign=med_general-awareness-evergreen_corp&utm_source=googlemybusiness&utm_medium=organic&utm_content=gmb_listing,200,ok,2026-05-28T18:02:41+00:00
+davenport-fl,Four Corners Health Center,34714,original,https://www.chcfl.org,true,https://www.chcfl.org/,200,ok,2026-05-28T18:02:41+00:00
+davenport-fl,OBFH Kissimmee,34744,original,https://www.obfh.org,true,https://obfh.org/,200,ok,2026-05-28T18:02:41+00:00
+davenport-fl,Southside Health Center,32809,original,https://www.mytruehealth.org,true,https://www.mytruehealth.org/,200,ok,2026-05-28T18:02:41+00:00
+corona-ca,Neighborhood Healthcare ~ Corona,92882,original,https://www.nhcare.org,true,https://www.nhcare.org/,200,ok,2026-05-28T18:02:42+00:00
+corona-ca,Mission City Community Network - Corona,92879,places,https://mccn.org/our-locations,true,https://mccn.org/our-locations,200,ok,2026-05-28T18:02:42+00:00
+corona-ca,CMCC- 6th Street Optometry/Vision,92882,original,https://www.centromedico.com,true,https://centromedico.com/,200,ok,2026-05-28T18:02:42+00:00
+corona-ca,Corona Community Health Center,92882,original,https://www.ruhealth.org/chc/corona,true,https://www.ruhealth.org/chc/corona,200,ok,2026-05-28T18:02:42+00:00
+davenport-fl,SCHC Women's Care of Lakeland,33805,places,http://www.suncoast-chc.org/,true,https://suncoast-chc.org/,200,ok,2026-05-28T18:02:43+00:00
+corona-ca,"Central City Community Health Center, Inc. - Norco",92860,original,https://www.centralcityhealth.org,true,https://centralcityhealth.org/,200,ok,2026-05-28T18:02:43+00:00
+corona-ca,Unicare Community Health Center - Corona,92879,places,https://unicarechc.org/,true,https://unicarechc.org/,200,ok,2026-05-28T18:02:44+00:00
+coral-springs-fl,Health Care District Community Health Center  -  Boca Raton,33428,original,https://www.hcdpbc.org/for-patients/primary-care-clinics,true,https://www.hcdpbc.org/for-patients/primary-care-clinics,200,ok,2026-05-28T18:02:44+00:00
+coral-springs-fl,Banyan Community Health Center-Lauderdale Lakes,33313,original,http://banyanhealth.org,true,https://banyanhealth.org/,200,ok,2026-05-28T18:02:44+00:00
+coral-springs-fl,"Care Resource Community Health Center, Inc at Oakland Park",33309,places,https://careresource.org/,true,https://careresource.org/,200,ok,2026-05-28T18:02:44+00:00
+coral-springs-fl,BROWARD COMMUNITY & FAMILY HEALTH CENTER-POMPANO MEDICAL,33069,original,https://www.bcfhc.org,false,,,"ssl_error:HTTPSConnectionPool(host='www.bcfhc.org', port=443): Max retries exceeded with u",2026-05-28T18:02:44+00:00
+conway-sc,"Health Care Partners of South Carolina, Inc. - CONWAY OFFICE",29526,original,https://www.hscpsc.com,false,,,dns_failure,2026-05-28T18:02:44+00:00
+coral-springs-fl,ChildNet Citrus Behavioral Services,33309,places,http://childnet.us/,true,https://childnet.us/,200,ok,2026-05-28T18:02:45+00:00
+conway-sc,WACCAMAW CENTER FOR MENTAL HEALTH,29526,original,https://www.lrmcenter.com,true,https://www.lrmcenter.com/,200,ok,2026-05-28T18:02:45+00:00
+cape-coral-fl,Huntingdon Health Services Suite 201,33907,original,https://www.mcrhs.org,false,,,"conn_error:HTTPSConnectionPool(host='www.mcrhs.org', port=443): Max retries exceeded with u",2026-05-28T18:02:46+00:00
+conway-sc,Careteam + Family Health and Specialty Care,29526,original,https://careteamplus.org,true,https://careteamplus.org/,200,ok,2026-05-28T18:02:46+00:00
+conway-sc,GOSHEN MEDICAL CENTER - TABOR CITY,28463,places,https://goshenmedical.org/locations/tabor-city/,true,https://goshenmedical.org/locations/tabor-city/,200,ok,2026-05-28T18:02:47+00:00
+conroe-tx,St. Hope Community Health Center Clinic,77301,places,http://offeringhope.org/,true,https://www.offeringhope.org/,200,ok,2026-05-28T18:02:47+00:00
+conway-sc,HopeHealth Hemingway,29554,places,https://www.hope-health.org/locations-list/hopehealth-in-hemingway/,true,https://www.hope-health.org/locations-list/hopehealth-in-hemingway/,200,ok,2026-05-28T18:02:47+00:00
+conroe-tx,TOMAGWA at Tomball - Main Clinic,77375,original,https://tomagwa.org/,true,https://www.tomagwa.org/,200,ok,2026-05-28T18:02:47+00:00
+conroe-tx,Spring Branch CHC - NAM Clinic,77090,original,https://www.sbchc.net,true,https://sbchc.net/,200,ok,2026-05-28T18:02:48+00:00
+conroe-tx,HACS: Spring-Cypress,77090,original,https://www.hacstxs.org,true,https://www.wokewaves.com/categories/culture,200,ok,2026-05-28T18:02:48+00:00
+conroe-tx,Health Center of Southeast Texas,77327,places,https://www.hcset.com/,true,https://hcset.com/,200,ok,2026-05-28T18:02:48+00:00
+conroe-tx,Lone Star Family Health Center - Conroe,77304,original,https://www.lonestarfamily.org,true,https://www.lonestarfamily.org/,200,ok,2026-05-28T18:02:49+00:00
+fallbrook-ca,TrueCare,92057,places,https://truecare.org/location/truecare-oceanside/,true,https://truecare.org/location/truecare-oceanside/,200,ok,2026-05-28T18:02:49+00:00
+fallbrook-ca,Fallbrook Family Health Center,92028,original,https://www.chsica.org,true,https://www.chsica.org/,200,ok,2026-05-28T18:02:49+00:00
+fallbrook-ca,Neighborhood Healthcare ~ Fallbrook,92028,places,https://www.nhcare.org/locations-list/fallbrook/,true,https://www.nhcare.org/locations-list/fallbrook/,200,ok,2026-05-28T18:02:49+00:00
+fallbrook-ca,Complete Care Community Health Center-Vista,92083,places,https://vistaccchc.com/,true,https://vistaccchc.com/,200,ok,2026-05-28T18:02:49+00:00
+fallbrook-ca,VCC: Fallbrook Pediatrics & Family Medicine,92028,original,https://www.vcc.org,true,https://www.vistacommunityclinic.org/,200,ok,2026-05-28T18:02:50+00:00
+fallbrook-ca,San Ysidro Health San Diego PACE Vista,92083,places,http://www.sdpace.org/,true,https://www.syhealth.org/san-diego-pace,200,ok,2026-05-28T18:02:50+00:00
+fairfield-ct,OPERATION HOPE,06824,original,https://www.swchc.org,true,https://swchc.org/,200,ok,2026-05-28T18:02:50+00:00
+fairfield-ct,City of Norwalk CT. Public Schools Family Center,06851,original,https://www.norwalkps.org,true,https://www.norwalkps.org/,200,ok,2026-05-28T18:02:50+00:00
+fairfield-ct,OPTIMUS at Kinsella,06605,places,https://recovery-programs.org/program/kinsella-treatment-center/,true,https://recovery-programs.org/program/kinsella-treatment-center/,200,ok,2026-05-28T18:02:50+00:00
+fairfield-ct,Franklin Elementary School SBHC,06614,places,https://www.stratfordk12.org/o/fes,true,https://www.stratfordk12.org/o/fes,200,ok,2026-05-28T18:02:50+00:00
+fairfield-ct,CS-HHC at Beth-El Center Homeless Clinic,06460,original,https://www.cornellscott.org,true,https://www.cornellscott.org/,200,ok,2026-05-28T18:02:50+00:00
+fairbanks-ak,TANANA CHIEFS CONFERENCE,99701,original,https://www.tananachiefs.org,true,https://www.tananachiefs.org/,200,ok,2026-05-28T18:02:50+00:00
+fairfield-ct,Family Centers Health Care at 986 Bedford,06905,places,http://www.familycenters.org/,true,https://familycenters.org/,200,ok,2026-05-28T18:02:50+00:00
+escondido-ca,San Ysidro Health Escondido Family Medicine,92025,places,https://www.syhealth.org/clinics/escondido-family-medicine,true,https://www.syhealth.org/clinics/escondido-family-medicine,200,ok,2026-05-28T18:02:51+00:00
+escondido-ca,Escondido Family Counseling Center,92025,original,https://www.fhcsd.org,true,https://www.fhcsd.org/,200,ok,2026-05-28T18:02:51+00:00
+escondido-ca,Juniper Elementary School,92025,places,https://sites.google.com/a/eusd.org/schools-juniper/,true,https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Fsites.google.com%2Fa%2Feusd.org%2Fschools-juniper%2F&dsh=S437216085%3A1779991371195399&followup=https%3A%2F%2Fsites.google.com%2Fa%2Feusd.org%2Fschools-juniper%2F&osid=1&passive=1209600&flowName=WebLiteSignIn&flowEntry=ServiceLogin&ifkv=AWa2PatrX9lGAi11mBLiQOCpmw3LVp3Lk3xW32AFDisikFfKsPoyb0mspiQis5fWPzMARAMETKQA,200,ok,2026-05-28T18:02:51+00:00
+escondido-ca,TrueCare San Marcos Rancheros Administrative Offices,92069,original,https://truecare.org/,true,https://truecare.org/,200,ok,2026-05-28T18:02:51+00:00
+fairbanks-ak,INTERIOR COMMUNITY HEALTH CENTER,99701,original,https://www.interiorcommunityhealth.org,true,https://www.interiorcommunityhealth.org/,200,ok,2026-05-28T18:02:51+00:00
+escondido-ca,OPSAM HEALTH: Rancho Penasquitos,92129,original,https://www.opsam.org,true,https://www.opsam.org/,200,ok,2026-05-28T18:02:51+00:00
+escondido-ca,DAP Health - Centro Medico Escondido,92025,original,https://www.daphealth.org,true,https://daphealth.org/,200,ok,2026-05-28T18:02:51+00:00
+erie-pa,Keystone Agricultural Worker Program - NorthWest,16511,hrsa,www.community-healthnet.com,false,,,other:MissingSchema:Invalid URL 'www.community-healthnet.com': No scheme supplie,2026-05-28T18:02:51+00:00
+erie-pa,Wayne Primary Care,16503,places,https://www.primary-health.net/locations/wayne-primary-care-2/wayne-primary-care/,true,https://www.primary-health.net/locations/wayne-primary-care-2/wayne-primary-care/,200,ok,2026-05-28T18:02:52+00:00
+englewood-co,STRIDE CHC  -  Englewood,80110,original,https://www.mcpn.org,false,https://www.mcpn.org/,530,http_530,2026-05-28T18:02:52+00:00
+englewood-co,Federico F. Pena Family Health Center,80219,places,https://www.denverhealth.org/locations/denver/federico-f-pena-southwest-family-health-center-1339-s-federal-blvd-denver-80219,false,https://www.denverhealth.org/locations/denver/federico-f-pena-southwest-family-health-center-1339-s-federal-blvd-denver-80219,403,http_403,2026-05-28T18:02:52+00:00
+englewood-co,Forum Apartments,80204,original,https://www.coloradocoalition.org,true,https://www.coloradocoalition.org/,200,ok,2026-05-28T18:02:52+00:00
+erie-pa,Multi-Cultural Health Evaluation Delivery System,16503,original,https://mheds.org,true,https://mheds.org/,200,ok,2026-05-28T18:02:52+00:00
+englewood-co,"Uptown Community Health Center, Inc. Bruner Family Medicine",80218,original,https://www.uptowncommunityhealth.org,true,https://www.uptowncommunityhealth.org/,200,ok,2026-05-28T18:02:52+00:00
+englewood-co,Inner City Health Center,80205,original,https://www.innercityhealth.org,true,https://www.innercityhealth.org/,200,ok,2026-05-28T18:02:52+00:00
+eldersburg-md,"Chase Brexton Health Services, Inc. at Security Square Center",21244,places,http://www.chasebrexton.org/?utm_source=GMBSocialClimb&utm_medium=ChaseBrextonHealthCare-RandallstownCenter,true,https://chasebrexton.org/?utm_source=GMBSocialClimb&utm_medium=ChaseBrextonHealthCare-RandallstownCenter,200,ok,2026-05-28T18:02:53+00:00
+erie-pa,"DANIEL S. SNOW, M.D. HEALTH CENTER",16501,original,https://www.community-healthnet.com,true,https://community-healthnet.com/,200,ok,2026-05-28T18:02:53+00:00
+eldersburg-md,Westside Health Center,21223,places,https://totalhealthcare.org/,false,https://totalhealthcare.org/,403,http_403,2026-05-28T18:02:53+00:00
+eldersburg-md,"Health Care for the Homeless, West Baltimore",21223,places,http://www.hchmd.org/,true,https://www.hchmd.org/,200,ok,2026-05-28T18:02:54+00:00
+eldersburg-md,Bond Mill Elementary School,20707,places,https://www.pgcps.org/schools/bond-mill-elementary,true,https://www.pgcps.org/schools/bond-mill-elementary,200,ok,2026-05-28T18:02:54+00:00
+el-paso-tx,Social Services,79901,original,https://www.lafe-ep.org,true,https://lafe-ep.org/,200,ok,2026-05-28T18:02:55+00:00
+el-paso-tx,HOMELESS CLINIC,79901,original,https://www.sanvicente.org,true,https://www.sanvicente.org/,200,ok,2026-05-28T18:02:55+00:00
+el-paso-tx,PROJECT VIDA HEALTH CENTER,79905,original,http://www.projectvidaelpaso.org/,false,http://www.projectvidaelpaso.org/,404,http_404,2026-05-28T18:02:55+00:00
+el-paso-tx,Sunland Park Building B,88063,original,https://www.lcdfnm.org,true,https://laclinicadefamilia.org/,200,ok,2026-05-28T18:02:56+00:00
+el-paso-tx,PMS - Chaparral  Family Health Center,88081,places,http://www.pmsnm.org/locations/chaparral-family-health-center,true,https://www.pmsnm.org/locations/chaparral-family-health-center/,200,ok,2026-05-28T18:02:57+00:00
+east-haven-ct,Pathways Academy SBHC,06512,places,https://www.ccp-ct.org/pathways-academy/,true,https://www.ccp-ct.org/pathways-academy/,200,ok,2026-05-28T18:02:58+00:00
+eldersburg-md,BMS AT ST. AGNES,21229,original,https://www.bmsi.org,true,https://bmsi.org/,200,ok,2026-05-28T18:02:59+00:00
+east-haven-ct,Fair Haven Community Health Center @ East Haven,06512,places,http://fhchc.org/,true,https://www.fhchc.org/,200,ok,2026-05-28T18:02:59+00:00
+east-haven-ct,CS-HHC at Sargent Drive,06511,original,https://www.cornellscott.org,true,https://www.cornellscott.org/,200,ok,2026-05-28T18:02:59+00:00
+east-haven-ct,OPTIMUS on Boston Avenue,06614,original,https://optimushealthcare.org/opthc/,true,https://optimushealthcare.org/,200,ok,2026-05-28T18:03:00+00:00
+east-haven-ct,Liberation Programs,06610,places,http://liberationprograms.org/,true,https://liberationprograms.org/,200,ok,2026-05-28T18:03:00+00:00
+east-haven-ct,StayWell Naugatuck Health Center,06770,places,http://staywellhealth.org/,true,https://staywellhealth.org/,200,ok,2026-05-28T18:03:00+00:00
+durham-nc,HEALTH CARE FOR THE HOMELESS,27701,original,https://www.lincolnchc.org,true,https://lincolnchc.org/,200,ok,2026-05-28T18:03:02+00:00
+durham-nc,Chapel Hill Community Health Center,27514,places,https://www.piedmonthealth.org/,true,https://piedmonthealth.org/,200,ok,2026-05-28T18:03:05+00:00
+durham-nc,CARY at DORCAS PLAZA,27511,original,https://www.advancechc.org,true,https://advancechc.org/,200,ok,2026-05-28T18:03:05+00:00
+durham-nc,BDIHS Admin,27713,original,https://www.bdintegratedhealth.com,true,https://bdintegratedhealth.com/,200,ok,2026-05-28T18:03:06+00:00
+durham-nc,NeighborHealth Center Susanne Berger Clinic,27607,places,https://neighborhealthcenter.org/,true,https://neighborhealthcenter.org/,200,ok,2026-05-28T18:03:06+00:00
+durham-nc,NC DEPARTMENT OF HEALTH AND HUMAN SERVICES,27607,places,https://www.ncdhhs.gov/,true,https://www.ncdhhs.gov/,200,ok,2026-05-28T18:03:06+00:00
+fullerton-ca,"Central City Community Health Center, Inc. - Thomas Edison Elementary School",92805,original,https://www.centralcityhealth.org,true,https://centralcityhealth.org/,200,ok,2026-05-28T18:03:08+00:00
+englewood-co,Sheridan Health Services,80110,original,https://www.nursing.ucdenver.edu/sheridan,false,,,"conn_error:HTTPSConnectionPool(host='www.nursing.ucdenver.edu', port=443): Max retries exce",2026-05-28T18:03:08+00:00
+fullerton-ca,Family Health Matters Dental Clinic,92805,places,http://fhm-chc.org/,true,https://www.fhm-chc.org/,200,ok,2026-05-28T18:03:08+00:00
+fullerton-ca,AltaMed Pharmacy - Anaheim,92801,original,https://www.altamed.org,true,https://www.altamed.org/,200,ok,2026-05-28T18:03:08+00:00
+fullerton-ca,Topaz School Clinic,92831,places,https://stjudenhc.com/?ls=location&y_source=1_MTAyMjUxNjM2My03MTUtbG9jYXRpb24ud2Vic2l0ZQ%3D%3D,true,https://stjudenhc.com/?ls=location&y_source=1_MTAyMjUxNjM2My03MTUtbG9jYXRpb24ud2Vic2l0ZQ%3D%3D,200,ok,2026-05-28T18:03:09+00:00
+fullerton-ca,SOS-Bridges Health Center,92806,original,https://www.shareourselves.org,true,https://shareourselves.org/,200,ok,2026-05-28T18:03:09+00:00
+friendswood-tx,MyCHN Pearland Administration,77581,places,https://mychn.org/locations/mychn-silverlake/,true,https://mychn.org/locations/mychn-silverlake/,200,ok,2026-05-28T18:03:09+00:00
+friendswood-tx,St. Hope Community Health Center- Dickinson,77539,places,https://offeringhope.org/,true,https://www.offeringhope.org/,200,ok,2026-05-28T18:03:10+00:00
+eldersburg-md,PARK WEST MEDICAL CENTER - PLAZA SITE,21215,places,http://www.parkwestmed.org/,false,,,"conn_error:HTTPSConnectionPool(host='www.parkwestmed.org', port=443): Max retries exceeded ",2026-05-28T18:03:10+00:00
+fullerton-ca,"Benevolence Industries, Inc. - Anaheim",92805,original,https://www.bhchealth.org,true,https://www.bhchealth.org/,200,ok,2026-05-28T18:03:11+00:00
+friendswood-tx,Coastal Health & Wellness - Texas City,77591,original,https://www.coastalhw.org,false,https://www.coastalhw.org/,403,http_403,2026-05-28T18:03:12+00:00
+friendswood-tx,Legacy Deer Park,77536,original,https://www.legacycommunityhealth.org,true,https://www.legacycommunityhealth.org/,200,ok,2026-05-28T18:03:12+00:00
+fort-worth-tx,Southeast Community Health Center,76105,original,https://www.ntachc.org,true,https://ntachc.org/,200,ok,2026-05-28T18:03:12+00:00
+fort-worth-tx,LBU Oak Cliff,75211,original,https://www.losbarriosunidos.org,false,,,dns_failure,2026-05-28T18:03:12+00:00
+fort-worth-tx,HHM Health Arlington,76015,places,https://www.hhmhealth.org/?utm_source=GMBSocialClimb&utm_medium=ThePearlWomen%27sCenteratHHMHealthArlington,true,https://www.hhmhealth.org/?utm_source=GMBSocialClimb&utm_medium=ThePearlWomen%27sCenteratHHMHealthArlington,200,ok,2026-05-28T18:03:12+00:00
+fort-smith-ar,Northside Clinic at 6th Street,72904,original,https://www.rvpcs.org,true,https://www.rvpcs.org/,200,ok,2026-05-28T18:03:12+00:00
+fort-smith-ar,ARcare-159,72903,places,https://www.arcare.net/locations/fort-smith-rheumatology/,true,https://www.arcare.net/locations/fort-smith-rheumatology/,200,ok,2026-05-28T18:03:12+00:00
+fort-myers-fl,BROADWAY DENTAL OFFICE,33901,original,https://www.fhcswf.org,true,https://fhcswfl.org/,200,ok,2026-05-28T18:03:13+00:00
+fort-smith-ar,HWC Adventure Head Start - Sallisaw EHS,74955,places,https://healthwellnessok.com/adventure-headstart,true,https://healthwellnessok.com/adventure-headstart,200,ok,2026-05-28T18:03:14+00:00
+friendswood-tx,Bee Busy Wellness Center - Bay Area,77058,original,https://mybbwc.org,true,https://mybbwc.org/,200,ok,2026-05-28T18:03:15+00:00
+folsom-ca,WellSpace Health - Folsom Community Health Center,95630,original,https://www.wellspacehealth.org,true,https://www.wellspacehealth.org/,200,ok,2026-05-28T18:03:15+00:00
+fort-myers-fl,Family Care North,34108,places,http://geraldlevensmd.com/,true,https://naplesfamilypractice.com/,200,ok,2026-05-28T18:03:15+00:00
+friendswood-tx,"Pasadena Health Center, Inc",77502,original,http://www.pasadenahealthcenter.com,true,https://www.phcx.org/,200,ok,2026-05-28T18:03:15+00:00
+folsom-ca,San Juan High School,95610,original,https://www.sanjuan.edu/SanJuan,true,https://sanjuan.sanjuan.edu,200,ok,2026-05-28T18:03:15+00:00
+folsom-ca,Sacramento Community Clinic - Sunrise,95670,places,http://allmedc.com/,true,https://www.halocares.org/,200,ok,2026-05-28T18:03:16+00:00
+folsom-ca,Fair Oaks Administrative Site,95628,places,http://www.sacent.com/,true,https://sacent.com/,200,ok,2026-05-28T18:03:16+00:00
+folsom-ca,El Dorado Community Health Center Cameron Park Main,95682,original,https://www.edcchc.org,true,https://edcchc.org/,200,ok,2026-05-28T18:03:17+00:00
+florence-sc,"HopeHealth, Inc.",29506,original,https://www.hope-health.org,true,https://www.hope-health.org/,200,ok,2026-05-28T18:03:17+00:00
+florence-sc,"Genesis Healthcare, Inc. dba Genesis Healthcare Florence",29505,original,https://www.genesisfqhc.org,true,https://genesisfqhc.org/,200,ok,2026-05-28T18:03:17+00:00
+folsom-ca,Cares Community Health dba One Community Health - Carmichael Health Center,95608,places,https://onecommunityhealth.com/,true,https://onecommunityhealth.com/,200,ok,2026-05-28T18:03:17+00:00
+florence-sc,CSC HARTSVILLE CENTER,29550,original,https://www.caresouth-carolina.com,true,https://www.caresouth-carolina.com/,200,ok,2026-05-28T18:03:17+00:00
+florence-sc,"Health Care Partners of South Carolina, Inc. - MARION OFFICE",29571,original,https://www.hcpsc.com,false,https://www.hcpsc.com/,403,http_403,2026-05-28T18:03:18+00:00
+fenton-mi,Mason Middle School Empowerment Zone,48329,original,https://www.honorcommunityhealth.org,true,https://honorcommunityhealth.org/,200,ok,2026-05-28T18:03:18+00:00
+fenton-mi,HCHN - New Burton,48529,places,http://www.hamiltonchn.org/,true,https://hamiltonchn.org/,200,ok,2026-05-28T18:03:18+00:00
+fayetteville-ar,Community Clinic Fayetteville Medical,72704,places,https://communityclinic.net/location/primary-specialty-care-fayetteville-ar-mlk-blvd/,true,https://communityclinic.net/location/primary-specialty-care-fayetteville-ar-mlk-blvd/,200,ok,2026-05-28T18:03:18+00:00
+fenton-mi,The Wellness Plan Medical Center - Pontiac,48342,original,https://www.wellplan.com,true,https://www.wellplan.com/,200,ok,2026-05-28T18:03:19+00:00
+fayetteville-ar,BOSTON MOUNTAIN RURAL HEALTH CTR,72740,original,https://www.bmrhc.net,true,https://www.bmrhc.net/,200,ok,2026-05-28T18:03:19+00:00
+fayetteville-ar,Infuse Rx,72703,original,https://www.infuserx.net,true,https://infuserx.net/,200,ok,2026-05-28T18:03:20+00:00
+fayetteville-ar,Westville Family Medicine,74965,original,https://www.neohealth.org,true,https://www.neohealth.org/,200,ok,2026-05-28T18:03:20+00:00
+greenville-sc,Unity Health On Main,29601,original,https://www.unityhealthonmain.org,true,https://www.unityhealthonmain.org/,200,ok,2026-05-28T18:03:20+00:00
+greenville-sc,NEW HORIZON FAMILY HEALTH SERVICES,29601,original,https://www.newhorizonfhs.org,true,https://www.newhorizonfhs.org/,200,ok,2026-05-28T18:03:22+00:00
+greenville-sc,"Foothills Community Health Care, Inc",29640,hrsa,www.myfchc.org,false,,,other:MissingSchema:Invalid URL 'www.myfchc.org': No scheme supplied. Perhaps yo,2026-05-28T18:03:22+00:00
+greensburg-pa,"Community Health Clinic, Inc.",15601,places,http://www.communityhealthclinic.org/,true,https://www.communityhealthclinic.org/,200,ok,2026-05-28T18:03:23+00:00
+greensburg-pa,Latrobe Health Center,15650,original,https://primary-health.net,true,https://www.primary-health.net/,200,ok,2026-05-28T18:03:24+00:00
+greensburg-pa,MCKEESPORT FAMILY HEALTH CENTER,15132,original,https://N/A,false,,,dns_failure,2026-05-28T18:03:24+00:00
+greensburg-pa,Cornerstone Care Community Health Center of Clairton,15025,places,https://cornerstonecare.com/,true,https://cornerstonecare.com/,200,ok,2026-05-28T18:03:24+00:00
+greensburg-pa,Donora Family Medicine,15033,places,https://www.centervilleclinics.com/location/donora-family-medicine,true,https://www.centervilleclinics.com/location/donora-family-medicine,200,ok,2026-05-28T18:03:25+00:00
+greenville-sc,ReGenesis Health Care-Phoenix Center,29607,places,http://www.phoenixcenter.org/,true,https://phoenixcenter.org/,200,ok,2026-05-28T18:03:25+00:00
+greensburg-pa,Metro Community Health Center,15218,original,https://www.metrofamilypractice.org,false,,,"conn_error:HTTPSConnectionPool(host='www.metrofamilypractice.org', port=443): Max retries e",2026-05-28T18:03:25+00:00
+grand-rapids-mi,Belknap Commons Dental Center,49503,original,https://www.cherryhealth.org,true,https://cherryhealth.org/,200,ok,2026-05-28T18:03:25+00:00
+grand-rapids-mi,Kent City High School Behavioral Health Services,49330,places,https://www.kentcityschools.org/highschool/,true,https://www.kentcityschools.org/highschool/,200,ok,2026-05-28T18:03:26+00:00
+grand-rapids-mi,Cross Roads Bible Church,49504,places,http://www.crossroads-bible.org/,true,https://crossroads-bible.org/,200,ok,2026-05-28T18:03:27+00:00
+glendale-az,Maverick Health Center,85301,original,https://terroshealth.org,true,https://terroshealth.org/,200,ok,2026-05-28T18:03:28+00:00
+glendale-az,Mountain Park Health Center - Glendale,85303,original,https://www.mountainparkhealth.org,true,https://mountainparkhealth.org/,200,ok,2026-05-28T18:03:28+00:00
+glendale-az,Valle del Sol_4344,85031,original,https://www.ValledelSol.Com,true,https://www.valledelsol.com/,200,ok,2026-05-28T18:03:30+00:00
+glendale-az,Adelante Healthcare West Phoenix,85051,original,https://adelantehealthcare.com/,true,https://adelantehealthcare.com/,200,ok,2026-05-28T18:03:30+00:00
+grand-rapids-mi,Ravenna Middle School,49451,places,http://www.ravennaschools.org/schools/rms/,true,https://www.ravennaschools.org//schools/rms/,200,ok,2026-05-28T18:03:30+00:00
+glendale-az,Valleywise Comprehensive Health Center-Peoria,85345,original,https://valleywisehealth.org/services/primary-care/,true,https://valleywisehealth.org/services/primary-care/,200,ok,2026-05-28T18:03:30+00:00
+gilroy-ca,GARDNER SOUTH COUNTY HEALTH CTR,95020,original,https://www.Gardnerhealth.org,false,https://www.gardnerhealth.org/,200,thin_body_114b,2026-05-28T18:03:30+00:00
+gilroy-ca,Glen View SB Health Clinic,95020,places,https://bach.health/santa-clara-county-locations,true,https://bach.health/santa-clara-county-locations,200,ok,2026-05-28T18:03:31+00:00
+gilroy-ca,Gilroy Neighborhood Health Clinic,95020,places,http://www.schoolhealthclinics.org/,true,https://www.schoolhealthclinics.org/,200,ok,2026-05-28T18:03:31+00:00
+glendale-az,Copperwood II Health Center,85304,places,https://noahhelps.org/health-center-locations/copperwood-ii/?y_source=1_MTAzNzkzOTI3Ny03MTUtbG9jYXRpb24ud2Vic2l0ZQ%3D%3D,true,https://noahhelps.org/health-center-locations/copperwood-ii/?y_source=1_MTAzNzkzOTI3Ny03MTUtbG9jYXRpb24ud2Vic2l0ZQ%3D%3D,200,ok,2026-05-28T18:03:31+00:00
+gilroy-ca,Valley Health Center Gilroy,95020,original,https://www.sccgov.org,false,https://www.sccgov.org/,403,http_403,2026-05-28T18:03:32+00:00
+gilroy-ca,Salud at Valle Verde,95019,places,http://www.splg.org/,true,https://splg.org/,200,ok,2026-05-28T18:03:32+00:00
+gilbertsville-pa,CHDC Boyertown,19512,places,https://ch-dc.org/,true,https://ch-dc.org/,200,ok,2026-05-28T18:03:32+00:00
+gilroy-ca,Watsonville Health Center - Building B,95076,original,https://www.santacruzhealth.org,true,https://www.santacruzhealth.org/,200,ok,2026-05-28T18:03:32+00:00
+gilbertsville-pa,Norristown Regional Health Center,19401,original,https://dvch.org,true,https://dvch.org/,200,ok,2026-05-28T18:03:33+00:00
+fenton-mi,Genesee Health System,48507,places,http://www.genhs.org/,false,,,"conn_error:HTTPConnectionPool(host='www.genhs.org', port=80): Max retries exceeded with url",2026-05-28T18:03:33+00:00
+gilbertsville-pa,Lehigh Valley Physicians Practice PCP,18102,original,https://www.valleyhealthpartners.org/,true,https://www.valleyhealthpartners.org/,200,ok,2026-05-28T18:03:33+00:00
+gilbertsville-pa,Keystone Agricultural Worker Program - Berks Co.,19610,places,https://keystonehealth.org/keystoneagworkerprogram/,true,https://keystonehealth.org/keystoneagworkerprogram/,200,ok,2026-05-28T18:03:34+00:00
+gilbertsville-pa,Star Community Health Dental Sigal-Allentown,18102,original,https://starcommunityhealth.org,true,https://www.starcommunityhealth.org/,200,ok,2026-05-28T18:03:34+00:00
+gig-harbor-wa,Key Peninsula Health Center,98349,places,https://www.commhealth.org/services/medical-clinics/key-medical-center/,true,https://www.commhealth.org/location/key-medical-center/,200,ok,2026-05-28T18:03:34+00:00
+gig-harbor-wa,Sea Mar CHC - Gig Harbor 50th St Ct NW,98335,places,http://www.seamar.org/pierce-bh-gigharbor.html,true,https://www.seamar.org/pierce-bh-gigharbor.html,200,ok,2026-05-28T18:03:35+00:00
+gig-harbor-wa,Peninsula Community Health Services - Key Peninsula,98329,places,https://www.pchsweb.org/,true,https://www.pchsweb.org/,200,ok,2026-05-28T18:03:35+00:00
+gig-harbor-wa,FEDERAL WAY PUBLIC HLTH CTR,98003,original,http://www.kingcounty.gov/healthservices/health/locations/federalway.aspx,false,https://kingcounty.gov/legacy/depts/health/locations/federalway.aspx,404,http_404,2026-05-28T18:03:36+00:00
+gig-harbor-wa,Neighborcare Health at High Point,98126,original,https://www.neighborcare.org,true,https://www.neighborcare.org/,200,ok,2026-05-28T18:03:36+00:00
+gig-harbor-wa,HealthPoint TAF@Saghalie Campus Health Center,98023,places,http://healthpointchc.org/find-clinics/tafsaghalie,true,https://www.healthpointchc.org/find-clinics/tafsaghalie,200,ok,2026-05-28T18:03:36+00:00
+germantown-md,MobileMed Germantown Clinic,20874,original,https://mobilemedicalcare.org,true,https://mobilemedicalcare.org/,200,ok,2026-05-28T18:03:37+00:00
+germantown-md,Mary's Center - Silver Spring MD,20901,places,https://www.maryscenter.org/,true,https://www.maryscenter.org/,200,ok,2026-05-28T18:03:37+00:00
+germantown-md,Friendship Place,20016,original,https://ww.unityhealthcare.org,false,,,dns_failure,2026-05-28T18:03:37+00:00
+germantown-md,CCI-Gaithersburg,20877,original,https://www.ccicares.org,false,,,"ssl_error:HTTPSConnectionPool(host='www.cciweb.org', port=443): Max retries exceeded with ",2026-05-28T18:03:37+00:00
+garland-tx,HHM Health Mesquite Family Health Center,75150,original,https://hhmhealth.org,true,https://www.hhmhealth.org/,200,ok,2026-05-28T18:03:38+00:00
+garland-tx,HSNT Wylie Children's Medical Clinic,75098,places,https://healthservicesntx.org/wylie-childrens-medical-clinic?utm_source=GMBSocialClimb&utm_medium=WylieChildren'sMedicalClinic,true,https://healthservicesntx.org/locations-wylie/,200,ok,2026-05-28T18:03:38+00:00
+germantown-md,The City of Frederick Housing and Human Services/FCAA,21701,original,https://www.cityoffrederick.com/fcaa,true,https://hhs.cityoffrederickmd.gov/,200,ok,2026-05-28T18:03:39+00:00
+garland-tx,Prism Health North Texas at South Dallas Health Center,75210,original,https://www.phntx.org,true,https://www.phntx.org/,200,ok,2026-05-28T18:03:39+00:00
+garland-tx,Women's Health Center of Plano,75075,places,https://www.fhcntx.org/,true,https://fhcntx.org/,200,ok,2026-05-28T18:03:40+00:00
+garland-tx,The Bridge,75201,original,http://www.parklandhospital.com/phhs/homeless-outreach.aspx,true,https://www.parklandhealth.org/homeless-outreach,200,ok,2026-05-28T18:03:40+00:00
+huntersville-nc,Charlotte Community Health Clinic,28262,original,http://charlottecommunityhealthclinic.org/,false,,,dns_failure,2026-05-28T18:03:41+00:00
+huntersville-nc,Kintegra at Turning Point Middle,28262,original,https://www.kintegra.org,true,https://www.kintegra.org/,200,ok,2026-05-28T18:03:42+00:00
+fort-myers-fl,Huntingdon Health Services Suite 201,33907,original,https://www.mcrhs.org,false,,,"conn_error:HTTPSConnectionPool(host='www.mcrhs.org', port=443): Max retries exceeded with u",2026-05-28T18:03:45+00:00
+huntersville-nc,Sugar Creek Health Center,28213,original,https://www.crchc.org,true,https://www.crchc.org/,200,ok,2026-05-28T18:03:46+00:00
+huntersville-nc,The C.W. Williams Community Health Center Inc.,28208,original,https://www.cwwilliams.org,true,https://cwwilliams.org/,200,ok,2026-05-28T18:03:46+00:00
+houston-tx,Harmony House Respite Center,77007,places,http://www.harmonyhouse.org/,true,https://harmonyhouse.org/,200,ok,2026-05-28T18:03:48+00:00
+gilbertsville-pa,Berks Community Health Center,19602,original,https://www.berkschc.org,false,,,"conn_error:HTTPSConnectionPool(host='www.berkschc.org', port=443): Max retries exceeded wit",2026-05-28T18:03:48+00:00
+houston-tx,CATHEDRAL CLINIC,77002,original,https://www.homeless-healthcare.org,true,https://www.homeless-healthcare.org/,200,ok,2026-05-28T18:03:49+00:00
+houston-tx,Legacy Wellness Bar,77006,places,https://www.wellnessbarbylegacy.org/,true,https://www.wellnessbarbylegacy.org/,200,ok,2026-05-28T18:03:50+00:00
+houston-tx,EL CENTRO DE CORAZON-EASTWOOD,77023,original,https://www.elcentrdecorazon.org,false,,,dns_failure,2026-05-28T18:03:50+00:00
+houston-tx,Avenue 360 Health and Wellness Midtown,77002,original,https://avenue360.org/,true,https://avenue360.org/,200,ok,2026-05-28T18:03:50+00:00
+huntersville-nc,AMG - N Tryon Rd,28262,original,https://amitymed.org,true,https://www.amitymed.org/,200,ok,2026-05-28T18:03:50+00:00
+hoffman-estates-il,3100 W. Higgins Road,60169,original,https://www.gefcc.org,true,https://greaterfamilyhealth.org,200,ok,2026-05-28T18:03:51+00:00
+hoffman-estates-il,Legacy Medical Care - Hanover Park,60133,places,http://www.legacymedicalcare.org/?utm_source=GMBSocialClimb&utm_medium=LegacyMedicalCare-HanoverPark,true,https://www.legacymedicalcare.org/?utm_source=GMBSocialClimb&utm_medium=LegacyMedicalCare-HanoverPark,200,ok,2026-05-28T18:03:51+00:00
+hoffman-estates-il,ACCESS Northwest Family Health Center,60004,places,https://www.achn.net/locations/location-pages/access-northwest-family-health-center/?utm_source=google&utm_medium=website&utm_id=website+link,true,https://www.achn.net/locations/location-pages/access-northwest-family-health-center/?utm_source=google&utm_medium=website&utm_id=website+link,200,ok,2026-05-28T18:03:51+00:00
+hoffman-estates-il,VNA Health Center - Elgin Villa,60120,original,https://www.vnahealth.com,true,https://vnahealth.com/,200,ok,2026-05-28T18:03:51+00:00
+hoffman-estates-il,CARPENTERSVILLE COMMUNITY HEALTH CENTER,60110,original,https://www.auntmarthas.org,true,https://www.auntmarthas.org/,200,ok,2026-05-28T18:03:51+00:00
+hoffman-estates-il,Hamdard Health Addison,60101,original,https://www.hamdardhealth.org/,true,https://www.hamdardhealth.org/,200,ok,2026-05-28T18:03:51+00:00
+hickory-nc,Eastern Burke HCCH,28612,places,https://www.highcountrycommunityhealth.com/,true,https://www.highcountrycommunityhealth.com/,200,ok,2026-05-28T18:03:52+00:00
+houston-tx,McReynolds Middle School,77020,places,https://www.houstonisd.org/mcreynolds,false,https://www.houstonisd.org/mcreynolds,404,http_404,2026-05-28T18:03:52+00:00
+hickory-nc,Good Samaritan Clinic,28655,places,https://gscburke.org/,true,https://www.gscburke.org/,200,ok,2026-05-28T18:03:52+00:00
+hickory-nc,Kintegra at Hickory High,28601,original,https://www.kintegra.org,true,https://www.kintegra.org/,200,ok,2026-05-28T18:03:52+00:00
+hemet-ca,Neighborhood Healthcare ~ Devonshire Avenue,92543,places,https://www.nhcare.org/locations-list/hemet/,true,https://www.nhcare.org/locations-list/hemet/,200,ok,2026-05-28T18:03:52+00:00
+hemet-ca,Hemet Community Health Center,92543,original,https://www.ruhealth.org/chc/hemet,true,https://www.ruhealth.org/chc/hemet,200,ok,2026-05-28T18:03:53+00:00
+hemet-ca,Tri-State Community Healthcare Center,92543,places,http://www.tristateclinics.org/,false,,,"ssl_error:HTTPSConnectionPool(host='www.tristateclinics.org', port=443): Max retries excee",2026-05-28T18:03:53+00:00
+hemet-ca,SJCH San Jacinto Health Center,92583,places,https://sjch.org/,true,https://www.sjch.org/,200,ok,2026-05-28T18:03:53+00:00
+hemet-ca,DAP Health - San Jacinto Community Health Center,92583,original,https://borregomedical.org,true,https://daphealth.org/,200,ok,2026-05-28T18:03:54+00:00
+hemet-ca,Innercare Hemet,92543,original,https://www.innercare.org,true,https://innercare.org/,200,ok,2026-05-28T18:03:54+00:00
+hamden-ct,Eli Whitney Technical High School SBHC,06514,places,http://whitney.cttech.org/index.html,true,http://whitney.cttech.org/index.html,200,ok,2026-05-28T18:03:54+00:00
+hamden-ct,Leeway House,06511,places,https://leeway.net/,true,https://www.leeway.net/,200,ok,2026-05-28T18:03:55+00:00
+hamden-ct,StayWell Naugatuck Health Center,06770,places,http://staywellhealth.org/,true,https://staywellhealth.org/,200,ok,2026-05-28T18:03:55+00:00
+garland-tx,"Martin Luther King, Jr. Family Clinic, Inc. d/b/a Foremost Family Health Centers",75215,original,https://www.foremostfhc.org,false,,,"conn_error:HTTPSConnectionPool(host='www.foremostfhc.org', port=443): Max retries exceeded ",2026-05-28T18:03:55+00:00
+hamden-ct,OPTIMUS on Boston Avenue,06614,original,https://optimushealthcare.org/opthc/,true,https://optimushealthcare.org/,200,ok,2026-05-28T18:03:55+00:00
+hamden-ct,CS-HHC at Dunbar Hill Elementary School,06514,places,https://www.hamden.org/dunbarhill,true,https://www.hamden.org/dunbarhill,200,ok,2026-05-28T18:03:56+00:00
+hamden-ct,Waterbury Health & Wellness Center,06704,original,https://www.wheelerclinic.org,true,https://www.wheelerhealth.org/,200,ok,2026-05-28T18:03:56+00:00
+kansas-city-ks,"Mercy and Truth Kansas City, KS",66102,original,https://www.mercyandtruth.com,true,https://www.mercyandtruth.com/,200,ok,2026-05-28T18:03:56+00:00
+gulfport-ms,Gulfport Health Center,39501,original,https://www.coastalfamilyhealth.org,true,https://coastalfamilyhealth.org/,200,ok,2026-05-28T18:03:57+00:00
+kansas-city-ks,Samuel U. Rodgers Health Center Cabot Westside,64108,places,https://samrodgers.org/,true,https://samrodgers.org/,200,ok,2026-05-28T18:03:57+00:00
+kansas-city-ks,Kansas City CARE Clinic,64111,places,http://kccare.org/,true,https://kccare.org/,200,ok,2026-05-28T18:03:57+00:00
+kansas-city-ks,"Hope Family Care Center, 3027 Prospect Ave., Kansas City, MO 64128",64128,places,http://hfcckc.org/,true,https://hfcckc.org/,200,ok,2026-05-28T18:03:57+00:00
+kansas-city-ks,SWOPE HEALTH SVCS - WYANDOTTE,66102,original,https://WWW.SWOPEHEALTH.ORG,true,https://swopehealth.org/,200,ok,2026-05-28T18:03:58+00:00
+joplin-mo,Commerce Community Health Center,74339,places,http://www.chcneo.com/,true,https://www.chcneo.com/,200,ok,2026-05-28T18:03:59+00:00
+joliet-il,Will County Community Health Center at Will County Health Department,60433,places,http://willcountyhealth.org/,true,https://willcountyhealth.org/,200,ok,2026-05-28T18:03:59+00:00
+kansas-city-ks,Vibrant Health - Children's Campus,66101,original,https://vibrantwyandotte.org/,true,https://vibranthealthkc.org/,200,ok,2026-05-28T18:03:59+00:00
+joliet-il,Aunt Martha's Joliet East Community Health Center,60432,places,https://www.auntmarthas.org/location/east-joliet-community-health-center/?utm_source=google&utm_medium=organic&utm_campaign=gbp-listing&utm_content=east-joliet-chc,true,https://www.auntmarthas.org/location/east-joliet-community-health-center/?utm_source=google&utm_medium=organic&utm_campaign=gbp-listing&utm_content=east-joliet-chc,200,ok,2026-05-28T18:03:59+00:00
+joplin-mo,Community Health Center of Southeast Kansas/Baxter Springs,66713,original,https://www.chcsek.org,true,https://chcsek.org/,200,ok,2026-05-28T18:04:00+00:00
+joliet-il,VNA Health Care- Joliet,60435,original,https://www.vnahealth.com,true,https://vnahealth.com/,200,ok,2026-05-28T18:04:00+00:00
+joplin-mo,Access Family Care Joplin,64801,original,https://www.accessfamilycare.org,true,https://accessfamilycare.org/,200,ok,2026-05-28T18:04:00+00:00
+joliet-il,COMMUNITY HEALTH PARTNERSHIP OF ILLINOIS,60505,original,https://www.chpofil.org,true,https://chpofil.org/,200,ok,2026-05-28T18:04:01+00:00
+joliet-il,Pillars Community Health Countryside,60525,original,https://www.pillarscommunityhealth.org,true,https://pillarscommunityhealth.org/,200,ok,2026-05-28T18:04:01+00:00
+jackson-mi,"Grace Health, Inc.",49224,original,https://www.gracehealthmi.org,true,https://www.gracehealthmi.org/,200,ok,2026-05-28T18:04:01+00:00
+issaquah-wa,Sea Mar CHC - Bellevue 150th Ave. SE,98006,places,http://www.seamar.org/king-medical-bellevue.html,true,https://www.seamar.org/king-medical-bellevue.html,200,ok,2026-05-28T18:04:01+00:00
+issaquah-wa,ICHS Bellevue Medical and Dental Clinic,98005,original,https://www.ichs.com,true,https://www.ichs.com/,200,ok,2026-05-28T18:04:01+00:00
+jackson-mi,CFH - Northeast Health Center,49202,original,https://www.centerforfamilyhealth.org,true,https://centerforfamilyhealth.org/,200,ok,2026-05-28T18:04:01+00:00
+issaquah-wa,Neighborcare Health at Rainier Beach,98118,original,https://www.neighborcare.org,true,https://www.neighborcare.org/,200,ok,2026-05-28T18:04:02+00:00
+issaquah-wa,Seattle Roots at Carolyn Downs,98122,original,http://www.cdchc.org,true,https://seattleroots.org/,200,ok,2026-05-28T18:04:03+00:00
+issaquah-wa,Eastgate Public Health Center,98007,original,http://www.kingcounty.gov/healthservices/health/locations/eastgate.aspx,true,https://kingcounty.gov/en/dept/dph/health-safety/health-centers-programs-services/public-health-centers/eastgate,200,ok,2026-05-28T18:04:03+00:00
+inverness-fl,Inverness Medical - 300 S. Line Avenue,34452,original,https://www.langleymedicalcenter.com,false,,,dns_failure,2026-05-28T18:04:03+00:00
+issaquah-wa,HealthPoint at Sunset Neighborhood Center,98056,places,https://www.healthpointchc.org/find-clinics/sunset-neighborhood-center,true,https://www.healthpointchc.org/find-clinics/sunset-neighborhood-center,200,ok,2026-05-28T18:04:03+00:00
+inverness-fl,"Citrus County Rural Health, Inc.",34428,original,https://www.ccrhealth.org,true,https://www.ccrhealth.org/,200,ok,2026-05-28T18:04:04+00:00
+inverness-fl,Brooksville Family Health Center,34601,original,https://www.premierhc.org,true,https://premierhc.org/,200,ok,2026-05-28T18:04:04+00:00
+joliet-il,GPS-Maurice Fitts Page Whole Health and Wellness Health Center,60411,original,https://www.gpsbh.org,true,https://gpsbh.org/,200,ok,2026-05-28T18:04:04+00:00
+lexington-ky,DBA Bluegrass Community Health Center,40507,original,https://N/A,false,,,dns_failure,2026-05-28T18:04:04+00:00
+lexington-ky,University of Kentucky,40506,original,https://www.uky.edu,true,https://www.uky.edu/,200,ok,2026-05-28T18:04:05+00:00
+lexington-ky,HealthFirst Bluegrass MET.,40508,original,https://www.healthfirstlex.com,true,https://healthfirstlex.com/,200,ok,2026-05-28T18:04:05+00:00
+lexington-ky,HealthPoint Nicholasville,40356,places,http://www.healthpointfc.org/,true,https://www.healthpointfc.org/,200,ok,2026-05-28T18:04:05+00:00
+lawton-ok,LCHC Call Center,73501,hrsa,www.lawtoncommunityhealthcenter.com,false,,,other:MissingSchema:Invalid URL 'www.lawtoncommunityhealthcenter.com': No scheme,2026-05-28T18:04:05+00:00
+lexington-ky,Sterling Health Care - Winchester,40391,places,http://www.sterlinghealthky.org/,true,https://www.sterlinghealthky.org/,200,ok,2026-05-28T18:04:06+00:00
+laurel-ms,"FAMILY HEALTH CENTER, INC.",39440,original,https://www.lfhc.net,true,https://www.lfhc.net/,200,ok,2026-05-28T18:04:06+00:00
+lexington-ky,Huntertown Elementary Healthy Kids Clinic,40383,original,https://www.cumberlandfamilymedical.com,true,https://cfmcky.com/,200,ok,2026-05-28T18:04:06+00:00
+laurel-ms,SEMINARY FAMILY HEALTH CENTER,39479,original,https://www.semrhi.com,true,https://www.semrhi.com/,200,ok,2026-05-28T18:04:07+00:00
+las-vegas-nv,FirstMed Pediatrics,89101,places,http://fmhwc.org/,false,https://fmhwc.org/,200,no_html_tag,2026-05-28T18:04:07+00:00
+las-vegas-nv,LAS VEGAS OUTREACH CLINIC,89101,places,https://www.nevadahealthcenters.org/,true,https://www.nevadahealthcenters.org/,200,ok,2026-05-28T18:04:08+00:00
+las-vegas-nv,All For Health - Charleston,89104,original,http://all4health.org/,true,http://all4health.org/,200,ok,2026-05-28T18:04:08+00:00
+las-vegas-nv,Hope Recuperative Care Center,89101,places,https://hopehealthvegas.org/recuperative-care-center/,true,https://hopehealthvegas.org/recuperative-care-center/,200,ok,2026-05-28T18:04:08+00:00
+laurel-ms,JASPER MEDICAL/DENTAL CLINIC,39439,original,https://www.outreachhs.org,true,https://www.outreachhs.org/,200,ok,2026-05-28T18:04:09+00:00
+lancaster-pa,"Lancaster Downtown (Medical, Dental & Pharmacy)",17603,places,https://unioncommunitycare.org/,true,https://unioncommunitycare.org/,200,ok,2026-05-28T18:04:09+00:00
+las-vegas-nv,Aghaby: North Las Vegas,89030,places,https://www.acchealthcenters.org/,true,https://www.acchealthcenters.org/,200,ok,2026-05-28T18:04:09+00:00
+lancaster-pa,Columbia Dental Center,17512,places,https://www.familyfirsthealth.org/locations/columbia-dental,true,https://www.familyfirsthealth.org/locations/columbia-dental,200,ok,2026-05-28T18:04:09+00:00
+lakeway-tx,Lone Star Circle of Care at Jonestown,78641,original,https://www.lonestarcares.org,true,https://lonestarcares.org/,200,ok,2026-05-28T18:04:09+00:00
+lakeway-tx,CommUnityCare Oak Hill,78735,original,http://www.communitycaretx.org,true,https://communitycaretx.org/,200,ok,2026-05-28T18:04:09+00:00
+las-vegas-nv,Southern Nevada Health District - Fremont,89104,places,http://southernnevadahealthdistrict.org/,true,https://www.southernnevadahealthdistrict.org/,200,ok,2026-05-28T18:04:09+00:00
+lake-wales-fl,Osceola Community Health Services at Poinciana,34758,original,https://www.osceolahealthcare.org,true,https://www.osceolahealthcare.org/,200,ok,2026-05-28T18:04:10+00:00
+lakeway-tx,St. David's Medical Center Pavilion,78705,original,https://www.austinpcc.org,true,https://www.austinpcc.org/,200,ok,2026-05-28T18:04:10+00:00
+lake-havasu-city-az,ELK RIDGE - LAKE HAVASU CITY CLINIC,86403,places,http://elkridge.org/,true,https://www.elkridge.org/,200,ok,2026-05-28T18:04:10+00:00
+lake-wales-fl,CFHC Lake Wales Primary Care,33853,original,http://www.cfhconline.org/,true,https://cfhc.org/,200,ok,2026-05-28T18:04:10+00:00
+lake-elsinore-ca,Neighborhood Healthcare ~ Menifee,92586,places,https://www.nhcare.org/locations-list/menifee/,true,https://www.nhcare.org/locations-list/menifee/,200,ok,2026-05-28T18:04:10+00:00
+lake-elsinore-ca,Lake Elsinore Community Health Center,92530,original,https://www.ruhealth.org/community-health-centers/locations/lake-elsinore,true,https://www.ruhealth.org/community-health-centers/locations/lake-elsinore,200,ok,2026-05-28T18:04:11+00:00
+lake-elsinore-ca,VCC: Lake Elsinore Health Center,92530,original,https://www.vcc.org,true,https://www.vistacommunityclinic.org/,200,ok,2026-05-28T18:04:11+00:00
+lake-elsinore-ca,DAP Health - Jay Hoffman Community Health Center,92567,places,https://www.daphealth.org/locations/#el-6a957d0a,true,https://daphealth.org/our-locations/#el-6a957d0a,200,ok,2026-05-28T18:04:12+00:00
+lake-city-fl,Florida Department of Health in Union County - New River Community Health Care Center,32054,places,https://union.floridahealth.gov/programs-and-services/clinical-and-nutrition-services/new-river-health/index.html,false,https://union.floridahealth.gov/programs-and-services/clinical-and-nutrition-services/new-river-health/index.html,404,http_404,2026-05-28T18:04:13+00:00
+lake-elsinore-ca,TrueCare,92571,places,https://truecare.org/location/truecare-perris/,true,https://truecare.org/location/truecare-perris/,200,ok,2026-05-28T18:04:13+00:00
+lake-city-fl,Palms Medical Group - Lake City West,32055,original,https://www.palmsmg.org,true,https://palmsmg.org/,200,ok,2026-05-28T18:04:13+00:00
+laguna-hills-ca,Access-Laguna Hills,92653,original,https://accessfqhc.org,true,https://accessfqhc.org/,200,ok,2026-05-28T18:04:13+00:00
+laguna-hills-ca,CLCHC Specialty Medical Services,92630,places,http://www.clchc.org/?utm_source=GMBSocialClimb&utm_medium=CelebratingLifeCommunityHealthCenter,true,https://www.clchc.org/?utm_source=GMBSocialClimb&utm_medium=CelebratingLifeCommunityHealthCenter,200,ok,2026-05-28T18:04:14+00:00
+laguna-hills-ca,SOS Community Health Center-Mission Viejo,92691,original,https://www.shareourselves.org,true,https://shareourselves.org/,200,ok,2026-05-28T18:04:14+00:00
+laguna-hills-ca,Camino Health Center - Lake Forest,92630,original,https://www.caminohealthcenter.org,true,https://caminohealthcenter.org/,200,ok,2026-05-28T18:04:15+00:00
+lafayette-la,Northside  Community Health Care,70501,original,https://www.swlpch.com,false,,,dns_failure,2026-05-28T18:04:15+00:00
+laguna-hills-ca,All For Health-Laguna Niguel,92677,original,https://all4health.org/,true,https://all4health.org/,200,ok,2026-05-28T18:04:15+00:00
+lafayette-la,Surrey Street Community Health Center Extension Site,70501,original,https://www.icchc.org,true,https://www.icchc.org/,200,ok,2026-05-28T18:04:15+00:00
+laguna-hills-ca,Laguna Beach Community Clinic,92651,original,https://www.lbclinic.org,true,https://lbclinic.org/,200,ok,2026-05-28T18:04:16+00:00
+lafayette-la,SWLA Center for Health Services - Lafayette,70501,original,https://www.swlahealth.org,true,https://www.swlahealth.org/,200,ok,2026-05-28T18:04:16+00:00
+lafayette-ca,Willow Pass Wellness Center,94520,places,http://cchealth.org/,false,http://www.cchealth.org/,403,http_403,2026-05-28T18:04:16+00:00
+lafayette-ca,BERKELEY PRIMARY CARE,94704,original,https://WWW.LIFELONGMEDICAL.ORG,false,https://www.lifelongmedical.org/,403,http_403,2026-05-28T18:04:16+00:00
+lafayette-ca,LA CLINICA MONUMENT,94518,original,https://www.laclinica.org,true,https://laclinica.org/,200,ok,2026-05-28T18:04:16+00:00
+lafayette-ca,Children's Hospital Oakland Primary Care,94618,original,https://www.cho.org,false,,,dns_failure,2026-05-28T18:04:16+00:00
+lafayette-ca,AHS HIGHLAND E1-E2 CLINIC,94602,places,http://www.alamedahealthsystem.org/,true,http://www.alamedahealthsystem.org/,200,ok,2026-05-28T18:04:17+00:00
+lafayette-la,Acadiana Cares Health & Wellness Center at Pride Plaza,70501,places,https://www.acadianacares.org/primary-care-clinic/,true,https://www.acadianacares.org/primary-care-clinic/,200,ok,2026-05-28T18:04:17+00:00
+la-quinta-ca,"Clinicas del Camino Real, Inc. - East Simi Valley",93063,original,https://www.clinicas.org,false,https://www.clinicas.org/,403,http_403,2026-05-28T18:04:17+00:00
+la-quinta-ca,California Institute of the Arts,91355,places,https://calarts.edu/admissions/explore-calarts/corners-of-our-campus/third-floor/noon-concerts-at-the-main-gallery,true,https://calarts.edu/admissions/explore-calarts/corners-of-our-campus/third-floor/noon-concerts-at-the-main-gallery,200,ok,2026-05-28T18:04:18+00:00
+la-quinta-ca,Sierra Vista Family Medical Clinic,93065,original,https://N/A,false,,,dns_failure,2026-05-28T18:04:18+00:00
+la-quinta-ca,Centro Medico Reseda,91324,original,https://centromedicoclinic.com,true,https://www.centromedicoclinic.com/,200,ok,2026-05-28T18:04:18+00:00
+la-quinta-ca,Todos Para La Salud: Canoga Park,91303,places,https://www.todosclinic.org/,true,https://www.todosclinic.org/,200,ok,2026-05-28T18:04:19+00:00
+la-mesa-ca,La Mesa Family Health Center,91942,places,https://www.fhcsd.org/la-mesa-family-health-center/,true,https://www.fhcsd.org/la-mesa-family-health-center/,200,ok,2026-05-28T18:04:19+00:00
+inverness-fl,Heart of Florida Health Center Southwest,34473,original,https://www.heartoffloridahealthcenter.org,false,,,"conn_error:HTTPSConnectionPool(host='www.heartoffloridahealthcenter.org', port=443): Max re",2026-05-28T18:04:19+00:00
+la-mesa-ca,San Ysidro Health El Cajon/San Diego PACE,92020,original,https://www.syhealth.org,true,https://www.syhealth.org/,200,ok,2026-05-28T18:04:19+00:00
+la-mesa-ca,La Maestra Lemon Grove Clinic,91945,places,http://lamaestra.org/,true,https://lamaestra.org/,200,ok,2026-05-28T18:04:20+00:00
+la-mesa-ca,DAP Health - Centro Medico El Cajon,92020,original,https://www.daphealth.org,true,https://daphealth.org/,200,ok,2026-05-28T18:04:20+00:00
+la-mesa-ca,Opsam Health Mid-City Health Center,92105,places,http://opsam.org/,true,https://www.opsam.org/,200,ok,2026-05-28T18:04:20+00:00
+la-mesa-ca,NEIGHBORHOOD HEALTHCARE ~ EL CAJON,92020,original,https://www.nhcare.org,true,https://www.nhcare.org/,200,ok,2026-05-28T18:04:20+00:00
+kokomo-in,Jane Pauley Community Health Center at Turning Point,46901,places,https://www.turningpointsoc.org/,true,https://turningpointsoc.org/,200,ok,2026-05-28T18:04:21+00:00
+kokomo-in,Bowen Health- Kokomo,46902,places,https://www.bowenhealth.org/,true,https://www.bowenhealth.org/,200,ok,2026-05-28T18:04:22+00:00
+kokomo-in,IHC Howard County WIC,46901,places,http://indianahealthonline.org/,true,https://indianahealthonline.org/,200,ok,2026-05-28T18:04:22+00:00
+kokomo-in,Family Heath Clinic of Burlington,46915,original,https://n/a,false,,,dns_failure,2026-05-28T18:04:22+00:00
+kokomo-in,Aspire Indiana Health - Elwood,46036,places,https://www.aspireindiana.org/,true,https://www.aspireindiana.org/,200,ok,2026-05-28T18:04:23+00:00
+knoxville-tn,CHS Knox Homeless Health Center (5th Ave),37917,original,https://www.cherokeehealth.com,false,https://www.cherokeehealth.com/,403,http_403,2026-05-28T18:04:24+00:00
+king-prussia-pa,Norristown Regional Health Center,19401,original,https://dvch.org,true,https://dvch.org/,200,ok,2026-05-28T18:04:24+00:00
+kokomo-in,Meridian Health Services Corp,46902,places,http://www.meridianhs.org/,true,https://www.meridianhs.org/,200,ok,2026-05-28T18:04:24+00:00
+king-prussia-pa,Covenant House Health and Dental Services,19150,places,https://covenanthousehealth.org/,true,https://covenanthousehealth.org/,200,ok,2026-05-28T18:04:24+00:00
+king-prussia-pa,ChesPenn Center for Family Health at Upper Darby,19082,original,https://www.chespenn.org,true,https://chespenn.org/,200,ok,2026-05-28T18:04:24+00:00
+king-prussia-pa,Philadelphia District Health Center #9,19144,places,https://www.phila.gov/departments/department-of-public-health/health-centers/city-health-centers/,true,https://www.phila.gov/departments/department-of-public-health/health-centers/city-health-centers/,200,ok,2026-05-28T18:04:25+00:00
+king-prussia-pa,THE SAYRE HEALTH CENTER,19139,original,https://www.sayrehealth.org,true,https://www.sayrehealth.org/,200,ok,2026-05-28T18:04:25+00:00
+mill-valley-ca,Marin City Health and Wellness Center - Phillips Drive,94965,original,https://www.marincityclinic.org,true,https://marincityclinic.org/,200,ok,2026-05-28T18:04:25+00:00
+la-quinta-ca,NEVHC- Newhall Health Center,91355,original,https://www.nevhc.org,true,https://nevhc.org/,200,ok,2026-05-28T18:04:26+00:00
+mill-valley-ca,Marin Community Clinic - Greenbrae,94904,places,http://www.marinclinic.org/about-us/contact-us/,true,https://www.marinclinic.org/company/contact-us/,200,ok,2026-05-28T18:04:26+00:00
+mill-valley-ca,Bolinas Community Health Center,94924,original,https://www.coastalhealth.net,false,,,dns_failure,2026-05-28T18:04:26+00:00
+mill-valley-ca,NORTH EAST MEDICAL SERVICES - CLEMENT,94118,original,https://www.nems.org/,true,https://www.nems.org/,200,ok,2026-05-28T18:04:26+00:00
+mill-valley-ca,Ritter Center Complex,94901,places,http://www.rittercenter.org/,true,https://rittercenter.org/,200,ok,2026-05-28T18:04:26+00:00
+mill-valley-ca,MAXINE HALL HEALTH CENTER,94115,places,https://www.sf.gov/location--maxine-hall-health-center,true,https://www.sf.gov/location--maxine-hall-health-center,200,ok,2026-05-28T18:04:26+00:00
+midwest-city-ok,Community Health at Rose State College,73110,original,https://www.communityhealthok.org,true,https://www.communityhealthok.org/,200,ok,2026-05-28T18:04:26+00:00
+midwest-city-ok,Variety Care Mid-Del Family Health Center,73115,original,https://www.varietycare.org,true,https://www.varietycare.org/,200,ok,2026-05-28T18:04:27+00:00
+miami-fl,CHN MDC Wolfson,33132,places,http://www.mdc.edu/wolfson/campus-information/default.aspx,true,https://www.mdc.edu/wolfson/campus-information/default.aspx,200,ok,2026-05-28T18:04:27+00:00
+miami-fl,Care Resource Community Health Centers in Little Havana,33135,original,https://www.careresource.org,true,https://careresource.org/,200,ok,2026-05-28T18:04:28+00:00
+miami-fl,Borinquen Medical Centers at Wynwood,33137,original,https://www.borinquenhealth.org/index.php/appointments/locations/,true,https://borinquenhealth.org/appointments/locations/,200,ok,2026-05-28T18:04:28+00:00
+miami-fl,"Camillus Health Concern, Greer Building",33128,original,https://www.camillushealth.org,true,https://camillushealth.org/,200,ok,2026-05-28T18:04:28+00:00
+miami-fl,"MIAMI BEACH COMMUNITY HEALTH CENTER, INC.",33139,original,https://miamibeachhealth.org,true,https://mymbchc.org/,200,ok,2026-05-28T18:04:29+00:00
+miami-fl,Flagler Main Site,33134,original,https://www.banyanhealth.org,true,https://banyanhealth.org/,200,ok,2026-05-28T18:04:29+00:00
+methuen-ma,LOWELL HIGH SCHOOL HEALTH CTR,01852,original,https://www.lchealth.org,true,https://www.lchealth.org/,200,ok,2026-05-28T18:04:29+00:00
+methuen-ma,GLFHC at Element Care,01844,places,http://elementcare.org/,true,https://elementcare.org/,200,ok,2026-05-28T18:04:29+00:00
+methuen-ma,Healthy Together,03038,places,http://www.centerforlifemanagement.org/,true,https://centerforlifemanagement.org/,200,ok,2026-05-28T18:04:29+00:00
+methuen-ma,Program for All-Inclusive Care for the Elderly (PACE) Site,01915,places,http://elementcare.org/,true,https://elementcare.org/,200,ok,2026-05-28T18:04:29+00:00
+methuen-ma,Peabody FAMILY HEALTH CENTER,01960,original,https://www.nschi.org,true,https://www.nschi.org/,200,ok,2026-05-28T18:04:30+00:00
+methuen-ma,Harbor Care Health and Wellness Center,03060,original,http://www.harborhomes.org,true,https://harborcarenh.org/,200,ok,2026-05-28T18:04:30+00:00
+media-pa,CHESPENN HEALTH SERVICES,19022,original,https://chespenn.org,true,https://chespenn.org/,200,ok,2026-05-28T18:04:30+00:00
+media-pa,Fairmount Primary Care Center at Sharon Hill-Delaware County,19079,places,https://dvch.org/fairmount-primary-sharon-hill/,true,https://dvch.org/fairmount-primary-sharon-hill/,200,ok,2026-05-28T18:04:30+00:00
+merritt-island-fl,BHA Barton Commons,32955,original,https://www.bhachc.org,true,https://www.brevardhealth.org/,200,ok,2026-05-28T18:04:30+00:00
+media-pa,Henrietta Johnson Medical Center at Claymont,19703,original,https://www.hjmc.org,true,https://www.hjmc.org/,200,ok,2026-05-28T18:04:31+00:00
+media-pa,THE SAYRE HEALTH CENTER,19139,original,https://www.sayrehealth.org,true,https://www.sayrehealth.org/,200,ok,2026-05-28T18:04:31+00:00
+mason-oh,Lincoln Heights Health Center,45215,original,https://na,false,,,dns_failure,2026-05-28T18:04:31+00:00
+merritt-island-fl,Space Coast Health Centers Primary Care - Port St. John,32927,original,https://www.spacecoasthealthcenters.org,false,https://www.spacecoasthealthcenters.org/,404,http_404,2026-05-28T18:04:31+00:00
+mason-oh,CPH Administrative Site,45005,places,https://www.centerpointhealth.org/locations/centerpoint-health-administration-middletown/,true,https://www.centerpointhealth.org/locations/centerpoint-health-administration-middletown/,200,ok,2026-05-28T18:04:31+00:00
+mason-oh,John P. Parker,45227,original,https://NA,false,,,dns_failure,2026-05-28T18:04:31+00:00
+mason-oh,Fairfield Township Community Health Center,45011,original,https://www.myprimaryhealthsolutions.org/,true,https://myprimaryhealthsolutions.org/,200,ok,2026-05-28T18:04:32+00:00
+mason-oh,"HealthSource of Ohio, Inc.",45140,places,https://www.healthsourceofohio.org/locations/healthsource-of-ohio-administrative-office/,true,https://www.healthsourceofohio.org/locations/healthsource-of-ohio-administrative-office/,200,ok,2026-05-28T18:04:32+00:00
+marrero-la,Priority Health Care - Administration,70072,hrsa,www.priorityhealthcare.org,false,,,other:MissingSchema:Invalid URL 'www.priorityhealthcare.org': No scheme supplied,2026-05-28T18:04:32+00:00
+mason-oh,WinMed-Cincinnati-Hamilton County Community Action Agency,45237,original,https://winmedinc.org,true,https://winmedinc.org/,200,ok,2026-05-28T18:04:32+00:00
+marrero-la,InclusivCare-Marrero,70072,original,https://www.inclusivcare.com,true,https://inclusivcare.com/,200,ok,2026-05-28T18:04:32+00:00
+lafayette-ca,WILLIAM BYRON RUMFORD MED CLINIC,94702,original,https://wohc@wohc.org,false,,,"conn_error:HTTPSConnectionPool(host='wohc.org', port=443): Max retries exceeded with url: /",2026-05-28T18:04:32+00:00
+marrero-la,Common Ground Health Clinic-Gretna,70056,places,https://cghcnola.org/,true,https://cghcnola.org/,200,ok,2026-05-28T18:04:33+00:00
+marrero-la,DePaul Community Health Centers - Westbank Expressway,70058,original,https://www.depaulcommunityhealthcenters.org/,true,https://www.depaulcommunityhealthcenters.org/,200,ok,2026-05-28T18:04:34+00:00
+marrero-la,AHL Eye Associates of West Jefferson,70072,original,http://accesshealthla.org,true,https://accesshealthla.org/,200,ok,2026-05-28T18:04:34+00:00
+mansfield-tx,HHM Health Arlington,76015,places,https://www.hhmhealth.org/?utm_source=GMBSocialClimb&utm_medium=ThePearlWomen%27sCenteratHHMHealthArlington,true,https://www.hhmhealth.org/?utm_source=GMBSocialClimb&utm_medium=ThePearlWomen%27sCenteratHHMHealthArlington,200,ok,2026-05-28T18:04:34+00:00
+marrero-la,JeffCare West Jefferson,70072,original,https://www.jphsa.org,true,https://www.jphsa.org/,200,ok,2026-05-28T18:04:34+00:00
+mansfield-tx,LBU Oak Cliff,75211,original,https://www.losbarriosunidos.org,false,,,dns_failure,2026-05-28T18:04:34+00:00
+marco-island-fl,Healthcare Network Manatee Middle,34114,original,https://www.HealthcareSWFL.org,true,https://healthcareswfl.org/,200,ok,2026-05-28T18:04:34+00:00
+mansfield-tx,Arlington Community Health Center,76012,places,http://ntachc.org/,true,https://ntachc.org/,200,ok,2026-05-28T18:04:34+00:00
+mansfield-tx,Prism Health North Texas at Oak Cliff Health Center,75208,original,https://www.phntx.org,true,https://www.phntx.org/,200,ok,2026-05-28T18:04:35+00:00
+lufkin-tx,Hope Community Medicine - Lufkin,75904,original,https://www.hcmtx.org,false,,,"ssl_error:HTTPSConnectionPool(host='www.hcmtx.org', port=443): Max retries exceeded with u",2026-05-28T18:04:35+00:00
+mansfield-tx,Dallas Deflection Center-Homeward Bound,75241,places,http://www.homewardboundinc.org/,true,https://www.homewardboundinc.org/,200,ok,2026-05-28T18:04:35+00:00
+mansfield-tx,Hope Health Waxahachie,75165,original,https://hopehealthtx.org,true,https://www.hopehealthtx.org/,200,ok,2026-05-28T18:04:35+00:00
+long-beach-ca,Serenity Atlantic Clinic,90813,places,https://serenitycarehealthgroup.org/,true,https://serenitycarehealthgroup.org/,200,ok,2026-05-28T18:04:35+00:00
+lufkin-tx,Sayers Street Clinic,75904,places,https://www.etchc.com/locations/lakeview-community-clinic-sayers/,true,https://www.etchc.com/locations/lakeview-community-clinic-sayers/,200,ok,2026-05-28T18:04:35+00:00
+long-beach-ca,"Benevolence Industries, Inc. - Long Beach",90813,original,https://www.bhchealth.org,true,https://www.bhchealth.org/,200,ok,2026-05-28T18:04:35+00:00
+long-beach-ca,APLA Health & Wellness - Long Beach Center,90813,original,https://www.aplahealth.org,true,https://aplahealth.org/,200,ok,2026-05-28T18:04:36+00:00
+long-beach-ca,"TCC Family Health, Healthy Aging at St. Mary",90813,places,https://locations.dignityhealth.org/family-clinic-st-mary-medical-center-long-beach,true,https://locations.dignityhealth.org/family-clinic-st-mary-medical-center-long-beach,200,ok,2026-05-28T18:04:36+00:00
+lone-tree-co,Smoky Hill High School Community Health Clinic,80015,original,https://stridechc.org/,true,https://www.stridechc.org/,200,ok,2026-05-28T18:04:36+00:00
+long-beach-ca,Long Beach Health Center #105,90813,places,http://www.harborchc.org/,true,https://www.harborchc.org/,200,ok,2026-05-28T18:04:36+00:00
+lone-tree-co,Renaissance at Lowry Boulevard,80230,original,https://www.coloradocoalition.org,true,https://www.coloradocoalition.org/,200,ok,2026-05-28T18:04:36+00:00
+lone-tree-co,Federico F. Pena Family Health Center,80219,places,https://www.denverhealth.org/locations/denver/federico-f-pena-southwest-family-health-center-1339-s-federal-blvd-denver-80219,false,https://www.denverhealth.org/locations/denver/federico-f-pena-southwest-family-health-center-1339-s-federal-blvd-denver-80219,403,http_403,2026-05-28T18:04:36+00:00
+lone-tree-co,"Uptown Community Health Center, Inc. Bruner Family Medicine",80218,original,https://www.uptowncommunityhealth.org,true,https://www.uptowncommunityhealth.org/,200,ok,2026-05-28T18:04:37+00:00
+lone-tree-co,Salud Aurora,80011,original,https://www.saludclinic.org,true,https://www.saludclinic.org/,200,ok,2026-05-28T18:04:37+00:00
+livermore-ca,Axis Site at Vineyard Resource Center,94551,places,http://www.openheartkitchen.org/,true,https://www.openheartkitchen.org/,200,ok,2026-05-28T18:04:37+00:00
+livermore-ca,WIC Program,94538,places,https://acphd.org/wic/,true,https://health.alamedacountyca.gov/department/public-health-department/,200,ok,2026-05-28T18:04:38+00:00
+livermore-ca,La Clinica Dental Union City,94587,places,http://www.laclinica.org/,true,https://laclinica.org/,200,ok,2026-05-28T18:04:38+00:00
+lincoln-ne,Bluestem Health: Central Business Office,68508,places,https://www.bluestemlincoln.com/,true,https://www.bluestemlincoln.com/,200,ok,2026-05-28T18:04:39+00:00
+livermore-ca,Street Medicine Outreach  Admin Office,94550,hrsa,http://www.axishealth.org/,true,https://axishealth.org/,200,ok,2026-05-28T18:04:39+00:00
+norfolk-va,CommuniCare Family Health Center,23510,original,https://www.hrchc.org,true,https://www.hrchc.org/,200,ok,2026-05-28T18:04:39+00:00
+norfolk-va,Chesapeake Community Health Center,23324,places,https://sevhs.org/,true,https://sevhs.org/,200,ok,2026-05-28T18:04:40+00:00
+newington-ct,Chamberlain Elementary School SBHC,06051,places,http://csdnb.org/,true,https://www.csdnb.org/,200,ok,2026-05-28T18:04:40+00:00
+newington-ct,CHARTER OAK HEALTH CENTER,06106,original,https://www.thecharteroak.org,true,https://thecharteroak.org/,200,ok,2026-05-28T18:04:41+00:00
+newington-ct,New Britain Family Health and Wellness Center,06052,original,https://www.wheelerclinic.org,true,https://www.wheelerhealth.org/,200,ok,2026-05-28T18:04:41+00:00
+long-beach-ca,CMWC Cultural Awareness Community Annex,90813,original,https://www.cmwcusa.org,true,https://cmwcusa.org/en/,200,ok,2026-05-28T18:04:41+00:00
+newington-ct,"COMMUNITY HEALTH SERVICES, INC.",06120,original,https://www.chshartford.org,true,https://www.chshartford.org/,200,ok,2026-05-28T18:04:41+00:00
+new-smyrna-beach-fl,FACT Team,32119,original,https://smahealthcare.org/,true,https://smahealthcare.org/,200,ok,2026-05-28T18:04:41+00:00
+newington-ct,Intercommunity's school based health center at Hockanum Elementary School,06118,places,https://eclc.easthartford.org/,true,https://eclc.easthartford.org/,200,ok,2026-05-28T18:04:42+00:00
+new-smyrna-beach-fl,AZA HEALTH,32114,original,https://WWW.AZAHEALTH.ORG,true,https://azahealth.org/,200,ok,2026-05-28T18:04:42+00:00
+newington-ct,Community Health Services,06120,original,http://www.chshartford.org,true,https://www.chshartford.org/,200,ok,2026-05-28T18:04:42+00:00
+new-smyrna-beach-fl,Enterprise Wellness Cottage,32725,places,https://www.mytruehealth.org/,true,https://www.mytruehealth.org/,200,ok,2026-05-28T18:04:43+00:00
+mount-vernon-wa,Sea Mar CHC - Skagit Valley Women's Health Center,98273,original,http://www.seamar.org,true,https://www.seamar.org/,200,ok,2026-05-28T18:04:43+00:00
+new-smyrna-beach-fl,Family Health Source East,32119,original,https://www.myfhs.org,true,https://www.myfhs.org/,200,ok,2026-05-28T18:04:44+00:00
+mount-vernon-wa,UCNW Carl Cozier Elementary School,98229,original,https://www.unitycarenw.org,true,https://unitycarenw.org/,200,ok,2026-05-28T18:04:44+00:00
+moreno-valley-ca,Main Campus First Floor Community Health Center,92555,places,https://www.ruhealth.org/community-health-centers/locations/main-campus,true,https://www.ruhealth.org/community-health-centers/locations/main-campus,200,ok,2026-05-28T18:04:44+00:00
+mount-vernon-wa,Arlington Clinic,98223,places,https://www.chcsno.org/clinics/arlington/?utm_source=GMBSocialClimb&utm_medium=CommunityHealthCenterofSnohomishCounty-ArlingtonMedical,true,https://www.chcsno.org/clinics/arlington/?utm_source=GMBSocialClimb&utm_medium=CommunityHealthCenterofSnohomishCounty-ArlingtonMedical,200,ok,2026-05-28T18:04:45+00:00
+moreno-valley-ca,Unicare Community Health Center - Moreno Valley,92553,places,https://unicarechc.org/,true,https://unicarechc.org/,200,ok,2026-05-28T18:04:45+00:00
+moreno-valley-ca,Moreno Valley Family Health Center,92553,original,https://www.chsica.org,true,https://www.chsica.org/,200,ok,2026-05-28T18:04:45+00:00
+moreno-valley-ca,TrueCare,92571,places,https://truecare.org/location/truecare-perris/,true,https://truecare.org/location/truecare-perris/,200,ok,2026-05-28T18:04:45+00:00
+montgomery-al,River Region Health Center,36107,original,https://www.hservinc.org,false,https://www.hservinc.org/,521,http_521,2026-05-28T18:04:45+00:00
+moreno-valley-ca,DAP Health - Jay Hoffman Community Health Center,92567,places,https://www.daphealth.org/locations/#el-6a957d0a,true,https://daphealth.org/our-locations/#el-6a957d0a,200,ok,2026-05-28T18:04:46+00:00
+monterey-ca,CSVS - SEASIDE CLINIC,93955,original,https://www.csvs.org,true,https://csvs.org/,200,ok,2026-05-28T18:04:47+00:00
+moreno-valley-ca,Neighborhood Healthcare ~ Mead Valley,92570,places,https://www.nhcare.org/locations-list/perris-mead-valley,true,https://www.nhcare.org/locations-list/perris-mead-valley/,200,ok,2026-05-28T18:04:48+00:00
+monterey-ca,Watsonville Health Center - Building B,95076,original,https://www.santacruzhealth.org,true,https://www.santacruzhealth.org/,200,ok,2026-05-28T18:04:48+00:00
+monterey-ca,Pajaro Resource Center,95076,original,https://www.splg.org,true,https://splg.org/,200,ok,2026-05-28T18:04:48+00:00
+mobile-al,Family Oriented Primary Health Care Clinic - Downtown Health Center,36603,original,https://mchd.org/family-health/,true,https://mchd.org/family-health/,200,ok,2026-05-28T18:04:49+00:00
+monterey-ca,County of Monterey - Seaside Family Health Center,93955,original,http://www.montereycountyclinicservices.org/,false,https://www.countyofmonterey.gov/government/departments-a-h/health/clinic-services/,403,http_403,2026-05-28T18:04:49+00:00
+mobile-al,Accordia Health  -  AOP,36617,places,https://accordia-health.org/,true,https://accordia-health.org/,200,ok,2026-05-28T18:04:50+00:00
+mobile-al,H.E. Savage Memorial Center,36604,original,https://www.franklinprimary.org,true,https://franklinprimary.org/,200,ok,2026-05-28T18:04:50+00:00
+mission-viejo-ca,CLCHC - The Adam Raine Healing Center,92691,places,http://www.clchc.org/?utm_source=GMBSocialClimb&utm_medium=CelebratingLifeCommunityHealthCenter,true,https://www.clchc.org/?utm_source=GMBSocialClimb&utm_medium=CelebratingLifeCommunityHealthCenter,200,ok,2026-05-28T18:04:50+00:00
+mission-viejo-ca,Access-Laguna Hills,92653,original,https://accessfqhc.org,true,https://accessfqhc.org/,200,ok,2026-05-28T18:04:51+00:00
+mobile-al,BAYOU LA BATRE AREA HEALTH DEVELOPMENT B,36544,original,https://mostellarmedical.org,true,https://www.mostellarmedical.org/,200,ok,2026-05-28T18:04:51+00:00
+mission-viejo-ca,SOS Community Health Center-Mission Viejo,92691,original,https://www.shareourselves.org,true,https://shareourselves.org/,200,ok,2026-05-28T18:04:51+00:00
+mission-viejo-ca,Camino Health Center - Lake Forest,92630,original,https://www.caminohealthcenter.org,true,https://caminohealthcenter.org/,200,ok,2026-05-28T18:04:52+00:00
+lone-tree-co,Sheridan Health Services,80110,original,https://www.nursing.ucdenver.edu/sheridan,false,,,"conn_error:HTTPSConnectionPool(host='www.nursing.ucdenver.edu', port=443): Max retries exce",2026-05-28T18:04:52+00:00
+milpitas-ca,NORTH EAST MEDICAL SERVICES - 1870 LUNDY,95131,original,https://www.nems.org/,true,https://www.nems.org/,200,ok,2026-05-28T18:04:52+00:00
+mission-viejo-ca,All For Health-Laguna Niguel,92677,original,https://all4health.org/,true,https://all4health.org/,200,ok,2026-05-28T18:04:52+00:00
+mission-viejo-ca,Laguna Beach Community Clinic,92651,original,https://www.lbclinic.org,true,https://lbclinic.org/,200,ok,2026-05-28T18:04:52+00:00
+milpitas-ca,Valley Health Center Milpitas,95035,original,https://www.sccgov.org,true,https://www.santaclaracounty.gov/home,200,ok,2026-05-28T18:04:52+00:00
+milpitas-ca,Independence SB Health Clinic,95133,places,http://bach.health/,true,https://bach.health/,200,ok,2026-05-28T18:04:53+00:00
+milpitas-ca,AACI Dental Clinic,95116,places,https://aaci.org/dental/,true,https://aaci.org/dental/,200,ok,2026-05-28T18:04:53+00:00
+leesburg-fl,COMMUNITY HEALTH CENTER - LEESBURG Family Medical and Dental,34748,original,https://WWW.CHCFL.ORG,true,https://www.chcfl.org/,200,ok,2026-05-28T18:04:53+00:00
+leesburg-fl,Langley Health Services Sumterville,33585,original,https://www.langleyhealthservices.com,true,https://langleyhealth.com,200,ok,2026-05-28T18:04:53+00:00
+milpitas-ca,Indian Health Center of Santa Clara Valley - St. Phillips,95127,places,http://www.indianhealthcenter.org/?utm_source=Google%20Maps,true,https://indianhealthcenter.org/,200,ok,2026-05-28T18:04:54+00:00
+kennett-square-pa,Westside Family Healthcare - Wilmington,19805,original,https://WWW.WESTSIDEHEALTH.ORG,true,https://www.westsidehealth.org/,200,ok,2026-05-28T18:04:54+00:00
+kennett-square-pa,Coatesville - Medical and Dental,19320,places,https://unioncommunitycare.org/,true,https://unioncommunitycare.org/,200,ok,2026-05-28T18:04:54+00:00
+kennett-square-pa,LCH Health and Community Services,19348,original,https://www.lacomunidadhispana.org,false,,,"ssl_error:HTTPSConnectionPool(host='www.lacomunidadhispana.org', port=443): Max retries ex",2026-05-28T18:04:54+00:00
+kennett-square-pa,HENRIETTA JOHNSON MEDICAL CENTER,19801,original,https://www.hjmc.org,true,https://www.hjmc.org/,200,ok,2026-05-28T18:04:54+00:00
+kennett-square-pa,ChesPenn Center for Family Health at Eastside,19013,original,https://www.chespenn.org,true,https://chespenn.org/,200,ok,2026-05-28T18:04:54+00:00
+leesburg-fl,Heart of Florida Health Center The Villages,32162,places,https://www.myhfhc.org/,true,https://www.myhfhc.org/,200,ok,2026-05-28T18:04:54+00:00
+pearland-tx,Pearland Family Health Center,77581,places,https://mychn.org/locations/pearland-family-health-center/,true,https://mychn.org/locations/pearland-family-health-center/,200,ok,2026-05-28T18:04:54+00:00
+milpitas-ca,Healthcare to the Homeless,95002,original,https://www.gardnerhealthservices.org,true,https://gardnerhealthservices.org/,200,ok,2026-05-28T18:04:55+00:00
+pearland-tx,Reed Family Clinic,77051,places,http://www.homeless-healthcare.org/,true,https://www.homeless-healthcare.org/,200,ok,2026-05-28T18:04:55+00:00
+pearland-tx,Star of Hope Cornerstone Community,77051,places,http://www.sohmission.org/,true,https://www.sohmission.org/,200,ok,2026-05-28T18:04:56+00:00
+kennett-square-pa,West Cecil Health Center-Cecil County Health Department,21921,places,http://www.cecilcountyhealth.org/,true,https://cecilcountyhealth.org/,200,ok,2026-05-28T18:04:57+00:00
+pearland-tx,Legacy Pasadena Southmore,77502,original,https://legacycommunityhealth.org,true,https://legacycommunityhealth.org/,200,ok,2026-05-28T18:04:57+00:00
+pearland-tx,PHC Dental Clinic 320,77502,places,http://pasadenahealthcenter.com/,true,https://www.phcx.org/,200,ok,2026-05-28T18:04:57+00:00
+pasadena-tx,MyCHN Pasasdena,77505,original,https://www.mychn.org,true,https://mychn.org/,200,ok,2026-05-28T18:04:58+00:00
+pasadena-tx,Legacy Pasadena Southmore,77502,original,https://legacycommunityhealth.org,true,https://legacycommunityhealth.org/,200,ok,2026-05-28T18:04:58+00:00
+pasadena-tx,"Pasadena Health Center, Inc.- Admin",77502,places,https://www.phcx.org/,true,https://www.phcx.org/,200,ok,2026-05-28T18:04:59+00:00
+pasadena-tx,El Centro de Corazon- John S. Dunn,77012,original,https://www.elcentrodecorazon.org,true,https://www.elcentrodecorazon.org/,200,ok,2026-05-28T18:04:59+00:00
+pasadena-tx,OPEN DOOR MISSION,77011,original,https://www.opendoorhouston.org,true,https://www.opendoorhouston.org/,200,ok,2026-05-28T18:04:59+00:00
+pasadena-ca,"ChapCare by AltaMed Medical Group  -  Pasadena, Lake",91104,original,https://www.altamed.org,true,https://www.altamed.org/,200,ok,2026-05-28T18:04:59+00:00
+pearland-tx,Bee Busy Wellness Center - Bay Area,77058,original,https://mybbwc.org,true,https://mybbwc.org/,200,ok,2026-05-28T18:04:59+00:00
+pasadena-ca,CSC Community Health Center - San Gabriel - Medical Mobile Van,91776,hrsa,www.cscla.org,false,,,other:MissingSchema:Invalid URL 'www.cscla.org': No scheme supplied. Perhaps you,2026-05-28T18:04:59+00:00
+pasadena-ca,Wesley Health Centers - Andrew Escajeda Clinic,91103,places,http://jwchinstitute.org/,true,http://jwchinstitute.org/,200,ok,2026-05-28T18:05:00+00:00
+pasadena-ca,"Comprehensive Community Health Centers, Inc-Eagle Rock",90041,original,https://www.cchccenters.org,true,https://cchccenters.org/,200,ok,2026-05-28T18:05:00+00:00
+pasadena-ca,ARROYO VISTA FAMILY HEALTH CENTER ~ Highland Park,90042,original,https://www.arroyovista.org,true,https://www.arroyovista.org/,200,ok,2026-05-28T18:05:00+00:00
+pasadena-ca,Complete Care Community Health Center- Altadena,91107,places,https://altadenacompletecare.com/,true,https://altadenacare.com//,200,ok,2026-05-28T18:05:00+00:00
+pasadena-tx,Port Houston Elementary School,77029,places,http://www.houstonisd.org/porthouston,false,https://www.houstonisd.org/porthouston,404,http_404,2026-05-28T18:05:01+00:00
+parma-oh,Ridge Community Health Center,44102,original,https://www.nfpmedcenter.org,true,https://www.nfpmedcenter.org/,200,ok,2026-05-28T18:05:01+00:00
+parma-oh,Health and Wellness Southwest,44129,places,http://www.thecentersohio.org/,true,https://thecentersohio.org/,200,ok,2026-05-28T18:05:01+00:00
+parma-oh,Brooklyn Health Center,44144,places,https://www.metrohealth.org/en/find-a-location/brooklyn-health-center/?utm_source=google-my-business&utm_campaign=local-listings&utm_medium=20,true,https://www.metrohealth.org/en/find-a-location/brooklyn-health-center/?utm_source=google-my-business&utm_campaign=local-listings&utm_medium=20,200,ok,2026-05-28T18:05:01+00:00
+parma-oh,Miles Broadway Health Center,44105,original,https://www.neonhealth.org,false,,,dns_failure,2026-05-28T18:05:01+00:00
+palmdale-ca,Wesley Palmdale East,93552,hrsa,www.jwchinstitute.org,false,,,other:MissingSchema:Invalid URL 'www.jwchinstitute.org': No scheme supplied. Per,2026-05-28T18:05:01+00:00
+parma-oh,Signature Lakewood Health Center,44107,places,https://www.signaturehealthinc.org/,true,https://www.signaturehealthinc.org/,200,ok,2026-05-28T18:05:01+00:00
+palmdale-ca,BACHC Campus,93535,hrsa,www@bachc.org,false,,,other:MissingSchema:Invalid URL 'www@bachc.org': No scheme supplied. Perhaps you,2026-05-28T18:05:01+00:00
+palm-coast-fl,AZA HEALTH,32137,original,https://WWW.AZAHEALTH.ORG,true,https://azahealth.org/,200,ok,2026-05-28T18:05:02+00:00
+palm-coast-fl,SMA Flagler Primary Care,32110,original,https://www.smahealthcare.org,true,https://smahealthcare.org/,200,ok,2026-05-28T18:05:02+00:00
+palatka-fl,AZA HEALTH,32177,original,https://www.azahealth.org,true,https://azahealth.org/,200,ok,2026-05-28T18:05:03+00:00
+palmdale-ca,Tarzana Treatment Centers-Palmdale II,93550,places,https://www.tarzanatc.org/,true,https://www.tarzanatc.org/,200,ok,2026-05-28T18:05:03+00:00
+palmdale-ca,Wesley Health Centers- Palmdale East,93552,original,https://www.jwchinstitute.org,true,https://jwchinstitute.org/,200,ok,2026-05-28T18:05:03+00:00
+parma-oh,Carl B. Stokes Clinic,44104,original,https://www.carealliance.org,true,https://carealliance.org/,200,ok,2026-05-28T18:05:03+00:00
+orange-park-fl,AZA HEALTH,32043,original,https://www.azahealth.org,true,https://azahealth.org/,200,ok,2026-05-28T18:05:03+00:00
+orange-park-fl,Coastal Community Health - Jacksonville (Westside),32073,places,http://coastalhealthprimarycare.com/,true,https://coastalhealthprimarycare.com/,200,ok,2026-05-28T18:05:03+00:00
+orange-park-fl,Agape Community Health Center/Blanding,32244,places,https://agapefamilyhealth.org/,true,https://www.agapefamilyhealth.org/,200,ok,2026-05-28T18:05:03+00:00
+orange-park-fl,Palms Medical Group - Fleming Island,32003,places,https://palmsmg.org/fleming-island-1/,true,https://palmsmg.org/fleming-island-1/,200,ok,2026-05-28T18:05:04+00:00
+orange-city-fl,Enterprise Wellness Cottage,32725,places,https://www.mytruehealth.org/,true,https://www.mytruehealth.org/,200,ok,2026-05-28T18:05:04+00:00
+orange-city-fl,COMMUNITY HEALTH CENTER - APOPKA FAMILY & OB CARE,32703,original,https://WWW.CHCFL.ORG,true,https://www.chcfl.org/,200,ok,2026-05-28T18:05:04+00:00
+orange-city-fl,FACT Team,32119,original,https://smahealthcare.org/,true,https://smahealthcare.org/,200,ok,2026-05-28T18:05:04+00:00
+orange-city-fl,AZA HEALTH,32114,original,https://WWW.AZAHEALTH.ORG,true,https://azahealth.org/,200,ok,2026-05-28T18:05:05+00:00
+olympia-wa,Sea Mar CHC - Tumwater Capitol Blvd SE,98501,places,http://www.seamar.org/thurston-bh-tumwater-family.html,true,https://www.seamar.org/thurston-bh-tumwater-family.html,200,ok,2026-05-28T18:05:05+00:00
+olympia-wa,Valley View Health Center - CYS Olympia,98501,places,http://communityyouthservices.org/,true,https://communityyouthservices.org/,200,ok,2026-05-28T18:05:06+00:00
+olympia-wa,LAKEWOOD CLINIC,98499,original,https://www.commhealth.org,true,https://www.commhealth.org/,200,ok,2026-05-28T18:05:06+00:00
+orange-city-fl,Family Health Source Deltona,32725,original,https://www.myfhs.org,true,https://www.myfhs.org/,200,ok,2026-05-28T18:05:06+00:00
+ocala-fl,Langley Health Services Ocala,34472,places,https://langleyhealth.com/ocala-location/,true,https://langleyhealth.com/ocala-location/,200,ok,2026-05-28T18:05:06+00:00
+olympia-wa,Peninsula Community Health Services - Franklin Street,98584,original,https://www.pchsweb.org,true,https://www.pchsweb.org/,200,ok,2026-05-28T18:05:06+00:00
+oakland-ca,LA CLINICA DE LA RAZA - DENTAL,94601,original,https://www.laclinica.org,true,https://laclinica.org/,200,ok,2026-05-28T18:05:07+00:00
+oakland-ca,Artthaus/Oakland Family Health Center,94601,places,https://arthaus.mov/work.php,true,https://arthaus.mov/work.php,200,ok,2026-05-28T18:05:07+00:00
+ocala-fl,Heart of Florida Health Center Main Location,34470,original,https://www.myhfhc.org,true,https://www.myhfhc.org/,200,ok,2026-05-28T18:05:07+00:00
+oakland-ca,HIGHLAND WELLNESS,94602,original,http://www.alamedahealthsystem.org/locations/,true,http://www.alamedahealthsystem.org/locations/,200,ok,2026-05-28T18:05:08+00:00
+oakland-ca,LifeLong Medical Care - Eastmont,94605,places,https://lifelongmedical.org/locations/eastmont-health-center/,false,https://lifelongmedical.org/locations/eastmont-health-center/,403,http_403,2026-05-28T18:05:08+00:00
+oakland-ca,Frank Kiang Medical Center,94606,original,https://www.asianhealthservices.org,true,https://asianhealthservices.org/,200,ok,2026-05-28T18:05:09+00:00
+norwalk-ct,Ponus Ridge Middle School SBHC,06850,places,http://prms.norwalkps.org/,true,https://prms.norwalkps.org/,200,ok,2026-05-28T18:05:10+00:00
+norwalk-ct,DAY STREET COMMUNITY HEALTH CENTER,06854,original,https://www.chc1.com,true,https://www.chc1.com/,200,ok,2026-05-28T18:05:10+00:00
+norwalk-ct,Family Centers Health Care at 986 Bedford,06905,places,http://www.familycenters.org/,true,https://familycenters.org/,200,ok,2026-05-28T18:05:10+00:00
+norwalk-ct,OPERATION HOPE,06824,original,https://www.swchc.org,true,https://swchc.org/,200,ok,2026-05-28T18:05:11+00:00
+norwalk-ct,OPTIMUS on the Boulevard,06902,original,https://www.optimushealthcare.org,true,https://optimushealthcare.org/,200,ok,2026-05-28T18:05:11+00:00
+norwalk-ct,EDISON ELEMENTARY SCHOOL BASED,10573,original,https://www.opendoormedical.org,true,https://opendoorcarenetwork.org/,200,ok,2026-05-28T18:05:12+00:00
+north-las-vegas-nv,"All For Health, Las Vegas",89115,original,https://www.allforhealth.org,false,https://www.allforhealth.org/,200,thin_body_114b,2026-05-28T18:05:12+00:00
+north-las-vegas-nv,Nellis Family Medical and Dental Center,89110,places,https://www.nvhealthcenters.org/,false,,,"ssl_error:HTTPSConnectionPool(host='www.nvhealthcenters.org', port=443): Max retries excee",2026-05-28T18:05:12+00:00
+north-las-vegas-nv,FirstMed North Las Vegas,89032,original,https://FMHWC.ORG,false,https://fmhwc.org/,200,no_html_tag,2026-05-28T18:05:12+00:00
+north-las-vegas-nv,Aghaby: North Las Vegas,89030,places,https://www.acchealthcenters.org/,true,https://www.acchealthcenters.org/,200,ok,2026-05-28T18:05:12+00:00
+north-las-vegas-nv,Hope Christian Health Center,89030,original,http://www.HopeHealthVegas.org,true,https://hopehealthvegas.org/,200,ok,2026-05-28T18:05:13+00:00
+north-las-vegas-nv,FPCC Mobile Clinic 1,89106,places,https://firstpersonclinic.org/,true,https://www.firstpersonclinic.org/,200,ok,2026-05-28T18:05:13+00:00
+norman-ok,Variety Care Norman,73069,original,https://www.varietycare.org,true,https://www.varietycare.org/,200,ok,2026-05-28T18:05:13+00:00
+norman-ok,Community Health Highland Park Family Medical Center,73135,places,https://www.communityhealthok.org/,true,https://www.communityhealthok.org/,200,ok,2026-05-28T18:05:14+00:00
+san-bernardino-ca,Inland Family Community Health Center,92401,original,https://www.ibhealth.org,true,https://ibhealth.org/,200,ok,2026-05-28T18:05:14+00:00
+norman-ok,South Central Medical Center - Washington Site,73093,places,http://provider.kareo.com/malori-lawrence-1,true,https://www.tebra.com/care/provider/malori-lawrence-aprn-1063068088,200,ok,2026-05-28T18:05:14+00:00
+san-bernardino-ca,SAC Health System Downtown Clinic,92410,original,https://www.sachealthsystem.org,true,https://www.sachealth.org/,200,ok,2026-05-28T18:05:15+00:00
+san-bernardino-ca,San Bernardino Health Center,92401,places,http://www.sbcounty.gov/dph/publichealth/ph_divisions/public_health_clinics/public_health_clinics_san_bernardino.asp,true,https://dph.sbcounty.gov/,200,ok,2026-05-28T18:05:15+00:00
+san-bernardino-ca,CNHF - H Street Clinic,92405,places,http://www.cnhfclinics.org/,true,https://www.cnhfclinics.org/,200,ok,2026-05-28T18:05:16+00:00
+san-bernardino-ca,SJCH San Bernardino Health Center,92404,places,https://sjch.org/sb/,true,https://www.sjch.org/san-bernardino-health-center,200,ok,2026-05-28T18:05:16+00:00
+san-antonio-tx,CENTROMED SARAH E DAVIDSON CLINIC,78207,original,https://www.centromedsa.com,true,https://www.centromedsa.com/,200,ok,2026-05-28T18:05:17+00:00
+san-antonio-tx,San Antonio Specialty Health & Sports Medicine - Downtown,78212,original,https://communicaresa.org,true,https://communicaresa.org/,200,ok,2026-05-28T18:05:17+00:00
+san-bernardino-ca,"Unicare Community Health Center, Inc. - San Bernardino 184",92404,places,https://unicarechc.org/,true,https://unicarechc.org/,200,ok,2026-05-28T18:05:17+00:00
+san-antonio-tx,Lytle Community Health Center,78052,original,https://atascosahealthcenter.org,true,https://atascosahealthcenter.org/,200,ok,2026-05-28T18:05:17+00:00
+saint-joseph-mi,INTERCARE CHILD AND ADOLESCENT HEALTH CENTER,49022,original,https://www.intercare.org,true,https://www.intercare.org/,200,ok,2026-05-28T18:05:18+00:00
+saint-cloud-fl,Osceola Community Health Services at St. Cloud,34769,original,https://www.osceolahealthcare.org,true,https://www.osceolahealthcare.org/,200,ok,2026-05-28T18:05:18+00:00
+saint-joseph-mi,Cass Family Clinic Dowagiac,49047,original,https://cassfamilyclinic.org/,true,https://cassfamilyclinic.org/,200,ok,2026-05-28T18:05:18+00:00
+saint-cloud-fl,OBFH Kissimmee,34744,original,https://www.obfh.org,true,https://obfh.org/,200,ok,2026-05-28T18:05:18+00:00
+saint-cloud-fl,COMMUNITY HEALTH CENTER - MEADOW WOODS FAMILY HEALTH CENTER,32824,original,https://www.chcfl.org,true,https://www.chcfl.org/,200,ok,2026-05-28T18:05:18+00:00
+saint-cloud-fl,CFHC Davenport Primary Care,33837,places,https://cfhc.org/location/davenport/,true,https://cfhc.org/location/davenport/,200,ok,2026-05-28T18:05:18+00:00
+saint-cloud-fl,Hoffner Health Center,32822,original,https://www.mytruehealth.org,true,https://www.mytruehealth.org/,200,ok,2026-05-28T18:05:18+00:00
+saginaw-mi,Great Lakes Bay Health Centers Saginaw High,48601,original,https://greatlakesbayhealthcenters.org,true,https://greatlakesbayhealthcenters.org/,200,ok,2026-05-28T18:05:19+00:00
+saginaw-mi,Clio Heath Center,48420,places,http://www.hamiltonchn.org/,true,https://hamiltonchn.org/,200,ok,2026-05-28T18:05:19+00:00
+orange-park-fl,Duval Family Health Center - Enterprise,32202,original,https://www.sulzbachercenter.org,false,,,"conn_error:HTTPSConnectionPool(host='www.sulzbachercenter.org', port=443): Max retries exce",2026-05-28T18:05:19+00:00
+rowlett-tx,HHM Health Mesquite Family Health Center,75150,original,https://hhmhealth.org,true,https://www.hhmhealth.org/,200,ok,2026-05-28T18:05:19+00:00
+rowlett-tx,HSNT Wylie Children's Medical Clinic,75098,places,https://healthservicesntx.org/wylie-childrens-medical-clinic?utm_source=GMBSocialClimb&utm_medium=WylieChildren'sMedicalClinic,true,https://healthservicesntx.org/locations-wylie/,200,ok,2026-05-28T18:05:20+00:00
+rowlett-tx,Prism Health North Texas at South Dallas Health Center,75210,original,https://www.phntx.org,true,https://www.phntx.org/,200,ok,2026-05-28T18:05:20+00:00
+rowlett-tx,The Bridge,75201,original,http://www.parklandhospital.com/phhs/homeless-outreach.aspx,true,https://www.parklandhealth.org/homeless-outreach,200,ok,2026-05-28T18:05:21+00:00
+rowlett-tx,Women's Health Center of Plano,75075,places,https://www.fhcntx.org/,true,https://fhcntx.org/,200,ok,2026-05-28T18:05:21+00:00
+rockford-il,UI Health Mile Square Health Center L.P. Johnson Rockford,61104,places,https://hospital.uillinois.edu/patients-and-visitors/mile-square-federally-qualified-health-center/locations/lp-johnson-rockford,false,https://hospital.uillinois.edu/patients-and-visitors/mile-square-federally-qualified-health-center/locations/lp-johnson-rockford,404,http_404,2026-05-28T18:05:21+00:00
+rockford-il,Aunt Martha's Rockford Community Health Center,61104,original,https://www.auntmarthas.org,true,https://www.auntmarthas.org/,200,ok,2026-05-28T18:05:22+00:00
+rockford-il,Beloit Area Community Health Center Behavioral Health Clinic,53511,places,https://www.chsofwi.org/,true,https://chsofwi.org/,200,ok,2026-05-28T18:05:22+00:00
+rockford-il,Crusader Clinic on West State Street,61102,original,https://www.crusaderhealth.org,true,https://www.crusaderhealth.org/,200,ok,2026-05-28T18:05:22+00:00
+rochester-hills-mi,The Wellness Plan Medical Center - Pontiac,48342,original,https://www.wellplan.com,true,https://www.wellplan.com/,200,ok,2026-05-28T18:05:23+00:00
+rochester-hills-mi,Brewster Elementary Empowerment Zone,48306,original,https://www.honorcommunityhealth.org,true,https://honorcommunityhealth.org/,200,ok,2026-05-28T18:05:23+00:00
+rochester-hills-mi,Advantage Health,48093,places,http://ahcdetroit.org/,true,https://ahcdetroit.org/,200,ok,2026-05-28T18:05:23+00:00
+rochester-hills-mi,MyCare Administration,48015,original,https://www.mycarehealthcenter.org,true,https://www.mycarehealthcenter.org/,200,ok,2026-05-28T18:05:23+00:00
+oakland-ca,EAST OAKLAND HEALTH CENTER,94621,original,https://wohc@wohc.org,false,,,"conn_error:HTTPSConnectionPool(host='wohc.org', port=443): Max retries exceeded with url: /",2026-05-28T18:05:23+00:00
+rochester-hills-mi,Greenfield,48075,original,https://hcdmg.org,true,https://hcdmg.org/,200,ok,2026-05-28T18:05:23+00:00
+rochester-hills-mi,Anne Mare' Ice Pediatric Health Center,48075,original,https://authorityhealth.org/,true,https://authorityhealth.org/,200,ok,2026-05-28T18:05:23+00:00
+riverdale-ga,The Family Health Centers at Morrow,30260,places,https://fhcga.org/,true,https://fhcga.org/,200,ok,2026-05-28T18:05:24+00:00
+riverdale-ga,Healing Community Center,30310,places,https://healatlanta.org/,true,https://healatlanta.org/,200,ok,2026-05-28T18:05:24+00:00
+riverdale-ga,Southside Medical Center - Riverdale clinic,30274,places,http://www.southsidemedical.net/?utm_source=GMBSocialClimb&utm_medium=SouthsideMedicalCenter,true,https://southsidemedical.net/?utm_source=GMBSocialClimb&utm_medium=SouthsideMedicalCenter,200,ok,2026-05-28T18:05:25+00:00
+riverdale-ga,Mercy Care at CHRIS 180,30316,original,https://www.mercyatlanta.org,true,https://mercyatlanta.org/,200,ok,2026-05-28T18:05:25+00:00
+riverdale-ga,YourTown Health,30268,original,https://www.yourtownhealth.com,true,https://www.yourtownhealth.com/,200,ok,2026-05-28T18:05:25+00:00
+riverdale-ga,MedCura McNair,30032,original,https://www.medcura.org,true,https://medcura.org/,200,ok,2026-05-28T18:05:25+00:00
+renton-wa,Finance Office,98057,places,https://www.dshs.wa.gov/,true,https://www.dshs.wa.gov/,200,ok,2026-05-28T18:05:26+00:00
+renton-wa,Neighborcare Health at Rainier Beach,98118,original,https://www.neighborcare.org,true,https://www.neighborcare.org/,200,ok,2026-05-28T18:05:26+00:00
+renton-wa,Renton Public Health Center,98056,original,https://www.kingcounty.gov/depts/health/locations/renton.aspx,true,https://kingcounty.gov/en/dept/dph/health-safety/health-centers-programs-services/public-health-centers/renton,200,ok,2026-05-28T18:05:26+00:00
+renton-wa,Sea Mar CHC - Burien 8th Ave. S.,98148,original,https://www.seamar.org,true,https://www.seamar.org/,200,ok,2026-05-28T18:05:26+00:00
+renton-wa,HealthPoint at Family First Community Center,98058,places,https://www.healthpointchc.org/find-clinics/family-first-community-center,true,https://www.healthpointchc.org/find-clinics/family-first-community-center,200,ok,2026-05-28T18:05:26+00:00
+reno-nv,Willow Street Health Center,89502,places,https://www.nevadahealthcenters.org/,true,https://www.nevadahealthcenters.org/,200,ok,2026-05-28T18:05:27+00:00
+reno-nv,Change Point,89503,original,https://www.nnhopes.org,true,https://www.nnhopes.org/,200,ok,2026-05-28T18:05:27+00:00
+reno-nv,First Person Care Clinic Reno,89502,original,https://www.firstpersonclinic.org,true,https://www.firstpersonclinic.org/,200,ok,2026-05-28T18:05:27+00:00
+reno-nv,Western Sierra Medical Clinic - Kings Beach,96143,original,https://www.wsmcmed.org,true,https://wsmcmed.org/,200,ok,2026-05-28T18:05:28+00:00
+reno-nv,Complex Care Center (CCC),89502,original,https://www.chanevada.org,true,https://www.chanevada.org/,200,ok,2026-05-28T18:05:28+00:00
+renton-wa,Seattle Roots at Step Clinic,98144,places,https://hep.org/programs/seattle-step-clinic/,false,https://www.hep.org/programs/seattle-step-clinic/,404,http_404,2026-05-28T18:05:28+00:00
+reidsville-nc,TAPM-Admin Office,27405,places,https://tapmedicine.com/,true,https://tapmedicine.com/,200,ok,2026-05-28T18:05:29+00:00
+reidsville-nc,Kintegra at Clover Garden School,27217,original,https://www.kintegra.org,true,https://www.kintegra.org/,200,ok,2026-05-28T18:05:29+00:00
+reidsville-nc,Person Family Dental Center Caswell Site,27379,places,http://www.personfamilymedical.com/,true,https://www.personfamilymedical.com/,200,ok,2026-05-28T18:05:30+00:00
+reidsville-nc,James Austin Health Center,27288,original,https://compassionhealthcare.org/james-austin-health-center/,true,https://compassionhealthcare.org/james-austin-health-center/,200,ok,2026-05-28T18:05:31+00:00
+reidsville-nc,PATHS Community Medical Center  -  Danville Riverside,24541,original,https://pathsinc.org,true,https://pathsinc.org/,200,ok,2026-05-28T18:05:31+00:00
+reidsville-nc,Scott Community Health Center,27217,original,https://www.piedmonthealth.org,true,https://piedmonthealth.org/,200,ok,2026-05-28T18:05:31+00:00
+red-bluff-ca,ANDERSON FAMILY HEALTH CENTER,96007,original,https://www.shastahealth.org,true,https://www.shastahealth.org/,200,ok,2026-05-28T18:05:31+00:00
+red-bluff-ca,Greenville Rancheria Dental Clinic,96080,places,https://www.grth.org/services/dental,true,https://www.grth.org/services/dental,200,ok,2026-05-28T18:05:32+00:00
+rancho-cucamonga-ca,Euclid Community Health Center,91786,places,https://www.hsa.care/,true,https://hsa.care/,200,ok,2026-05-28T18:05:32+00:00
+red-bluff-ca,Ampla Health Los Molinos Medical,96055,original,https://www.amplahealth.org,true,https://www.amplahealth.org/,200,ok,2026-05-28T18:05:33+00:00
+rancho-cucamonga-ca,"Central City Community Health Center, Inc - Benson",91786,places,https://centralcityhealth.org/,true,https://centralcityhealth.org/,200,ok,2026-05-28T18:05:33+00:00
+rancho-cucamonga-ca,"Friends of Family Health Center - 1129 W. 4th Street, Ontario",91762,original,https://www.fofhealthcenter.org,true,https://fofhealthcenter.org/,200,ok,2026-05-28T18:05:33+00:00
+rancho-cucamonga-ca,"Unicare Community Health Center, Inc.",91762,original,https://www.unicarechc.org,true,https://unicarechc.org/,200,ok,2026-05-28T18:05:34+00:00
+port-arthur-tx,Triangle Area Network,77702,original,https://tanhealthcare.org,true,https://www.tanhealthcare.org/,200,ok,2026-05-28T18:05:34+00:00
+port-arthur-tx,Legacy Central Beaumont Stagg Dr.,77701,original,https://legacycommunityhealth.org,true,https://legacycommunityhealth.org/,200,ok,2026-05-28T18:05:35+00:00
+pomona-ca,East Valley Community Health Center,91766,original,https://www.evchc.org,true,https://www.evchc.org/,200,ok,2026-05-28T18:05:35+00:00
+port-arthur-tx,"GULF COAST HEALTH CENTER, INC. - WEST SIDE",77640,original,https://WWW.GULFCOASTHC.ORG,true,https://gulfcoasthc.org/,200,ok,2026-05-28T18:05:35+00:00
+pomona-ca,Mission Blvd.,91766,places,http://fenixdoctors.com/component/content/article/11-doctors/57-luis-perez-md,false,,,dns_failure,2026-05-28T18:05:35+00:00
+pomona-ca,East Valley CHC - Pomona/Garey,91766,original,https://evchc.org,true,https://www.evchc.org/,200,ok,2026-05-28T18:05:35+00:00
+rowlett-tx,Foremost Family Health Center - Balch Springs,75180,original,https://www.foremostfhc.org,false,,,"conn_error:HTTPSConnectionPool(host='www.foremostfhc.org', port=443): Max retries exceeded ",2026-05-28T18:05:36+00:00
+pomona-ca,Centro Medico- Holt,91768,original,https://centromedicoclinic.com,true,https://www.centromedicoclinic.com/,200,ok,2026-05-28T18:05:36+00:00
+pomona-ca,Mission City Community Network-Orange Grove,91767,original,https://www.mccn.org,true,https://mccn.org/,200,ok,2026-05-28T18:05:36+00:00
+philadelphia-pa,Cottman Community Health Center,19149,original,https://www.spectrumhs.org,true,https://www.spectrumhs.org/,200,ok,2026-05-28T18:05:36+00:00
+philadelphia-pa,Philadelphia District Health Center #10,19149,original,http://www.phila.gov/health/index.html,true,https://www.phila.gov/departments/department-of-public-health/,200,ok,2026-05-28T18:05:36+00:00
+philadelphia-pa,Parkview Women and Children's Health Center,19124,places,https://dvch.org/parkview-health-center/,true,https://dvch.org/parkview-health-center/,200,ok,2026-05-28T18:05:36+00:00
+philadelphia-pa,Rising Sun Health Center,19120,places,https://www.phmc.org/site/programs/health-care-centers/rising-sun,true,https://phmc.org/program/rising-sun-health-center/,200,ok,2026-05-28T18:05:36+00:00
+pomona-ca,"Unicare Community Health Center, Inc. - Pomona",91767,original,https://www.unicarechc.org,true,https://unicarechc.org/,200,ok,2026-05-28T18:05:37+00:00
+petersburg-va,CVHS Downtown Petersburg,23803,original,https://www.cvhsinc.org,true,https://www.cvhsinc.org/,200,ok,2026-05-28T18:05:37+00:00
+petersburg-va,Dinwiddie Medical Center and Counseling Center,23841,places,https://sdhsinc.com/locations/dinwiddie/,true,https://sdhsinc.com/locations/dinwiddie/,200,ok,2026-05-28T18:05:37+00:00
+petersburg-va,Stony Creek Community Health Center DBA Stony Creek Pharmacy,23882,places,https://stonycreekhealth.com/,true,https://stonycreekhealth.com/,200,ok,2026-05-28T18:05:37+00:00
+philadelphia-pa,Pathways to Housing - PA,19141,original,http://www.pathwaystohousing.org/site/pa/,true,https://www.pathwayshousingfirst.org/,200,ok,2026-05-28T18:05:38+00:00
+petersburg-va,Waverly Medical Center,23890,original,https://NONE,false,,,dns_failure,2026-05-28T18:05:38+00:00
+philadelphia-pa,FRANKFORD AVENUE HEALTH CENTER,19124,original,https://WWW.GPHAINC.ORG,true,https://gphainc.org/,200,ok,2026-05-28T18:05:38+00:00
+terre-haute-in,JR Pharmacy Poplar,47807,places,http://pharmacy.valleyprohealth.org/,true,https://pharmacy.valleyprohealth.org/,200,ok,2026-05-28T18:05:39+00:00
+terre-haute-in,"Wabash Valley Health Center, Inc.",47807,original,https://www.wabashvalleyhealthcenter.org,true,https://www.wabashvalleyhealthcenter.org/,200,ok,2026-05-28T18:05:40+00:00
+terre-haute-in,Greene County Health- Shakamak,47438,places,http://gc-health.org/contact.php,true,http://gc-health.org/contact.php,200,ok,2026-05-28T18:05:40+00:00
+terre-haute-in,Grace Clinic - Vigo County,47804,original,http://www.hamiltoncenter.org,true,https://www.hamiltoncenter.org/,200,ok,2026-05-28T18:05:40+00:00
+taunton-ma,Manet at Taunton--(Suite 140),02780,original,https://www.manetchc.org,true,https://www.manetchc.org/,200,ok,2026-05-28T18:05:40+00:00
+taunton-ma,"Elder Service Plan, Brockton",02301,original,https://www.hhsi.us,true,https://hhsi.us/,200,ok,2026-05-28T18:05:41+00:00
+petersburg-va,The Southside Community Health Center of Greater Richmond,23224,places,http://www.dailyplanetva.org/,true,https://dailyplanetva.org/,200,ok,2026-05-28T18:05:41+00:00
+taunton-ma,BNHC Manley Street site,02301,places,http://www.bnhc.org/,true,https://www.bnhc.org/,200,ok,2026-05-28T18:05:42+00:00
+taunton-ma,Adams-Farley Counseling Center,02915,original,https://www.ebcap.org,false,,,"ssl_error:HTTPSConnectionPool(host='www.ebcap.org', port=443): Max retries exceeded with u",2026-05-28T18:05:42+00:00
+taunton-ma,SSTAR Integrated Health Services Center,02720,original,https://www.sstar.org,true,https://www.sstar.org/,200,ok,2026-05-28T18:05:44+00:00
+sunnyvale-ca,Mayview Community Health Center Sunnyvale a Member of Ravenswood Family Health Network,94085,places,http://www.mayview.org/,true,https://www.immobilier-gratuit.net/,200,ok,2026-05-28T18:05:44+00:00
+taunton-ma,BVCHC DENTAL Health Center,02860,original,https://www.bvchc.org,true,https://www.bvchc.org/,200,ok,2026-05-28T18:05:44+00:00
+sunnyvale-ca,Valley Health Center Sunnyvale,94086,original,http://www.scvmed.org/SCC/docs%2FSanta%20Clara%20Valley%20Medical%20Center%20%28DEP%29%2Fattachments%2FSCVHC-ClinicCards2008FairOaks.pdf,false,http://www.scvmed.org/SCC/docs%2FSanta%20Clara%20Valley%20Medical%20Center%20%28DEP%29%2Fattachments%2FSCVHC-ClinicCards2008FairOaks.pdf,404,http_404,2026-05-28T18:05:44+00:00
+petersburg-va,Bermuda Medical Center,23237,original,https://www.cahealthnet.org,true,https://cahealthnet.org/,200,ok,2026-05-28T18:05:44+00:00
+sunnyvale-ca,Indian Health Center of Santa Clara Valley - Family Medicine Center,95128,original,https://www.indianhealthcenter.org,true,https://indianhealthcenter.org/,200,ok,2026-05-28T18:05:44+00:00
+sunnyvale-ca,NORTH EAST MEDICAL SERVICES - 1870 LUNDY,95131,original,https://www.nems.org/,true,https://www.nems.org/,200,ok,2026-05-28T18:05:45+00:00
+sugar-land-tx,St. Hope Community Health Center-Sugar Land,77478,places,http://offeringhope.org/,true,https://www.offeringhope.org/,200,ok,2026-05-28T18:05:45+00:00
+sunnyvale-ca,AACI,95128,original,http://aaci.org/main/programs/health/#health-center,false,https://aaci.org/main/programs/health/#health-center,404,http_404,2026-05-28T18:05:46+00:00
+sugar-land-tx,HOPE Clinic Alief,77083,original,https://www.hopechc.org,true,https://www.hopechc.org/,200,ok,2026-05-28T18:05:46+00:00
+sugar-land-tx,Legacy Sugardale Fountains,77477,places,https://www.legacycommunityhealth.org/legacy-stafford-fountains/,true,https://www.legacycommunityhealth.org/legacy-stafford-fountains/,200,ok,2026-05-28T18:05:47+00:00
+sugar-land-tx,Stafford Center,77477,original,https://www.myaccesshealth.org,true,https://www.myaccesshealth.org/,200,ok,2026-05-28T18:05:47+00:00
+sunnyvale-ca,Healthcare to the Homeless,95002,original,https://www.gardnerhealthservices.org,true,https://gardnerhealthservices.org/,200,ok,2026-05-28T18:05:47+00:00
+stuart-fl,"Florida Community Health Center, Inc. - Stuart",34994,original,https://www.fchcinc.org,true,https://www.fchcinc.org/,200,ok,2026-05-28T18:05:47+00:00
+sugar-land-tx,Admin - Westwood,77036,places,https://www.boxerproperty.com/office-space/houston/10039-bissonnet-street?utm_source=google_business_profile&utm_medium=web&utm_campaign=google_map_boxer&utm_term=prospect,true,https://www.boxerproperty.com/office-space/houston/10039-bissonnet-street?utm_source=google_business_profile&utm_medium=web&utm_campaign=google_map_boxer&utm_term=prospect,200,ok,2026-05-28T18:05:47+00:00
+sugar-land-tx,MyCHN at Westwood,77036,original,https://www.mychn.org,true,https://mychn.org/,200,ok,2026-05-28T18:05:48+00:00
+spring-hill-fl,Hudson Health Center,34669,original,https://www.ccrhealth.org,true,https://www.ccrhealth.org/,200,ok,2026-05-28T18:05:48+00:00
+stuart-fl,Health Care District Community Health Center - Jupiter,33458,original,https://www.hcdpbc.org/for-patients/primary-care-clinics,true,https://www.hcdpbc.org/for-patients/primary-care-clinics,200,ok,2026-05-28T18:05:48+00:00
+spring-hill-fl,Spring Hill Family Health Center,34606,original,https://www.premierhc.org,true,https://premierhc.org/,200,ok,2026-05-28T18:05:48+00:00
+spring-hill-fl,Langley Health Services - Homosassa,34446,places,https://langleyhealth.com/homosassa/,true,https://langleyhealth.com/homosassa/,200,ok,2026-05-28T18:05:48+00:00
+stuart-fl,WFHC Behavioral Health Fort Pierce,34950,original,https://www.wfhcfl.org,true,https://wfhcfl.org/,200,ok,2026-05-28T18:05:49+00:00
+spring-hill-fl,METRO New Port Richey,34652,original,https://www.metrotampabay.org,true,https://metrotampabay.org/,200,ok,2026-05-28T18:05:49+00:00
+south-bend-in,HealthLinc Centennial,46601,places,https://healthlincchc.org/locations/centennial/,true,https://healthlincchc.org/locations/centennial/,200,ok,2026-05-28T18:05:49+00:00
+south-bend-in,Bowen Health South Bend,46613,places,https://www.bowenhealth.org/,true,https://www.bowenhealth.org/,200,ok,2026-05-28T18:05:49+00:00
+south-bend-in,Heart City Womens Health,46514,places,http://www.heartcityhealth.org/women/?utm_source=GMBlisting&utm_medium=organic,true,https://www.heartcityhealth.org/women/?utm_source=GMBlisting&utm_medium=organic,200,ok,2026-05-28T18:05:50+00:00
+south-bend-in,IHC at Oaklawn,46617,places,http://www.oaklawn.org/services#.VfbD32xStBc,true,https://oaklawn.org/main/our-services/access-services/#.VfbD32xStBc,200,ok,2026-05-28T18:05:50+00:00
+sherman-oaks-ca,Eisner Health Intergenerational Health Center,91403,original,https://www.eisnerhealth.org,false,,,"ssl_error:HTTPSConnectionPool(host='www.eisnerhealth.org', port=443): Max retries exceeded",2026-05-28T18:05:51+00:00
+south-bend-in,Niles Community Health Center,49120,places,http://www.cassfamilyclinic.org/,true,https://cassfamilyclinic.org/,200,ok,2026-05-28T18:05:51+00:00
+south-bend-in,Westend Community Health Center,46526,original,https://www.mchcc.org,true,https://mchcc.org/about,200,ok,2026-05-28T18:05:51+00:00
+sherman-oaks-ca,Complete Care Community Health Center-Sherman Oaks 2,91403,places,https://shermanoakscompletecare.com/,true,https://shermanoakscompletecare.com/,200,ok,2026-05-28T18:05:51+00:00
+sherman-oaks-ca,Valley Community Healthcare,91423,places,https://valleycommunityhealthcare.org/,true,https://valleycommunityhealthcare.org/,200,ok,2026-05-28T18:05:52+00:00
+sherman-oaks-ca,Clinica Romero - San Fernando Valley,91401,places,https://clinicaromero.com/,true,https://clinicaromero.com/,200,ok,2026-05-28T18:05:52+00:00
+sherman-oaks-ca,SCMC Van Nuys,91411,original,http://www.scmedcenter.org/,true,https://www.scmedcenter.org/,200,ok,2026-05-28T18:05:52+00:00
+seattle-wa,STD Program Public Health,98104,original,http://www.kingcounty.gov/healthservices/health/communicable/hiv/resources/testing.aspx,false,https://kingcounty.gov/healthservices/health/communicable/hiv/resources/testing.aspx,404,http_404,2026-05-28T18:05:52+00:00
+sherman-oaks-ca,"Center for Family Health & Education, Inc. dba Priority Care Medical Group - Van Nuys",91401,original,https://www.cffhae.org,true,https://www.cffhae.org/,200,ok,2026-05-28T18:05:52+00:00
+seattle-wa,Neighborcare Health at Pike Place Market,98101,original,https://www.neighborcare.org,true,https://www.neighborcare.org/,200,ok,2026-05-28T18:05:52+00:00
+seattle-wa,Seattle Indian Health Board - Pioneer Square,98104,original,https://www.sihb.org,true,https://www.sihb.org/,200,ok,2026-05-28T18:05:53+00:00
+seattle-wa,ICHS - International District Medical & Dental Clinic,98104,original,https://www.ichs.com,true,https://www.ichs.com/,200,ok,2026-05-28T18:05:53+00:00
+seattle-wa,Seattle Roots at Step Clinic,98144,places,https://hep.org/programs/seattle-step-clinic/,false,https://www.hep.org/programs/seattle-step-clinic/,404,http_404,2026-05-28T18:05:53+00:00
+spring-hill-fl,TFHC Lutz,33548,original,https://www.tampafamilyHC.com,true,https://tampafamilyhc.com/,200,ok,2026-05-28T18:05:53+00:00
+seattle-wa,Sea Mar CHC - Seattle 8720 14th Ave. S.,98108,original,https://www.seamar.org,true,https://www.seamar.org/,200,ok,2026-05-28T18:05:53+00:00
+scottsdale-az,Mountain Park Health Center - Balsz,85008,original,https://www.mountainparkhealth.org,true,https://mountainparkhealth.org/,200,ok,2026-05-28T18:05:54+00:00
+scottsdale-az,McDowell Road Integrated Care,85008,original,https://www.terroshealth.org,true,https://terroshealth.org/,200,ok,2026-05-28T18:05:54+00:00
+scottsdale-az,Adelante Healthcare Roosevelt,85008,places,https://adelantehealthcare.com/locations/central-phoenix-roosevelt/,true,https://adelantehealthcare.com/locations/central-phoenix-roosevelt/,200,ok,2026-05-28T18:05:54+00:00
+scottsdale-az,Cholla Health Center,85257,original,https://www.noahhelps.org,true,https://noahhelps.org/,200,ok,2026-05-28T18:05:54+00:00
+scottsdale-az,Circle the City Family Health Center - UMOM Campus,85008,original,https://www.circlethecity.org,false,https://circlethecity.org/,200,no_html_tag,2026-05-28T18:05:54+00:00
+scottsdale-az,Valle del Sol_Mesa_334,85201,places,https://www.valledelsol.com/?utm_source=GMBlistingEastValley&utm_medium=referral,true,https://www.valledelsol.com/?utm_source=GMBlistingEastValley&utm_medium=referral,200,ok,2026-05-28T18:05:54+00:00
+santa-clarita-ca,Canyon Country Health Center,91351,original,https://www.sdfhc.org,true,https://www.sdfhc.org/,200,ok,2026-05-28T18:05:55+00:00
+santa-clarita-ca,Santo Nino Mission Hills,91345,places,https://locations.lakesidemed.com/mission-hills/?utm_campaign=gmb&utm_medium=organic&utm_source=local,true,https://locations.lakesidemed.com/mission-hills/?utm_campaign=gmb&utm_medium=organic&utm_source=local,200,ok,2026-05-28T18:05:55+00:00
+santa-clarita-ca,Benevolence Health Center - Sylmar,91342,places,http://www.clinicshere.com/clinica-de-salud-familiar-sylmar-ca/,true,https://www.clinicshere.com/clinica-de-salud-familiar-sylmar-ca/,200,ok,2026-05-28T18:05:55+00:00
+santa-ana-ca,Yehowa Medical Services  -  North Main,92701,original,https://ymedical.org/,true,https://ymedical.org/,200,ok,2026-05-28T18:05:55+00:00
+santa-clarita-ca,"Center for Family Health & Education, Inc. dba Priority Care Medical Group - Mission Hills",91345,original,https://www.cffhae.org,true,https://www.cffhae.org/,200,ok,2026-05-28T18:05:56+00:00
+santa-ana-ca,Access-Santa Ana,92701,original,https://accessfqhc.org,true,https://accessfqhc.org/,200,ok,2026-05-28T18:05:56+00:00
+santa-ana-ca,"COMMUNITY MEDICINE INC., SANTA ANA",92701,original,https://www.communitymedicineinv.org,false,,,dns_failure,2026-05-28T18:05:57+00:00
+santa-ana-ca,UC IRVINE FAMILY HEALTH CENTER - SANTA ANA,92701,original,http://www.ucirvinehealth.org/locations/santa-ana/family-health-center-santa-ana/,true,https://www.ucihealth.org/locations/santa-ana/family-health-center-santa-ana,200,ok,2026-05-28T18:05:57+00:00
+santa-ana-ca,SOS-El Sol Wellness Center-Broadway,92701,original,https://www.shareourselves.org,true,https://shareourselves.org/,200,ok,2026-05-28T18:05:58+00:00
+santa-ana-ca,Serve The People Community Health Center,92701,original,https://www.Serve-The-People.com,true,https://www.servethepeople.org/,200,ok,2026-05-28T18:05:58+00:00
+san-francisco-ca,HealthRIGHT 360 Integrated Care Center,94103,original,https://www.healthright360.org,true,https://www.healthright360.org/,200,ok,2026-05-28T18:05:58+00:00
+san-francisco-ca,Haight Ashbury Integrated Care Center,94103,places,http://www.healthright360.org/,true,https://www.healthright360.org/,200,ok,2026-05-28T18:05:58+00:00
+san-francisco-ca,API Wellness at San Francisco LGBT Center,94102,places,https://psychiatricalternatives.com/,true,https://psychiatricalternatives.com/,200,ok,2026-05-28T18:05:58+00:00
+santa-clarita-ca,Community Medical Wellness Centers USA-Sylmar,91342,places,https://cmwcusa.org/,true,https://cmwcusa.org/en/,200,ok,2026-05-28T18:05:59+00:00
+san-francisco-ca,NORTH EAST MEDICAL SERVICES - POLK,94102,original,https://www.nems.org/,true,https://www.nems.org/,200,ok,2026-05-28T18:05:59+00:00
+san-dimas-ca,Southern California Medical Center - San Dimas,91773,original,https://www.scmedcenter.org,true,https://www.scmedcenter.org/,200,ok,2026-05-28T18:05:59+00:00
+san-francisco-ca,Lyon-Martin Community Health Services,94103,original,https://lyon-martin.org/,true,https://www.lyon-martin.org/,200,ok,2026-05-28T18:05:59+00:00
+san-dimas-ca,BHS Mobile Health Center,91768,original,https://bhs-inc.org,true,https://bhs-inc.org/,200,ok,2026-05-28T18:05:59+00:00
+san-dimas-ca,AltaMed PACE  -  Pomona,91767,places,https://www.altamed.org/PACE,true,https://www.altamed.org/PACE,200,ok,2026-05-28T18:05:59+00:00
+san-dimas-ca,Mission City Community Network-Orange Grove,91767,original,https://www.mccn.org,true,https://mccn.org/,200,ok,2026-05-28T18:05:59+00:00
+san-dimas-ca,Centro Medico- Holt,91768,original,https://centromedicoclinic.com,true,https://www.centromedicoclinic.com/,200,ok,2026-05-28T18:06:00+00:00
+san-dimas-ca,EVCHC - Covina Health Center,91723,original,https://www.evchc.org,true,https://www.evchc.org/,200,ok,2026-05-28T18:06:00+00:00
+san-diego-ca,San Ysidro Health Senior Dental Center,92101,places,https://sydentalcare.com/,true,https://sydentalcare.com/,200,ok,2026-05-28T18:06:00+00:00
+san-diego-ca,Downtown Family Health Center at Connections,92101,places,https://www.fhcsd.org/downtown-family-health-center-at-connections/,true,https://www.fhcsd.org/downtown-family-health-center-at-connections/,200,ok,2026-05-28T18:06:00+00:00
+san-francisco-ca,SMHC Pharmacy,94103,places,http://www.equityhealth.org/,true,https://equityhealth.org/,200,ok,2026-05-28T18:06:01+00:00
+san-diego-ca,Central Elementary School,92105,original,https://www.sdfamilycare.org,true,https://sdfamilycare.org/,200,ok,2026-05-28T18:06:01+00:00
+san-diego-ca,San Diego Community Health Center,92103,original,https://www.sdaihc.org,true,https://www.sdaihc.org/,200,ok,2026-05-28T18:06:03+00:00
+san-diego-ca,St Vincent de Paul Village Family Health Center,92101,original,https://my.neighbor.org/clinic,true,https://my.neighbor.org/clinic-elizabeths-story/,200,ok,2026-05-28T18:06:03+00:00
+yakima-wa,"Yakima Administration, Terrace Heights",98901,original,https://www.yvfwc.com,false,https://www.yvfwc.com/,403,http_403,2026-05-28T18:06:03+00:00
+santa-clarita-ca,NEVHC Santa Clarita Health Center,91351,original,https://www.nevhc.org,true,https://nevhc.org/,200,ok,2026-05-28T18:06:03+00:00
+wilmington-de,Westside Family Healthcare - Administration Office,19801,original,https://www.westsidehealth.org,true,https://www.westsidehealth.org/,200,ok,2026-05-28T18:06:03+00:00
+wilmington-de,HENRIETTA JOHNSON MEDICAL CENTER,19801,original,https://www.hjmc.org,true,https://www.hjmc.org/,200,ok,2026-05-28T18:06:03+00:00
+yakima-wa,Neighborhood Health Services - Terrace Heights,98901,original,https://www.ynhs.org,true,https://ynhs.org/,200,ok,2026-05-28T18:06:04+00:00
+wilmington-de,LCH Health and Community Services,19348,original,https://www.lacomunidadhispana.org,false,,,"ssl_error:HTTPSConnectionPool(host='www.lacomunidadhispana.org', port=443): Max retries ex",2026-05-28T18:06:04+00:00
+wilmington-de,ChesPenn Center for Family Health at Eastside,19013,original,https://www.chespenn.org,true,https://chespenn.org/,200,ok,2026-05-28T18:06:04+00:00
+westminster-md,HANOVER CENTER,17331,original,https://www.familyfirsthealth.org,true,https://www.familyfirsthealth.org/,200,ok,2026-05-28T18:06:04+00:00
+san-diego-ca,La Maestra Monroe Clark Middle School Clinic,92105,original,https://www.lamaestra.org,true,https://lamaestra.org/,200,ok,2026-05-28T18:06:05+00:00
+wilmington-de,SALEM HEALTH CENTER,08079,original,https://www.sjfmc.org,true,https://www.sjfmc.org/,200,ok,2026-05-28T18:06:05+00:00
+westminster-md,"Chase Brexton Health Services, Inc. at Security Square Center",21244,places,http://www.chasebrexton.org/?utm_source=GMBSocialClimb&utm_medium=ChaseBrextonHealthCare-RandallstownCenter,true,https://chasebrexton.org/?utm_source=GMBSocialClimb&utm_medium=ChaseBrextonHealthCare-RandallstownCenter,200,ok,2026-05-28T18:06:05+00:00
+westminster-ca,FTOC Magnolia Medical Clinic,92683,places,https://familiestogetheroc.org/locations/magnolia-imaging,true,https://familiestogetheroc.org/locations/magnolia-imaging,200,ok,2026-05-28T18:06:06+00:00
+westminster-ca,Nhan Hoa Comprehensive Health Care Clinic,92841,hrsa,www.nhanhoa.org,false,,,other:MissingSchema:Invalid URL 'www.nhanhoa.org': No scheme supplied. Perhaps y,2026-05-28T18:06:06+00:00
+westminster-md,The City of Frederick Housing and Human Services/FCAA,21701,original,https://www.cityoffrederick.com/fcaa,true,https://hhs.cityoffrederickmd.gov/,200,ok,2026-05-28T18:06:06+00:00
+yakima-wa,CHCW 401,98902,places,http://chcw.org/,true,https://www.chcw.org/,200,ok,2026-05-28T18:06:07+00:00
+westminster-ca,"Southland Integrated Services, Inc.",92841,original,https://www.southlandintegrated.org,true,https://www.southlandintegrated.org/,200,ok,2026-05-28T18:06:07+00:00
+westminster-ca,AltaMed Medical and Dental Group: Huntington Beach Community Clinic,92647,original,https://www.altamed.org,true,https://www.altamed.org/,200,ok,2026-05-28T18:06:08+00:00
+westminster-ca,"Central City Community Health Center, Inc.- Stanton",90680,original,https://www.centralcityhealth.org,true,https://centralcityhealth.org/,200,ok,2026-05-28T18:06:08+00:00
+westminster-ca,Livingstone Community Health Clinic,90680,places,http://www.livingstonecdc.com/,true,https://www.livingstonecdc.com/,200,ok,2026-05-28T18:06:08+00:00
+wellington-fl,FAU/NCHA Westgate Community Health Center,33409,original,https://www.fau.edu/nursing,true,https://www.fau.edu/nursing/,200,ok,2026-05-28T18:06:09+00:00
+wellington-fl,Health Care District Community Health Center - Atlantis,33461,places,https://www.hcdpbc.org/for-patients/primary-care-clinics/locations/atlantis,true,https://www.hcdpbc.org/for-patients/primary-care-clinics/locations/atlantis,200,ok,2026-05-28T18:06:09+00:00
+wellington-fl,"Florida Community Health Centers, Inc.",33407,original,https://www.fchcinc.org,true,https://www.fchcinc.org/,200,ok,2026-05-28T18:06:09+00:00
+walnut-creek-ca,LA CLINICA MONUMENT,94518,original,https://www.laclinica.org,true,https://laclinica.org/,200,ok,2026-05-28T18:06:09+00:00
+walnut-creek-ca,Willow Pass Wellness Center,94520,places,http://cchealth.org/,false,http://www.cchealth.org/,403,http_403,2026-05-28T18:06:10+00:00
+wellington-fl,FoundCare -Yolette Bonnet Center,33417,places,http://www.foundcare.org/,true,https://foundcare.org/,200,ok,2026-05-28T18:06:11+00:00
+walnut-creek-ca,LifeLong Medical Care - Eastmont,94605,places,https://lifelongmedical.org/locations/eastmont-health-center/,false,https://lifelongmedical.org/locations/eastmont-health-center/,403,http_403,2026-05-28T18:06:11+00:00
+walnut-creek-ca,CASTLEMONT HIGH SCHOOL-YOUTH UPRISING,94605,places,http://www.youthuprising.org/,true,https://www.youthuprising.org/,200,ok,2026-05-28T18:06:12+00:00
+walnut-creek-ca,EASTMONT WELLNESS,94605,original,https://www.eastmontahs.org,true,http://www.alamedahealthsystem.org,200,ok,2026-05-28T18:06:12+00:00
+vancouver-wa,Sea Mar CHC - Vancouver 317 E 39th St,98663,places,http://www.seamar.org/csnw,true,https://www.seamar.org/csnw,200,ok,2026-05-28T18:06:13+00:00
+vancouver-wa,North Portland Health Center,97203,original,https:////multco.us,false,,,other:InvalidURL:Invalid URL 'https:////multco.us': No host supplied,2026-05-28T18:06:13+00:00
+vancouver-wa,Prism Health,97227,original,https://www.prismhealth.org,true,https://www.prismhealth.org/,200,ok,2026-05-28T18:06:13+00:00
+vancouver-wa,Cascadia Garlington Health Center,97212,original,https://www.cascadiabhc.org/,false,,,"ssl_error:HTTPSConnectionPool(host='www.cascadiabhc.org', port=443): Max retries exceeded ",2026-05-28T18:06:13+00:00
+vancouver-wa,NARA Indian Health Clinic,97212,places,http://www.naranorthwest.org/,true,https://www.naranorthwest.org/,200,ok,2026-05-28T18:06:14+00:00
+vancouver-wa,Hooper Detoxification and Stabilization Center,97227,original,https://www.centralcityconcern.org,true,https://centralcityconcern.org/,200,ok,2026-05-28T18:06:14+00:00
+van-nuys-ca,Santo Nino Maternal Fetal Clinic,91405,original,https://santoninohc.org/,true,https://santoninohc.org/,200,ok,2026-05-28T18:06:14+00:00
+van-nuys-ca,Eisner Health Mid-Valley,91405,places,https://eisnerhealth.org/location/mid-valley/,true,https://eisnerhealth.org/location/mid-valley/,200,ok,2026-05-28T18:06:15+00:00
+van-nuys-ca,Van Nuys Women's & Reproductive Health Center Suite 306,91405,original,https://nevhc.org/,true,https://nevhc.org/,200,ok,2026-05-28T18:06:15+00:00
+van-nuys-ca,Clinica Romero - Van Nuys,91405,places,https://clinicaromero.com/,true,https://clinicaromero.com/,200,ok,2026-05-28T18:06:15+00:00
+van-nuys-ca,SCMC Van Nuys,91411,original,http://www.scmedcenter.org/,true,https://www.scmedcenter.org/,200,ok,2026-05-28T18:06:16+00:00
+van-nuys-ca,Center for Family Health & Education,91405,places,https://www.cffhae.org/find-a-location/panorama-city/,true,https://www.cffhae.org/find-a-location/panorama-city/,200,ok,2026-05-28T18:06:17+00:00
+upland-ca,Euclid Community Health Center,91786,places,https://www.hsa.care/,true,https://hsa.care/,200,ok,2026-05-28T18:06:18+00:00
+upland-ca,"Central City Community Health Center, Inc - Benson",91786,places,https://centralcityhealth.org/,true,https://centralcityhealth.org/,200,ok,2026-05-28T18:06:19+00:00
+upland-ca,"Friends of Family Health Center - 1129 W. 4th Street, Ontario",91762,original,https://www.fofhealthcenter.org,true,https://fofhealthcenter.org/,200,ok,2026-05-28T18:06:20+00:00
+westminster-md,PARK WEST MEDICAL CENTER - PLAZA SITE,21215,places,http://www.parkwestmed.org/,false,,,"conn_error:HTTPSConnectionPool(host='www.parkwestmed.org', port=443): Max retries exceeded ",2026-05-28T18:06:22+00:00
+upland-ca,"Unicare Community Health Center, Inc.",91762,original,https://www.unicarechc.org,true,https://unicarechc.org/,200,ok,2026-05-28T18:06:22+00:00
+tyler-tx,Family Circle of Care Family Dentistry,75701,original,https://tylercircleofcare.org,true,https://tylercircleofcare.org/,200,ok,2026-05-28T18:06:22+00:00
+tyler-tx,Tyler Care Clinic Midtown,75701,original,https://www.specialhealth.org,true,https://www.specialhealth.org/,200,ok,2026-05-28T18:06:23+00:00
+turlock-ca,GVHC - Turlock Pediatric Health Center 1100,95382,places,https://www.gvhc.org/locations/turlock/turlock-pediatrics/,true,https://www.gvhc.org/locations/turlock/turlock-pediatrics/,200,ok,2026-05-28T18:06:24+00:00
+wellington-fl,Genesis Community Health at Boynton Beach Community High SBHC,33426,original,https://www.gencomhealth.org,false,,,"conn_error:HTTPSConnectionPool(host='www.gencomhealth.org', port=443): Max retries exceeded",2026-05-28T18:06:25+00:00
+turlock-ca,Turlock Health Center,95382,original,https://www.visitlch.org,true,https://lumirahealthcare.com/,200,ok,2026-05-28T18:06:25+00:00
+turlock-ca,Administrative Site,95355,places,https://www.schsa.org/,true,https://www.schsa.org/,200,ok,2026-05-28T18:06:25+00:00
+turlock-ca,Community Health Centers of America Livingston,95334,places,https://www.chcahealth.org/locations/livingston/,true,https://www.chcahealth.org/locations/livingston/,200,ok,2026-05-28T18:06:26+00:00
+turlock-ca,Castle Family Health Center at Winton,95388,places,https://www.cfhc.care/,true,https://www.cfhc.care/,200,ok,2026-05-28T18:06:26+00:00
+tyler-tx,Wellness Pointe - Women's Health Center at Tyler,75701,original,https://www.wellnesspointe.org,true,https://wellnesspointe.org/,200,ok,2026-05-28T18:06:26+00:00
+torrington-ct,Torrington Soup Kitchen c/o Trinity Church,06790,places,https://communitykitchen.net/,true,https://www.communitykitchen.net/,200,ok,2026-05-28T18:06:26+00:00
+torrington-ct,StayWell Health Center at Western CT Mental Health Network,06702,original,https://N/A,false,,,dns_failure,2026-05-28T18:06:26+00:00
+torrington-ct,Charter Oak Health Center Bloomfield,06002,original,https://www.thecharteroak.org,true,https://thecharteroak.org/,200,ok,2026-05-28T18:06:27+00:00
+torrington-ct,Mary P. Hinsdale - SBHC,06098,places,https://www.winchesterschools.org/batcheller-elementary-school,true,https://www.winchesterschools.org/batcheller-elementary-school,200,ok,2026-05-28T18:06:27+00:00
+torrington-ct,InterCommunity Inc.,06112,places,https://www.intercommunityct.org/?utm_source=GMBSocialClimb&utm_medium=InterCommunityHealthCare,true,https://www.intercommunityct.org/?utm_source=GMBSocialClimb&utm_medium=InterCommunityHealthCare,200,ok,2026-05-28T18:06:27+00:00
+torrington-ct,Bristol Family Health and Wellness Center,06010,original,https://www.wheelerclinic.org,true,https://www.wheelerhealth.org/,200,ok,2026-05-28T18:06:28+00:00
+walnut-creek-ca,EAST OAKLAND HEALTH CENTER,94621,original,https://wohc@wohc.org,false,,,"conn_error:HTTPSConnectionPool(host='wohc.org', port=443): Max retries exceeded with url: /",2026-05-28T18:06:28+00:00
+torrance-ca,Yehowa Medical Services - Administrative Site,90503,places,http://www.ymedical.org/,true,https://ymedical.org/,200,ok,2026-05-28T18:06:28+00:00
+torrance-ca,VCC: Torrance Pediatrics & Family Medicine,90501,original,https://www.vcc.org,true,https://www.vistacommunityclinic.org/,200,ok,2026-05-28T18:06:28+00:00
+torrance-ca,Wilmington Community Clinic @ Wilmington Middle School,90744,places,https://www.wilmingtoncc.org/,true,https://wilmingtoncc.org/,200,ok,2026-05-28T18:06:29+00:00
+torrance-ca,BHS - Carson Health Center,90746,places,https://www.bhs-inc.org/locations,true,https://www.bhs-inc.org/locations,200,ok,2026-05-28T18:06:29+00:00
+titusville-fl,BHA Titusville Dental Clinic,32796,original,https://www.brevardhealth.org,true,https://www.brevardhealth.org/,200,ok,2026-05-28T18:06:29+00:00
+torrance-ca,NECC - Harbor City Health Center,90710,original,https://www.necc.net,true,https://necccare.com,200,ok,2026-05-28T18:06:29+00:00
+titusville-fl,COMMUNITY HEALTH CENTER - BITHLO FAMILY CARE,32820,original,https://www.chcfl.org,true,https://www.chcfl.org/,200,ok,2026-05-28T18:06:29+00:00
+titusville-fl,Alafaya Health Center,32826,original,https://www.mytruehealth.org,true,https://www.mytruehealth.org/,200,ok,2026-05-28T18:06:29+00:00
+the-villages-fl,COMMUNITY HEALTH CENTER - LEESBURG Family Medical and Dental,34748,original,https://WWW.CHCFL.ORG,true,https://www.chcfl.org/,200,ok,2026-05-28T18:06:29+00:00
+the-villages-fl,Langley Health Services Ocala,34472,places,https://langleyhealth.com/ocala-location/,true,https://langleyhealth.com/ocala-location/,200,ok,2026-05-28T18:06:30+00:00
+titusville-fl,Space Coast Health Centers Titusville Main,32796,places,https://www.spacecoasthealthcenters.org/,false,https://www.spacecoasthealthcenters.org/,404,http_404,2026-05-28T18:06:30+00:00
+zephyrhills-fl,Centennial Health Center,33525,original,https://www.ccrhealth.org,true,https://www.ccrhealth.org/,200,ok,2026-05-28T18:06:30+00:00
+the-villages-fl,Heart of Florida Health Center The Villages,32162,places,https://www.myhfhc.org/,true,https://www.myhfhc.org/,200,ok,2026-05-28T18:06:30+00:00
+zephyrhills-fl,Premier Community HealthCare Group - Medical View Lane,33542,original,https://www.premierhc.org,true,https://premierhc.org/,200,ok,2026-05-28T18:06:30+00:00
+zephyrhills-fl,CFHC Lakeland Primary Care,33805,original,http://www.cfhconline.org/,true,https://cfhc.org/,200,ok,2026-05-28T18:06:31+00:00
+zephyrhills-fl,"Ibis Healthcare, Inc. North Tampa",33613,places,http://www.gracepointhealthcare.org/?utm_source=GMBSocialClimb&utm_medium=GracepointHealthcare-North,false,,,dns_failure,2026-05-28T18:06:31+00:00
+zephyrhills-fl,METRO at Fletcher Avenue,33613,original,https://www.metrotampabay.org,true,https://metrotampabay.org/,200,ok,2026-05-28T18:06:31+00:00
+new-york-ny,High School for Fashion Industries School-Based Health Center,10011,places,https://www.hsfi.nyc/,true,https://www.hsfi.nyc/,200,ok,2026-05-28T18:06:32+00:00
+new-york-ny,Metro Community Health Center - Manhattan,10011,places,https://mchcny.org/locations-manhattan/,true,https://mchcny.org/locations-manhattan/,200,ok,2026-05-28T18:06:32+00:00
+zephyrhills-fl,Plant City Family Care,33563,places,http://www.suncoast-chc.org/,true,https://suncoast-chc.org/,200,ok,2026-05-28T18:06:32+00:00
+new-york-ny,Callen-Lorde 19th Street Administrative Offices,10011,hrsa,www.lmcmc.com,false,,,other:MissingSchema:Invalid URL 'www.lmcmc.com': No scheme supplied. Perhaps you,2026-05-28T18:06:32+00:00
+new-york-ny,Central Administrative Office,10001,places,http://www.chnnyc.org/,false,https://www.chnnyc.org/,403,http_403,2026-05-28T18:06:32+00:00
+new-york-ny,Sun River Health West 37th Street Health Center,10018,places,https://www.sunriver.org/your-health/sun-river-health-sidney-baer/,true,https://www.sunriver.org/your-health/sun-river-health-sidney-baer/,200,ok,2026-05-28T18:06:32+00:00
+los-angeles-ca,AltaMed Medical Group: Florence-Firestone,90001,original,https://www.altamed.org,true,https://www.altamed.org/,200,ok,2026-05-28T18:06:32+00:00
+new-york-ny,Housing Works Health Services III at W 37 Street,10018,original,https://www.housingworks.org,true,https://www.housingworks.org/,200,ok,2026-05-28T18:06:33+00:00
+torrance-ca,Venice Family Clinic - Carole Keen Carson Wellness Center,90745,places,https://venicefamilyclinic.org/,true,https://venicefamilyclinic.org/,200,ok,2026-05-28T18:06:33+00:00
+los-angeles-ca,SJCH - Avalon Health and Access Center,90003,places,https://sjch.org/,true,https://www.sjch.org/,200,ok,2026-05-28T18:06:33+00:00
+los-angeles-ca,UMMA Health Fremont Wellness Center,90003,original,https://www.ummahealthca.org,true,https://www.ummahealthca.org/,200,ok,2026-05-28T18:06:33+00:00
+los-angeles-ca,Aghaby: Walnut Park,90255,original,https://www.acchealthcenters.org,true,https://www.acchealthcenters.org/,200,ok,2026-05-28T18:06:33+00:00
+los-angeles-ca,SCFHC- Santa Fe,90255,original,https://www.scfhc.org,true,https://scfhc.org/,200,ok,2026-05-28T18:06:33+00:00
+los-angeles-ca,"Central City Community Health Center, Inc. - SLA",90001,original,https://www.centralcityhealth.org,true,https://centralcityhealth.org/,200,ok,2026-05-28T18:06:34+00:00
+chicago-il,LCHC at Fourth Presbyterian - Chicago Lights,60611,places,http://www.fourthchurch.org/,true,https://www.fourthchurch.org/,200,ok,2026-05-28T18:06:34+00:00
+chicago-il,Haymarket Center,60607,original,https://www.hcenter.org/,true,https://haymarketcenter.org/,200,ok,2026-05-28T18:06:34+00:00
+chicago-il,"UNIVERSITY OF ILLINOIS MEDICAL CENTER - MILE SQUARE HEALTH CENTER, NATIONAL TEACHERS ACADEMY HEALTH AND WELLNESS CENTER",60616,original,https://N/A,false,,,dns_failure,2026-05-28T18:06:34+00:00
+chicago-il,COMMUNITY HEALTH PARTNERSHIP OF ILLINOIS,60606,original,https://www.chpofil.org,true,https://chpofil.org/,200,ok,2026-05-28T18:06:35+00:00
+dallas-tx,Prism Health North Texas at Oak Lawn Health Center,75204,original,https://www.phntx.org,true,https://www.phntx.org/,200,ok,2026-05-28T18:06:35+00:00
+dallas-tx,"Los Barrios Unidos Community Clinic, Inc.",75212,original,https://www.losbarriosunidos.org,false,,,dns_failure,2026-05-28T18:06:35+00:00
+dallas-tx,HHM Health at Holmes St.,75215,places,https://www.hhmhealth.org/?utm_source=GMBSocialClimb&utm_medium=HHMHealthatSouthDallas,true,https://www.hhmhealth.org/?utm_source=GMBSocialClimb&utm_medium=HHMHealthatSouthDallas,200,ok,2026-05-28T18:06:35+00:00
+dallas-tx,The Bridge,75201,original,http://www.parklandhospital.com/phhs/homeless-outreach.aspx,true,https://www.parklandhealth.org/homeless-outreach,200,ok,2026-05-28T18:06:35+00:00
+chicago-il,Winfield Moody Health Center,60610,original,https://www.nearnorthhealth.org,true,https://nearnorthhealth.org/,200,ok,2026-05-28T18:06:36+00:00
+phoenix-az,Valleywise Community Health Center - McDowell,85004,original,https://valleywisehealth.org/services/primary-care/,true,https://valleywisehealth.org/services/primary-care/,200,ok,2026-05-28T18:06:36+00:00
+phoenix-az,"Circle the City Family Health Center, Downtown Campus",85007,original,https://www.circlethecity.org,false,https://circlethecity.org/,200,no_html_tag,2026-05-28T18:06:36+00:00
+dallas-tx,Women's Health Center of Plano,75075,places,https://www.fhcntx.org/,true,https://fhcntx.org/,200,ok,2026-05-28T18:06:36+00:00
+phoenix-az,Valle del Sol_Red Mountain Service Center_1209,85003,original,https://www.valledelsol.com,true,https://www.valledelsol.com/,200,ok,2026-05-28T18:06:37+00:00
+phoenix-az,Mountain Park Health Center - Central Office,85012,hrsa,www.nativehealthphoenix.org,false,,,other:MissingSchema:Invalid URL 'www.nativehealthphoenix.org': No scheme supplie,2026-05-28T18:06:37+00:00
+phoenix-az,"Terros, Inc",85012,original,https://terroshealth.org,true,https://terroshealth.org/,200,ok,2026-05-28T18:06:37+00:00
+phoenix-az,Wesley Health Center,85034,hrsa,https://wesleycenterphx.org/,true,https://wesleychc.org,200,ok,2026-05-28T18:06:38+00:00
+atlanta-ga,Mercy Care at Gateway Center,30303,original,https://www.mercyatlanta.org,true,https://mercyatlanta.org/,200,ok,2026-05-28T18:06:38+00:00
+atlanta-ga,MedCura Midtown,30308,original,https://www.medcura.org,true,https://medcura.org/,200,ok,2026-05-28T18:06:39+00:00
+atlanta-ga,SOUTHSIDE MEDICAL CENTER - Main Center / Corporate HQ,30315,original,https://www.smcmed.com,false,,,"conn_error:HTTPSConnectionPool(host='www.smcmed.com', port=443): Max retries exceeded with ",2026-05-28T18:06:39+00:00
+atlanta-ga,Healing Community Center,30310,places,https://healatlanta.org/,true,https://healatlanta.org/,200,ok,2026-05-28T18:06:39+00:00
+atlanta-ga,Ethne Health - Dental,30021,original,https://www.ethnehealth.org,true,https://www.ethnehealth.org/,200,ok,2026-05-28T18:06:39+00:00
+detroit-mi,WOODWARD CORRIDOR FAMILY MEDICAL CENTER,48201,original,https://www.dchcquality.org,true,https://www.dchcquality.org/,200,ok,2026-05-28T18:06:39+00:00
+detroit-mi,Detroit Central City Health Center,48201,original,https://www.centralcityhealth.com,true,https://www.centralcityhealth.com/,200,ok,2026-05-28T18:06:39+00:00
+detroit-mi,Family Medical Center - Cass Tech,48201,places,https://www.detroitk12.org/casstech,true,https://casstech.detroitk12.org,200,ok,2026-05-28T18:06:40+00:00
+detroit-mi,University Health Center - St. Antoine,48201,places,http://www.dmc.org/,true,https://www.dmc.org/,200,ok,2026-05-28T18:06:41+00:00
+detroit-mi,"The Wellness Plan, Gateway Medical Center",48202,original,https://www.wellplan.com,true,https://www.wellplan.com/,200,ok,2026-05-28T18:06:41+00:00
+charlotte-nc,CRCHC at Shelter Health Services,28206,original,https://www.crchc.org,true,https://www.crchc.org/,200,ok,2026-05-28T18:06:42+00:00
+detroit-mi,Advantage Health Centers - Alexandrine,48201,original,https://www.advantagehealth.org,true,https://curahealth.com,200,ok,2026-05-28T18:06:42+00:00
+charlotte-nc,"C.W. Williams Community Health Center, Inc.",28217,original,https://www.cwwilliams.org,true,https://cwwilliams.org/,200,ok,2026-05-28T18:06:42+00:00
+charlotte-nc,Charlotte Community Health Clinic - Express Care,28205,original,https://charlottecommunityhealth.org/en/,true,https://charlottecommunityhealth.org/en/,200,ok,2026-05-28T18:06:43+00:00
+charlotte-nc,Kintegra at Pinewood Elementary - Clt,28210,original,https://www.kintegra.org,true,https://www.kintegra.org/,200,ok,2026-05-28T18:06:44+00:00
+charlotte-nc,Affinity Health Center Main,29730,places,https://affinityhealthcenter.org/,true,https://affinityhealthcenter.org/,200,ok,2026-05-28T18:06:45+00:00
+tampa-fl,METRO Seminole Heights,33603,places,https://www.metrotampabay.org/about/locations/seminole-heights/,true,https://metrotampabay.org/about/locations/seminole-heights/,200,ok,2026-05-28T18:06:46+00:00
+tampa-fl,Suncoast Neighborhood Health Clinic,33619,places,http://suncoast-chc.org/,true,https://suncoast-chc.org,200,ok,2026-05-28T18:06:46+00:00
+tampa-fl,TFHC MLK,33607,places,https://www.tfhc.org/infusioncenter?utm_source=GMBSocialClimb&utm_medium=TampaFamilyInfusionCenter,true,https://www.tfhc.org/infusioncenter?utm_source=GMBSocialClimb&utm_medium=TampaFamilyInfusionCenter,200,ok,2026-05-28T18:06:47+00:00
+tampa-fl,"Ibis Healthcare, Inc.",33610,original,https://www.gracepointwellness.org,true,https://ibishealthcare.org/,200,ok,2026-05-28T18:06:47+00:00
+tampa-fl,Bayside Health Clinic,33762,places,http://www.pinellascounty.org/humanservices/hch.htm,true,https://pinellas.gov/programs/health-care-for-the-homeless-program,200,ok,2026-05-28T18:06:48+00:00
+tampa-fl,Evara Gold - Suncoast,33760,original,https://www.evarahealth.org,true,https://evarahealth.org/,200,ok,2026-05-28T18:06:49+00:00
+denver-co,Forum Apartments,80204,original,https://www.coloradocoalition.org,true,https://www.coloradocoalition.org/,200,ok,2026-05-28T18:06:49+00:00
+denver-co,Rose Andom Health Center,80204,places,http://roseandomcenter.org/,true,https://roseandomcenter.org/,200,ok,2026-05-28T18:06:50+00:00
+chicago-il,Access Community Health Network,60661,original,https://accesscommunityhealth.net,false,,,"conn_error:HTTPSConnectionPool(host='accesscommunityhealth.net', port=443): Max retries exc",2026-05-28T18:06:50+00:00
+denver-co,"Uptown Community Health Center, Inc. Bruner Family Medicine",80218,original,https://www.uptowncommunityhealth.org,true,https://www.uptowncommunityhealth.org/,200,ok,2026-05-28T18:06:50+00:00
+denver-co,Inner City Health Center,80205,original,https://www.innercityhealth.org,true,https://www.innercityhealth.org/,200,ok,2026-05-28T18:06:50+00:00
+denver-co,Tepeyac Administration,80216,original,https://www.tepeyachealth.org,true,https://www.tepeyachealth.org/,200,ok,2026-05-28T18:06:50+00:00
+denver-co,Sheridan Health Services-Urban Peak,80223,original,https://nursing.cuanschutz.edu/patient-care/sheridan-health-services,true,https://nursing.cuanschutz.edu/healthcare/locations/sheridan-family,200,ok,2026-05-28T18:06:50+00:00
+orlando-fl,Community Health Centers - West Lakes,32805,original,https://www.chcfl.org,true,https://www.chcfl.org/,200,ok,2026-05-28T18:06:51+00:00
+orlando-fl,Christian Service Center,32805,original,https://www.obfh.org,true,https://obfh.org/,200,ok,2026-05-28T18:06:51+00:00
+orlando-fl,Osceola Community Health Services at Buenaventura Lakes,34744,original,https://www.osceolahealthcare.org,true,https://www.osceolahealthcare.org/,200,ok,2026-05-28T18:06:51+00:00
+orlando-fl,Lake Underhill Health Center,32807,original,https://www.mytruehealth.org,true,https://www.mytruehealth.org/,200,ok,2026-05-28T18:06:51+00:00
+charlotte-nc,AMG - Randolph Rd,28207,original,https://amitymed.org,true,https://www.amitymed.org/,200,ok,2026-05-28T18:06:51+00:00
+portland-or,Billi Odegaard Dental Clinic,97209,original,https:////multco.us,false,,,other:InvalidURL:Invalid URL 'https:////multco.us': No host supplied,2026-05-28T18:06:51+00:00
+portland-or,NARA Outpatient Treatment and Recovery Services Program,97201,original,https://www.naranorthwest.org,true,https://www.naranorthwest.org/,200,ok,2026-05-28T18:06:51+00:00
+portland-or,Outside In BH,97205,places,https://outsidein.org/,true,https://outsidein.org/,200,ok,2026-05-28T18:06:51+00:00
+portland-or,Old Town Clinic,97209,original,https://www.centralcityconcern.org,true,https://centralcityconcern.org/,200,ok,2026-05-28T18:06:51+00:00
+portland-or,Cascadia Health- Administrative Office,97232,original,https://cascadiabhc.org/,false,,,"ssl_error:HTTPSConnectionPool(host='cascadiabhc.org', port=443): Max retries exceeded with",2026-05-28T18:06:51+00:00
+portland-or,Cascade AIDS Project,97209,original,https://www.cascadeaids.org,true,https://www.capnw.org/,200,ok,2026-05-28T18:06:52+00:00
+indianapolis-in,Damien Center - Legacy,46201,original,https://www.damien.org,true,https://www.damien.org/,200,ok,2026-05-28T18:06:52+00:00
+indianapolis-in,Wheeler Shelter for Women and Children Clinic,46201,places,http://www.wheelermission.org/,true,https://wheelermission.org/,200,ok,2026-05-28T18:06:52+00:00
+indianapolis-in,Eskenazi Health Center Pedigo,46202,original,https://www.eskenazihealth.edu/locations/primary-care-sites,true,https://www.eskenazihealth.edu/locations/primary-care-sites,200,ok,2026-05-28T18:06:53+00:00
+indianapolis-in,IPS 54 School Based Clinic - Brookside Academy,46201,places,https://myips.org/brookside/,true,https://brookside.myips.org/,200,ok,2026-05-28T18:06:54+00:00
+indianapolis-in,Aspire Indiana Health - Progress House,46202,places,http://www.progresshouse.org/,true,https://www.progresshouse.org/,200,ok,2026-05-28T18:06:54+00:00
+columbus-oh,Heart of Ohio Family Health OB-GYN at St. Ann's,43081,places,https://www.mountcarmelhealth.com/location/mount-carmel-st-anns-obgyn-clinic,true,https://www.mountcarmelhealth.com/location/mount-carmel-st-anns-obgyn-clinic,200,ok,2026-05-28T18:06:54+00:00
+columbus-oh,Lower Lights Health Northland,43231,places,https://llchc.org/,true,https://llchc.org/,200,ok,2026-05-28T18:06:55+00:00
+columbus-oh,Equitas Health Columbus Administration Office,43229,original,https://www.equitashealth.com,true,https://equitashealth.com/,200,ok,2026-05-28T18:06:55+00:00
+columbus-oh,PrimaryOne Health 4661 Sawmill Road,43220,places,https://www.primaryonehealth.org/locations/,true,https://www.primaryonehealth.org/locations/,200,ok,2026-05-28T18:06:55+00:00
+columbus-oh,OSU Total Health Care Center Rardin,43201,places,https://wexnermedical.osu.edu/locations/primary-care-northwood-high?utm_campaign=med_general-awareness-evergreen_corp&utm_source=googlemybusiness&utm_medium=organic&utm_content=gmb_listing,true,https://wexnermedical.osu.edu/locations/primary-care-northwood-high?utm_campaign=med_general-awareness-evergreen_corp&utm_source=googlemybusiness&utm_medium=organic&utm_content=gmb_listing,200,ok,2026-05-28T18:06:56+00:00
+columbus-oh,Health Center at Faith Mission,43215,original,https://www.lssnetworkofhope.org,true,https://lssnetworkofhope.org/,200,ok,2026-05-28T18:06:56+00:00
+nashville-tn,UNHS MIssion Clinic,37203,original,https://www.neighborhoodhealthtn.org,true,https://neighborhoodhealthtn.org/,200,ok,2026-05-28T18:06:57+00:00
+nashville-tn,VINE HILL COMMUNITY CLINIC,37204,original,https://www.connectus.org,true,https://www.connectus.org/,200,ok,2026-05-28T18:06:57+00:00
+nashville-tn,MATTHEW WALKER COMPREHENSIVE HEALTH CENT,37208,original,https://www.mwchc.org,true,https://mwchc.org/,200,ok,2026-05-28T18:06:59+00:00
+nashville-tn,Primary Care & Hope Clinic of Smyrna,37167,original,https://hopeclnc.org,true,https://hopeclnc.org/,200,ok,2026-05-28T18:07:00+00:00
+nashville-tn,TENNESSEE DEPARTMENT OF HEALTH,37216,original,http://health.state.tn.us/,true,https://www.tn.gov/health,200,ok,2026-05-28T18:07:00+00:00
+indianapolis-in,Jane Pauley Community Health Center at 16th Street,46218,original,https://www.janepauleychc.com,false,,,"conn_error:HTTPSConnectionPool(host='www.janepauleychc.com', port=443): Max retries exceede",2026-05-28T18:07:09+00:00
+atlanta-ga,The Family Health Center of GA dba Georgia Center for Women at Peachtree,30308,original,https://gacfw.com,false,,,"conn_error:HTTPSConnectionPool(host='gacfw.com', port=443): Max retries exceeded with url: ",2026-05-28T18:07:25+00:00
