@@ -206,7 +206,7 @@ footer{
 </header>
 
 <div class="stats">
-  <div class="stat bad"><span class="n">11.9%</span><span class="l">Orders double-clicked</span></div>
+  <div class="stat bad"><span class="n">8 of 67</span><span class="l">Orders clicked twice+</span></div>
   <div class="stat bad"><span class="n">3.1%</span><span class="l">Cart → order</span></div>
   <div class="stat warn"><span class="n">2.2</span><span class="l">Checkout perf / 100</span></div>
   <div class="stat"><span class="n">273</span><span class="l">Dead clicks</span></div>
@@ -220,29 +220,30 @@ footer{
       <div class="idx">01</div>
       <div class="fbody">
         <div class="fhead">
-          <h3>One in eight orders clicks “Place My Order” more than once</h3>
+          <h3>Eight of 67 orders click “Place My Order” more than once, for two different reasons</h3>
           <div class="tags">
             <span class="tag crit">Revenue</span>
             <span class="tag">67 order attempts</span>
-            <span class="tag">Already ticketed</span>
+            <span class="tag">Partly ticketed</span>
           </div>
         </div>
-        <p>Of 67 US order attempts, 8 clicked the order button two or more times. The gaps between clicks are the important part: they run from 17 to 97 seconds, not fractions of a second. This is not a fat-finger double-tap. It is someone pressing the button, seeing nothing happen, waiting, and pressing it again.</p>
-        <p class="sub">The fix is already specified in <a href="https://gitlab.dailyrssmail.com/intelligent/testing.com-pressable/-/work_items/345">work item 345</a>, which traced it to the button staying live while validation makes a network round trip, and asks for a pending state on the first click, an in-flight guard, and invoice reuse server side. Nothing here changes that.</p>
-        <p class="sub">What the recordings add is scope. Four of these eight order codes do not appear in the ticket’s invoice table, so the count of shoppers hitting this is higher than the Stripe side alone shows. Clicks and invoices also do not match one to one: O7PN27 took four clicks and produced no invoice row, which looks like validation failing rather than the guard holding, while O4GR18 produced three invoices from two observed clicks. Neither source is complete on its own.</p>
+        <p>Reading what happens <em>between</em> the clicks splits these into two unrelated problems, which is easy to miss if you only look at the gap.</p>
+        <p class="sub"><strong>Five clicked again with nothing changed in between.</strong> That is the duplicate-invoice bug, already specified in <a href="https://gitlab.dailyrssmail.com/intelligent/testing.com-pressable/-/work_items/345">work item 345</a>: the button stays live while validation makes a network round trip, so a second click starts a second payment intent. The ticket asks for a pending state on the first click, an in-flight guard, and invoice reuse server side. Nothing in the recordings changes that.</p>
+        <p class="sub"><strong>Three edited the form in between.</strong> Those shoppers clicked, got bounced by validation, fixed a field and clicked again. Different mechanism, not covered by 345, and it points at validation errors being easy to miss rather than at the button. O7PN27 went round that loop four times and still completed.</p>
+        <p class="sub">Six of the eight eventually placed the order. The two that did not, O3RO98 and O0KI26, are the ones worth a second look, because they suggest repeat-clicking may cost orders and not just mint spare invoices. Three sessions is too thin to conclude on.</p>
         <div class="eholder">
           <table>
             <caption>Every repeat-click order attempt, US, Aug 18–20</caption>
-            <thead><tr><th>Clicks</th><th>Span</th><th>Checkout</th><th>Recording</th></tr></thead>
+            <thead><tr><th>Order</th><th>Clicks</th><th>Span</th><th>Between clicks</th><th>Placed</th><th>Recording</th></tr></thead>
             <tbody>
-              <tr><td class="num">2</td><td class="gap">17s</td><td>o2nu31</td><td><a href="https://clarity.microsoft.com/player/y0aebsjypd/yahocr/1fpwd70">yahocr/1fpwd70</a></td></tr>
-              <tr><td class="num">3</td><td class="gap">20s</td><td>o4qi51</td><td><a href="https://clarity.microsoft.com/player/y0aebsjypd/1p40271/1raegn0">1p40271/1raegn0</a></td></tr>
-              <tr><td class="num">2</td><td class="gap">25s</td><td>o3ro98</td><td><a href="https://clarity.microsoft.com/player/y0aebsjypd/lrgy2v/1olm8z2">lrgy2v/1olm8z2</a></td></tr>
-              <tr><td class="num">2</td><td class="gap">40s</td><td>o6wd54</td><td><a href="https://clarity.microsoft.com/player/y0aebsjypd/18p3rdb/1hokztk">18p3rdb/1hokztk</a></td></tr>
-              <tr><td class="num">2</td><td class="gap">51s</td><td>o4gr18</td><td><a href="https://clarity.microsoft.com/player/y0aebsjypd/185fggi/1iudxt6">185fggi/1iudxt6</a></td></tr>
-              <tr><td class="num">2</td><td class="gap">80s</td><td>o0ki26</td><td><a href="https://clarity.microsoft.com/player/y0aebsjypd/1x9culj/1szalgv">1x9culj/1szalgv</a></td></tr>
-              <tr><td class="num">4</td><td class="gap">90s</td><td>o7pn27</td><td><a href="https://clarity.microsoft.com/player/y0aebsjypd/1sllivt/10i1i5p">1sllivt/10i1i5p</a></td></tr>
-              <tr><td class="num">2</td><td class="gap">97s</td><td>o9po78</td><td><a href="https://clarity.microsoft.com/player/y0aebsjypd/1wk22rm/tm9rt9">1wk22rm/tm9rt9</a></td></tr>
+              <tr><td>o2nu31</td><td class="num">2</td><td class="gap">17s</td><td>nothing</td><td>yes</td><td><a href="https://clarity.microsoft.com/player/y0aebsjypd/yahocr/1fpwd70">yahocr/1fpwd70</a></td></tr>
+              <tr><td>o4qi51</td><td class="num">3</td><td class="gap">20s</td><td>form edits</td><td>yes</td><td><a href="https://clarity.microsoft.com/player/y0aebsjypd/1p40271/1raegn0">1p40271/1raegn0</a></td></tr>
+              <tr><td>o3ro98</td><td class="num">2</td><td class="gap">25s</td><td>form edits</td><td><strong>no</strong></td><td><a href="https://clarity.microsoft.com/player/y0aebsjypd/lrgy2v/1olm8z2">lrgy2v/1olm8z2</a></td></tr>
+              <tr><td>o6wd54</td><td class="num">2</td><td class="gap">40s</td><td>nothing</td><td>yes</td><td><a href="https://clarity.microsoft.com/player/y0aebsjypd/18p3rdb/1hokztk">18p3rdb/1hokztk</a></td></tr>
+              <tr><td>o4gr18</td><td class="num">2</td><td class="gap">51s</td><td>nothing</td><td>yes</td><td><a href="https://clarity.microsoft.com/player/y0aebsjypd/185fggi/1iudxt6">185fggi/1iudxt6</a></td></tr>
+              <tr><td>o0ki26</td><td class="num">2</td><td class="gap">80s</td><td>nothing</td><td><strong>no</strong></td><td><a href="https://clarity.microsoft.com/player/y0aebsjypd/1x9culj/1szalgv">1x9culj/1szalgv</a></td></tr>
+              <tr><td>o7pn27</td><td class="num">4</td><td class="gap">90s</td><td>form edits</td><td>yes</td><td><a href="https://clarity.microsoft.com/player/y0aebsjypd/1sllivt/10i1i5p">1sllivt/10i1i5p</a></td></tr>
+              <tr><td>o9po78</td><td class="num">2</td><td class="gap">97s</td><td>nothing</td><td>yes</td><td><a href="https://clarity.microsoft.com/player/y0aebsjypd/1wk22rm/tm9rt9">1wk22rm/tm9rt9</a></td></tr>
             </tbody>
           </table>
         </div>
@@ -343,7 +344,8 @@ footer{
 <section>
   <h2>What I would do next</h2>
   <ul>
-    <li>Add the four missing order codes to <a href="https://gitlab.dailyrssmail.com/intelligent/testing.com-pressable/-/work_items/345">work item 345</a>, since the fix is already scoped there but the affected-order count is understated.</li>
+    <li>Leave <a href="https://gitlab.dailyrssmail.com/intelligent/testing.com-pressable/-/work_items/345">work item 345</a> alone. The duplicate-invoice fix is fully scoped and assigned; nothing here changes it.</li>
+    <li>Pull a wider slice on the other two patterns before filing anything: shoppers retrying after a validation bounce, and whether repeat-clicking predicts abandonment.</li>
     <li>Kill the checkout case redirect so the page loads once.</li>
     <li>Decide whether the How It Works steps are links; right now they are neither clearly.</li>
     <li>Block internal QA IPs in Clarity so the sample stops being polluted.</li>
