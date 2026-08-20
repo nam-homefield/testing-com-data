@@ -207,9 +207,9 @@ footer{
 
 <div class="stats">
   <div class="stat bad"><span class="n">8 of 67</span><span class="l">Orders clicked twice+</span></div>
-  <div class="stat bad"><span class="n">3.1%</span><span class="l">Cart → order</span></div>
-  <div class="stat warn"><span class="n">2.2</span><span class="l">Checkout perf / 100</span></div>
-  <div class="stat"><span class="n">273</span><span class="l">Dead clicks</span></div>
+  <div class="stat warn"><span class="n">25</span><span class="l">Carts back to pricing</span></div>
+  <div class="stat warn"><span class="n">14</span><span class="l">Dead clicks, one non-link</span></div>
+  <div class="stat"><span class="n">1</span><span class="l">Rage-click session</span></div>
 </div>
 
 <section>
@@ -227,10 +227,9 @@ footer{
             <span class="tag">Partly ticketed</span>
           </div>
         </div>
-        <p>Reading what happens <em>between</em> the clicks splits these into two unrelated problems, which is easy to miss if you only look at the gap.</p>
-        <p class="sub"><strong>Five clicked again with nothing changed in between.</strong> That is the duplicate-invoice bug, already specified in <a href="https://gitlab.dailyrssmail.com/intelligent/testing.com-pressable/-/work_items/345">work item 345</a>: the button stays live while validation makes a network round trip, so a second click starts a second payment intent. The ticket asks for a pending state on the first click, an in-flight guard, and invoice reuse server side. Nothing in the recordings changes that.</p>
-        <p class="sub"><strong>Three edited the form in between.</strong> Those shoppers clicked, got bounced by validation, fixed a field and clicked again. Different mechanism, not covered by 345, and it points at validation errors being easy to miss rather than at the button. O7PN27 went round that loop four times and still completed.</p>
-        <p class="sub">Six of the eight eventually placed the order. The two that did not, O3RO98 and O0KI26, are the ones worth a second look, because they suggest repeat-clicking may cost orders and not just mint spare invoices. Three sessions is too thin to conclude on.</p>
+        <p>What happens between the clicks splits these into two unrelated problems.</p>
+        <p class="sub"><strong>Five clicked again with nothing changed.</strong> That is the duplicate-invoice bug, already scoped in <a href="https://gitlab.dailyrssmail.com/intelligent/testing.com-pressable/-/work_items/345">work item 345</a>. Nothing here changes it.</p>
+        <p class="sub"><strong>Three edited the form first</strong>, so validation had bounced them. Different problem, not in 345. Six of the eight eventually ordered; O3RO98 and O0KI26 did not.</p>
         <div class="eholder">
           <table>
             <caption>Every repeat-click order attempt, US, Aug 18–20</caption>
@@ -254,14 +253,14 @@ footer{
       <div class="idx">02</div>
       <div class="fbody">
         <div class="fhead">
-          <h3>Adding to cart almost never becomes an order</h3>
+          <h3>The most common way a cart dies is walking back to the pricing page</h3>
           <div class="tags">
             <span class="tag crit">Revenue</span>
             <span class="tag">130 cart sessions</span>
           </div>
         </div>
-        <p>130 US sessions fired an add-to-cart event. Four reached <code>/thank-you/</code>. Of the rest, 36 ended sitting on the checkout page itself and 25 walked back out to <code>/std-test-pricing/</code>.</p>
-        <p class="sub">Those two exits say different things. Ending on checkout is a form or payment problem. Returning to the pricing page after seeing the total looks like price reaction, and it is the single most common backwards move in the data. Worth watching alongside the in-home collection fee, which nearly doubles some orders.</p>
+        <p>Of 130 US sessions that added to cart, 36 ended sitting on the checkout page and 25 went back out to <code>/std-test-pricing/</code>. Those mean different things. Stalling on checkout is a form or payment problem; returning to pricing after seeing the total reads as price reaction. Worth watching next to the in-home collection fee, which nearly doubles some orders.</p>
+        <p class="sub">Use the <a href="https://nam-homefield.github.io/testing-com-data/orders/">orders report</a> for the actual conversion rate, not this. Clarity samples, and it splits one shopper across several session records, so any funnel percentage from it understates. Aug 19 was 61 carts and 6 orders on the Stripe side.</p>
       </div>
     </article>
 
@@ -276,8 +275,8 @@ footer{
             <span class="tag">3 pages</span>
           </div>
         </div>
-        <p>It is dead-clicked on the homepage, on <code>/tests/</code>, and on <code>/popular-lab-tests/</code>. Checked against the live page at origin, it is a <code>&lt;p class="how-it-works-step-title"&gt;</code> inside the How It Works explainer. It is not a link and never was.</p>
-        <p class="sub">People read the three steps as three things they can do and click the last one. Either make the step cards link somewhere sensible, or stop styling them like affordances. Same pattern shows up on the neighbouring step text and on “My Cart Your cart is empty” on the homepage, clicked dead three times.</p>
+        <p>Dead-clicked on the homepage, <code>/tests/</code> and <code>/popular-lab-tests/</code>. Checked live at origin: it is a <code>&lt;p class="how-it-works-step-title"&gt;</code> in the How It Works explainer, not a link and never was.</p>
+        <p class="sub">People read the three steps as three things they can do. Either link the step cards or stop styling them like affordances. Same on “My Cart Your cart is empty”, dead-clicked three times.</p>
       </div>
     </article>
 
@@ -285,14 +284,14 @@ footer{
       <div class="idx">04</div>
       <div class="fbody">
         <div class="fhead">
-          <h3>Checkout scores 2 out of 100 on performance</h3>
+          <h3>Every checkout entry loads the page twice</h3>
           <div class="tags">
             <span class="tag warn">Technical</span>
-            <span class="tag">323 page loads</span>
+            <span class="tag">188 page loads</span>
           </div>
         </div>
-        <p>Across 323 US checkout page loads the mean Clarity performance score is 2.2. Largest Contentful Paint has a median of 1.8s, a 90th percentile of 3.4s and a worst case of 5.6s.</p>
-        <p class="sub">Every checkout entry also loads twice. The lowercase order URL appears first for roughly a second, then the uppercase one. A case redirect on the highest-value page on the site, paid for on every single order.</p>
+        <p>The lowercase order URL loads first and sits for about a second, then the uppercase one loads. A case redirect on the highest-value page on the site, paid on every order. 26 of the recorded loads are that throwaway first hop.</p>
+        <p class="sub">Speed itself looks fine. Largest Contentful Paint runs a 1.8s median and a 3.4s 90th percentile. Ignore Clarity's performance score on this page type: 183 of 188 loads report exactly 0, which is Clarity failing to score the page rather than the page scoring badly. The five it did score averaged 83.</p>
       </div>
     </article>
 
@@ -306,8 +305,8 @@ footer{
             <span class="tag">250 sessions</span>
           </div>
         </div>
-        <p>Of 250 sessions containing a quick-back, 143 entered on the homepage. Nothing else comes close; the runner-up is <code>/tests/</code> with 6.</p>
-        <p class="sub">A quick-back is a click followed by an immediate return, so this is people landing on the homepage, choosing something, and reversing out of it. It reads as a navigation or expectation mismatch one click deep, not a landing page that fails on arrival.</p>
+        <p>Of 250 sessions containing a quick-back, 143 entered on the homepage. Runner-up is <code>/tests/</code> with 6. A quick-back is a click then an immediate return, so these are people choosing something and reversing straight out of it.</p>
+        <p class="sub">Treat this as a lead, not a result. The homepage is also the biggest entry point on the site, so some of that 143 is just traffic share. Worth a proper rate against homepage entries before acting.</p>
       </div>
     </article>
 
@@ -321,8 +320,8 @@ footer{
             <span class="tag">1 session</span>
           </div>
         </div>
-        <p>One US rage-click session in the whole window. That is genuinely good, but it also means rage clicks are the wrong alarm to wire up here.</p>
-        <p class="sub">Dead clicks are the signal on this site, at 273 in a comparable slice. Any recurring monitor should track dead clicks and repeat-click gaps, and ignore rage.</p>
+        <p>One US rage-click session in the whole window, against 273 dead clicks in a comparable slice. Genuinely good news, but it means rage clicks are the wrong alarm to wire up here.</p>
+        <p class="sub">Any recurring monitor should track dead clicks and repeat-click gaps, and ignore rage.</p>
       </div>
     </article>
 
@@ -331,13 +330,14 @@ footer{
 
 <section>
   <h2>Known issues with pulling data this way</h2>
-  <p class="sub">Five things constrain the pull itself. They shape how far the numbers above can be pushed, and all five are worth fixing before this becomes a recurring report.</p>
+  <p class="sub">Six constraints on the pull itself. Each one has already produced a wrong answer in this report before being caught.</p>
   <ul>
-    <li><strong>The 250-session cap is the biggest limit.</strong> Every query returns at most 250 sessions, newest first, with no pagination. On a busy filter that is a few hours of traffic, not the week that was requested. Widening a date range does nothing; only a narrower filter reaches further back.</li>
-    <li><strong>Country can only be filtered on the way in.</strong> The filter is inclusion-only, with no way to exclude, and the response carries no per-session country to sort on afterwards. So this is United States rather than everything-minus-offshore. Getting it wrong is not harmless: an unfiltered first pass produced three false double-submits that vanished once India and the Philippines were dropped.</li>
-    <li><strong>Masked fields fake repeat clicks.</strong> Payment inputs come back as bullet characters, so ordinary typing in the card field reads as a burst of clicks on one element. Anything measuring repeat clicks has to discard them or it will find friction that is not there. Discarded here.</li>
-    <li><strong>Nothing separates internal traffic from customers.</strong> Known QA orders from a Bellevue address sit in the data with no flag distinguishing them, and they place real-looking orders. Blocking those IPs in Clarity settings is the only clean fix, and it would improve every future pull.</li>
-    <li><strong>Events arrive unlabelled as to intent.</strong> A dead click is only a record that a click hit nothing, not a judgement that something is broken; some are people clicking body copy to select it. Separating the two is manual, which is why the findings above are limited to patterns that repeat across sessions and pages.</li>
+    <li><strong>Never quote a rate from Clarity.</strong> It samples, and it splits one shopper across several session records, so any funnel percentage understates. Conversion comes from the orders report.</li>
+    <li><strong>250 sessions per query, newest first, no pagination.</strong> On a busy filter that is a few hours, not a week. Widening the date range does nothing; only a narrower filter reaches further back.</li>
+    <li><strong>Not every field means something on every page.</strong> The performance score reads 0 on 97% of checkout loads because Clarity cannot score that page type, not because the page is slow. Check the distribution before trusting a mean.</li>
+    <li><strong>Country filters on the way in only.</strong> Inclusion-only, and the response has no per-session country to sort on later. An unfiltered first pass produced three false double-submits that vanished once India and the Philippines were dropped.</li>
+    <li><strong>Masked card fields fake repeat clicks.</strong> Typing in the payment input reads as a burst of clicks on one element. Discarded here.</li>
+    <li><strong>Internal QA traffic is unflagged.</strong> Known test orders from a Bellevue address place real-looking orders. Blocking those IPs in Clarity settings fixes every future pull.</li>
   </ul>
 </section>
 
