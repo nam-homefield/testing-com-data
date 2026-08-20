@@ -128,7 +128,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
   // hash of this shell, the payload carries the hash it was built for, and a mismatch
   // reloads once against a fresh URL. Without this every reader has to be told to hard
   // refresh, and most will just think the report is broken.
-  var SV = '19a37766';
+  var SV = 'f1380cb7';
   // Payload source depends on where this shell is served from. On GitHub Pages the
   // payload sits next to it, so fetch same-origin. On githack the payload must come
   // from gist.githubusercontent.com directly: githack caches its own copy of every
@@ -294,10 +294,10 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
         return;
       }
       var mins = Math.floor((Date.now() - d.built_ms)/60000);
-      if (mins > 150) {
+      if (mins > 90) {
         var el=document.getElementById('stale');
         el.textContent = 'These numbers are ' + Math.floor(mins/60) + 'h ' + (mins%60)
-          + 'm old. The hourly refresh has stopped. Tell Nam.';
+          + 'm old, so the hourly refresh has missed at least one run. Tell Nam.';
         el.style.display='block';
       }
       var m = d.metrics.map(function(x){
