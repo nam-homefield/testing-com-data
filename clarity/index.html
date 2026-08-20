@@ -328,13 +328,6 @@ footer{
 </section>
 
 <section>
-  <h2>Answering the original question</h2>
-  <p>Ashley asked whether we could get Claude summaries of the Clarity recordings, or ask questions of them, to identify common patterns. Yes, and not by watching video.</p>
-  <p>Clarity returns each session as a structured event timeline: every page with its URL, title, load time and web vitals, then every click, text entry, text selection and dead click with a timestamp and the text of the element that was hit. Claude reads that as text, which means hundreds of sessions can be compared at once instead of one at a time. Everything above came out of six queries.</p>
-  <div class="note"><strong>Clarity’s own Copilot also does this</strong> for small batches, with no setup. Recordings → Summarize Recordings gives a written summary of the top 10, or of a custom selection. Good for a quick look; it cannot be exported or scheduled, which is why this report was built against the API instead.</div>
-</section>
-
-<section>
   <h2>What this method cannot tell you</h2>
   <ul>
     <li><strong>It is a sample, not a census.</strong> Every query is capped at 250 sessions returned newest-first, so on busy slices that is a few hours rather than the full week. Each finding above carries its real window.</li>
