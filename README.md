@@ -2,6 +2,16 @@
 
 Public data layer for the [nam-homefield/testing-com](https://github.com/nam-homefield/testing-com) private workflow repo.
 
+## Reports
+
+| Report | What it covers | Updated |
+|---|---|---|
+| [Orders](https://nam-homefield.github.io/testing-com-data/orders/) | Revenue, orders and cart rate. Stripe for money, Junction for fulfilment, GA4 for attribution. | Hourly, automatic |
+| [Session patterns](https://nam-homefield.github.io/testing-com-data/clarity/) | Checkout and navigation friction read out of Microsoft Clarity session recordings. | Manual |
+
+Both are `noindex,nofollow` and carry no patient information. They are public URLs on a
+public repo, so treat them as shareable with the team but not with the world.
+
 ## What's here
 
 CSV datasets that AirOps workflows fetch at runtime via `raw.githubusercontent.com`. The private workflow repo can't be the fetch source because GitHub's raw CDN requires auth tokens for private repos. This public sibling repo holds only data — no workflow code, prompts, or secrets.
