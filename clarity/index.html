@@ -224,11 +224,11 @@ footer{
           <div class="tags">
             <span class="tag crit">Revenue</span>
             <span class="tag">67 order attempts</span>
-            <span class="tag">Aug 18–20</span>
+            <span class="tag">Already ticketed</span>
           </div>
         </div>
         <p>Of 67 US order attempts, 8 clicked the order button two or more times. The gaps between clicks are the important part: they run from 17 to 97 seconds, not fractions of a second. This is not a fat-finger double-tap. It is someone pressing the button, seeing nothing happen, waiting, and pressing it again.</p>
-        <p class="sub">That points the fix at missing submit feedback, a disabled state and a spinner, rather than debounce alone. It corroborates the duplicate Stripe invoices already tracked in work item 345, from the customer’s side of the glass.</p>
+        <p class="sub">Already tracked as <a href="https://gitlab.dailyrssmail.com/intelligent/testing.com-pressable/-/work_items/345">work item 345</a>, filed from the Stripe side after one customer generated three invoices in 92 seconds. What is new here is the customer’s side of the same event, and it moves the fix: 17 to 97 second gaps point at missing submit feedback, a disabled state and a spinner, rather than debounce alone.</p>
         <div class="eholder">
           <table>
             <caption>Every repeat-click order attempt, US, Aug 18–20</caption>
@@ -328,20 +328,21 @@ footer{
 </section>
 
 <section>
-  <h2>What this method cannot tell you</h2>
+  <h2>Known issues with pulling data this way</h2>
+  <p class="sub">Five things constrain the pull itself. They shape how far the numbers above can be pushed, and all five are worth fixing before this becomes a recurring report.</p>
   <ul>
-    <li><strong>It is a sample, not a census.</strong> Every query is capped at 250 sessions returned newest-first, so on busy slices that is a few hours rather than the full week. Each finding above carries its real window.</li>
-    <li><strong>Card fields look like frantic clicking and are not.</strong> Payment inputs come back masked, so ordinary typing reads as repeated clicks on the same element. Excluded here.</li>
-    <li><strong>Country has to be filtered on the way in.</strong> The response carries no per-session country, and the filter is inclusion-only, so this is United States rather than everything-minus-offshore. An unfiltered first pass produced three false double-submits that vanished once India and the Philippines were dropped.</li>
-    <li><strong>Internal QA traffic is still in here.</strong> Known test orders from a Bellevue address are not yet excluded. Blocking those IPs in Clarity settings would clean every future pull.</li>
-    <li><strong>Dead clicks are not always bugs.</strong> Some are people clicking body copy to select it. The ones called out above repeat across sessions and pages.</li>
+    <li><strong>The 250-session cap is the biggest limit.</strong> Every query returns at most 250 sessions, newest first, with no pagination. On a busy filter that is a few hours of traffic, not the week that was requested. Widening a date range does nothing; only a narrower filter reaches further back.</li>
+    <li><strong>Country can only be filtered on the way in.</strong> The filter is inclusion-only, with no way to exclude, and the response carries no per-session country to sort on afterwards. So this is United States rather than everything-minus-offshore. Getting it wrong is not harmless: an unfiltered first pass produced three false double-submits that vanished once India and the Philippines were dropped.</li>
+    <li><strong>Masked fields fake repeat clicks.</strong> Payment inputs come back as bullet characters, so ordinary typing in the card field reads as a burst of clicks on one element. Anything measuring repeat clicks has to discard them or it will find friction that is not there. Discarded here.</li>
+    <li><strong>Nothing separates internal traffic from customers.</strong> Known QA orders from a Bellevue address sit in the data with no flag distinguishing them, and they place real-looking orders. Blocking those IPs in Clarity settings is the only clean fix, and it would improve every future pull.</li>
+    <li><strong>Events arrive unlabelled as to intent.</strong> A dead click is only a record that a click hit nothing, not a judgement that something is broken; some are people clicking body copy to select it. Separating the two is manual, which is why the findings above are limited to patterns that repeat across sessions and pages.</li>
   </ul>
 </section>
 
 <section>
   <h2>What I would do next</h2>
   <ul>
-    <li>Add a disabled state and spinner to Place My Order, and attach these eight recordings to work item 345.</li>
+    <li>Attach these eight recordings to <a href="https://gitlab.dailyrssmail.com/intelligent/testing.com-pressable/-/work_items/345">work item 345</a>, and note that the click gaps argue for a disabled state and spinner, not just a debounce.</li>
     <li>Kill the checkout case redirect so the page loads once.</li>
     <li>Decide whether the How It Works steps are links; right now they are neither clearly.</li>
     <li>Block internal QA IPs in Clarity so the sample stops being polluted.</li>
