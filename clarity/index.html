@@ -228,7 +228,8 @@ footer{
           </div>
         </div>
         <p>Of 67 US order attempts, 8 clicked the order button two or more times. The gaps between clicks are the important part: they run from 17 to 97 seconds, not fractions of a second. This is not a fat-finger double-tap. It is someone pressing the button, seeing nothing happen, waiting, and pressing it again.</p>
-        <p class="sub">Already tracked as <a href="https://gitlab.dailyrssmail.com/intelligent/testing.com-pressable/-/work_items/345">work item 345</a>, filed from the Stripe side after one customer generated three invoices in 92 seconds. What is new here is the customer’s side of the same event, and it moves the fix: 17 to 97 second gaps point at missing submit feedback, a disabled state and a spinner, rather than debounce alone.</p>
+        <p class="sub">The fix is already specified in <a href="https://gitlab.dailyrssmail.com/intelligent/testing.com-pressable/-/work_items/345">work item 345</a>, which traced it to the button staying live while validation makes a network round trip, and asks for a pending state on the first click, an in-flight guard, and invoice reuse server side. Nothing here changes that.</p>
+        <p class="sub">What the recordings add is scope. Four of these eight order codes do not appear in the ticket’s invoice table, so the count of shoppers hitting this is higher than the Stripe side alone shows. Clicks and invoices also do not match one to one: O7PN27 took four clicks and produced no invoice row, which looks like validation failing rather than the guard holding, while O4GR18 produced three invoices from two observed clicks. Neither source is complete on its own.</p>
         <div class="eholder">
           <table>
             <caption>Every repeat-click order attempt, US, Aug 18–20</caption>
@@ -342,7 +343,7 @@ footer{
 <section>
   <h2>What I would do next</h2>
   <ul>
-    <li>Attach these eight recordings to <a href="https://gitlab.dailyrssmail.com/intelligent/testing.com-pressable/-/work_items/345">work item 345</a>, and note that the click gaps argue for a disabled state and spinner, not just a debounce.</li>
+    <li>Add the four missing order codes to <a href="https://gitlab.dailyrssmail.com/intelligent/testing.com-pressable/-/work_items/345">work item 345</a>, since the fix is already scoped there but the affected-order count is understated.</li>
     <li>Kill the checkout case redirect so the page loads once.</li>
     <li>Decide whether the How It Works steps are links; right now they are neither clearly.</li>
     <li>Block internal QA IPs in Clarity so the sample stops being polluted.</li>
