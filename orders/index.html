@@ -128,7 +128,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
   // hash of this shell, the payload carries the hash it was built for, and a mismatch
   // reloads once against a fresh URL. Without this every reader has to be told to hard
   // refresh, and most will just think the report is broken.
-  var SV = 'f1380cb7';
+  var SV = 'c2c0cb4c';
   // Payload source depends on where this shell is served from. On GitHub Pages the
   // payload sits next to it, so fetch same-origin. On githack the payload must come
   // from gist.githubusercontent.com directly: githack caches its own copy of every
@@ -293,11 +293,13 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
            + 'Windows.');
         return;
       }
+      // 70 minutes: tolerates one missed or slow run on a 30 minute cadence, and
+      // still surfaces a dead pipeline inside the hour.
       var mins = Math.floor((Date.now() - d.built_ms)/60000);
-      if (mins > 90) {
+      if (mins > 70) {
         var el=document.getElementById('stale');
         el.textContent = 'These numbers are ' + Math.floor(mins/60) + 'h ' + (mins%60)
-          + 'm old, so the hourly refresh has missed at least one run. Tell Nam.';
+          + 'm old, so the refresh has missed at least one run. Tell Nam.';
         el.style.display='block';
       }
       var m = d.metrics.map(function(x){
@@ -309,7 +311,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
         '<div class="topbar"><h1>Testing.com Orders</h1>'
         + '<p>Customer orders and revenue. Internal test orders are excluded.</p>'
         + '<span class="pill"><span class="dot"></span>Updated ' + d.built_label
-        + ' PT &middot; refreshes hourly</span></div>'
+        + ' PT &middot; refreshes every 30 minutes</span></div>'
         + '<section><h2>Today</h2><div class="sub">' + d.day_label
         + ' &middot; all times Pacific</div><div class="metrics">' + m + '</div></section>'
         + '<section><h2>Orders today</h2><div class="sub">Every customer order, newest first</div>'
@@ -326,13 +328,13 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
         + (d.pace_html || '') + (d.traffic_html || '')
         + (d.impact_html || '')
         + d.attribution_html
-        + '<footer>Generated ' + d.built_label + ' Pacific &middot; refreshes hourly<br>'
+        + '<footer>Generated ' + d.built_label + ' Pacific &middot; refreshes every 30 minutes<br>'
         + 'Questions: Nam Phan</footer>';
       drawCharts(d);
     })
     .catch(function(e){
       fail('<b>Could not load current numbers.</b> The report data could not be fetched ('
-         + e.message + '). This usually means the hourly job has not run yet or GitHub is '
+         + e.message + '). This usually means the refresh job has not run yet or GitHub is '
          + 'unreachable. Reload in a minute; if it persists, tell Nam.');
     });
 })();
