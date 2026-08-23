@@ -1,0 +1,280 @@
+{
+ "days": [
+  {
+   "carts": 0,
+   "date": "2026-07-24",
+   "engaged_sessions": 3571,
+   "organic_visits": 3095,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "carts": 0,
+   "date": "2026-07-25",
+   "engaged_sessions": 2529,
+   "organic_visits": 2165,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "carts": 0,
+   "date": "2026-07-26",
+   "engaged_sessions": 2528,
+   "organic_visits": 2201,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "carts": 0,
+   "date": "2026-07-27",
+   "engaged_sessions": 3845,
+   "organic_visits": 3364,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "carts": 0,
+   "date": "2026-07-28",
+   "engaged_sessions": 4614,
+   "organic_visits": 3380,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "carts": 0,
+   "date": "2026-07-29",
+   "engaged_sessions": 6846,
+   "organic_visits": 3598,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "carts": 0,
+   "date": "2026-07-30",
+   "engaged_sessions": 5875,
+   "organic_visits": 3511,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "carts": 0,
+   "date": "2026-07-31",
+   "engaged_sessions": 5240,
+   "organic_visits": 2959,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "carts": 0,
+   "date": "2026-08-01",
+   "engaged_sessions": 3478,
+   "organic_visits": 2240,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "carts": 0,
+   "date": "2026-08-02",
+   "engaged_sessions": 3377,
+   "organic_visits": 2304,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "carts": 0,
+   "date": "2026-08-03",
+   "engaged_sessions": 5598,
+   "organic_visits": 3399,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "carts": 0,
+   "date": "2026-08-04",
+   "engaged_sessions": 5722,
+   "organic_visits": 3264,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "carts": 0,
+   "date": "2026-08-05",
+   "engaged_sessions": 5744,
+   "organic_visits": 3345,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "carts": 0,
+   "date": "2026-08-06",
+   "engaged_sessions": 5722,
+   "organic_visits": 3425,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "carts": 0,
+   "date": "2026-08-07",
+   "engaged_sessions": 5306,
+   "organic_visits": 3155,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "carts": 0,
+   "date": "2026-08-08",
+   "engaged_sessions": 3574,
+   "organic_visits": 2157,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "carts": 0,
+   "date": "2026-08-09",
+   "engaged_sessions": 3435,
+   "organic_visits": 2330,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "carts": 0,
+   "date": "2026-08-10",
+   "engaged_sessions": 5620,
+   "organic_visits": 3318,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "carts": 0,
+   "date": "2026-08-11",
+   "engaged_sessions": 5815,
+   "organic_visits": 3408,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "carts": 0,
+   "date": "2026-08-12",
+   "engaged_sessions": 5610,
+   "organic_visits": 3280,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "carts": 0,
+   "date": "2026-08-13",
+   "engaged_sessions": 5516,
+   "organic_visits": 3174,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "carts": 0,
+   "date": "2026-08-14",
+   "engaged_sessions": 5023,
+   "organic_visits": 2998,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "carts": 0,
+   "date": "2026-08-15",
+   "engaged_sessions": 3589,
+   "organic_visits": 2270,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "carts": 0,
+   "date": "2026-08-16",
+   "engaged_sessions": 3489,
+   "organic_visits": 2222,
+   "partial": false,
+   "reached_checkout": 0
+  },
+  {
+   "abandoned": 0,
+   "carts": 0,
+   "date": "2026-08-17",
+   "engaged_sessions": 5654,
+   "orders": 0,
+   "organic_visits": 3414,
+   "partial": false,
+   "qa_orders": 6,
+   "reached_checkout": 0,
+   "revenue_cents": 0
+  },
+  {
+   "abandoned": 1,
+   "carts": 93,
+   "date": "2026-08-18",
+   "engaged_sessions": 6847,
+   "orders": 6,
+   "organic_visits": 3822,
+   "partial": false,
+   "qa_orders": 6,
+   "reached_checkout": 52,
+   "revenue_cents": 131600
+  },
+  {
+   "abandoned": 1,
+   "carts": 88,
+   "date": "2026-08-19",
+   "engaged_sessions": 6535,
+   "orders": 6,
+   "organic_visits": 3889,
+   "partial": false,
+   "qa_orders": 0,
+   "reached_checkout": 53,
+   "revenue_cents": 93800
+  },
+  {
+   "abandoned": 1,
+   "carts": 79,
+   "date": "2026-08-20",
+   "engaged_sessions": 6346,
+   "orders": 10,
+   "organic_visits": 3825,
+   "partial": false,
+   "qa_orders": 4,
+   "reached_checkout": 61,
+   "revenue_cents": 152600
+  },
+  {
+   "abandoned": 2,
+   "carts": 78,
+   "date": "2026-08-21",
+   "engaged_sessions": 5863,
+   "orders": 7,
+   "organic_visits": 3579,
+   "partial": false,
+   "qa_orders": 1,
+   "reached_checkout": 44,
+   "revenue_cents": 48700
+  },
+  {
+   "abandoned": 1,
+   "carts": 62,
+   "date": "2026-08-22",
+   "engaged_sessions": 4049,
+   "orders": 3,
+   "organic_visits": 2644,
+   "partial": false,
+   "qa_orders": 0,
+   "reached_checkout": 35,
+   "revenue_cents": 50400
+  },
+  {
+   "abandoned": 0,
+   "carts": 23,
+   "date": "2026-08-23",
+   "engaged_sessions": 2463,
+   "orders": 2,
+   "organic_visits": 1645,
+   "partial": true,
+   "qa_orders": 0,
+   "reached_checkout": 15,
+   "revenue_cents": 23600
+  }
+ ]
+}
