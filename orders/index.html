@@ -128,7 +128,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
   // hash of this shell, the payload carries the hash it was built for, and a mismatch
   // reloads once against a fresh URL. Without this every reader has to be told to hard
   // refresh, and most will just think the report is broken.
-  var SV = 'c2c0cb4c';
+  var SV = '13d7fbac';
   // Payload source depends on where this shell is served from. On GitHub Pages the
   // payload sits next to it, so fetch same-origin. On githack the payload must come
   // from gist.githubusercontent.com directly: githack caches its own copy of every
@@ -136,6 +136,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
   var RAW = /github\.io$/.test(location.hostname)
     ? '' : 'https://gist.githubusercontent.com/nam-homefield/95c52291050858f43c8350e053dbed60/raw/';
   var app = document.getElementById('app');
+  var CHARTS = [], lastBuilt = 0, everLoaded = false;
   function fail(msg){
     document.getElementById('load').style.display='none';
     var e=document.getElementById('err');
@@ -146,6 +147,12 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
   // must stay byte-identical, so only the numbers travel in orders-data.json.
   function drawCharts(d){
     if (typeof Chart === 'undefined') return;
+    // Each re-render replaces the canvases, which leaves the previous Chart objects
+    // alive in Chart.js's own registry, holding detached nodes. Over a day of polling
+    // that is a real leak, so the old set is torn down before the new one is built.
+    CHARTS.forEach(function(c){ try { c.destroy(); } catch (e) {} });
+    CHARTS = [];
+    function mk(ctx, cfg){ var c = new Chart(ctx, cfg); CHARTS.push(c); return c; }
     var FONT = '600 10px "Work Sans",sans-serif';
     function tag(g, text, x, y, col){
       g.font = FONT;
@@ -170,7 +177,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
           tag(g, 'now', x, c.chartArea.top + 3, '#6b7280');
           g.restore();
         }};
-        new Chart(pel.getContext('2d'), {type:'line',
+        mk(pel.getContext('2d'), {type:'line',
           data:{labels:P.labels, datasets:[
             {label:'Normal day at this hour', data:P.avg, borderColor:'#00247a',
              borderWidth:2, borderDash:[6,4], pointRadius:0, tension:.25, fill:false},
@@ -204,7 +211,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
           tag(g, '4-week average', c.chartArea.left + 6, y - 16, '#6b7280');
           g.restore();
         }};
-        new Chart(tel.getContext('2d'), {type:'bar',
+        mk(tel.getContext('2d'), {type:'bar',
           data:{labels:T.labels, datasets:[
             {label:'Organic visits', data:T.organic,
              backgroundColor:T.colors, borderRadius:2, maxBarThickness:22}]},
@@ -244,7 +251,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
             g.restore();
           });
         }};
-        new Chart(iel.getContext('2d'), {type:'line',
+        mk(iel.getContext('2d'), {type:'line',
           data:{labels:I.labels, datasets:I.series.map(function(sv){
             return {label:sv.label, data:sv.rate, borderColor:sv.color,
                     backgroundColor:sv.color, borderWidth:sv.dashed ? 1.8 : 2.5,
@@ -278,30 +285,26 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
       }
     }
   }
-  fetch(RAW + 'orders-data.json?cb=' + Date.now(), {cache:'no-store'})
-    .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
-    .then(function(d){
-      if (d.shell_version && d.shell_version !== SV) {
-        var u = new URL(location.href);
-        if (u.searchParams.get('sv') !== d.shell_version) {
-          u.searchParams.set('sv', d.shell_version);
-          location.replace(u.toString());
-          return;
-        }
-        fail('<b>Your browser is holding an old copy of this page.</b> The report itself '
-           + 'is fine. Hard refresh to update it: Cmd+Shift+R on a Mac, Ctrl+Shift+R on '
-           + 'Windows.');
-        return;
-      }
-      // 70 minutes: tolerates one missed or slow run on a 30 minute cadence, and
-      // still surfaces a dead pipeline inside the hour.
-      var mins = Math.floor((Date.now() - d.built_ms)/60000);
-      if (mins > 70) {
-        var el=document.getElementById('stale');
-        el.textContent = 'These numbers are ' + Math.floor(mins/60) + 'h ' + (mins%60)
-          + 'm old, so the refresh has missed at least one run. Tell Nam.';
-        el.style.display='block';
-      }
+  // The banner is recomputed on a timer rather than once at load. This page is read
+  // by leaving it open on a monitor, so a pipeline that dies at 11am has to become
+  // visible to someone who opened the tab at 9. Computing it once did the opposite:
+  // the tab that had been open longest was the one least likely to warn anybody.
+  function setStale(builtMs){
+    var el = document.getElementById('stale');
+    if (!el) return;
+    // 70 minutes: tolerates one missed or slow run on a 30 minute cadence, and
+    // still surfaces a dead pipeline inside the hour.
+    var mins = Math.floor((Date.now() - builtMs)/60000);
+    if (mins > 70) {
+      el.textContent = 'These numbers are ' + Math.floor(mins/60) + 'h ' + (mins%60)
+        + 'm old, so the refresh has missed at least one run. Tell Nam.';
+      el.style.display = 'block';
+    } else {
+      el.style.display = 'none';
+    }
+  }
+
+  function render(d){
       var m = d.metrics.map(function(x){
         return '<div class="metric' + (x.hero ? ' hero' : '')
              + (x.tone ? ' ' + x.tone : '') + '"><div class="k">' + x.k
@@ -331,12 +334,55 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
         + '<footer>Generated ' + d.built_label + ' Pacific &middot; refreshes every 30 minutes<br>'
         + 'Questions: Nam Phan</footer>';
       drawCharts(d);
-    })
-    .catch(function(e){
-      fail('<b>Could not load current numbers.</b> The report data could not be fetched ('
-         + e.message + '). This usually means the refresh job has not run yet or GitHub is '
-         + 'unreachable. Reload in a minute; if it persists, tell Nam.');
-    });
+  }
+
+  function load(){
+    return fetch(RAW + 'orders-data.json?cb=' + Date.now(), {cache:'no-store'})
+      .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function(d){
+        if (d.shell_version && d.shell_version !== SV) {
+          var u = new URL(location.href);
+          if (u.searchParams.get('sv') !== d.shell_version) {
+            u.searchParams.set('sv', d.shell_version);
+            location.replace(u.toString());
+            return;
+          }
+          fail('<b>Your browser is holding an old copy of this page.</b> The report itself '
+             + 'is fine. Hard refresh to update it: Cmd+Shift+R on a Mac, Ctrl+Shift+R on '
+             + 'Windows.');
+          return;
+        }
+        // Re-render only when the numbers actually changed. Most polls land between
+        // builds, and repainting the DOM under a reader who is mid-scroll or reading a
+        // tooltip for no gain is worse than doing nothing.
+        if (d.built_ms !== lastBuilt) { lastBuilt = d.built_ms; render(d); }
+        setStale(lastBuilt);
+        everLoaded = true;
+      })
+      .catch(function(e){
+        // A failed poll must never blank a page that is already showing good numbers.
+        // Once something is on screen, the staleness banner is what tells the reader
+        // those numbers have aged, and it keeps working with the network down.
+        if (everLoaded) return;
+        fail('<b>Could not load current numbers.</b> The report data could not be fetched ('
+           + e.message + '). This usually means the refresh job has not run yet or GitHub is '
+           + 'unreachable. Reload in a minute; if it persists, tell Nam.');
+      });
+  }
+
+  load();
+  // Poll well inside the 30 minute build cadence, so an open tab is never more than a
+  // couple of minutes behind the pipeline. The payload is a few KB of JSON served by
+  // Pages, so the cost of being wrong about the interval is negligible.
+  setInterval(load, 90000);
+  // The banner ages on its own clock: with the network down, no poll ever resolves,
+  // and that is exactly when a reader most needs to be told the numbers are old.
+  setInterval(function(){ if (lastBuilt) setStale(lastBuilt); }, 60000);
+  // Coming back to a backgrounded tab should show current numbers immediately rather
+  // than up to 90 seconds later. Browsers also throttle timers in hidden tabs.
+  document.addEventListener('visibilitychange', function(){
+    if (!document.hidden) load();
+  });
 })();
 </script>
 </body></html>
