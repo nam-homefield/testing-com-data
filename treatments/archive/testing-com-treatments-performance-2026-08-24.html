@@ -34,6 +34,15 @@
   .chart-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 14px 8px;margin-top:4px}
   .chart-label{font-size:11px;letter-spacing:.04em;color:var(--ink-3);font-weight:600;text-transform:uppercase;margin-bottom:8px}
   .chart-card canvas{height:200px !important;max-height:200px}
+  .pd{display:flex;flex-direction:column;gap:9px;margin-top:16px}
+  .pd-row{display:grid;grid-template-columns:66px 1fr 104px;align-items:center;gap:12px}
+  .pd-band{font-size:12px;font-weight:600}
+  .pd-track{background:#f1f3f7;border-radius:5px;height:16px;overflow:hidden}
+  .pd-fill{height:100%;border-radius:5px}
+  .pd-0{background:#1f8456} .pd-1{background:#00247a}
+  .pd-2{background:#d9a406} .pd-3{background:#c0c4cc}
+  .pd-n{font-size:12px;font-weight:600;text-align:right}
+  .pd-pct{color:#6b7280;font-weight:500}
   table.pages{width:100%;border-collapse:collapse;font-size:13px}
   table.pages th{text-align:left;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);font-weight:600;padding:8px 10px;border-bottom:2px solid var(--border)}
   table.pages td{padding:9px 10px;border-bottom:1px solid var(--border-soft);vertical-align:middle}
@@ -86,6 +95,10 @@
       <div class="metric"><div class="metric-label">Avg Position</div><div class="metric-val">5.6</div></div>
     </div>
     <div class="chart-card"><div class="chart-label">Cohort weekly clicks &amp; impressions (last ~13 weeks)</div><canvas id="trend"></canvas></div>
+    <div class="chart-card"><div class="chart-label">Cohort weekly CTR % and avg position</div><canvas id="ctrpos"></canvas></div>
+    <p class="note">Shaded bands are Google announcements that overlap this window, from the <a href="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history" target="_blank" rel="noopener">Search Status Dashboard</a>: <a href="https://status.search.google.com/incidents/wdAXJk6LRRihEjpzEeWE" target="_blank" rel="noopener">May 2026 core update</a> (May 21 to Jun 2); <a href="https://status.search.google.com/incidents/YUX1peHev5a4fkxLDiUQ" target="_blank" rel="noopener">June 2026 spam update</a> (Jun 24 to Jun 26); <a href="https://status.search.google.com/incidents/LEubPCm2octf2uMqCFKE" target="_blank" rel="noopener">August 2026 spam update</a> (Aug 18 to Aug 21). A band is context, not a cause. Movement inside one is worth a second look before crediting our own work.</p>
+    <div class="pd"><div class="pd-row"><div class="pd-band">1 to 3</div><div class="pd-track"><div class="pd-fill pd-0" style="width:0%"></div></div><div class="pd-n">0 <span class="pd-pct">0%</span></div></div><div class="pd-row"><div class="pd-band">4 to 10</div><div class="pd-track"><div class="pd-fill pd-1" style="width:93%"></div></div><div class="pd-n">13 <span class="pd-pct">93%</span></div></div><div class="pd-row"><div class="pd-band">11 to 20</div><div class="pd-track"><div class="pd-fill pd-2" style="width:0%"></div></div><div class="pd-n">0 <span class="pd-pct">0%</span></div></div><div class="pd-row"><div class="pd-band">21+</div><div class="pd-track"><div class="pd-fill pd-3" style="width:7%"></div></div><div class="pd-n">1 <span class="pd-pct">7%</span></div></div></div>
+    <p class="note">Where the 14 pages earning impressions actually rank, over the same 28 finalized days. Pages at 11 to 20 already rank and sit just below page one, which is the cheapest place to gain clicks.</p>
   </section>
 
   <section class="bucket">
@@ -360,6 +373,8 @@
 </div>
 <script>
 const mkGrad=(ctx,c1,c2)=>{const g=ctx.createLinearGradient(0,0,0,200);g.addColorStop(0,c1);g.addColorStop(1,c2);return g;};
+const WK=["2026-05-31", "2026-06-07", "2026-06-14", "2026-06-21", "2026-06-28", "2026-07-05", "2026-07-12", "2026-07-19", "2026-07-26", "2026-08-02", "2026-08-09", "2026-08-16"],M=[{"week": "2026-08-16", "span": ["2026-08-16"], "label": "Aug 2026 spam", "name": "August 2026 spam update", "kind": "ranking", "begin": "2026-08-18", "end": "2026-08-21", "url": "https://status.search.google.com/incidents/LEubPCm2octf2uMqCFKE"}, {"week": "2026-06-21", "span": ["2026-06-21"], "label": "Jun 2026 spam", "name": "June 2026 spam update", "kind": "ranking", "begin": "2026-06-24", "end": "2026-06-26", "url": "https://status.search.google.com/incidents/YUX1peHev5a4fkxLDiUQ"}, {"week": "2026-05-31", "span": ["2026-05-31"], "label": "May 2026 core", "name": "May 2026 core update", "kind": "ranking", "begin": "2026-05-21", "end": "2026-06-02", "url": "https://status.search.google.com/incidents/wdAXJk6LRRihEjpzEeWE"}];
+var UPCOL={"ranking": "#8b5cf6", "serving": "#6b7280"};var gmark={id:'gupd',beforeDatasetsDraw:function(c){var x=c.scales.x,t=c.chartArea.top,b=c.chartArea.bottom,g=c.ctx;M.forEach(function(m){if(!m.span||!m.span.length)return;var idx=m.span.map(function(w){return WK.indexOf(w);}).filter(function(i){return i>=0;});if(!idx.length)return;var lo=Math.min.apply(null,idx),hi=Math.max.apply(null,idx);var half=(x.getPixelForValue(1)-x.getPixelForValue(0))/2||8;var x1=x.getPixelForValue(lo)-half,x2=x.getPixelForValue(hi)+half;g.save();g.fillStyle=(UPCOL[m.kind]||'#6b7280')+'14';g.fillRect(x1,t,x2-x1,b-t);g.restore();});},afterDatasetsDraw:function(c){var x=c.scales.x,t=c.chartArea.top,b=c.chartArea.bottom,g=c.ctx;M.forEach(function(m,k){var i=WK.indexOf(m.week);if(i<0)return;var px=x.getPixelForValue(i),col=UPCOL[m.kind]||'#6b7280';g.save();g.beginPath();g.setLineDash([5,4]);g.lineWidth=1.5;g.strokeStyle=col;g.moveTo(px,t);g.lineTo(px,b);g.stroke();g.setLineDash([]);g.font='600 10px "Work Sans",sans-serif';var w=g.measureText(m.label).width,ax=px+4,ay=t+4+(k%2)*15;if(ax+w+6>c.chartArea.right)ax=px-w-6;g.fillStyle='rgba(255,255,255,.88)';g.fillRect(ax-3,ay,w+6,13);g.fillStyle=col;g.textBaseline='top';g.fillText(m.label,ax,ay+2);g.restore();});}};
 const tctx=document.getElementById('trend').getContext('2d');
 new Chart(tctx,{type:'line',data:{labels:["May 31", "Jun 7", "Jun 14", "Jun 21", "Jun 28", "Jul 5", "Jul 12", "Jul 19", "Jul 26", "Aug 2", "Aug 9", "Aug 16"],datasets:[
   {label:'Clicks',data:[15, 44, 143, 250, 656, 1220, 2367, 3651, 5276, 6234, 6021, 5798],borderColor:'#fd605b',backgroundColor:mkGrad(tctx,'rgba(253,96,91,.22)','rgba(253,96,91,0)'),fill:true,tension:.35,yAxisID:'y',borderWidth:2,pointRadius:2},
@@ -367,6 +382,14 @@ new Chart(tctx,{type:'line',data:{labels:["May 31", "Jun 7", "Jun 14", "Jun 21",
 ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
 plugins:{legend:{labels:{boxWidth:12,font:{size:11}}}},
 scales:{y:{position:'left',title:{display:true,text:'Clicks',font:{size:10}},grid:{color:'#f0f1f2'}},
-y1:{position:'right',title:{display:true,text:'Impressions',font:{size:10}},grid:{drawOnChartArea:false}}}}});
+y1:{position:'right',title:{display:true,text:'Impressions',font:{size:10}},grid:{drawOnChartArea:false}}}},plugins:[gmark]});
+const rctx=document.getElementById('ctrpos').getContext('2d');
+new Chart(rctx,{type:'line',data:{labels:["May 31", "Jun 7", "Jun 14", "Jun 21", "Jun 28", "Jul 5", "Jul 12", "Jul 19", "Jul 26", "Aug 2", "Aug 9", "Aug 16"],datasets:[
+{label:'CTR %',data:[0.43, 0.47, 0.42, 0.42, 0.54, 0.64, 0.92, 1.14, 1.31, 1.27, 1.11, 1.19],yAxisID:'y',borderColor:'#1f8456',backgroundColor:mkGrad(rctx,'rgba(31,132,86,.20)','rgba(31,132,86,0)'),fill:true,tension:.3,borderWidth:2.5,pointRadius:0},
+{label:'Avg position',data:[7.5, 8.6, 8.0, 8.1, 6.7, 5.9, 5.2, 5.0, 5.4, 5.7, 5.8, 5.6],yAxisID:'y1',borderColor:'#8b5cf6',borderDash:[4,3],fill:false,tension:.3,borderWidth:2,pointRadius:0}]},
+options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+plugins:{legend:{labels:{boxWidth:12,font:{size:11}}}},
+scales:{y:{position:'left',title:{display:true,text:'CTR %',font:{size:10}},grid:{color:'#f0f1f2'},ticks:{callback:(v)=>v+'%'}},
+y1:{position:'right',reverse:true,title:{display:true,text:'Avg position',font:{size:10}},grid:{drawOnChartArea:false}}}},plugins:[gmark]});
 </script>
 </body></html>
