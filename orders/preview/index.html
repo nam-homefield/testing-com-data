@@ -56,10 +56,10 @@ border-radius:8px;padding:14px 16px;margin-bottom:10px}
 .note a{color:var(--navy);font-weight:600}
 .note{font-size:12px;color:var(--ink-3);margin-top:8px}
 .empty{font-size:13px;color:var(--ink-3);font-style:italic;padding:10px 0}
-.spark{display:flex;gap:6px;align-items:flex-end;height:96px;margin-top:8px;
-padding-bottom:2px;border-bottom:1px solid var(--border)}
-.bar{cursor:default}
-.bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%}
+.spark{display:flex;gap:6px;align-items:flex-end;height:116px;margin-top:8px}
+.bar{flex:1;display:flex;flex-direction:column;align-items:center;height:100%;cursor:default}
+.bar .fw{width:100%;flex:1;display:flex;align-items:flex-end;
+border-bottom:1px solid var(--border)}
 .bar .fill{width:100%;background:var(--navy);border-radius:4px 4px 0 0;min-height:3px;opacity:.85}
 .bar.today .fill{background:var(--coral)}
 .bar span{font-size:11px;font-weight:700;color:var(--navy);margin-top:4px;font-feature-settings:'tnum'}
@@ -144,7 +144,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
   // hash of this shell, the payload carries the hash it was built for, and a mismatch
   // reloads once against a fresh URL. Without this every reader has to be told to hard
   // refresh, and most will just think the report is broken.
-  var SV = 'f83a92ab';
+  var SV = 'a2bca1f6';
   // Payload source depends on where this shell is served from. On GitHub Pages the
   // payload sits next to it, so fetch same-origin. On githack the payload must come
   // from gist.githubusercontent.com directly: githack caches its own copy of every
