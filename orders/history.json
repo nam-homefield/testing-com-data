@@ -278,14 +278,14 @@
   },
   {
    "abandoned": 1,
-   "carts": 32,
+   "carts": 33,
    "date": "2026-08-24",
-   "engaged_sessions": 952,
+   "engaged_sessions": 1172,
    "orders": 0,
-   "organic_visits": 646,
+   "organic_visits": 772,
    "partial": true,
    "qa_orders": 0,
-   "reached_checkout": 7,
+   "reached_checkout": 11,
    "revenue_cents": 0
   }
  ]
