@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Testing.com · Weekly All STD-related Performance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root { --navy:#00247a;--navy-soft:#edf2ff;--navy-ink:#001a59;--coral:#fd605b;--coral-soft:#ffeee9;--coral-ink:#c63d39;--good:#1f8456;--good-soft:#e3f5ec;--bad:#c63d39;--bad-soft:#ffeee9;--ink:#2d2d2d;--ink-3:#6b7280;--border:#e2e3e4;--border-soft:#f0f1f2;--surface:#ffffff;--bg:#f7f8fa; }
+  *{box-sizing:border-box} html,body{margin:0;padding:0}
+  body{font-family:'Work Sans',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;padding:32px 24px 64px}
+  .wrap{max-width:1180px;margin:0 auto}
+  .topbar{background:var(--navy);color:#fff;border-radius:14px;padding:28px 32px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .topbar-left h1{font-family:'Work Sans',sans-serif;font-size:26px;font-weight:700;letter-spacing:-.01em;margin:0 0 6px;color:#fff}
+  .topbar-left .eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:600;margin-bottom:6px}
+  .topbar-meta{display:flex;gap:8px;flex-wrap:wrap}
+  .topbar-meta .pill{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:500;padding:5px 12px;border-radius:999px;display:inline-flex;align-items:center;gap:6px}
+  .topbar-meta .pill .dot{width:6px;height:6px;border-radius:50%;background:var(--coral)}
+  .topbar-meta .pill.pill-gen{background:var(--coral);border-color:var(--coral);color:#fff;font-weight:600}
+  section.bucket{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px 28px 20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,36,122,.04)}
+  .bucket-head{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border-soft)}
+  .bucket h2{font-family:'Work Sans',sans-serif;font-size:18px;font-weight:700;letter-spacing:-.005em;color:var(--navy);margin:0 0 4px}
+  .bucket-sub{font-size:13px;color:var(--ink-3);margin:0;font-weight:400}
+  .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+  .metric{background:var(--navy-soft);border:1px solid #d8e2ff;border-radius:10px;padding:14px 16px}
+  .metric-label{font-size:11px;letter-spacing:.04em;color:var(--navy);font-weight:600;text-transform:uppercase;margin-bottom:8px}
+  .metric-val{font-family:'Work Sans',sans-serif;font-size:28px;font-weight:700;letter-spacing:-.015em;color:var(--navy-ink);line-height:1.05;margin-bottom:8px;font-feature-settings:'tnum'}
+  .delta{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;font-feature-settings:'tnum'}
+  .delta.up{color:var(--good);background:var(--good-soft)}
+  .delta.down{color:var(--bad);background:var(--bad-soft)}
+  .delta.zero{color:var(--ink-3);background:#f0f1f2;font-weight:500}
+  .charts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .chart-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 14px 8px}
+  .chart-label{font-size:11px;letter-spacing:.04em;color:var(--ink-3);font-weight:600;text-transform:uppercase;margin-bottom:8px}
+  .chart-card canvas{height:150px !important;max-height:150px}
+  section.airops{background:var(--coral-soft);border-color:#ffd8d0}
+  section.airops .bucket-head{border-bottom-color:#ffd8d0}
+  section.airops h2{color:var(--coral-ink)}
+  .airops-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .airops-card{background:#fff;border:1px solid #ffd8d0;border-radius:10px;padding:16px 18px;text-align:center}
+  .airops-label{font-size:11px;letter-spacing:.04em;color:var(--coral-ink);font-weight:600;text-transform:uppercase;margin-bottom:8px}
+  .airops-val{font-family:'Work Sans',sans-serif;font-size:30px;font-weight:700;letter-spacing:-.015em;color:var(--navy);line-height:1.05;font-feature-settings:'tnum'}
+  .airops-of{font-size:15px;font-weight:600;color:#6b7280;letter-spacing:0}
+  footer{margin-top:32px;text-align:center;color:var(--ink-3);font-size:11px;letter-spacing:.04em}
+  @media(max-width:880px){.metrics,.charts,.airops-grid{grid-template-columns:1fr 1fr} .topbar{padding:22px 20px;flex-direction:column;align-items:flex-start} section.bucket{padding:20px 18px}}
+</style></head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="eyebrow">Testing.com · Performance Report</div>
+      <h1>Weekly All STD-related Performance</h1>
+    </div>
+    <div class="topbar-meta">
+      <span class="pill pill-gen">Report generated Aug 24, 2026</span>
+      <span class="pill"><span class="dot"></span>Week of Aug 16 → Aug 22, 2026</span>
+      <span class="pill">Tiles = last finalized Sun → Sat week</span>
+      <span class="pill">Δ vs previous week</span>
+      <span class="pill">Charts: Mar 8 → Aug 22</span>
+    </div>
+  </div>
+  <section class="bucket airops">
+    <div class="bucket-head"><h2>AirOps /std-testing/ Performance</h2><p class="bucket-sub">The city pages refreshed or generated through the AirOps program. This is the program set, not the whole /std-testing/ sitemap: the 51 state-level pages were never built through AirOps, which is why the Pages in Sitemap counts in the sections below run higher than the Program URLs count here.</p></div>
+    <div class="airops-grid"><div class="airops-card"><div class="airops-label">Program URLs</div><div class="airops-val">1,983</div></div><div class="airops-card"><div class="airops-label">New URLs</div><div class="airops-val">1,294</div></div><div class="airops-card"><div class="airops-label">Refreshed URLs</div><div class="airops-val">689</div></div><div class="airops-card"><div class="airops-label">In Sitemap</div><div class="airops-val">1,983<span class="airops-of"> of 1,983</span></div></div><div class="airops-card"><div class="airops-label">Is Indexed</div><div class="airops-val">1,770<span class="airops-of"> of 1,983</span></div></div></div>
+  </section>
+  
+    <section class="bucket">
+      <div class="bucket-head"><h2>All</h2><p class="bucket-sub">Every STD-related page across /std-testing/ and the /tests/ STD product set.</p></div>
+      <div class="metrics">
+        <div class="metric"><div class="metric-label">Clicks</div><div class="metric-val">5.7K</div><span class="delta down">↓ 1.2%</span></div>
+        <div class="metric"><div class="metric-label">Impressions</div><div class="metric-val">880.6K</div><span class="delta down">↓ 9.1%</span></div>
+        <div class="metric"><div class="metric-label">Pages in Sitemap</div><div class="metric-val">2,049</div><span class="delta zero">No change</span></div>
+        <div class="metric"><div class="metric-label">Avg Position</div><div class="metric-val">9.21</div><span class="delta down">↑ 0.56 worse</span></div>
+      </div>
+      <div class="charts">
+        <div class="chart-card"><div class="chart-label">Weekly Clicks</div><canvas id="ch_all_c"></canvas></div>
+        <div class="chart-card"><div class="chart-label">Weekly Impressions</div><canvas id="ch_all_i"></canvas></div>
+      </div>
+      <script>(function(){const WT=["Week of Mar 8\u201314", "Week of Mar 15\u201321", "Week of Mar 22\u201328", "Week of Mar 29\u2013Apr 4", "Week of Apr 5\u201311", "Week of Apr 12\u201318", "Week of Apr 19\u201325", "Week of Apr 26\u2013May 2", "Week of May 3\u20139", "Week of May 10\u201316", "Week of May 17\u201323", "Week of May 24\u201330", "Week of May 31\u2013Jun 6", "Week of Jun 7\u201313", "Week of Jun 14\u201320", "Week of Jun 21\u201327", "Week of Jun 28\u2013Jul 4", "Week of Jul 5\u201311", "Week of Jul 12\u201318", "Week of Jul 19\u201325", "Week of Jul 26\u2013Aug 1", "Week of Aug 2\u20138", "Week of Aug 9\u201315", "Week of Aug 16\u201322"];const opts={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{intersect:false,mode:'index',backgroundColor:'#00247a',titleFont:{size:11,family:'Work Sans'},bodyFont:{size:12,weight:'600',family:'Work Sans'},padding:10,cornerRadius:6,displayColors:false,callbacks:{title:function(t){return WT[t[0].dataIndex];}}}},scales:{x:{grid:{display:false},border:{color:'#e2e3e4'},ticks:{color:'#6b7280',font:{size:10,family:'Work Sans'},maxRotation:0,autoSkip:true,maxTicksLimit:6}},y:{grid:{color:'rgba(0,36,122,.08)'},border:{display:false},ticks:{color:'#6b7280',font:{size:10,family:'Work Sans'}}}},interaction:{intersect:false,mode:'index'}};
+const grad=(ctx,c)=>{const g=ctx.createLinearGradient(0,0,0,160);g.addColorStop(0,c+'33');g.addColorStop(1,c+'00');return g;};
+const cCtx=document.getElementById('ch_all_c').getContext('2d');new Chart(cCtx,{type:'line',data:{labels:["Wk of Mar 8", "Wk of Mar 15", "Wk of Mar 22", "Wk of Mar 29", "Wk of Apr 5", "Wk of Apr 12", "Wk of Apr 19", "Wk of Apr 26", "Wk of May 3", "Wk of May 10", "Wk of May 17", "Wk of May 24", "Wk of May 31", "Wk of Jun 7", "Wk of Jun 14", "Wk of Jun 21", "Wk of Jun 28", "Wk of Jul 5", "Wk of Jul 12", "Wk of Jul 19", "Wk of Jul 26", "Wk of Aug 2", "Wk of Aug 9", "Wk of Aug 16"],datasets:[{data:[2231, 3279, 3083, 3038, 2915, 3015, 3113, 3251, 3222, 3222, 3629, 4421, 5430, 5711, 5634, 5919, 5757, 6748, 6346, 6155, 6016, 5956, 5752, 5682],borderColor:'#fd605b',backgroundColor:grad(cCtx,'#fd605b'),fill:true,tension:.35,borderWidth:2.5,pointRadius:0,pointHoverRadius:5,pointHoverBackgroundColor:'#fd605b',pointHoverBorderColor:'#fff',pointHoverBorderWidth:2}]},options:opts});
+const iCtx=document.getElementById('ch_all_i').getContext('2d');new Chart(iCtx,{type:'line',data:{labels:["Wk of Mar 8", "Wk of Mar 15", "Wk of Mar 22", "Wk of Mar 29", "Wk of Apr 5", "Wk of Apr 12", "Wk of Apr 19", "Wk of Apr 26", "Wk of May 3", "Wk of May 10", "Wk of May 17", "Wk of May 24", "Wk of May 31", "Wk of Jun 7", "Wk of Jun 14", "Wk of Jun 21", "Wk of Jun 28", "Wk of Jul 5", "Wk of Jul 12", "Wk of Jul 19", "Wk of Jul 26", "Wk of Aug 2", "Wk of Aug 9", "Wk of Aug 16"],datasets:[{data:[444606, 658061, 704611, 665640, 628441, 642783, 561330, 607373, 630718, 622379, 609342, 750978, 820355, 850749, 913704, 1044741, 903998, 945779, 909022, 891809, 926990, 898548, 969121, 880590],borderColor:'#00247a',backgroundColor:grad(iCtx,'#00247a'),fill:true,tension:.35,borderWidth:2.5,pointRadius:0,pointHoverRadius:5,pointHoverBackgroundColor:'#00247a',pointHoverBorderColor:'#fff',pointHoverBorderWidth:2}]},options:opts});})();</script>
+    </section>
+  
+    <section class="bucket">
+      <div class="bucket-head"><h2>Geo</h2><p class="bucket-sub">City and state-level pages under /std-testing/.</p></div>
+      <div class="metrics">
+        <div class="metric"><div class="metric-label">Clicks</div><div class="metric-val">4.8K</div><span class="delta up">↑ 0.1%</span></div>
+        <div class="metric"><div class="metric-label">Impressions</div><div class="metric-val">520.9K</div><span class="delta down">↓ 5.7%</span></div>
+        <div class="metric"><div class="metric-label">Pages in Sitemap</div><div class="metric-val">2,034</div><span class="delta zero">No change</span></div>
+        <div class="metric"><div class="metric-label">Avg Position</div><div class="metric-val">10.32</div><span class="delta down">↑ 0.93 worse</span></div>
+      </div>
+      <div class="charts">
+        <div class="chart-card"><div class="chart-label">Weekly Clicks</div><canvas id="ch_geo_c"></canvas></div>
+        <div class="chart-card"><div class="chart-label">Weekly Impressions</div><canvas id="ch_geo_i"></canvas></div>
+      </div>
+      <script>(function(){const WT=["Week of Mar 8\u201314", "Week of Mar 15\u201321", "Week of Mar 22\u201328", "Week of Mar 29\u2013Apr 4", "Week of Apr 5\u201311", "Week of Apr 12\u201318", "Week of Apr 19\u201325", "Week of Apr 26\u2013May 2", "Week of May 3\u20139", "Week of May 10\u201316", "Week of May 17\u201323", "Week of May 24\u201330", "Week of May 31\u2013Jun 6", "Week of Jun 7\u201313", "Week of Jun 14\u201320", "Week of Jun 21\u201327", "Week of Jun 28\u2013Jul 4", "Week of Jul 5\u201311", "Week of Jul 12\u201318", "Week of Jul 19\u201325", "Week of Jul 26\u2013Aug 1", "Week of Aug 2\u20138", "Week of Aug 9\u201315", "Week of Aug 16\u201322"];const opts={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{intersect:false,mode:'index',backgroundColor:'#00247a',titleFont:{size:11,family:'Work Sans'},bodyFont:{size:12,weight:'600',family:'Work Sans'},padding:10,cornerRadius:6,displayColors:false,callbacks:{title:function(t){return WT[t[0].dataIndex];}}}},scales:{x:{grid:{display:false},border:{color:'#e2e3e4'},ticks:{color:'#6b7280',font:{size:10,family:'Work Sans'},maxRotation:0,autoSkip:true,maxTicksLimit:6}},y:{grid:{color:'rgba(0,36,122,.08)'},border:{display:false},ticks:{color:'#6b7280',font:{size:10,family:'Work Sans'}}}},interaction:{intersect:false,mode:'index'}};
+const grad=(ctx,c)=>{const g=ctx.createLinearGradient(0,0,0,160);g.addColorStop(0,c+'33');g.addColorStop(1,c+'00');return g;};
+const cCtx=document.getElementById('ch_geo_c').getContext('2d');new Chart(cCtx,{type:'line',data:{labels:["Wk of Mar 8", "Wk of Mar 15", "Wk of Mar 22", "Wk of Mar 29", "Wk of Apr 5", "Wk of Apr 12", "Wk of Apr 19", "Wk of Apr 26", "Wk of May 3", "Wk of May 10", "Wk of May 17", "Wk of May 24", "Wk of May 31", "Wk of Jun 7", "Wk of Jun 14", "Wk of Jun 21", "Wk of Jun 28", "Wk of Jul 5", "Wk of Jul 12", "Wk of Jul 19", "Wk of Jul 26", "Wk of Aug 2", "Wk of Aug 9", "Wk of Aug 16"],datasets:[{data:[1804, 2676, 2554, 2526, 2519, 2605, 2697, 2864, 2828, 2831, 3177, 3730, 4618, 4842, 4759, 5112, 4881, 5791, 5374, 5103, 5037, 4992, 4802, 4809],borderColor:'#fd605b',backgroundColor:grad(cCtx,'#fd605b'),fill:true,tension:.35,borderWidth:2.5,pointRadius:0,pointHoverRadius:5,pointHoverBackgroundColor:'#fd605b',pointHoverBorderColor:'#fff',pointHoverBorderWidth:2}]},options:opts});
+const iCtx=document.getElementById('ch_geo_i').getContext('2d');new Chart(iCtx,{type:'line',data:{labels:["Wk of Mar 8", "Wk of Mar 15", "Wk of Mar 22", "Wk of Mar 29", "Wk of Apr 5", "Wk of Apr 12", "Wk of Apr 19", "Wk of Apr 26", "Wk of May 3", "Wk of May 10", "Wk of May 17", "Wk of May 24", "Wk of May 31", "Wk of Jun 7", "Wk of Jun 14", "Wk of Jun 21", "Wk of Jun 28", "Wk of Jul 5", "Wk of Jul 12", "Wk of Jul 19", "Wk of Jul 26", "Wk of Aug 2", "Wk of Aug 9", "Wk of Aug 16"],datasets:[{data:[270961, 408750, 445339, 448297, 439674, 456759, 419026, 446141, 463818, 462652, 449153, 501521, 505606, 516619, 551011, 691283, 561400, 584674, 547666, 510151, 522247, 489284, 552618, 520872],borderColor:'#00247a',backgroundColor:grad(iCtx,'#00247a'),fill:true,tension:.35,borderWidth:2.5,pointRadius:0,pointHoverRadius:5,pointHoverBackgroundColor:'#00247a',pointHoverBorderColor:'#fff',pointHoverBorderWidth:2}]},options:opts});})();</script>
+    </section>
+  
+    <section class="bucket">
+      <div class="bucket-head"><h2>Non-Geo</h2><p class="bucket-sub">The /std-testing/ hub plus the STD product pages on /tests/.</p></div>
+      <div class="metrics">
+        <div class="metric"><div class="metric-label">Clicks</div><div class="metric-val">873</div><span class="delta down">↓ 8.1%</span></div>
+        <div class="metric"><div class="metric-label">Impressions</div><div class="metric-val">359.7K</div><span class="delta down">↓ 13.6%</span></div>
+        <div class="metric"><div class="metric-label">Pages in Sitemap</div><div class="metric-val">15</div><span class="delta zero">No change</span></div>
+        <div class="metric"><div class="metric-label">Avg Position</div><div class="metric-val">7.59</div><span class="delta up">↓ 0.07 better</span></div>
+      </div>
+      <div class="charts">
+        <div class="chart-card"><div class="chart-label">Weekly Clicks</div><canvas id="ch_non-geo_c"></canvas></div>
+        <div class="chart-card"><div class="chart-label">Weekly Impressions</div><canvas id="ch_non-geo_i"></canvas></div>
+      </div>
+      <script>(function(){const WT=["Week of Mar 8\u201314", "Week of Mar 15\u201321", "Week of Mar 22\u201328", "Week of Mar 29\u2013Apr 4", "Week of Apr 5\u201311", "Week of Apr 12\u201318", "Week of Apr 19\u201325", "Week of Apr 26\u2013May 2", "Week of May 3\u20139", "Week of May 10\u201316", "Week of May 17\u201323", "Week of May 24\u201330", "Week of May 31\u2013Jun 6", "Week of Jun 7\u201313", "Week of Jun 14\u201320", "Week of Jun 21\u201327", "Week of Jun 28\u2013Jul 4", "Week of Jul 5\u201311", "Week of Jul 12\u201318", "Week of Jul 19\u201325", "Week of Jul 26\u2013Aug 1", "Week of Aug 2\u20138", "Week of Aug 9\u201315", "Week of Aug 16\u201322"];const opts={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{intersect:false,mode:'index',backgroundColor:'#00247a',titleFont:{size:11,family:'Work Sans'},bodyFont:{size:12,weight:'600',family:'Work Sans'},padding:10,cornerRadius:6,displayColors:false,callbacks:{title:function(t){return WT[t[0].dataIndex];}}}},scales:{x:{grid:{display:false},border:{color:'#e2e3e4'},ticks:{color:'#6b7280',font:{size:10,family:'Work Sans'},maxRotation:0,autoSkip:true,maxTicksLimit:6}},y:{grid:{color:'rgba(0,36,122,.08)'},border:{display:false},ticks:{color:'#6b7280',font:{size:10,family:'Work Sans'}}}},interaction:{intersect:false,mode:'index'}};
+const grad=(ctx,c)=>{const g=ctx.createLinearGradient(0,0,0,160);g.addColorStop(0,c+'33');g.addColorStop(1,c+'00');return g;};
+const cCtx=document.getElementById('ch_non-geo_c').getContext('2d');new Chart(cCtx,{type:'line',data:{labels:["Wk of Mar 8", "Wk of Mar 15", "Wk of Mar 22", "Wk of Mar 29", "Wk of Apr 5", "Wk of Apr 12", "Wk of Apr 19", "Wk of Apr 26", "Wk of May 3", "Wk of May 10", "Wk of May 17", "Wk of May 24", "Wk of May 31", "Wk of Jun 7", "Wk of Jun 14", "Wk of Jun 21", "Wk of Jun 28", "Wk of Jul 5", "Wk of Jul 12", "Wk of Jul 19", "Wk of Jul 26", "Wk of Aug 2", "Wk of Aug 9", "Wk of Aug 16"],datasets:[{data:[427, 603, 529, 512, 396, 410, 416, 387, 394, 391, 452, 691, 812, 869, 875, 807, 876, 957, 972, 1052, 979, 964, 950, 873],borderColor:'#fd605b',backgroundColor:grad(cCtx,'#fd605b'),fill:true,tension:.35,borderWidth:2.5,pointRadius:0,pointHoverRadius:5,pointHoverBackgroundColor:'#fd605b',pointHoverBorderColor:'#fff',pointHoverBorderWidth:2}]},options:opts});
+const iCtx=document.getElementById('ch_non-geo_i').getContext('2d');new Chart(iCtx,{type:'line',data:{labels:["Wk of Mar 8", "Wk of Mar 15", "Wk of Mar 22", "Wk of Mar 29", "Wk of Apr 5", "Wk of Apr 12", "Wk of Apr 19", "Wk of Apr 26", "Wk of May 3", "Wk of May 10", "Wk of May 17", "Wk of May 24", "Wk of May 31", "Wk of Jun 7", "Wk of Jun 14", "Wk of Jun 21", "Wk of Jun 28", "Wk of Jul 5", "Wk of Jul 12", "Wk of Jul 19", "Wk of Jul 26", "Wk of Aug 2", "Wk of Aug 9", "Wk of Aug 16"],datasets:[{data:[173645, 249311, 259272, 217343, 188767, 186024, 142304, 161232, 166900, 159727, 160189, 249457, 314749, 334130, 362693, 353458, 342598, 361105, 361356, 381658, 404743, 409264, 416503, 359718],borderColor:'#00247a',backgroundColor:grad(iCtx,'#00247a'),fill:true,tension:.35,borderWidth:2.5,pointRadius:0,pointHoverRadius:5,pointHoverBackgroundColor:'#00247a',pointHoverBorderColor:'#fff',pointHoverBorderWidth:2}]},options:opts});})();</script>
+    </section>
+  <footer>Sources: Google Search Console · Yoast sitemap · AirOps registry · Generated Aug 24, 2026<br>A week appears only once all 7 of its days are finalized in Google Search Console, so every tile, delta, and chart point reflects a fully settled week.</footer>
+</div>
+</body></html>
