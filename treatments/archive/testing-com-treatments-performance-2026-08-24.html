@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Testing.com · Treatments Guides Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root { --navy:#00247a;--navy-soft:#edf2ff;--navy-ink:#001a59;--coral:#fd605b;--coral-soft:#ffeee9;--coral-ink:#c63d39;--good:#1f8456;--good-soft:#e3f5ec;--bad:#c63d39;--bad-soft:#ffeee9;--ink:#2d2d2d;--ink-3:#6b7280;--border:#e2e3e4;--border-soft:#f0f1f2;--surface:#ffffff;--bg:#f7f8fa; }
+  *{box-sizing:border-box} html,body{margin:0;padding:0}
+  body{font-family:'Work Sans',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;padding:32px 24px 64px}
+  .wrap{max-width:1180px;margin:0 auto}
+  .topbar{background:var(--navy);color:#fff;border-radius:14px;padding:28px 32px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .topbar-left h1{font-size:26px;font-weight:700;letter-spacing:-.01em;margin:0 0 6px;color:#fff}
+  .topbar-left .eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:600;margin-bottom:6px}
+  .topbar-meta{display:flex;gap:8px;flex-wrap:wrap}
+  .topbar-meta .pill{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:500;padding:5px 12px;border-radius:999px;display:inline-flex;align-items:center;gap:6px}
+  .topbar-meta .pill .dot{width:6px;height:6px;border-radius:50%;background:var(--coral)}
+  .topbar-meta .pill.pill-gen{background:var(--coral);border-color:var(--coral);color:#fff;font-weight:600}
+  section.bucket{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px 28px 20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,36,122,.04)}
+  .bucket-head{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border-soft)}
+  .bucket h2{font-size:18px;font-weight:700;letter-spacing:-.005em;color:var(--navy);margin:0 0 4px}
+  .bucket-sub{font-size:13px;color:var(--ink-3);margin:0;font-weight:400}
+  .metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .metric{background:var(--navy-soft);border:1px solid #d8e2ff;border-radius:10px;padding:14px 16px}
+  .metric-label{font-size:11px;letter-spacing:.04em;color:var(--navy);font-weight:600;text-transform:uppercase;margin-bottom:8px}
+  .metric-val{font-size:26px;font-weight:700;letter-spacing:-.015em;color:var(--navy-ink);line-height:1.05;margin-bottom:8px;font-feature-settings:'tnum'}
+  .delta{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;font-feature-settings:'tnum'}
+  .delta.up{color:var(--good);background:var(--good-soft)}
+  .delta.down{color:var(--bad);background:var(--bad-soft)}
+  .delta.zero{color:var(--ink-3);background:#f0f1f2;font-weight:500}
+  .chart-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 14px 8px;margin-top:4px}
+  .chart-label{font-size:11px;letter-spacing:.04em;color:var(--ink-3);font-weight:600;text-transform:uppercase;margin-bottom:8px}
+  .chart-card canvas{height:200px !important;max-height:200px}
+  table.pages{width:100%;border-collapse:collapse;font-size:13px}
+  table.pages th{text-align:left;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);font-weight:600;padding:8px 10px;border-bottom:2px solid var(--border)}
+  table.pages td{padding:9px 10px;border-bottom:1px solid var(--border-soft);vertical-align:middle}
+  table.pages td.num{text-align:right;white-space:nowrap;font-feature-settings:'tnum'}
+  table.pages th.num{text-align:right}
+  table.pages td.num .delta{margin-left:6px;padding:2px 7px;font-size:10px}
+  table.pages tr:hover td{background:var(--navy-soft)}
+  .tablewrap{overflow-x:auto}
+  table.pages th.wk-col,table.pages td.wk-col{background:#fafbfd}
+  table.pages tr:hover td.wk-col{background:#e6ecfb}
+  table.pages td.wk-col:first-of-type,table.pages th.wk-col:first-of-type{border-left:1px solid var(--border)}
+  table.pages tr.grouprow th{padding:6px 10px;border-bottom:1px solid var(--border-soft);font-size:10px;color:var(--navy);letter-spacing:.05em}
+  table.pages tfoot td{border-top:2px solid var(--border);border-bottom:none;font-weight:600;background:var(--surface)}
+  table.pages tfoot td.wk-col{background:#fafbfd}
+  table.pages a{color:var(--navy);text-decoration:none;font-weight:500}
+  table.pages a:hover{text-decoration:underline}
+  .urlsub{color:var(--ink-3);font-size:11px;margin-top:2px}
+  td.rev{color:var(--ink-3);font-size:12px;white-space:nowrap}
+  .qgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .qcard{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+  .qcard-head{font-size:13px;font-weight:600;margin-bottom:8px}
+  .qcard-head a{color:var(--navy);text-decoration:none}
+  table.qtable{font-size:12px} table.qtable td,table.qtable th{padding:5px 8px}
+  footer{margin-top:32px;text-align:center;color:var(--ink-3);font-size:11px;letter-spacing:.04em;line-height:1.6}
+  @media(max-width:880px){.metrics{grid-template-columns:repeat(2,1fr)} .qgrid{grid-template-columns:1fr} .topbar{padding:22px 20px;flex-direction:column;align-items:flex-start} section.bucket{padding:20px 18px} td.rev:nth-child(3){display:none} table.pages th:nth-child(3){display:none}}
+</style></head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="eyebrow">Testing.com · Performance Report</div>
+      <h1>Treatments Guides: New Builds</h1>
+    </div>
+    <div class="topbar-meta">
+      <span class="pill pill-gen">Report generated Aug 24, 2026</span>
+      <span class="pill"><span class="dot"></span>Window: Jul 25 → Aug 21, 2026</span>
+      <span class="pill">Tiles = last 28 finalized days</span>
+      <span class="pill">Δ vs prior 28d</span>
+      <span class="pill">WoW week: Aug 16 → Aug 22</span>
+    </div>
+  </div>
+
+  <section class="bucket">
+    <div class="bucket-head"><h2>Program Snapshot</h2><p class="bucket-sub">Every /treatments/ guide live in the sitemap. All new builds, medically reviewed by Soma Mandal. Clicks and impressions are the last 28 finalized days; avg position is impression-weighted across pages earning impressions.</p></div>
+    <div class="metrics">
+      <div class="metric"><div class="metric-label">Pages Published</div><div class="metric-val">14</div></div>
+      <div class="metric"><div class="metric-label">Getting Impressions</div><div class="metric-val">14</div></div>
+      <div class="metric"><div class="metric-label">Clicks (28d)</div><div class="metric-val">23.9K</div><span class="delta up">▲ 226%</span></div>
+      <div class="metric"><div class="metric-label">Impressions (28d)</div><div class="metric-val">1966.2K</div><span class="delta up">▲ 130%</span></div>
+      <div class="metric"><div class="metric-label">Avg Position</div><div class="metric-val">5.6</div></div>
+    </div>
+    <div class="chart-card"><div class="chart-label">Cohort weekly clicks &amp; impressions (last ~13 weeks)</div><canvas id="trend"></canvas></div>
+  </section>
+
+  <section class="bucket">
+    <div class="bucket-head"><h2>Per-Page Performance</h2><p class="bucket-sub">Published date, days live, and Search Console traffic per page. The first block is the last 28 finalized days with Δ vs the prior 28 days. The shaded block is week over week: Aug 16&ndash;Aug 22 against Aug 9&ndash;Aug 15, both complete Sun&ndash;Sat weeks. Avg position is impression-weighted and its week delta is in rank spots, so red means the page moved down the page. A dash means no impressions in that window.</p></div>
+    <div class="tablewrap">
+    <table class="pages">
+      <thead>
+        <tr class="grouprow"><th colspan="3"></th><th class="num" colspan="4">Last 28 finalized days</th><th class="num wk-col" colspan="3">Week over week &middot; Aug 16&ndash;Aug 22</th></tr>
+        <tr><th>Page</th><th>Published</th><th>Days Live</th><th class="num">Clicks (28d)</th><th class="num">Impr (28d)</th><th class="num">CTR</th><th class="num">Avg Pos</th><th class="num wk-col">Clicks (wk)</th><th class="num wk-col">Impr (wk)</th><th class="num wk-col">Avg Pos (wk)</th></tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><a href="https://www.testing.com/treatments/" target="_blank">Treatment Guides: Compounded GLP-1, Sermorelin &amp; NAD+</a><div class="urlsub">/treatments/</div></td>
+        <td class="rev">Aug 11, 2026</td>
+        <td class="rev">10d</td>
+        <td class="num">18 <span class="delta zero">±0%</span></td>
+        <td class="num">4.8K <span class="delta up">▲ 213%</span></td>
+        <td class="num">0.4%</td>
+        <td class="num">8.0</td>
+        <td class="num wk-col">5 <span class="delta down">▼ 38%</span></td>
+        <td class="num wk-col">999 <span class="delta down">▼ 38%</span></td>
+        <td class="num wk-col">7.8 <span class="delta up">▼ 0.2</span></td>
+      </tr>
+      <tr>
+        <td><a href="https://www.testing.com/treatments/compounded-semaglutide-dosage-chart/" target="_blank">Compounded Semaglutide Dosage Chart: Titration Guide</a><div class="urlsub">/treatments/compounded-semaglutide-dosage-chart/</div></td>
+        <td class="rev">Jul 1, 2026</td>
+        <td class="rev">51d</td>
+        <td class="num">7.5K <span class="delta up">▲ 627%</span></td>
+        <td class="num">327.1K <span class="delta up">▲ 710%</span></td>
+        <td class="num">2.3%</td>
+        <td class="num">5.2</td>
+        <td class="num wk-col">1.9K <span class="delta up">▲ 5%</span></td>
+        <td class="num wk-col">89.5K <span class="delta up">▲ 7%</span></td>
+        <td class="num wk-col">5.1 <span class="delta up">▼ 0.1</span></td>
+      </tr>
+      <tr>
+        <td><a href="https://www.testing.com/treatments/compounded-semaglutide-side-effects/" target="_blank">Compounded Semaglutide Side Effects: What to Expect</a><div class="urlsub">/treatments/compounded-semaglutide-side-effects/</div></td>
+        <td class="rev">Jul 14, 2026</td>
+        <td class="rev">38d</td>
+        <td class="num">22 <span class="delta zero">new</span></td>
+        <td class="num">5.2K <span class="delta zero">new</span></td>
+        <td class="num">0.4%</td>
+        <td class="num">7.6</td>
+        <td class="num wk-col">4 <span class="delta down">▼ 43%</span></td>
+        <td class="num wk-col">1.3K <span class="delta down">▼ 20%</span></td>
+        <td class="num wk-col">7.4 <span class="delta up">▼ 0.2</span></td>
+      </tr>
+      <tr>
+        <td><a href="https://www.testing.com/treatments/compounded-semaglutide/" target="_blank">Compounded Semaglutide: Uses, Safety, and Access</a><div class="urlsub">/treatments/compounded-semaglutide/</div></td>
+        <td class="rev">Aug 6, 2026</td>
+        <td class="rev">15d</td>
+        <td class="num">93 <span class="delta up">▲ 72%</span></td>
+        <td class="num">45.3K <span class="delta up">▲ 35%</span></td>
+        <td class="num">0.2%</td>
+        <td class="num">8.1</td>
+        <td class="num wk-col">28 <span class="delta down">▼ 10%</span></td>
+        <td class="num wk-col">10.6K <span class="delta down">▼ 25%</span></td>
+        <td class="num wk-col">7.8 <span class="delta up">▼ 0.2</span></td>
+      </tr>
+      <tr>
+        <td><a href="https://www.testing.com/treatments/compounded-tirzepatide-side-effects/" target="_blank">Compounded Tirzepatide Side Effects: What to Expect</a><div class="urlsub">/treatments/compounded-tirzepatide-side-effects/</div></td>
+        <td class="rev">Jul 14, 2026</td>
+        <td class="rev">38d</td>
+        <td class="num">57 <span class="delta zero">new</span></td>
+        <td class="num">14.8K <span class="delta zero">new</span></td>
+        <td class="num">0.4%</td>
+        <td class="num">8.1</td>
+        <td class="num wk-col">1 <span class="delta down">▼ 86%</span></td>
+        <td class="num wk-col">854 <span class="delta down">▼ 67%</span></td>
+        <td class="num wk-col">6.7 <span class="delta up">▼ 0.2</span></td>
+      </tr>
+      <tr>
+        <td><a href="https://www.testing.com/treatments/compounded-tirzepatide/" target="_blank">Compounded Tirzepatide: How It Works and Safety</a><div class="urlsub">/treatments/compounded-tirzepatide/</div></td>
+        <td class="rev">Aug 6, 2026</td>
+        <td class="rev">15d</td>
+        <td class="num">1.7K <span class="delta up">▲ 102%</span></td>
+        <td class="num">193.7K <span class="delta up">▲ 50%</span></td>
+        <td class="num">0.9%</td>
+        <td class="num">6.0</td>
+        <td class="num wk-col">467 <span class="delta up">▲ 16%</span></td>
+        <td class="num wk-col">50.6K <span class="delta down">▼ 5%</span></td>
+        <td class="num wk-col">5.9 <span class="delta up">▼ 0.2</span></td>
+      </tr>
+      <tr>
+        <td><a href="https://www.testing.com/treatments/glp-1-agonists/" target="_blank">GLP-1 Agonists: How They Work, Types, and Safety</a><div class="urlsub">/treatments/glp-1-agonists/</div></td>
+        <td class="rev">Aug 6, 2026</td>
+        <td class="rev">15d</td>
+        <td class="num">7 <span class="delta down">▼ 12%</span></td>
+        <td class="num">9.4K <span class="delta up">▲ 65%</span></td>
+        <td class="num">0.1%</td>
+        <td class="num">22.9</td>
+        <td class="num wk-col">3 <span class="delta up">▲ 50%</span></td>
+        <td class="num wk-col">3K <span class="delta up">▲ 3%</span></td>
+        <td class="num wk-col">19.0 <span class="delta up">▼ 10.6</span></td>
+      </tr>
+      <tr>
+        <td><a href="https://www.testing.com/treatments/nad-injection-side-effects/" target="_blank">NAD+ Injection Side Effects: What to Expect</a><div class="urlsub">/treatments/nad-injection-side-effects/</div></td>
+        <td class="rev">Jul 14, 2026</td>
+        <td class="rev">38d</td>
+        <td class="num">452 <span class="delta zero">new</span></td>
+        <td class="num">66.8K <span class="delta zero">new</span></td>
+        <td class="num">0.7%</td>
+        <td class="num">4.6</td>
+        <td class="num wk-col">201 <span class="delta up">▲ 57%</span></td>
+        <td class="num wk-col">26.1K <span class="delta up">▲ 14%</span></td>
+        <td class="num wk-col">4.5 <span class="delta up">▼ 0.1</span></td>
+      </tr>
+      <tr>
+        <td><a href="https://www.testing.com/treatments/nad-injections-benefits/" target="_blank">NAD+ Injection Benefits: What the Research Actually Shows</a><div class="urlsub">/treatments/nad-injections-benefits/</div></td>
+        <td class="rev">Jul 1, 2026</td>
+        <td class="rev">51d</td>
+        <td class="num">2.2K <span class="delta up">▲ 551%</span></td>
+        <td class="num">266K <span class="delta up">▲ 415%</span></td>
+        <td class="num">0.8%</td>
+        <td class="num">6.1</td>
+        <td class="num wk-col">981 <span class="delta up">▲ 52%</span></td>
+        <td class="num wk-col">115.6K <span class="delta up">▲ 35%</span></td>
+        <td class="num wk-col">6.1 <span class="delta up">▼ 0.1</span></td>
+      </tr>
+      <tr>
+        <td><a href="https://www.testing.com/treatments/nad/" target="_blank">NAD+ Injections: Benefits, Safety, and What to Know</a><div class="urlsub">/treatments/nad/</div></td>
+        <td class="rev">Aug 6, 2026</td>
+        <td class="rev">15d</td>
+        <td class="num">6.8K <span class="delta up">▲ 136%</span></td>
+        <td class="num">474.5K <span class="delta up">▲ 73%</span></td>
+        <td class="num">1.4%</td>
+        <td class="num">5.7</td>
+        <td class="num wk-col">1.6K <span class="delta up">▲ 1%</span></td>
+        <td class="num wk-col">110.2K <span class="delta down">▼ 10%</span></td>
+        <td class="num wk-col">5.5 <span class="delta up">▼ 0.4</span></td>
+      </tr>
+      <tr>
+        <td><a href="https://www.testing.com/treatments/sermorelin-benefits/" target="_blank">Sermorelin Benefits: What the Research Actually Shows</a><div class="urlsub">/treatments/sermorelin-benefits/</div></td>
+        <td class="rev">Jul 1, 2026</td>
+        <td class="rev">51d</td>
+        <td class="num">2.9K <span class="delta up">▲ 304%</span></td>
+        <td class="num">165.8K <span class="delta up">▲ 204%</span></td>
+        <td class="num">1.7%</td>
+        <td class="num">3.6</td>
+        <td class="num wk-col">1.1K <span class="delta up">▲ 23%</span></td>
+        <td class="num wk-col">61.2K <span class="delta up">▲ 31%</span></td>
+        <td class="num wk-col">3.8 <span class="delta down">▲ 0.4</span></td>
+      </tr>
+      <tr>
+        <td><a href="https://www.testing.com/treatments/sermorelin-side-effects/" target="_blank">Sermorelin Side Effects: What to Expect</a><div class="urlsub">/treatments/sermorelin-side-effects/</div></td>
+        <td class="rev">Jul 14, 2026</td>
+        <td class="rev">38d</td>
+        <td class="num">83 <span class="delta zero">new</span></td>
+        <td class="num">15.8K <span class="delta zero">new</span></td>
+        <td class="num">0.5%</td>
+        <td class="num">5.2</td>
+        <td class="num wk-col">32 <span class="delta up">▲ 28%</span></td>
+        <td class="num wk-col">5.1K <span class="delta up">▲ 11%</span></td>
+        <td class="num wk-col">5.5 <span class="delta down">▲ 0.4</span></td>
+      </tr>
+      <tr>
+        <td><a href="https://www.testing.com/treatments/sermorelin/" target="_blank">Sermorelin: How It Works, Safety, and Access</a><div class="urlsub">/treatments/sermorelin/</div></td>
+        <td class="rev">Aug 6, 2026</td>
+        <td class="rev">15d</td>
+        <td class="num">2K <span class="delta up">▲ 43%</span></td>
+        <td class="num">281.4K <span class="delta up">▲ 9%</span></td>
+        <td class="num">0.7%</td>
+        <td class="num">4.6</td>
+        <td class="num wk-col">312 <span class="delta down">▼ 25%</span></td>
+        <td class="num wk-col">47.9K <span class="delta down">▼ 30%</span></td>
+        <td class="num wk-col">4.8 <span class="delta zero">±0</span></td>
+      </tr>
+      <tr>
+        <td><a href="https://www.testing.com/treatments/tirzepatide-vs-semaglutide/" target="_blank">Tirzepatide vs Semaglutide: Weight Loss, Side Effects, and More</a><div class="urlsub">/treatments/tirzepatide-vs-semaglutide/</div></td>
+        <td class="rev">Jul 1, 2026</td>
+        <td class="rev">51d</td>
+        <td class="num">127 <span class="delta up">▲ 354%</span></td>
+        <td class="num">95.8K <span class="delta up">▲ 1175%</span></td>
+        <td class="num">0.1%</td>
+        <td class="num">8.7</td>
+        <td class="num wk-col">32 <span class="delta down">▼ 27%</span></td>
+        <td class="num wk-col">30.3K <span class="delta zero">±0%</span></td>
+        <td class="num wk-col">7.9 <span class="delta up">▼ 0.6</span></td>
+      </tr>
+      </tbody>
+      <tfoot><tr>
+        <td>All 14 pages</td><td class="rev"></td><td class="rev"></td>
+        <td class="num">23.9K <span class="delta up">▲ 226%</span></td>
+        <td class="num">1966.2K <span class="delta up">▲ 130%</span></td>
+        <td class="num">1.2%</td>
+        <td class="num">5.6</td>
+        <td class="num wk-col">6.7K <span class="delta up">▲ 11%</span></td>
+        <td class="num wk-col">553.4K <span class="delta up">▲ 2%</span></td>
+        <td class="num wk-col"></td>
+      </tr></tfoot>
+    </table>
+    </div>
+  </section>
+
+  <section class="bucket">
+    <div class="bucket-head"><h2>Rankings: Top Queries per Page</h2><p class="bucket-sub">What each page ranks for in Search Console over the last 28 finalized days, top 8 queries by impressions. Position is the average rank Google served the page at for that query.</p></div>
+    <div class="qgrid">
+    <div class="qcard">
+      <div class="qcard-head"><a href="https://www.testing.com/treatments/" target="_blank">Treatment Guides: Compounded GLP-1, Sermorelin &amp; NAD+</a></div>
+      <table class="pages qtable"><thead><tr><th>Query</th><th class="num">Clicks</th><th class="num">Impr</th><th class="num">Avg Pos</th></tr></thead>
+      <tbody><tr><td>sermorelin and nad+</td><td class='num'>1</td><td class='num'>142</td><td class='num'>6.0</td></tr><tr><td>sermorelin vs nad+</td><td class='num'>0</td><td class='num'>131</td><td class='num'>7.4</td></tr><tr><td>sermorelin vs tirzepatide</td><td class='num'>0</td><td class='num'>82</td><td class='num'>9.4</td></tr><tr><td>nad+ vs sermorelin</td><td class='num'>0</td><td class='num'>79</td><td class='num'>8.0</td></tr><tr><td>nad+ and tirzepatide</td><td class='num'>0</td><td class='num'>37</td><td class='num'>10.4</td></tr><tr><td>tirzepatide nad+</td><td class='num'>0</td><td class='num'>33</td><td class='num'>9.5</td></tr><tr><td>tirzepatide and nad+</td><td class='num'>1</td><td class='num'>30</td><td class='num'>10.2</td></tr><tr><td>starlightpeptides.com sermorelin and nad+</td><td class='num'>0</td><td class='num'>30</td><td class='num'>5.8</td></tr></tbody></table>
+    </div>
+    <div class="qcard">
+      <div class="qcard-head"><a href="https://www.testing.com/treatments/compounded-semaglutide-dosage-chart/" target="_blank">Compounded Semaglutide Dosage Chart: Titration Guide</a></div>
+      <table class="pages qtable"><thead><tr><th>Query</th><th class="num">Clicks</th><th class="num">Impr</th><th class="num">Avg Pos</th></tr></thead>
+      <tbody><tr><td>semaglutide dosing</td><td class='num'>111</td><td class='num'>12.1K</td><td class='num'>5.8</td></tr><tr><td>semaglutide weight loss dosage chart</td><td class='num'>57</td><td class='num'>4.6K</td><td class='num'>3.6</td></tr><tr><td>semaglutide dosing chart</td><td class='num'>124</td><td class='num'>3.2K</td><td class='num'>3.0</td></tr><tr><td>semaglutide dosage</td><td class='num'>38</td><td class='num'>2.5K</td><td class='num'>4.3</td></tr><tr><td>semaglutide dosage chart</td><td class='num'>57</td><td class='num'>2.4K</td><td class='num'>2.0</td></tr><tr><td>semaglutide 2.5 mg/ml dosage chart</td><td class='num'>55</td><td class='num'>1.4K</td><td class='num'>2.0</td></tr><tr><td>semaglutide dose</td><td class='num'>11</td><td class='num'>1.3K</td><td class='num'>5.4</td></tr><tr><td>semaglutide doses</td><td class='num'>7</td><td class='num'>1.3K</td><td class='num'>6.7</td></tr></tbody></table>
+    </div>
+    <div class="qcard">
+      <div class="qcard-head"><a href="https://www.testing.com/treatments/compounded-semaglutide-side-effects/" target="_blank">Compounded Semaglutide Side Effects: What to Expect</a></div>
+      <table class="pages qtable"><thead><tr><th>Query</th><th class="num">Clicks</th><th class="num">Impr</th><th class="num">Avg Pos</th></tr></thead>
+      <tbody><tr><td>compounded semaglutide side effects</td><td class='num'>3</td><td class='num'>624</td><td class='num'>9.2</td></tr><tr><td>compound semaglutide side effects</td><td class='num'>0</td><td class='num'>175</td><td class='num'>9.5</td></tr><tr><td>semaglutide compound side effects</td><td class='num'>1</td><td class='num'>170</td><td class='num'>10.1</td></tr><tr><td>side effects of compounded semaglutide</td><td class='num'>2</td><td class='num'>131</td><td class='num'>9.1</td></tr><tr><td>most side effects from compounded semaglutide happen how long after injection</td><td class='num'>0</td><td class='num'>52</td><td class='num'>6.4</td></tr><tr><td>side effects compounded semaglutide</td><td class='num'>0</td><td class='num'>7</td><td class='num'>9.1</td></tr><tr><td>what are the side effects of compounded semaglutide</td><td class='num'>0</td><td class='num'>7</td><td class='num'>6.9</td></tr><tr><td>side effects of semaglutide compound</td><td class='num'>0</td><td class='num'>6</td><td class='num'>11.0</td></tr></tbody></table>
+    </div>
+    <div class="qcard">
+      <div class="qcard-head"><a href="https://www.testing.com/treatments/compounded-semaglutide/" target="_blank">Compounded Semaglutide: Uses, Safety, and Access</a></div>
+      <table class="pages qtable"><thead><tr><th>Query</th><th class="num">Clicks</th><th class="num">Impr</th><th class="num">Avg Pos</th></tr></thead>
+      <tbody><tr><td>compounded semaglutide</td><td class='num'>10</td><td class='num'>8.9K</td><td class='num'>9.0</td></tr><tr><td>compound semaglutide</td><td class='num'>4</td><td class='num'>2.3K</td><td class='num'>9.0</td></tr><tr><td>semaglutide compound</td><td class='num'>5</td><td class='num'>1.7K</td><td class='num'>8.0</td></tr><tr><td>what is compounded semaglutide</td><td class='num'>2</td><td class='num'>1.6K</td><td class='num'>5.9</td></tr><tr><td>is compounded semaglutide safe</td><td class='num'>2</td><td class='num'>1.3K</td><td class='num'>7.1</td></tr><tr><td>does compounded semaglutide work</td><td class='num'>1</td><td class='num'>461</td><td class='num'>6.2</td></tr><tr><td>explain semaglutide medical uses alongside its common side effects</td><td class='num'>0</td><td class='num'>384</td><td class='num'>9.7</td></tr><tr><td>semaglutide compounding pharmacy</td><td class='num'>1</td><td class='num'>270</td><td class='num'>7.4</td></tr></tbody></table>
+    </div>
+    <div class="qcard">
+      <div class="qcard-head"><a href="https://www.testing.com/treatments/compounded-tirzepatide-side-effects/" target="_blank">Compounded Tirzepatide Side Effects: What to Expect</a></div>
+      <table class="pages qtable"><thead><tr><th>Query</th><th class="num">Clicks</th><th class="num">Impr</th><th class="num">Avg Pos</th></tr></thead>
+      <tbody><tr><td>tirzepatide side effects</td><td class='num'>7</td><td class='num'>272</td><td class='num'>15.0</td></tr><tr><td>side effects of tirzepatide compound</td><td class='num'>2</td><td class='num'>259</td><td class='num'>8.8</td></tr><tr><td>compounded tirzepatide</td><td class='num'>0</td><td class='num'>134</td><td class='num'>3.0</td></tr><tr><td>mounjaro</td><td class='num'>1</td><td class='num'>98</td><td class='num'>2.7</td></tr><tr><td>tirzepatide</td><td class='num'>2</td><td class='num'>96</td><td class='num'>2.6</td></tr><tr><td>tirzepatide compound side effects</td><td class='num'>0</td><td class='num'>94</td><td class='num'>8.7</td></tr><tr><td>compounded tirzepatide side effects</td><td class='num'>0</td><td class='num'>66</td><td class='num'>8.8</td></tr><tr><td>side effects of compounded tirzepatide</td><td class='num'>2</td><td class='num'>65</td><td class='num'>7.9</td></tr></tbody></table>
+    </div>
+    <div class="qcard">
+      <div class="qcard-head"><a href="https://www.testing.com/treatments/compounded-tirzepatide/" target="_blank">Compounded Tirzepatide: How It Works and Safety</a></div>
+      <table class="pages qtable"><thead><tr><th>Query</th><th class="num">Clicks</th><th class="num">Impr</th><th class="num">Avg Pos</th></tr></thead>
+      <tbody><tr><td>compounded tirzepatide</td><td class='num'>256</td><td class='num'>21.4K</td><td class='num'>3.7</td></tr><tr><td>tirzepatide compound</td><td class='num'>117</td><td class='num'>19K</td><td class='num'>4.7</td></tr><tr><td>compound tirzepatide</td><td class='num'>36</td><td class='num'>6.6K</td><td class='num'>4.6</td></tr><tr><td>what is compounded tirzepatide</td><td class='num'>42</td><td class='num'>3.2K</td><td class='num'>3.0</td></tr><tr><td>is compounded tirzepatide safe</td><td class='num'>7</td><td class='num'>1.9K</td><td class='num'>6.4</td></tr><tr><td>tirzepatide/pyridoxine</td><td class='num'>6</td><td class='num'>1.9K</td><td class='num'>6.2</td></tr><tr><td>what is the starting dose of compounded tirzepatide</td><td class='num'>23</td><td class='num'>1.6K</td><td class='num'>3.1</td></tr><tr><td>tirzepatide</td><td class='num'>2</td><td class='num'>1.4K</td><td class='num'>21.6</td></tr></tbody></table>
+    </div>
+    <div class="qcard">
+      <div class="qcard-head"><a href="https://www.testing.com/treatments/glp-1-agonists/" target="_blank">GLP-1 Agonists: How They Work, Types, and Safety</a></div>
+      <table class="pages qtable"><thead><tr><th>Query</th><th class="num">Clicks</th><th class="num">Impr</th><th class="num">Avg Pos</th></tr></thead>
+      <tbody><tr><td>peptides</td><td class='num'>0</td><td class='num'>116</td><td class='num'>2.0</td></tr><tr><td>what are peptides</td><td class='num'>0</td><td class='num'>81</td><td class='num'>2.0</td></tr><tr><td>peptides for weight loss</td><td class='num'>0</td><td class='num'>23</td><td class='num'>3.0</td></tr><tr><td>glp-1 agonists</td><td class='num'>0</td><td class='num'>18</td><td class='num'>34.9</td></tr><tr><td>are peptides safe</td><td class='num'>0</td><td class='num'>17</td><td class='num'>2.0</td></tr><tr><td>types of glp1</td><td class='num'>0</td><td class='num'>17</td><td class='num'>1.0</td></tr><tr><td>site:www.testing.com</td><td class='num'>0</td><td class='num'>11</td><td class='num'>20.5</td></tr><tr><td>what are glp-1 medications</td><td class='num'>0</td><td class='num'>11</td><td class='num'>33.1</td></tr></tbody></table>
+    </div>
+    <div class="qcard">
+      <div class="qcard-head"><a href="https://www.testing.com/treatments/nad-injection-side-effects/" target="_blank">NAD+ Injection Side Effects: What to Expect</a></div>
+      <table class="pages qtable"><thead><tr><th>Query</th><th class="num">Clicks</th><th class="num">Impr</th><th class="num">Avg Pos</th></tr></thead>
+      <tbody><tr><td>nad+ side effects</td><td class='num'>28</td><td class='num'>2.9K</td><td class='num'>5.2</td></tr><tr><td>nad side effects</td><td class='num'>10</td><td class='num'>1.5K</td><td class='num'>5.9</td></tr><tr><td>nad+</td><td class='num'>6</td><td class='num'>1.4K</td><td class='num'>2.0</td></tr><tr><td>nad+ benefits and side effects</td><td class='num'>2</td><td class='num'>859</td><td class='num'>9.6</td></tr><tr><td>nad injections side effects</td><td class='num'>2</td><td class='num'>621</td><td class='num'>8.0</td></tr><tr><td>nad+ benefits</td><td class='num'>0</td><td class='num'>452</td><td class='num'>2.3</td></tr><tr><td>nad supplement side effects</td><td class='num'>0</td><td class='num'>396</td><td class='num'>8.2</td></tr><tr><td>nad + side effects</td><td class='num'>6</td><td class='num'>340</td><td class='num'>6.0</td></tr></tbody></table>
+    </div>
+    <div class="qcard">
+      <div class="qcard-head"><a href="https://www.testing.com/treatments/nad-injections-benefits/" target="_blank">NAD+ Injection Benefits: What the Research Actually Shows</a></div>
+      <table class="pages qtable"><thead><tr><th>Query</th><th class="num">Clicks</th><th class="num">Impr</th><th class="num">Avg Pos</th></tr></thead>
+      <tbody><tr><td>nad+</td><td class='num'>258</td><td class='num'>47.7K</td><td class='num'>8.2</td></tr><tr><td>nad peptide</td><td class='num'>45</td><td class='num'>10.1K</td><td class='num'>8.7</td></tr><tr><td>nad injections</td><td class='num'>110</td><td class='num'>9.5K</td><td class='num'>3.1</td></tr><tr><td>nad+ peptide</td><td class='num'>46</td><td class='num'>5.2K</td><td class='num'>6.3</td></tr><tr><td>nad peptide benefits</td><td class='num'>32</td><td class='num'>4.9K</td><td class='num'>6.9</td></tr><tr><td>nad+ injections</td><td class='num'>53</td><td class='num'>4.1K</td><td class='num'>3.9</td></tr><tr><td>nad+ benefits</td><td class='num'>28</td><td class='num'>3.6K</td><td class='num'>5.9</td></tr><tr><td>what is nad+</td><td class='num'>27</td><td class='num'>3.2K</td><td class='num'>7.1</td></tr></tbody></table>
+    </div>
+    <div class="qcard">
+      <div class="qcard-head"><a href="https://www.testing.com/treatments/nad/" target="_blank">NAD+ Injections: Benefits, Safety, and What to Know</a></div>
+      <table class="pages qtable"><thead><tr><th>Query</th><th class="num">Clicks</th><th class="num">Impr</th><th class="num">Avg Pos</th></tr></thead>
+      <tbody><tr><td>nad injections</td><td class='num'>927</td><td class='num'>41.8K</td><td class='num'>2.6</td></tr><tr><td>nad+ peptide</td><td class='num'>121</td><td class='num'>22K</td><td class='num'>8.5</td></tr><tr><td>nad+</td><td class='num'>49</td><td class='num'>17.4K</td><td class='num'>7.6</td></tr><tr><td>nad+ injections</td><td class='num'>407</td><td class='num'>15.3K</td><td class='num'>2.5</td></tr><tr><td>nad+ benefits</td><td class='num'>15</td><td class='num'>9.6K</td><td class='num'>10.3</td></tr><tr><td>nad+ dosage</td><td class='num'>325</td><td class='num'>7.3K</td><td class='num'>3.6</td></tr><tr><td>nad peptide</td><td class='num'>19</td><td class='num'>6.3K</td><td class='num'>10.2</td></tr><tr><td>nad+ injection dosage and frequency</td><td class='num'>187</td><td class='num'>3.7K</td><td class='num'>2.7</td></tr></tbody></table>
+    </div>
+    <div class="qcard">
+      <div class="qcard-head"><a href="https://www.testing.com/treatments/sermorelin-benefits/" target="_blank">Sermorelin Benefits: What the Research Actually Shows</a></div>
+      <table class="pages qtable"><thead><tr><th>Query</th><th class="num">Clicks</th><th class="num">Impr</th><th class="num">Avg Pos</th></tr></thead>
+      <tbody><tr><td>sermorelin</td><td class='num'>435</td><td class='num'>28.8K</td><td class='num'>2.7</td></tr><tr><td>sermorelin peptide</td><td class='num'>312</td><td class='num'>18K</td><td class='num'>2.9</td></tr><tr><td>sermorelin benefits</td><td class='num'>290</td><td class='num'>6.2K</td><td class='num'>1.5</td></tr><tr><td>sermorelin peptide benefits</td><td class='num'>107</td><td class='num'>2.9K</td><td class='num'>1.5</td></tr><tr><td>what is sermorelin</td><td class='num'>50</td><td class='num'>2.7K</td><td class='num'>2.2</td></tr><tr><td>does sermorelin work</td><td class='num'>55</td><td class='num'>2K</td><td class='num'>2.4</td></tr><tr><td>what does sermorelin do</td><td class='num'>58</td><td class='num'>1.9K</td><td class='num'>1.8</td></tr><tr><td>semorelin</td><td class='num'>12</td><td class='num'>1.4K</td><td class='num'>2.4</td></tr></tbody></table>
+    </div>
+    <div class="qcard">
+      <div class="qcard-head"><a href="https://www.testing.com/treatments/sermorelin-side-effects/" target="_blank">Sermorelin Side Effects: What to Expect</a></div>
+      <table class="pages qtable"><thead><tr><th>Query</th><th class="num">Clicks</th><th class="num">Impr</th><th class="num">Avg Pos</th></tr></thead>
+      <tbody><tr><td>sermorelin side effects</td><td class='num'>3</td><td class='num'>1K</td><td class='num'>6.5</td></tr><tr><td>sermorelin long-term side effects</td><td class='num'>0</td><td class='num'>535</td><td class='num'>8.5</td></tr><tr><td>sermorelin peptide</td><td class='num'>0</td><td class='num'>371</td><td class='num'>3.0</td></tr><tr><td>can sermorelin cause cancer</td><td class='num'>1</td><td class='num'>173</td><td class='num'>6.4</td></tr><tr><td>does sermorelin cause cancer</td><td class='num'>0</td><td class='num'>173</td><td class='num'>10.8</td></tr><tr><td>sermorelin</td><td class='num'>0</td><td class='num'>141</td><td class='num'>2.2</td></tr><tr><td>what is sermorelin</td><td class='num'>0</td><td class='num'>125</td><td class='num'>2.1</td></tr><tr><td>side effects of sermorelin</td><td class='num'>1</td><td class='num'>104</td><td class='num'>7.0</td></tr></tbody></table>
+    </div>
+    <div class="qcard">
+      <div class="qcard-head"><a href="https://www.testing.com/treatments/sermorelin/" target="_blank">Sermorelin: How It Works, Safety, and Access</a></div>
+      <table class="pages qtable"><thead><tr><th>Query</th><th class="num">Clicks</th><th class="num">Impr</th><th class="num">Avg Pos</th></tr></thead>
+      <tbody><tr><td>sermorelin</td><td class='num'>707</td><td class='num'>98.2K</td><td class='num'>4.1</td></tr><tr><td>sermorelin peptide</td><td class='num'>389</td><td class='num'>34.7K</td><td class='num'>3.7</td></tr><tr><td>sermorelin side effects</td><td class='num'>57</td><td class='num'>7.2K</td><td class='num'>4.1</td></tr><tr><td>semorelin</td><td class='num'>25</td><td class='num'>4.2K</td><td class='num'>3.9</td></tr><tr><td>what is sermorelin</td><td class='num'>5</td><td class='num'>3.3K</td><td class='num'>6.5</td></tr><tr><td>is sermorelin safe</td><td class='num'>4</td><td class='num'>1.7K</td><td class='num'>8.7</td></tr><tr><td>sermorelin acetate</td><td class='num'>30</td><td class='num'>1.6K</td><td class='num'>2.3</td></tr><tr><td>sermorlin</td><td class='num'>13</td><td class='num'>1.3K</td><td class='num'>4.0</td></tr></tbody></table>
+    </div>
+    <div class="qcard">
+      <div class="qcard-head"><a href="https://www.testing.com/treatments/tirzepatide-vs-semaglutide/" target="_blank">Tirzepatide vs Semaglutide: Weight Loss, Side Effects, and More</a></div>
+      <table class="pages qtable"><thead><tr><th>Query</th><th class="num">Clicks</th><th class="num">Impr</th><th class="num">Avg Pos</th></tr></thead>
+      <tbody><tr><td>semaglutide vs tirzepatide</td><td class='num'>14</td><td class='num'>15.5K</td><td class='num'>9.5</td></tr><tr><td>tirzepatide vs semaglutide</td><td class='num'>6</td><td class='num'>8.1K</td><td class='num'>8.6</td></tr><tr><td>difference between semaglutide and tirzepatide</td><td class='num'>2</td><td class='num'>5.5K</td><td class='num'>8.1</td></tr><tr><td>what is the difference between semaglutide and tirzepatide</td><td class='num'>5</td><td class='num'>2.5K</td><td class='num'>7.4</td></tr><tr><td>difference between tirzepatide and semaglutide</td><td class='num'>4</td><td class='num'>2K</td><td class='num'>8.1</td></tr><tr><td>what&#x27;s the difference between semaglutide and tirzepatide</td><td class='num'>1</td><td class='num'>1.1K</td><td class='num'>8.1</td></tr><tr><td>what is the difference between tirzepatide and semaglutide</td><td class='num'>0</td><td class='num'>1.1K</td><td class='num'>8.3</td></tr><tr><td>tirzepatide vs semaglutide for weight loss</td><td class='num'>1</td><td class='num'>955</td><td class='num'>8.7</td></tr></tbody></table>
+    </div>
+    </div>
+  </section>
+
+  <footer>Sources: Google Search Console · page-sitemap.xml · uploader queue sheet · Generated Aug 24, 2026<br>The most recent 3 days are held back until Google Search Console finalizes its data, so every tile, delta, and chart point reflects fully settled days.</footer>
+</div>
+<script>
+const mkGrad=(ctx,c1,c2)=>{const g=ctx.createLinearGradient(0,0,0,200);g.addColorStop(0,c1);g.addColorStop(1,c2);return g;};
+const tctx=document.getElementById('trend').getContext('2d');
+new Chart(tctx,{type:'line',data:{labels:["May 31", "Jun 7", "Jun 14", "Jun 21", "Jun 28", "Jul 5", "Jul 12", "Jul 19", "Jul 26", "Aug 2", "Aug 9", "Aug 16"],datasets:[
+  {label:'Clicks',data:[15, 44, 143, 250, 656, 1220, 2367, 3651, 5276, 6234, 6021, 5798],borderColor:'#fd605b',backgroundColor:mkGrad(tctx,'rgba(253,96,91,.22)','rgba(253,96,91,0)'),fill:true,tension:.35,yAxisID:'y',borderWidth:2,pointRadius:2},
+  {label:'Impressions',data:[3470, 9398, 34295, 59248, 121513, 189723, 258224, 321498, 402725, 492516, 540702, 485434],borderColor:'#00247a',backgroundColor:'rgba(0,36,122,0)',fill:false,tension:.35,yAxisID:'y1',borderWidth:2,pointRadius:2,borderDash:[4,3]}
+]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+plugins:{legend:{labels:{boxWidth:12,font:{size:11}}}},
+scales:{y:{position:'left',title:{display:true,text:'Clicks',font:{size:10}},grid:{color:'#f0f1f2'}},
+y1:{position:'right',title:{display:true,text:'Impressions',font:{size:10}},grid:{drawOnChartArea:false}}}}});
+</script>
+</body></html>
