@@ -8,9 +8,21 @@ Public data layer for the [nam-homefield/testing-com](https://github.com/nam-hom
 |---|---|---|
 | [Orders](https://nam-homefield.github.io/testing-com-data/orders/) | Revenue, orders and cart rate. Stripe for money, Junction for fulfilment, GA4 for attribution. | Hourly, automatic |
 | [Session patterns](https://nam-homefield.github.io/testing-com-data/clarity/) | Checkout and navigation friction read out of Microsoft Clarity session recordings. | Manual |
+| [STD GEO](https://nam-homefield.github.io/testing-com-data/std/) | Search Console performance for the /std-testing/ geo pages, plus the refresh-vs-control read. | Weekly, Mondays |
+| [Blood testing GEO](https://nam-homefield.github.io/testing-com-data/blood/) | Search Console performance for the /blood-testing/ city pages. | Manual |
+| [Individual test pages](https://nam-homefield.github.io/testing-com-data/tests/) | Search Console performance for the /tests/, panel and treatment upload cohort, split new vs refreshed. | Manual |
+| [Treatments guides](https://nam-homefield.github.io/testing-com-data/treatments/) | Search Console traffic and rankings for the /treatments/ pages. | Manual |
 
-Both are `noindex,nofollow` and carry no patient information. They are public URLs on a
-public repo, so treat them as shareable with the team but not with the world.
+Every report is `noindex,nofollow` and carries no patient information, and `robots.txt`
+disallows the whole site. They are still public URLs on a public repo, so treat them as
+shareable with the team but not with the world.
+
+Each report lives at `<name>/index.html`, which is a permanent URL that must never move.
+Dated snapshots accumulate in `<name>/archive/`. All of them are published by
+`shared/pages-publish/publish_report.sh` in the private testing-com repo. The four
+Search Console reports moved here from githack-fronted gists in August 2026, because
+Pages is served by GitHub directly instead of through a third-party proxy that
+rate-limits and 403s while its edge cache rebuilds. The old gist URLs redirect here.
 
 ## What's here
 
