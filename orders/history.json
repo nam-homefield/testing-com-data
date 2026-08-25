@@ -290,15 +290,15 @@
   },
   {
    "abandoned": 0,
-   "carts": 6,
+   "carts": 8,
    "date": "2026-08-25",
-   "engaged_sessions": 462,
-   "orders": 0,
-   "organic_visits": 315,
+   "engaged_sessions": 525,
+   "orders": 1,
+   "organic_visits": 330,
    "partial": true,
    "qa_orders": 0,
    "reached_checkout": 2,
-   "revenue_cents": 0
+   "revenue_cents": 5500
   }
  ]
 }
