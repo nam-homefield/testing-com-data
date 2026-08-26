@@ -144,7 +144,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
   // hash of this shell, the payload carries the hash it was built for, and a mismatch
   // reloads once against a fresh URL. Without this every reader has to be told to hard
   // refresh, and most will just think the report is broken.
-  var SV = 'd0d119b2';
+  var SV = 'f7b3a94a';
   // Payload source depends on where this shell is served from. On GitHub Pages the
   // payload sits next to it, so fetch same-origin. On githack the payload must come
   // from gist.githubusercontent.com directly: githack caches its own copy of every
@@ -294,7 +294,9 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
                 var i = it[0].dataIndex, out = [];
                 series.forEach(function(sv){
                   out.push(sv.label.replace(' cart rate','') + ': ' + sv.carts[i]
-                           + ' carts / ' + sv.visits[i].toLocaleString() + ' visits');
+                           + ' ' + (sv.numword || 'carts') + ' / '
+                           + sv.visits[i].toLocaleString()
+                           + ' ' + (sv.denword || 'visits'));
                 });
                 out.push('Paid orders: ' + I.orders[i]);
                 if (I.partial && i === I.labels.length - 1)
