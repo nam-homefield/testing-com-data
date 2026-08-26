@@ -292,11 +292,11 @@
    "abandoned": 0,
    "carts": 70,
    "date": "2026-08-25",
-   "engaged_sessions": 5275,
+   "engaged_sessions": 5406,
    "orders": 11,
-   "organic_visits": 3065,
+   "organic_visits": 3165,
    "partial": true,
-   "qa_orders": 0,
+   "qa_orders": 1,
    "reached_checkout": 38,
    "revenue_cents": 140000
   }
