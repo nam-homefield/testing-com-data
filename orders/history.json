@@ -301,12 +301,12 @@
    "revenue_cents": 140000
   },
   {
-   "carts": 1,
+   "carts": 5,
    "date": "2026-08-26",
-   "engaged_sessions": 403,
-   "organic_visits": 252,
+   "engaged_sessions": 456,
+   "organic_visits": 284,
    "partial": true,
-   "reached_checkout": 0
+   "reached_checkout": 1
   }
  ]
 }
