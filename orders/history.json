@@ -305,12 +305,12 @@
    "carts": 26,
    "date": "2026-08-26",
    "engaged_sessions": 1767,
-   "orders": 5,
+   "orders": 6,
    "organic_visits": 1075,
    "partial": true,
    "qa_orders": 0,
    "reached_checkout": 10,
-   "revenue_cents": 42900
+   "revenue_cents": 53400
   }
  ]
 }
