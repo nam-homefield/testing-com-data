@@ -46,13 +46,6 @@ td.amt{font-weight:700;color:var(--navy);white-space:nowrap;font-feature-setting
 .badge.miss{background:var(--bad-soft);color:var(--bad)}
 .flag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:999px;background:#f0f1f2;color:var(--ink-3)}
 .flag.bad{background:var(--bad-soft);color:var(--bad)}
-.exc{background:#fafbfc;border:1px solid var(--border);border-left:3px solid var(--ink-3);
-border-radius:8px;padding:14px 16px;margin-bottom:10px}
-.exc.urgent{border-left-color:var(--coral);background:var(--coral-soft);border-color:#ffd8d0}
-.exc h3{font-size:13px;font-weight:700;margin-bottom:8px}
-.exc h3 .n{background:var(--navy);color:#fff;font-size:11px;padding:1px 8px;border-radius:999px;margin-left:6px}
-.exc.urgent h3 .n{background:var(--coral)}
-.exc ul{margin-left:18px;font-size:13px;line-height:1.6}
 .note a{color:var(--navy);font-weight:600}
 .note{font-size:12px;color:var(--ink-3);margin-top:8px}
 .empty{font-size:13px;color:var(--ink-3);font-style:italic;padding:10px 0}
@@ -144,7 +137,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
   // hash of this shell, the payload carries the hash it was built for, and a mismatch
   // reloads once against a fresh URL. Without this every reader has to be told to hard
   // refresh, and most will just think the report is broken.
-  var SV = 'f7b3a94a';
+  var SV = 'dbdaeddf';
   // Payload source depends on where this shell is served from. On GitHub Pages the
   // payload sits next to it, so fetch same-origin. On githack the payload must come
   // from gist.githubusercontent.com directly: githack caches its own copy of every
@@ -350,8 +343,6 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
         + '<section><h2>Orders per day</h2><div class="sub">Paid customer orders, last '
         + d.mix_days + ' days including today</div>'
         + '<div class="spark">' + d.spark_html + '</div></section>'
-        + '<section><h2>Needs attention</h2><div class="sub">Money we did not collect, and '
-        + 'orders that did not complete cleanly</div>' + d.exceptions_html + '</section>'
         + '<section><h2>What people are buying</h2><div class="sub">Paid customer orders, last '
         + d.mix_days + ' days</div><table><thead><tr><th>Product</th><th>Orders</th></tr></thead>'
         + '<tbody>' + d.mix_html + '</tbody></table></section>'
