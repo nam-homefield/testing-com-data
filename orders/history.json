@@ -307,10 +307,18 @@
    "engaged_sessions": 6525,
    "orders": 14,
    "organic_visits": 3878,
-   "partial": true,
+   "partial": false,
    "qa_orders": 0,
    "reached_checkout": 40,
    "revenue_cents": 124200
+  },
+  {
+   "carts": 38,
+   "date": "2026-08-27",
+   "engaged_sessions": 288,
+   "organic_visits": 147,
+   "partial": true,
+   "reached_checkout": 17
   }
  ]
 }
