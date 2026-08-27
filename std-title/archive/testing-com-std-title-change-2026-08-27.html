@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Testing.com &middot; STD GEO Title Change Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root { --navy:#00247a;--navy-soft:#edf2ff;--navy-ink:#001a59;--coral:#fd605b;--coral-ink:#c63d39;--good:#1f8456;--good-soft:#e3f5ec;--bad:#c63d39;--bad-soft:#ffeee9;--amber:#8a6300;--amber-soft:#fff6e0;--ink:#2d2d2d;--ink-3:#6b7280;--border:#e2e3e4;--border-soft:#f0f1f2;--surface:#fff;--bg:#f7f8fa; }
+  *{box-sizing:border-box} html,body{margin:0;padding:0}
+  body{font-family:'Work Sans',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;padding:32px 24px 64px}
+  .wrap{max-width:1180px;margin:0 auto}
+  .topbar{background:var(--navy);color:#fff;border-radius:14px;padding:28px 32px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:600;margin-bottom:6px}
+  .topbar h1{font-size:26px;font-weight:700;letter-spacing:-.01em;margin:0;color:#fff}
+  .topbar-meta{display:flex;gap:8px;flex-wrap:wrap}
+  .pill{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:500;padding:5px 12px;border-radius:999px;display:inline-flex;align-items:center;gap:6px}
+  .pill .dot{width:6px;height:6px;border-radius:50%;background:var(--coral)}
+  section{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px 28px 20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,36,122,.04)}
+  .head{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border-soft)}
+  h2{font-size:18px;font-weight:700;color:var(--navy);margin:0 0 4px}
+  .sub{font-size:13px;color:var(--ink-3);margin:0}
+  .verdict{border-radius:12px;padding:20px 24px;margin-bottom:4px}
+  .verdict h3{margin:0 0 6px;font-size:22px;font-weight:700}
+  .verdict p{margin:0;font-size:13px;line-height:1.6}
+  .verdict.early{background:var(--amber-soft);border:1px solid #f0dfb0} .verdict.early h3{color:var(--amber)}
+  .verdict.good{background:var(--good-soft);border:1px solid #bfe5d1} .verdict.good h3{color:var(--good)}
+  .verdict.bad{background:var(--bad-soft);border:1px solid #ffd8d0} .verdict.bad h3{color:var(--bad)}
+  .verdict.flat{background:var(--navy-soft);border:1px solid #d8e2ff} .verdict.flat h3{color:var(--navy)}
+  .qgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .qcard{background:var(--navy-soft);border:1px solid #d8e2ff;border-radius:10px;padding:16px 18px}
+  .qcard:first-child{background:#fff6e0;border-color:#f0dfb0}
+  .qlabel{font-size:12px;letter-spacing:.03em;color:var(--navy);font-weight:700;text-transform:uppercase;margin-bottom:4px}
+  .qblurb{font-size:12px;color:var(--ink-3);line-height:1.45;margin-bottom:12px;min-height:34px}
+  .qrow{display:flex;align-items:baseline;gap:8px;margin-top:10px}
+  .qk{font-size:12px;color:var(--ink-3);flex:1}
+  .qv{font-size:20px;font-weight:700;color:var(--navy-ink);font-feature-settings:'tnum'}
+  .qsub{font-size:11px;color:var(--ink-3);margin-top:2px}
+  .delta{display:inline-flex;font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px;font-feature-settings:'tnum'}
+  .delta.up{color:var(--good);background:var(--good-soft)}
+  .delta.down{color:var(--bad);background:var(--bad-soft)}
+  .delta.zero{color:var(--ink-3);background:#f0f1f2;font-weight:500}
+  .charts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .chart-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 14px 8px}
+  .chart-label{font-size:11px;letter-spacing:.04em;color:var(--ink-3);font-weight:600;text-transform:uppercase;margin-bottom:8px}
+  .chart-card canvas{height:190px !important;max-height:190px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:left;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);padding:0 10px 8px;border-bottom:1px solid var(--border)}
+  td{padding:8px 10px;border-bottom:1px solid var(--border-soft)}
+  td.n{text-align:right;font-feature-settings:'tnum';white-space:nowrap}
+  .tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:999px;background:#f0f1f2;color:var(--ink-3)}
+  .tag.chg{background:var(--coral);color:#fff}
+  .note{font-size:12px;color:var(--ink-3);line-height:1.65;margin:14px 0 0}
+  .note b{color:var(--ink)}
+  footer{margin-top:32px;text-align:center;color:var(--ink-3);font-size:11px;letter-spacing:.04em}
+  @media(max-width:880px){.qgrid,.charts{grid-template-columns:1fr} .topbar{flex-direction:column;align-items:flex-start}}
+</style></head>
+<body><div class="wrap">
+  <div class="topbar">
+    <div><div class="eyebrow">Testing.com &middot; Change Tracker</div>
+      <h1>STD GEO Title and Meta Change</h1></div>
+    <div class="topbar-meta">
+      <span class="pill"><span class="dot"></span>Applied Aug 27, 2026 &middot; 2,034 pages</span>
+      <span class="pill">GSC data through Aug 25</span>
+      <span class="pill">Built Aug 27, 4:33 PM</span>
+    </div>
+  </div>
+
+  <section>
+    <div class="verdict early"><h3>Too early to read</h3><p>0 clean days of data so far, and the pages recrawl over days to weeks, so early days mix old and new titles. This turns into a verdict at 5 days.</p></div>
+    <p class="note"><b>What changed.</b> The SEO title and meta description on all 2,034
+    published /std-testing/ geo pages, 1,983 city and 51 state. Titles went from
+    "Find Free or Low-Cost STD Testing in {City}, {ST}" to
+    "STD Testing in {City}, {ST} | Same-Day Testing". No H1, URL or page content
+    changed, and the 8 product pages under /std-testing/ are excluded from every number
+    here. GitLab work item 357.</p>
+  </section>
+
+  <section>
+    <div class="head"><h2>Split by what people searched</h2>
+      <div class="sub">The change swapped which words the title matches, so the section
+      total can sit still while these move in opposite directions</div></div>
+    <p class="note" style="margin:0 0 16px"><b>These cover 51% of clicks, not
+    all of them.</b> Search Console hides rare queries, so it names a query for only about
+    half the clicks in this section. Baseline and after are drawn from that same half, so
+    the comparison holds, but read the counts as a sample rather than as totals.</p>
+    <div class="qgrid">
+    <div class="qcard">
+      <div class="qlabel">Free / low-cost queries</div>
+      <div class="qblurb">The words the old title had and the new one dropped. Watch this one first.</div>
+      <div class="qrow"><span class="qk">Named-query clicks since the change</span>
+        <span class="qv">&mdash;</span> </div>
+      <div class="qsub">nothing to compare yet</div>
+      <div class="qrow"><span class="qk">Share of named-query clicks</span>
+        <span class="qv">0.0%</span></div>
+      <div class="qsub">was 43.0% over the 4 weeks before</div>
+      <div class="qrow"><span class="qk">CTR</span>
+        <span class="qv">0.00%</span></div>
+      <div class="qsub">was 4.16% over the 4 weeks before</div>
+      <div class="qrow"><span class="qk">Avg position</span>
+        <span class="qv">0.0</span></div>
+      <div class="qsub">was 6.6 before, drifting -0.4% a week</div>
+    </div>
+    <div class="qcard">
+      <div class="qlabel">Same-day / near-me queries</div>
+      <div class="qblurb">The words the new title added.</div>
+      <div class="qrow"><span class="qk">Named-query clicks since the change</span>
+        <span class="qv">&mdash;</span> </div>
+      <div class="qsub">nothing to compare yet</div>
+      <div class="qrow"><span class="qk">Share of named-query clicks</span>
+        <span class="qv">0.0%</span></div>
+      <div class="qsub">was 23.1% over the 4 weeks before</div>
+      <div class="qrow"><span class="qk">CTR</span>
+        <span class="qv">0.00%</span></div>
+      <div class="qsub">was 2.84% over the 4 weeks before</div>
+      <div class="qrow"><span class="qk">Avg position</span>
+        <span class="qv">0.0</span></div>
+      <div class="qsub">was 7.1 before, drifting -0.2% a week</div>
+    </div>
+    <div class="qcard">
+      <div class="qlabel">Generic queries</div>
+      <div class="qblurb">Everything else, mostly long-tail city terms.</div>
+      <div class="qrow"><span class="qk">Named-query clicks since the change</span>
+        <span class="qv">&mdash;</span> </div>
+      <div class="qsub">nothing to compare yet</div>
+      <div class="qrow"><span class="qk">Share of named-query clicks</span>
+        <span class="qv">0.0%</span></div>
+      <div class="qsub">was 33.9% over the 4 weeks before</div>
+      <div class="qrow"><span class="qk">CTR</span>
+        <span class="qv">0.00%</span></div>
+      <div class="qsub">was 0.73% over the 4 weeks before</div>
+      <div class="qrow"><span class="qk">Avg position</span>
+        <span class="qv">0.0</span></div>
+      <div class="qsub">was 7.7 before, drifting -6.0% a week</div>
+    </div></div>
+  </section>
+
+  <section>
+    <div class="head"><h2>Daily clicks and position</h2>
+      <div class="sub">The dashed line is the day the titles changed. Shaded days on the
+      right are still being finalized by Search Console</div></div>
+    <div class="charts">
+      <div class="chart-card"><div class="chart-label">Clicks a day by query type</div>
+        <canvas id="c1"></canvas></div>
+      <div class="chart-card"><div class="chart-label">Average position, whole section</div>
+        <canvas id="c2"></canvas></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head"><h2>Last 14 days</h2><div class="sub">Geo pages only</div></div>
+    <table><thead><tr><th>Day</th><th class="n">Clicks</th><th class="n">Impressions</th>
+      <th class="n">CTR</th><th class="n">Position</th><th class="n">Free</th>
+      <th class="n">Same-day</th><th class="n">Generic</th></tr></thead>
+      <tbody><tr><td>Tue Aug 25 <span class="tag">still filling in</span></td><td class="n">793</td><td class="n">91,268</td><td class="n">0.87%</td><td class="n">10.0</td><td class="n">176</td><td class="n">99</td><td class="n">130</td></tr><tr><td>Mon Aug 24 <span class="tag">still filling in</span></td><td class="n">870</td><td class="n">96,572</td><td class="n">0.90%</td><td class="n">9.7</td><td class="n">205</td><td class="n">113</td><td class="n">143</td></tr><tr><td>Sun Aug 23</td><td class="n">554</td><td class="n">77,241</td><td class="n">0.72%</td><td class="n">10.5</td><td class="n">131</td><td class="n">68</td><td class="n">105</td></tr><tr><td>Sat Aug 22</td><td class="n">550</td><td class="n">66,813</td><td class="n">0.82%</td><td class="n">10.6</td><td class="n">108</td><td class="n">75</td><td class="n">85</td></tr><tr><td>Fri Aug 21</td><td class="n">670</td><td class="n">83,129</td><td class="n">0.81%</td><td class="n">10.2</td><td class="n">146</td><td class="n">91</td><td class="n">105</td></tr><tr><td>Thu Aug 20</td><td class="n">816</td><td class="n">91,050</td><td class="n">0.90%</td><td class="n">10.0</td><td class="n">175</td><td class="n">91</td><td class="n">135</td></tr><tr><td>Wed Aug 19</td><td class="n">811</td><td class="n">94,892</td><td class="n">0.85%</td><td class="n">9.0</td><td class="n">183</td><td class="n">110</td><td class="n">139</td></tr><tr><td>Tue Aug 18</td><td class="n">934</td><td class="n">111,189</td><td class="n">0.84%</td><td class="n">8.8</td><td class="n">221</td><td class="n">103</td><td class="n">130</td></tr><tr><td>Mon Aug 17</td><td class="n">923</td><td class="n">116,466</td><td class="n">0.79%</td><td class="n">8.6</td><td class="n">224</td><td class="n">86</td><td class="n">157</td></tr><tr><td>Sun Aug 16</td><td class="n">635</td><td class="n">89,826</td><td class="n">0.71%</td><td class="n">9.6</td><td class="n">141</td><td class="n">79</td><td class="n">120</td></tr><tr><td>Sat Aug 15</td><td class="n">573</td><td class="n">82,933</td><td class="n">0.69%</td><td class="n">9.4</td><td class="n">150</td><td class="n">60</td><td class="n">95</td></tr><tr><td>Fri Aug 14</td><td class="n">715</td><td class="n">111,620</td><td class="n">0.64%</td><td class="n">9.3</td><td class="n">152</td><td class="n">93</td><td class="n">133</td></tr><tr><td>Thu Aug 13</td><td class="n">779</td><td class="n">105,028</td><td class="n">0.74%</td><td class="n">8.6</td><td class="n">160</td><td class="n">83</td><td class="n">148</td></tr><tr><td>Wed Aug 12</td><td class="n">757</td><td class="n">100,850</td><td class="n">0.75%</td><td class="n">8.2</td><td class="n">161</td><td class="n">97</td><td class="n">129</td></tr><tr><td>Tue Aug 11</td><td class="n">887</td><td class="n">104,017</td><td class="n">0.85%</td><td class="n">7.9</td><td class="n">212</td><td class="n">82</td><td class="n">134</td></tr><tr><td>Mon Aug 10</td><td class="n">981</td><td class="n">104,435</td><td class="n">0.94%</td><td class="n">8.3</td><td class="n">209</td><td class="n">117</td><td class="n">173</td></tr></tbody></table>
+  </section>
+
+  <section>
+    <div class="head"><h2>How to read this</h2></div>
+    <p class="note"><b>Give it until mid-September.</b> 2,034 pages recrawl over days to
+    weeks, so the change reaches Google gradually. Early days are a blend of old and new
+    titles, and Search Console finalizes on a two-day lag on top of that.</p>
+    <p class="note"><b>Flat is a win here.</b> Section clicks fell 10.5% over the six weeks
+    before this change and average position drifted from 9.2 to 10.0. The baseline was
+    already sliding, so holding level means the change stopped a decline.</p>
+    <p class="note"><b>Separate CTR from position.</b> Clicks down with position flat is a
+    wording problem, meaning the new title is less clickable. Position down means Google
+    thinks the page matches the query less well than it did. They need different fixes.</p>
+    <p class="note"><b>Clicks are not the goal.</b> This change trades free-clinic seekers
+    for buyers. Losing some free traffic while orders per visit rises is the change
+    working, and a clicks-only read would call that a failure. Order volume lives on the
+    <a href="https://nam-homefield.github.io/testing-com-data/orders/">orders report</a>.</p>
+    <p class="note"><b>Check a real SERP now and then.</b> Google rewrites titles it thinks
+    do not match the query. If it is rewriting ours, the change never reached the user and
+    none of these numbers are measuring it.</p>
+  </section>
+
+  <footer>Testing.com &middot; rebuilt daily &middot; Search Console, geo pages only</footer>
+</div>
+<script>
+const D = {"labels": ["Jul 1", "Jul 2", "Jul 3", "Jul 4", "Jul 5", "Jul 6", "Jul 7", "Jul 8", "Jul 9", "Jul 10", "Jul 11", "Jul 12", "Jul 13", "Jul 14", "Jul 15", "Jul 16", "Jul 17", "Jul 18", "Jul 19", "Jul 20", "Jul 21", "Jul 22", "Jul 23", "Jul 24", "Jul 25", "Jul 26", "Jul 27", "Jul 28", "Jul 29", "Jul 30", "Jul 31", "Aug 1", "Aug 2", "Aug 3", "Aug 4", "Aug 5", "Aug 6", "Aug 7", "Aug 8", "Aug 9", "Aug 10", "Aug 11", "Aug 12", "Aug 13", "Aug 14", "Aug 15", "Aug 16", "Aug 17", "Aug 18", "Aug 19", "Aug 20", "Aug 21", "Aug 22", "Aug 23", "Aug 24", "Aug 25"], "dates": ["2026-07-01", "2026-07-02", "2026-07-03", "2026-07-04", "2026-07-05", "2026-07-06", "2026-07-07", "2026-07-08", "2026-07-09", "2026-07-10", "2026-07-11", "2026-07-12", "2026-07-13", "2026-07-14", "2026-07-15", "2026-07-16", "2026-07-17", "2026-07-18", "2026-07-19", "2026-07-20", "2026-07-21", "2026-07-22", "2026-07-23", "2026-07-24", "2026-07-25", "2026-07-26", "2026-07-27", "2026-07-28", "2026-07-29", "2026-07-30", "2026-07-31", "2026-08-01", "2026-08-02", "2026-08-03", "2026-08-04", "2026-08-05", "2026-08-06", "2026-08-07", "2026-08-08", "2026-08-09", "2026-08-10", "2026-08-11", "2026-08-12", "2026-08-13", "2026-08-14", "2026-08-15", "2026-08-16", "2026-08-17", "2026-08-18", "2026-08-19", "2026-08-20", "2026-08-21", "2026-08-22", "2026-08-23", "2026-08-24", "2026-08-25"], "free": [212, 195, 143, 89, 135, 234, 243, 234, 218, 178, 114, 146, 253, 185, 184, 193, 198, 119, 125, 210, 197, 187, 206, 171, 123, 121, 209, 171, 181, 185, 149, 99, 125, 212, 204, 189, 170, 154, 140, 129, 209, 212, 161, 160, 152, 150, 141, 224, 221, 183, 175, 146, 108, 131, 205, 176], "sameday": [93, 92, 82, 46, 73, 115, 114, 109, 107, 84, 77, 70, 103, 101, 94, 117, 106, 75, 64, 89, 121, 98, 94, 71, 66, 65, 126, 92, 113, 113, 84, 73, 73, 115, 90, 87, 85, 91, 81, 77, 117, 82, 97, 83, 93, 60, 79, 86, 103, 110, 91, 91, 75, 68, 113, 99], "generic": [161, 148, 140, 101, 154, 208, 218, 189, 187, 158, 142, 133, 168, 157, 150, 170, 119, 115, 119, 153, 151, 146, 156, 137, 105, 110, 184, 153, 135, 141, 144, 118, 120, 169, 151, 149, 148, 146, 98, 108, 173, 134, 129, 148, 133, 95, 120, 157, 130, 139, 135, 105, 85, 105, 143, 130], "pos": [7.6, 7.5, 8.1, 8.66, 8.43, 7.59, 7.48, 7.29, 7.52, 7.63, 8.71, 8.33, 7.87, 7.72, 7.83, 7.6, 7.74, 7.86, 8.25, 7.74, 7.65, 7.5, 7.96, 7.17, 9.06, 9.3, 8.59, 8.56, 8.34, 9.45, 9.07, 9.74, 9.46, 7.33, 8.26, 8.48, 8.73, 8.08, 9.27, 9.43, 8.28, 7.87, 8.17, 8.58, 9.33, 9.39, 9.57, 8.6, 8.83, 9.02, 9.97, 10.21, 10.64, 10.46, 9.71, 10.0], "change": "2026-08-27", "solid": "2026-08-23"};
+const ci = D.dates.indexOf(D.change), si = D.dates.indexOf(D.solid);
+const mark = {id:'m', afterDatasetsDraw(c){
+  const x=c.scales.x, g=c.ctx, t=c.chartArea.top, b=c.chartArea.bottom;
+  if(si>=0 && si<D.dates.length-1){
+    g.save(); g.fillStyle='rgba(107,114,128,.10)';
+    g.fillRect(x.getPixelForValue(si), t, c.chartArea.right-x.getPixelForValue(si), b-t); g.restore();
+  }
+  if(ci<0) return;
+  const px=x.getPixelForValue(ci);
+  g.save(); g.beginPath(); g.setLineDash([5,4]); g.lineWidth=1.5; g.strokeStyle='#fd605b';
+  g.moveTo(px,t); g.lineTo(px,b); g.stroke(); g.setLineDash([]);
+  g.font='600 10px Work Sans, sans-serif'; g.fillStyle='#c63d39';
+  g.fillText('titles changed', Math.min(px+5, c.chartArea.right-78), t+11); g.restore();
+}};
+const base={responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+  plugins:{legend:{position:'bottom',labels:{boxWidth:12,boxHeight:2,font:{size:11},usePointStyle:false}}},
+  scales:{x:{grid:{display:false},ticks:{font:{size:10},color:'#6b7280',maxRotation:0,autoSkipPadding:10}},
+    y:{beginAtZero:true,grid:{color:'#f0f1f2'},ticks:{font:{size:10},color:'#6b7280'}}}};
+new Chart(document.getElementById('c1'),{type:'line',plugins:[mark],
+  data:{labels:D.labels,datasets:[
+    {label:'Free / low-cost',data:D.free,borderColor:'#eda100',backgroundColor:'#eda100',borderWidth:2.5,tension:.25,pointRadius:0,pointHoverRadius:5},
+    {label:'Same-day / near me',data:D.sameday,borderColor:'#1baf7a',backgroundColor:'#1baf7a',borderWidth:2.5,tension:.25,pointRadius:0,pointHoverRadius:5},
+    {label:'Generic',data:D.generic,borderColor:'#2f62cc',backgroundColor:'#2f62cc',borderWidth:2.5,tension:.25,pointRadius:0,pointHoverRadius:5}]},
+  options:base});
+new Chart(document.getElementById('c2'),{type:'line',plugins:[mark],
+  data:{labels:D.labels,datasets:[{label:'Average position',data:D.pos,borderColor:'#00247a',backgroundColor:'#00247a',borderWidth:2.5,tension:.25,pointRadius:0,pointHoverRadius:5}]},
+  options:{...base, scales:{...base.scales, y:{...base.scales.y, beginAtZero:false, reverse:true}}}});
+</script></body></html>
