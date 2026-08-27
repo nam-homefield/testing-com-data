@@ -38,6 +38,7 @@
   .qk{font-size:12px;color:var(--ink-3);flex:1}
   .qv{font-size:20px;font-weight:700;color:var(--navy-ink);font-feature-settings:'tnum'}
   .qsub{font-size:11px;color:var(--ink-3);margin-top:2px}
+  .pct{color:var(--ink-3);font-weight:500;font-size:11px}
   .delta{display:inline-flex;font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px;font-feature-settings:'tnum'}
   .delta.up{color:var(--good);background:var(--good-soft)}
   .delta.down{color:var(--bad);background:var(--bad-soft)}
@@ -64,7 +65,7 @@
     <div class="topbar-meta">
       <span class="pill"><span class="dot"></span>Applied Aug 27, 2026 &middot; 2,034 pages</span>
       <span class="pill">GSC data through Aug 25</span>
-      <span class="pill">Built Aug 27, 4:33 PM</span>
+      <span class="pill">Built Aug 27, 4:51 PM</span>
     </div>
   </div>
 
@@ -150,6 +151,53 @@
   </section>
 
   <section>
+    <div class="head"><h2>How many pages rank, and where</h2>
+      <div class="sub">One row per week, counting the 2,034 geo pages by their average
+      position that week</div></div>
+    <div class="qgrid">
+      <div class="qcard"><div class="qlabel">Pages Google showed</div>
+        <div class="qblurb">At least one impression in the last 28 days.</div>
+        <div class="qrow"><span class="qk">of 2,034 geo pages</span>
+          <span class="qv">1,814</span></div>
+        <div class="qsub">89% surfaced at least once</div></div>
+      <div class="qcard"><div class="qlabel">Pages in positions 1 to 4</div>
+        <div class="qblurb">Average position across all the queries each page ranks for.</div>
+        <div class="qrow"><span class="qk">last full week</span>
+          <span class="qv">139</span> <span class="delta down">&#9660; 37%</span></div>
+        <div class="qsub">was 220 the week of Jul 20</div>
+        <div class="qrow"><span class="qk">share of pages shown</span>
+          <span class="qv">9.3%</span></div>
+        <div class="qsub">was 15.1%</div></div>
+      <div class="qcard"><div class="qlabel">Pages past position 10</div>
+        <div class="qblurb">Page two and beyond, where clicks all but stop.</div>
+        <div class="qrow"><span class="qk">last full week</span>
+          <span class="qv">553</span>
+          <span class="delta down">&#9650; 81%</span></div>
+        <div class="qsub">was 305 the week of Jul 20</div>
+        <div class="qrow"><span class="qk">share of pages shown</span>
+          <span class="qv">37.0%</span></div>
+        <div class="qsub">was 20.9%</div></div></div>
+    <div class="chart-card" style="margin-top:14px">
+      <div class="chart-label">Pages by position band, each full week</div>
+      <canvas id="c3"></canvas></div>
+    <table style="margin-top:16px"><thead><tr><th>Week of</th><th class="n">Pages shown</th>
+      <th class="n">Pos 1-4</th><th class="n">Pos 5-10</th><th class="n">Pos 11-20</th>
+      <th class="n">Pos 21+</th></tr></thead><tbody><tr><td>Aug 24 <span class="tag">part week</span></td><td class="n">1,190</td><td class="n">104<span class="pct"> 9%</span></td><td class="n">611<span class="pct"> 51%</span></td><td class="n">410<span class="pct"> 34%</span></td><td class="n">65<span class="pct"> 5%</span></td></tr><tr><td>Aug 17</td><td class="n">1,493</td><td class="n">139<span class="pct"> 9%</span></td><td class="n">801<span class="pct"> 54%</span></td><td class="n">500<span class="pct"> 33%</span></td><td class="n">53<span class="pct"> 4%</span></td></tr><tr><td>Aug 10</td><td class="n">1,531</td><td class="n">182<span class="pct"> 12%</span></td><td class="n">899<span class="pct"> 59%</span></td><td class="n">419<span class="pct"> 27%</span></td><td class="n">31<span class="pct"> 2%</span></td></tr><tr><td>Aug 3</td><td class="n">1,463</td><td class="n">181<span class="pct"> 12%</span></td><td class="n">897<span class="pct"> 61%</span></td><td class="n">358<span class="pct"> 24%</span></td><td class="n">27<span class="pct"> 2%</span></td></tr><tr><td>Jul 27</td><td class="n">1,484</td><td class="n">160<span class="pct"> 11%</span></td><td class="n">827<span class="pct"> 56%</span></td><td class="n">461<span class="pct"> 31%</span></td><td class="n">36<span class="pct"> 2%</span></td></tr><tr><td>Jul 20</td><td class="n">1,456</td><td class="n">220<span class="pct"> 15%</span></td><td class="n">931<span class="pct"> 64%</span></td><td class="n">288<span class="pct"> 20%</span></td><td class="n">17<span class="pct"> 1%</span></td></tr><tr><td>Jul 13</td><td class="n">1,414</td><td class="n">199<span class="pct"> 14%</span></td><td class="n">930<span class="pct"> 66%</span></td><td class="n">264<span class="pct"> 19%</span></td><td class="n">21<span class="pct"> 1%</span></td></tr><tr><td>Jul 6</td><td class="n">1,353</td><td class="n">171<span class="pct"> 13%</span></td><td class="n">887<span class="pct"> 66%</span></td><td class="n">275<span class="pct"> 20%</span></td><td class="n">20<span class="pct"> 1%</span></td></tr><tr><td>Jun 29</td><td class="n">1,283</td><td class="n">175<span class="pct"> 14%</span></td><td class="n">795<span class="pct"> 62%</span></td><td class="n">290<span class="pct"> 23%</span></td><td class="n">23<span class="pct"> 2%</span></td></tr></tbody></table>
+    <p class="note"><b>"Shown" is a floor on indexed, not a count of it.</b> Search Console
+    only reports pages it actually surfaced for someone. A page can be indexed and never
+    appear in the window, so the real indexed number is at least this and probably higher.
+    The only exact source is the URL Inspection API, one call per URL against a 2,000 a day
+    quota, which 2,034 pages would use up in a single run.</p>
+    <p class="note"><b>Anchor links are collapsed onto their page.</b> Search Console counts
+    /std-testing/alaska/#_std_testing_in_alaska as its own page. Left alone that inflates
+    the page count by about 400 and, because each fragment carries its own average position,
+    makes the top-4 band look like it fell by two thirds when it did not.</p>
+    <p class="note"><b>Read the share, not just the count.</b> More pages surfacing pushes
+    every band up at once, and new pages enter low. The share column is what separates a
+    real slide down the results from a bigger pool.</p>
+  </section>
+
+  <section>
     <div class="head"><h2>Last 14 days</h2><div class="sub">Geo pages only</div></div>
     <table><thead><tr><th>Day</th><th class="n">Clicks</th><th class="n">Impressions</th>
       <th class="n">CTR</th><th class="n">Position</th><th class="n">Free</th>
@@ -180,7 +228,7 @@
   <footer>Testing.com &middot; rebuilt daily &middot; Search Console, geo pages only</footer>
 </div>
 <script>
-const D = {"labels": ["Jul 1", "Jul 2", "Jul 3", "Jul 4", "Jul 5", "Jul 6", "Jul 7", "Jul 8", "Jul 9", "Jul 10", "Jul 11", "Jul 12", "Jul 13", "Jul 14", "Jul 15", "Jul 16", "Jul 17", "Jul 18", "Jul 19", "Jul 20", "Jul 21", "Jul 22", "Jul 23", "Jul 24", "Jul 25", "Jul 26", "Jul 27", "Jul 28", "Jul 29", "Jul 30", "Jul 31", "Aug 1", "Aug 2", "Aug 3", "Aug 4", "Aug 5", "Aug 6", "Aug 7", "Aug 8", "Aug 9", "Aug 10", "Aug 11", "Aug 12", "Aug 13", "Aug 14", "Aug 15", "Aug 16", "Aug 17", "Aug 18", "Aug 19", "Aug 20", "Aug 21", "Aug 22", "Aug 23", "Aug 24", "Aug 25"], "dates": ["2026-07-01", "2026-07-02", "2026-07-03", "2026-07-04", "2026-07-05", "2026-07-06", "2026-07-07", "2026-07-08", "2026-07-09", "2026-07-10", "2026-07-11", "2026-07-12", "2026-07-13", "2026-07-14", "2026-07-15", "2026-07-16", "2026-07-17", "2026-07-18", "2026-07-19", "2026-07-20", "2026-07-21", "2026-07-22", "2026-07-23", "2026-07-24", "2026-07-25", "2026-07-26", "2026-07-27", "2026-07-28", "2026-07-29", "2026-07-30", "2026-07-31", "2026-08-01", "2026-08-02", "2026-08-03", "2026-08-04", "2026-08-05", "2026-08-06", "2026-08-07", "2026-08-08", "2026-08-09", "2026-08-10", "2026-08-11", "2026-08-12", "2026-08-13", "2026-08-14", "2026-08-15", "2026-08-16", "2026-08-17", "2026-08-18", "2026-08-19", "2026-08-20", "2026-08-21", "2026-08-22", "2026-08-23", "2026-08-24", "2026-08-25"], "free": [212, 195, 143, 89, 135, 234, 243, 234, 218, 178, 114, 146, 253, 185, 184, 193, 198, 119, 125, 210, 197, 187, 206, 171, 123, 121, 209, 171, 181, 185, 149, 99, 125, 212, 204, 189, 170, 154, 140, 129, 209, 212, 161, 160, 152, 150, 141, 224, 221, 183, 175, 146, 108, 131, 205, 176], "sameday": [93, 92, 82, 46, 73, 115, 114, 109, 107, 84, 77, 70, 103, 101, 94, 117, 106, 75, 64, 89, 121, 98, 94, 71, 66, 65, 126, 92, 113, 113, 84, 73, 73, 115, 90, 87, 85, 91, 81, 77, 117, 82, 97, 83, 93, 60, 79, 86, 103, 110, 91, 91, 75, 68, 113, 99], "generic": [161, 148, 140, 101, 154, 208, 218, 189, 187, 158, 142, 133, 168, 157, 150, 170, 119, 115, 119, 153, 151, 146, 156, 137, 105, 110, 184, 153, 135, 141, 144, 118, 120, 169, 151, 149, 148, 146, 98, 108, 173, 134, 129, 148, 133, 95, 120, 157, 130, 139, 135, 105, 85, 105, 143, 130], "pos": [7.6, 7.5, 8.1, 8.66, 8.43, 7.59, 7.48, 7.29, 7.52, 7.63, 8.71, 8.33, 7.87, 7.72, 7.83, 7.6, 7.74, 7.86, 8.25, 7.74, 7.65, 7.5, 7.96, 7.17, 9.06, 9.3, 8.59, 8.56, 8.34, 9.45, 9.07, 9.74, 9.46, 7.33, 8.26, 8.48, 8.73, 8.08, 9.27, 9.43, 8.28, 7.87, 8.17, 8.58, 9.33, 9.39, 9.57, 8.6, 8.83, 9.02, 9.97, 10.21, 10.64, 10.46, 9.71, 10.0], "change": "2026-08-27", "solid": "2026-08-23"};
+const D = {"labels": ["Jul 1", "Jul 2", "Jul 3", "Jul 4", "Jul 5", "Jul 6", "Jul 7", "Jul 8", "Jul 9", "Jul 10", "Jul 11", "Jul 12", "Jul 13", "Jul 14", "Jul 15", "Jul 16", "Jul 17", "Jul 18", "Jul 19", "Jul 20", "Jul 21", "Jul 22", "Jul 23", "Jul 24", "Jul 25", "Jul 26", "Jul 27", "Jul 28", "Jul 29", "Jul 30", "Jul 31", "Aug 1", "Aug 2", "Aug 3", "Aug 4", "Aug 5", "Aug 6", "Aug 7", "Aug 8", "Aug 9", "Aug 10", "Aug 11", "Aug 12", "Aug 13", "Aug 14", "Aug 15", "Aug 16", "Aug 17", "Aug 18", "Aug 19", "Aug 20", "Aug 21", "Aug 22", "Aug 23", "Aug 24", "Aug 25"], "dates": ["2026-07-01", "2026-07-02", "2026-07-03", "2026-07-04", "2026-07-05", "2026-07-06", "2026-07-07", "2026-07-08", "2026-07-09", "2026-07-10", "2026-07-11", "2026-07-12", "2026-07-13", "2026-07-14", "2026-07-15", "2026-07-16", "2026-07-17", "2026-07-18", "2026-07-19", "2026-07-20", "2026-07-21", "2026-07-22", "2026-07-23", "2026-07-24", "2026-07-25", "2026-07-26", "2026-07-27", "2026-07-28", "2026-07-29", "2026-07-30", "2026-07-31", "2026-08-01", "2026-08-02", "2026-08-03", "2026-08-04", "2026-08-05", "2026-08-06", "2026-08-07", "2026-08-08", "2026-08-09", "2026-08-10", "2026-08-11", "2026-08-12", "2026-08-13", "2026-08-14", "2026-08-15", "2026-08-16", "2026-08-17", "2026-08-18", "2026-08-19", "2026-08-20", "2026-08-21", "2026-08-22", "2026-08-23", "2026-08-24", "2026-08-25"], "free": [212, 195, 143, 89, 135, 234, 243, 234, 218, 178, 114, 146, 253, 185, 184, 193, 198, 119, 125, 210, 197, 187, 206, 171, 123, 121, 209, 171, 181, 185, 149, 99, 125, 212, 204, 189, 170, 154, 140, 129, 209, 212, 161, 160, 152, 150, 141, 224, 221, 183, 175, 146, 108, 131, 205, 176], "sameday": [93, 92, 82, 46, 73, 115, 114, 109, 107, 84, 77, 70, 103, 101, 94, 117, 106, 75, 64, 89, 121, 98, 94, 71, 66, 65, 126, 92, 113, 113, 84, 73, 73, 115, 90, 87, 85, 91, 81, 77, 117, 82, 97, 83, 93, 60, 79, 86, 103, 110, 91, 91, 75, 68, 113, 99], "generic": [161, 148, 140, 101, 154, 208, 218, 189, 187, 158, 142, 133, 168, 157, 150, 170, 119, 115, 119, 153, 151, 146, 156, 137, 105, 110, 184, 153, 135, 141, 144, 118, 120, 169, 151, 149, 148, 146, 98, 108, 173, 134, 129, 148, 133, 95, 120, 157, 130, 139, 135, 105, 85, 105, 143, 130], "pos": [7.6, 7.5, 8.1, 8.66, 8.43, 7.59, 7.48, 7.29, 7.52, 7.63, 8.71, 8.33, 7.87, 7.72, 7.83, 7.6, 7.74, 7.86, 8.25, 7.74, 7.65, 7.5, 7.96, 7.17, 9.06, 9.3, 8.59, 8.56, 8.34, 9.45, 9.07, 9.74, 9.46, 7.33, 8.26, 8.48, 8.73, 8.08, 9.27, 9.43, 8.28, 7.87, 8.17, 8.58, 9.33, 9.39, 9.57, 8.6, 8.83, 9.02, 9.97, 10.21, 10.64, 10.46, 9.71, 10.0], "change": "2026-08-27", "solid": "2026-08-23"}, PB = {"labels": ["Jun 29", "Jul 6", "Jul 13", "Jul 20", "Jul 27", "Aug 3", "Aug 10", "Aug 17", "Aug 24"], "complete": [true, true, true, true, true, true, true, true, false], "1-4": [175, 171, 199, 220, 160, 181, 182, 139, 104], "5-10": [795, 887, 930, 931, 827, 897, 899, 801, 611], "11-20": [290, 275, 264, 288, 461, 358, 419, 500, 410], "21+": [23, 20, 21, 17, 36, 27, 31, 53, 65]};
 const ci = D.dates.indexOf(D.change), si = D.dates.indexOf(D.solid);
 const mark = {id:'m', afterDatasetsDraw(c){
   const x=c.scales.x, g=c.ctx, t=c.chartArea.top, b=c.chartArea.bottom;
@@ -208,4 +256,11 @@ new Chart(document.getElementById('c1'),{type:'line',plugins:[mark],
 new Chart(document.getElementById('c2'),{type:'line',plugins:[mark],
   data:{labels:D.labels,datasets:[{label:'Average position',data:D.pos,borderColor:'#00247a',backgroundColor:'#00247a',borderWidth:2.5,tension:.25,pointRadius:0,pointHoverRadius:5}]},
   options:{...base, scales:{...base.scales, y:{...base.scales.y, beginAtZero:false, reverse:true}}}});
+const bandCols={'1-4':'#1f8456','5-10':'#2f62cc','11-20':'#eda100','21+':'#c63d39'};
+new Chart(document.getElementById('c3'),{type:'bar',
+  data:{labels:PB.labels,datasets:['1-4','5-10','11-20','21+'].map(function(k){
+    return {label:'Position '+k,data:PB[k],backgroundColor:PB.complete.map(function(c){
+      return c ? bandCols[k] : bandCols[k]+'55'; }), borderWidth:0};})},
+  options:{...base, scales:{x:{...base.scales.x, stacked:true},
+    y:{...base.scales.y, stacked:true}}}});
 </script></body></html>
