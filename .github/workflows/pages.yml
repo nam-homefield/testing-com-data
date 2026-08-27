@@ -1,0 +1,49 @@
+# Deploy the report site to GitHub Pages.
+#
+# This replaces GitHub's built-in branch-based "pages build and deployment". That
+# builder has no concurrency control, and the publishers here push often: the orders
+# report every 30 minutes, plus the std / blood / tests / treatments refreshes. Pages
+# allows one in-progress deployment at a time, so when a deploy hung server-side on
+# 2026-08-27 the next push was rejected outright:
+#
+#   Deployment request failed ... due to in progress deployment.
+#   Please cancel 28d28df first or wait for it to complete.
+#
+# The concurrency block below is the fix. A newer push cancels the older run, and
+# actions/deploy-pages cancels its own pending deployment when cancelled, which
+# releases the lock instead of leaving it held until it times out. Superseding is the
+# behaviour we want here anyway: these are dashboards, so only the latest build
+# matters and an older one still in flight is already stale.
+#
+# No Jekyll step on purpose. upload-pages-artifact serves the files exactly as pushed,
+# which is what the reports need, and the repo has no Jekyll sources.
+name: Deploy Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v4
