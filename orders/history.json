@@ -316,11 +316,11 @@
    "abandoned": 1,
    "carts": 68,
    "date": "2026-08-27",
-   "engaged_sessions": 601,
+   "engaged_sessions": 650,
    "orders": 0,
-   "organic_visits": 300,
+   "organic_visits": 330,
    "partial": true,
-   "qa_orders": 0,
+   "qa_orders": 1,
    "reached_checkout": 44,
    "revenue_cents": 0
   }
