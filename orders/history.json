@@ -325,12 +325,16 @@
    "revenue_cents": 24400
   },
   {
-   "carts": 0,
+   "abandoned": 0,
+   "carts": 2,
    "date": "2026-08-28",
-   "engaged_sessions": 344,
-   "organic_visits": 245,
+   "engaged_sessions": 537,
+   "orders": 0,
+   "organic_visits": 373,
    "partial": true,
-   "reached_checkout": 0
+   "qa_orders": 0,
+   "reached_checkout": 1,
+   "revenue_cents": 0
   }
  ]
 }
