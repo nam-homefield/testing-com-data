@@ -326,14 +326,14 @@
   },
   {
    "abandoned": 1,
-   "carts": 6,
+   "carts": 8,
    "date": "2026-08-28",
-   "engaged_sessions": 2233,
+   "engaged_sessions": 2478,
    "orders": 6,
-   "organic_visits": 1399,
+   "organic_visits": 1548,
    "partial": true,
    "qa_orders": 0,
-   "reached_checkout": 4,
+   "reached_checkout": 5,
    "revenue_cents": 82800
   }
  ]
