@@ -337,10 +337,10 @@
    "revenue_cents": 101900
   },
   {
-   "carts": 0,
+   "carts": 1,
    "date": "2026-08-29",
-   "engaged_sessions": 547,
-   "organic_visits": 380,
+   "engaged_sessions": 574,
+   "organic_visits": 398,
    "partial": true,
    "reached_checkout": 0
   }
