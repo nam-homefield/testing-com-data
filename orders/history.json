@@ -352,13 +352,13 @@
    "abandoned": 0,
    "carts": 13,
    "date": "2026-08-30",
-   "engaged_sessions": 2120,
-   "orders": 2,
-   "organic_visits": 1429,
+   "engaged_sessions": 2244,
+   "orders": 4,
+   "organic_visits": 1513,
    "partial": true,
    "qa_orders": 0,
    "reached_checkout": 7,
-   "revenue_cents": 15500
+   "revenue_cents": 37500
   }
  ]
 }
