@@ -361,12 +361,12 @@
    "revenue_cents": 41000
   },
   {
-   "abandoned": 0,
+   "abandoned": 1,
    "carts": 3,
    "date": "2026-08-31",
-   "engaged_sessions": 774,
+   "engaged_sessions": 853,
    "orders": 2,
-   "organic_visits": 511,
+   "organic_visits": 565,
    "partial": true,
    "qa_orders": 0,
    "reached_checkout": 1,
