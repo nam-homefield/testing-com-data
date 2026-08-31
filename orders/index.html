@@ -102,6 +102,13 @@ tr.hot td:first-child{font-weight:600}
 font-size:12px;color:var(--ink-3);line-height:1.6}
 .stale{display:none;background:var(--coral);color:#fff;border-radius:12px;padding:13px 18px;
 margin-bottom:14px;font-size:13.5px;font-weight:600;line-height:1.5}
+/* Amber, not coral. Coral is the dead-pipeline banner and means the whole page is
+   stale. This one means the page is current and one input to it is not, which is a
+   different instruction to the reader: keep using the report, distrust one section. */
+.notice{background:#fff8e6;border:1px solid #f2dfa8;border-left:3px solid var(--amber,#eda100);
+border-radius:10px;padding:14px 18px;margin:0 0 18px;font-size:13px;line-height:1.65;
+color:#6b5514}
+.notice b{color:#4a3a0b}
 footer{font-size:11px;color:var(--ink-3);text-align:center;margin-top:22px;line-height:1.7}
 @media(max-width:560px){body{padding:16px 12px 48px}.metric .v{font-size:22px}td,th{padding:8px 6px}}
 /* A four-column table cannot hold a product name like "Lipid/Cholesterol Panel +
@@ -137,7 +144,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
   // hash of this shell, the payload carries the hash it was built for, and a mismatch
   // reloads once against a fresh URL. Without this every reader has to be told to hard
   // refresh, and most will just think the report is broken.
-  var SV = 'dbdaeddf';
+  var SV = 'c704fdb3';
   // Payload source depends on where this shell is served from. On GitHub Pages the
   // payload sits next to it, so fetch same-origin. On githack the payload must come
   // from gist.githubusercontent.com directly: githack caches its own copy of every
@@ -242,6 +249,52 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
     var I = d.impact;
     if (I) {
       var COL = {launch:'#c63d39', funnel:'#d9a406', content:'#6b7280'};
+      // Painted UNDER the data, not over it, so a shaded day still shows the orders
+      // line and the change markers. The band is the only thing on the chart that says
+      // a gap is missing data rather than a real zero, so it carries its own label
+      // instead of relying on the legend.
+      var darkband = {id:'dark', beforeDatasetsDraw:function(c){
+        if (!(I.dark && I.dark.length) && !(I.murky && I.murky.length)) return;
+        var g = c.ctx, xs = c.scales.x, t = c.chartArea.top, b = c.chartArea.bottom;
+        var half = (xs.getPixelForValue(1) - xs.getPixelForValue(0)) / 2 || 6;
+        // One rectangle per CONSECUTIVE run, not one from first to last. A single
+        // min-to-max box paints "tracking down" over any working day that falls between
+        // two outages, which is the opposite of what the band is for.
+        function span(days, alpha){
+          var idx = (days || []).map(function(d){ return I.dates.indexOf(d); })
+                                .filter(function(i){ return i >= 0; })
+                                .sort(function(p, q){ return p - q; });
+          if (!idx.length) return null;
+          var runs = [[idx[0], idx[0]]];
+          for (var k = 1; k < idx.length; k++) {
+            if (idx[k] === runs[runs.length-1][1] + 1) runs[runs.length-1][1] = idx[k];
+            else runs.push([idx[k], idx[k]]);
+          }
+          g.fillStyle = 'rgba(154,161,172,' + alpha + ')';
+          var widest = null;
+          runs.forEach(function(r){
+            var x0 = xs.getPixelForValue(r[0]) - half,
+                x1 = xs.getPixelForValue(r[1]) + half;
+            g.fillRect(x0, t, x1 - x0, b - t);
+            if (!widest || x1 - x0 > widest[1] - widest[0]) widest = [x0, x1];
+          });
+          return widest;
+        }
+        g.save();
+        // Lighter, and label-free. A half-tracked day still has real data in it, so it
+        // keeps its point on the line, but it sits at the top of a cliff the reader's
+        // eye reads as a fall. Tinting it says "this is already the outage" without
+        // claiming the day is empty.
+        span(I.murky, .08);
+        var box = span(I.dark, .16);
+        if (box) {
+          g.font = FONT; g.fillStyle = '#6b7280';
+          var lbl = 'tracking down';
+          if (g.measureText(lbl).width + 10 < box[1] - box[0])
+            g.fillText(lbl, (box[0] + box[1]) / 2 - g.measureText(lbl).width / 2, b - 8);
+        }
+        g.restore();
+      }};
       var mark = {id:'chg', afterDatasetsDraw:function(c){
         var g = c.ctx, xs = c.scales.x, t = c.chartArea.top, b = c.chartArea.bottom;
         I.marks.forEach(function(m, k){
@@ -262,7 +315,10 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
       // count sessions that LANDED in a section; page rates count sessions that VIEWED
       // a page. Sharing an axis would flatten the section lines under the page line and
       // invite a comparison between two different groups of people.
-      function impactChart(id, series, ymax, ytitle, unit){
+      // band=false for the checkout chart. That chart is the one still recording
+      // during an outage, so shading it grey and stamping "tracking down" across it
+      // would say the opposite of what it is there to show.
+      function impactChart(id, series, ymax, ytitle, unit, band){
         var el = document.getElementById(id);
         if (!el || !series || !series.length) return;
         mk(el.getContext('2d'), {type:'line',
@@ -291,18 +347,34 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
                            + sv.visits[i].toLocaleString()
                            + ' ' + (sv.denword || 'visits'));
                 });
-                out.push('Paid orders: ' + I.orders[i]);
+                // Whole site, always. Orders come from Stripe invoices and carry no
+                // page attribution; they are joined to the chart on date alone. Printed
+                // bare as "Paid orders" under a page-scoped header it read as orders
+                // FROM that page, which is a number this pipeline does not have.
+                out.push('Paid orders, whole site: ' + I.orders[i]);
+                // band === false is the checkout chart, which kept recording. Telling
+                // its reader "tracking was down" would contradict its own caption.
+                if (band !== false) {
+                  if (I.dark && I.dark.indexOf(I.dates[i]) >= 0)
+                    out.push('Cart tracking was down. This day recorded no carts, '
+                             + 'it did not have none.');
+                  else if (I.murky && I.murky.indexOf(I.dates[i]) >= 0)
+                    out.push('Tracking broke partway through this day, so this is '
+                             + 'an undercount, not a fall.');
+                }
                 if (I.partial && i === I.labels.length - 1)
                   out.push('Partial day, still counting');
                 I.marks.filter(function(m){ return m.date === I.dates[i]; })
                        .forEach(function(m){ out.push('CHANGE: ' + m.label); });
                 return out;
               }}}}},
-          plugins:[mark]});
+          plugins:(band === false ? [mark] : [darkband, mark])});
       }
       impactChart('chg_chart', I.series, I.ymax, 'Carts per 1,000 visits', '');
       impactChart('chg_page_chart', I.page_series, I.page_ymax,
                   I.page_ytitle, I.page_unit);
+      impactChart('chg_ck_chart', I.ck_series, I.ck_ymax,
+                  'Visits reaching checkout per 1,000', '', false);
     }
   }
   // The banner is recomputed on a timer rather than once at load. This page is read
@@ -335,6 +407,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
         + '<p>Customer orders and revenue. Internal test orders are excluded.</p>'
         + '<span class="pill"><span class="dot"></span>Updated ' + d.built_label
         + ' PT &middot; refreshes every 30 minutes</span></div>'
+        + (d.notice_html || '')
         + '<section><h2>Today</h2><div class="sub">' + d.day_label
         + ' &middot; all times Pacific</div><div class="metrics">' + m + '</div></section>'
         + '<section><h2>Orders today</h2><div class="sub">Every customer order, newest first</div>'
