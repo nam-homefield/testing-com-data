@@ -913,7 +913,7 @@
    "carts": null,
    "checkout_visits": 54,
    "date": "2026-09-01",
-   "engaged_sessions": 5861,
+   "engaged_sessions": 5868,
    "orders": 15,
    "orders_by_hour": [
     0,
@@ -942,7 +942,7 @@
     0
    ],
    "org_checkout_visits": 44,
-   "organic_visits": 3617,
+   "organic_visits": 3619,
    "partial": true,
    "qa_orders": 3,
    "reached_checkout": null,
