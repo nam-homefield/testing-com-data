@@ -976,11 +976,11 @@
   },
   {
    "carts": 0,
-   "checkout_visits": 4,
+   "checkout_visits": 7,
    "date": "2026-09-02",
-   "engaged_sessions": 372,
+   "engaged_sessions": 413,
    "org_checkout_visits": 3,
-   "organic_visits": 275,
+   "organic_visits": 300,
    "partial": true,
    "reached_checkout": 0
   }
