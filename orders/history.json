@@ -1043,11 +1043,11 @@
   },
   {
    "carts": 0,
-   "checkout_visits": 6,
+   "checkout_visits": 7,
    "date": "2026-09-03",
-   "engaged_sessions": 327,
-   "org_checkout_visits": 5,
-   "organic_visits": 222,
+   "engaged_sessions": 374,
+   "org_checkout_visits": 6,
+   "organic_visits": 256,
    "partial": true,
    "reached_checkout": 0
   }
