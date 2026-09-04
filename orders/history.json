@@ -1110,11 +1110,11 @@
   },
   {
    "carts": 0,
-   "checkout_visits": 9,
+   "checkout_visits": 11,
    "date": "2026-09-04",
-   "engaged_sessions": 389,
-   "org_checkout_visits": 7,
-   "organic_visits": 254,
+   "engaged_sessions": 443,
+   "org_checkout_visits": 8,
+   "organic_visits": 290,
    "partial": true,
    "reached_checkout": 0
   }
