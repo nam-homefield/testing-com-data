@@ -1109,12 +1109,12 @@
    "revenue_cents": 231700
   },
   {
-   "abandoned": 0,
+   "abandoned": 1,
    "cart_tracking_down": true,
    "carts": null,
    "checkout_visits": 76,
    "date": "2026-09-04",
-   "engaged_sessions": 3900,
+   "engaged_sessions": 3932,
    "orders": 11,
    "orders_by_hour": [
     0,
@@ -1143,7 +1143,7 @@
     0
    ],
    "org_checkout_visits": 40,
-   "organic_visits": 2184,
+   "organic_visits": 2201,
    "partial": true,
    "qa_orders": 1,
    "reached_checkout": null,
