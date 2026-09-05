@@ -1179,9 +1179,9 @@
    "abandoned": 0,
    "cart_tracking_down": true,
    "carts": null,
-   "checkout_visits": 39,
+   "checkout_visits": 40,
    "date": "2026-09-05",
-   "engaged_sessions": 1474,
+   "engaged_sessions": 1534,
    "orders": 1,
    "orders_by_hour": [
     0,
@@ -1209,8 +1209,8 @@
     0,
     0
    ],
-   "org_checkout_visits": 18,
-   "organic_visits": 907,
+   "org_checkout_visits": 19,
+   "organic_visits": 947,
    "partial": true,
    "qa_orders": 0,
    "reached_checkout": null,
