@@ -1245,11 +1245,11 @@
   },
   {
    "carts": 0,
-   "checkout_visits": 7,
+   "checkout_visits": 10,
    "date": "2026-09-06",
-   "engaged_sessions": 417,
-   "org_checkout_visits": 6,
-   "organic_visits": 295,
+   "engaged_sessions": 477,
+   "org_checkout_visits": 8,
+   "organic_visits": 322,
    "partial": true,
    "reached_checkout": 0
   }
