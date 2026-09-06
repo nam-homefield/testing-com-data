@@ -1180,9 +1180,9 @@
    "cart_tracking_down": true,
    "cart_tracking_partial": true,
    "carts": 0,
-   "checkout_visits": 58,
+   "checkout_visits": 62,
    "date": "2026-09-05",
-   "engaged_sessions": 3147,
+   "engaged_sessions": 3261,
    "orders": 2,
    "orders_by_hour": [
     0,
@@ -1210,8 +1210,8 @@
     0,
     0
    ],
-   "org_checkout_visits": 34,
-   "organic_visits": 1968,
+   "org_checkout_visits": 38,
+   "organic_visits": 2037,
    "partial": true,
    "qa_orders": 0,
    "reached_checkout": 7,
