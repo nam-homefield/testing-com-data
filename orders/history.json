@@ -1247,9 +1247,9 @@
    "abandoned": 0,
    "cart_tracking_down": true,
    "carts": null,
-   "checkout_visits": 69,
+   "checkout_visits": 70,
    "date": "2026-09-06",
-   "engaged_sessions": 3387,
+   "engaged_sessions": 3555,
    "orders": 9,
    "orders_by_hour": [
     0,
@@ -1278,7 +1278,7 @@
     0
    ],
    "org_checkout_visits": 45,
-   "organic_visits": 2277,
+   "organic_visits": 2389,
    "partial": false,
    "qa_orders": 1,
    "reached_checkout": null,
@@ -1314,9 +1314,9 @@
    "abandoned": 0,
    "cart_tracking_down": true,
    "carts": 9,
-   "checkout_visits": 19,
+   "checkout_visits": 20,
    "date": "2026-09-07",
-   "engaged_sessions": 978,
+   "engaged_sessions": 1086,
    "orders": 1,
    "orders_by_hour": [
     0,
@@ -1344,8 +1344,8 @@
     0,
     0
    ],
-   "org_checkout_visits": 18,
-   "organic_visits": 668,
+   "org_checkout_visits": 19,
+   "organic_visits": 736,
    "partial": true,
    "qa_orders": 0,
    "reached_checkout": 6,
