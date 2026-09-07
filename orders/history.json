@@ -1312,11 +1312,11 @@
   },
   {
    "carts": 0,
-   "checkout_visits": 5,
+   "checkout_visits": 6,
    "date": "2026-09-07",
-   "engaged_sessions": 202,
-   "org_checkout_visits": 5,
-   "organic_visits": 156,
+   "engaged_sessions": 240,
+   "org_checkout_visits": 6,
+   "organic_visits": 182,
    "partial": true,
    "reached_checkout": 0
   }
