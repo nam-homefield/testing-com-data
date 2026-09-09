@@ -144,7 +144,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
   // hash of this shell, the payload carries the hash it was built for, and a mismatch
   // reloads once against a fresh URL. Without this every reader has to be told to hard
   // refresh, and most will just think the report is broken.
-  var SV = 'c704fdb3';
+  var SV = '3247fdcb';
   // Payload source depends on where this shell is served from. On GitHub Pages the
   // payload sits next to it, so fetch same-origin. On githack the payload must come
   // from gist.githubusercontent.com directly: githack caches its own copy of every
@@ -373,8 +373,6 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
       impactChart('chg_chart', I.series, I.ymax, 'Carts per 1,000 visits', '');
       impactChart('chg_page_chart', I.page_series, I.page_ymax,
                   I.page_ytitle, I.page_unit);
-      impactChart('chg_ck_chart', I.ck_series, I.ck_ymax,
-                  'Visits reaching checkout per 1,000', '', false);
     }
   }
   // The banner is recomputed on a timer rather than once at load. This page is read
@@ -420,7 +418,6 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
         + d.mix_days + ' days</div><table><thead><tr><th>Product</th><th>Orders</th></tr></thead>'
         + '<tbody>' + d.mix_html + '</tbody></table></section>'
         + (d.pace_html || '') + (d.traffic_html || '')
-        + (d.impact_html || '')
         + d.attribution_html
         + '<footer>Generated ' + d.built_label + ' Pacific &middot; refreshes every 30 minutes<br>'
         + 'Questions: Nam Phan</footer>';
