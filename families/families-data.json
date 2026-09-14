@@ -1,0 +1,174 @@
+{
+ "window": [
+  "2026-08-17",
+  "2026-09-13"
+ ],
+ "span_days": 28,
+ "built": "2026-09-14T16:57:41-07:00",
+ "rows": [
+  {
+   "family": "tests-unmonetized",
+   "label": "Test pages, Not Monetized",
+   "orders": 3,
+   "order_share": 2.2556390977443606,
+   "sessions": 44426,
+   "session_share": 28.83906314914832,
+   "per_1k": 0.06752802413001395,
+   "eng_rate": 69.75194705802909,
+   "avg_secs": 85.09847836852293
+  },
+  {
+   "family": "treatments",
+   "label": "Treatment guides",
+   "orders": 1,
+   "order_share": 0.7518796992481203,
+   "sessions": 34966,
+   "session_share": 22.69812006647279,
+   "per_1k": 0.028599210661785734,
+   "eng_rate": 70.10524509523538,
+   "avg_secs": 97.98853171652462
+  },
+  {
+   "family": "tests-monetized",
+   "label": "Test pages, Monetized",
+   "orders": 35,
+   "order_share": 26.31578947368421,
+   "sessions": 21383,
+   "session_share": 13.880738471125884,
+   "per_1k": 1.636814291727073,
+   "eng_rate": 62.78819623065052,
+   "avg_secs": 75.11195809755414
+  },
+  {
+   "family": "std-geo-city",
+   "label": "STD geo, city",
+   "orders": 68,
+   "order_share": 51.127819548872175,
+   "sessions": 14095,
+   "session_share": 9.149745533859576,
+   "per_1k": 4.824405817665839,
+   "eng_rate": 76.55196878325647,
+   "avg_secs": 45.51670805250089
+  },
+  {
+   "family": "article",
+   "label": "Articles",
+   "orders": 0,
+   "order_share": 0.0,
+   "sessions": 12150,
+   "session_share": 7.88715205650187,
+   "per_1k": 0.0,
+   "eng_rate": 73.69547325102882,
+   "avg_secs": 64.61884773662551
+  },
+  {
+   "family": "category",
+   "label": "Category and hub",
+   "orders": 1,
+   "order_share": 0.7518796992481203,
+   "sessions": 10251,
+   "session_share": 6.654419401744911,
+   "per_1k": 0.097551458394303,
+   "eng_rate": 72.22709979514194,
+   "avg_secs": 79.5599453711833
+  },
+  {
+   "family": "other",
+   "label": "Unclassified",
+   "orders": 2,
+   "order_share": 1.5037593984962405,
+   "sessions": 6755,
+   "session_share": 4.384996884088077,
+   "per_1k": 0.2960769800148038,
+   "eng_rate": 17.897853441894892,
+   "avg_secs": 19.945521835677276
+  },
+  {
+   "family": "homepage",
+   "label": "Homepage",
+   "orders": 11,
+   "order_share": 8.270676691729323,
+   "sessions": 3645,
+   "session_share": 2.366145616950561,
+   "per_1k": 3.017832647462277,
+   "eng_rate": 38.244170096021946,
+   "avg_secs": 40.64499314128944
+  },
+  {
+   "family": "std-test-product",
+   "label": "STD tests (nav menu)",
+   "orders": 5,
+   "order_share": 3.7593984962406015,
+   "sessions": 2601,
+   "session_share": 1.6884347735770668,
+   "per_1k": 1.9223375624759709,
+   "eng_rate": 65.359477124183,
+   "avg_secs": 65.1280276816609
+  },
+  {
+   "family": "blood-geo",
+   "label": "Blood testing geo",
+   "orders": 2,
+   "order_share": 1.5037593984962405,
+   "sessions": 1447,
+   "session_share": 0.9393176152887412,
+   "per_1k": 1.38217000691085,
+   "eng_rate": 73.18590186592951,
+   "avg_secs": 52.3953006219765
+  },
+  {
+   "family": "std-product",
+   "label": "STD product, not in nav",
+   "orders": 0,
+   "order_share": 0.0,
+   "sessions": 1111,
+   "session_share": 0.7212037806398006,
+   "per_1k": 0.0,
+   "eng_rate": 72.997299729973,
+   "avg_secs": 76.3042304230423
+  },
+  {
+   "family": "std-geo-state",
+   "label": "STD geo, state",
+   "orders": 1,
+   "order_share": 0.7518796992481203,
+   "sessions": 576,
+   "session_share": 0.3739094308267553,
+   "per_1k": 1.736111111111111,
+   "eng_rate": 73.78472222222221,
+   "avg_secs": 56.260416666666664
+  },
+  {
+   "family": "std-pricing",
+   "label": "STD prices and packages",
+   "orders": 4,
+   "order_share": 3.007518796992481,
+   "sessions": 499,
+   "session_share": 0.3239250103863731,
+   "per_1k": 8.016032064128256,
+   "eng_rate": 32.06412825651302,
+   "avg_secs": 17.45490981963928
+  },
+  {
+   "family": "std-hub",
+   "label": "STD testing landing page",
+   "orders": 0,
+   "order_share": 0.0,
+   "sessions": 143,
+   "session_share": 0.09282820938928125,
+   "per_1k": 0.0,
+   "eng_rate": 65.03496503496503,
+   "avg_secs": 73.9020979020979
+  }
+ ],
+ "attributed": 133,
+ "paid_total": 272,
+ "qa": 31,
+ "drop": {
+  "no_pageview": 68,
+  "direct": 24,
+  "began_at_checkout": 14,
+  "non_us": 2
+ },
+ "total_sessions": 154048
+}
