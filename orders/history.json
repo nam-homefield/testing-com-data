@@ -1840,12 +1840,12 @@
    "revenue_cents": 268300
   },
   {
-   "carts": 16,
-   "checkout_visits": 11,
+   "carts": 17,
+   "checkout_visits": 12,
    "date": "2026-09-15",
-   "engaged_sessions": 441,
-   "org_checkout_visits": 10,
-   "organic_visits": 314,
+   "engaged_sessions": 462,
+   "org_checkout_visits": 11,
+   "organic_visits": 330,
    "partial": true,
    "reached_checkout": 3
   }
