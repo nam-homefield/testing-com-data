@@ -2041,11 +2041,11 @@
    "carts": 8,
    "checkout_visits": 6,
    "date": "2026-09-18",
-   "engaged_sessions": 383,
+   "engaged_sessions": 420,
    "org_checkout_visits": 5,
-   "organic_visits": 272,
+   "organic_visits": 300,
    "partial": true,
-   "reached_checkout": 1
+   "reached_checkout": 5
   }
  ]
 }
