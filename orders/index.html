@@ -80,6 +80,18 @@ border-radius:8px;padding:13px 15px;font-size:12.5px;line-height:1.6;margin-bott
 .cmprow .val{width:64px;text-align:right;font-weight:700;color:var(--navy);font-feature-settings:'tnum';flex:none}
 
 .chartwrap.short{height:230px}
+
+.ttv{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--navy-soft);
+border:1px solid #d8e2ff;border-radius:10px;padding:12px 15px;margin-bottom:16px;font-size:13px}
+.ttp{border:1px solid var(--border);border-radius:11px;padding:15px 16px 10px;margin-bottom:12px}
+.ttph{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:2px}
+.ttph .ttn{font-size:13.5px;font-weight:700;color:var(--navy)}
+.ttph .ttnow{font-size:20px;font-weight:700;font-feature-settings:'tnum'}
+.ttph .ttvs{font-size:12px;color:var(--ink-3)}
+.ttps{font-size:11.5px;color:var(--ink-3);margin-bottom:4px}
+.chartwrap.tt{height:210px}
+@media(max-width:600px){.chartwrap.tt{height:185px}}
+
 .flag.launch{background:var(--bad-soft);color:var(--bad)}
 .flag.funnel{background:#fff6e0;color:#9a7404}
 .flag.content{background:#f0f1f2;color:var(--ink-3)}
@@ -91,9 +103,38 @@ table.attr th:nth-child(1),table.attr td:nth-child(1){width:40%}
 table.attr th:nth-child(2),table.attr td:nth-child(2){width:24%}
 table.attr th:nth-child(3),table.attr td:nth-child(3){width:16%}
 table.attr th:nth-child(4),table.attr td:nth-child(4){width:20%}
+table.attr6{table-layout:fixed}
+/* Six columns do not fit a phone, and this table is fixed-layout, so the cells keep
+   their boxes while the TEXT runs straight across the neighbouring column. At 390px
+   "10.79%" was printed through the word "normal". Nam reads this on a phone and mobile
+   is about 70% of the site's traffic, so the narrow view drops the two raw counts and
+   keeps the three that answer the question he asked it: what is the rate today, what is
+   it usually, and is that a problem. The counts are still on the desktop view. */
+table.attr6 td,table.attr6 th{overflow:hidden;text-overflow:ellipsis}
+@media(max-width:620px){
+  table.attr6 th:nth-child(2),table.attr6 td:nth-child(2),
+  table.attr6 th:nth-child(3),table.attr6 td:nth-child(3){display:none}
+  table.attr6 th:nth-child(1),table.attr6 td:nth-child(1){width:28%}
+  table.attr6 th:nth-child(4),table.attr6 td:nth-child(4){width:24%}
+  table.attr6 th:nth-child(5),table.attr6 td:nth-child(5){width:27%}
+  table.attr6 th:nth-child(6),table.attr6 td:nth-child(6){width:21%}
+  /* Three columns of numbers on a 390px screen need smaller type or "131.33%" gets
+     clipped to "131.3...". The pricing page really does run above 100%, so the column
+     has to fit six characters and a sign. */
+  table.attr6 td,table.attr6 th{font-size:11px;padding-left:3px;padding-right:3px}
+  table.attr6 .vb{font-size:10px;padding:2px 5px}
+}
+table.attr6 th:nth-child(1),table.attr6 td:nth-child(1){width:28%}
+table.attr6 th:nth-child(2),table.attr6 td:nth-child(2){width:16%}
+table.attr6 th:nth-child(3),table.attr6 td:nth-child(3){width:10%}
+table.attr6 th:nth-child(4),table.attr6 td:nth-child(4){width:17%}
+table.attr6 th:nth-child(5),table.attr6 td:nth-child(5){width:13%}
+table.attr6 th:nth-child(6),table.attr6 td:nth-child(6){width:16%}
 table.attr2{table-layout:fixed}
-table.attr2 th:nth-child(1),table.attr2 td:nth-child(1){width:80%}
-table.attr2 th:nth-child(2),table.attr2 td:nth-child(2){width:20%}
+table.attr2 th:nth-child(1),table.attr2 td:nth-child(1){width:46%}
+table.attr2 th:nth-child(2),table.attr2 td:nth-child(2){width:16%}
+table.attr2 th:nth-child(3),table.attr2 td:nth-child(3){width:14%}
+table.attr2 th:nth-child(4),table.attr2 td:nth-child(4){width:24%}
 h3.mini{font-size:12px;font-weight:700;color:var(--navy);text-transform:uppercase;
 letter-spacing:.04em;margin:18px 0 6px}
 tr.hot td{background:var(--good-soft)}
@@ -144,7 +185,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
   // hash of this shell, the payload carries the hash it was built for, and a mismatch
   // reloads once against a fresh URL. Without this every reader has to be told to hard
   // refresh, and most will just think the report is broken.
-  var SV = '535730df';
+  var SV = '29547b18';
   // Payload source depends on where this shell is served from. On GitHub Pages the
   // payload sits next to it, so fetch same-origin. On githack the payload must come
   // from gist.githubusercontent.com directly: githack caches its own copy of every
@@ -214,40 +255,34 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
           plugins:[nowline]});
       }
     }
-    var T = d.traffic;
-    if (T) {
-      var tel = document.getElementById('traffic_chart');
-      if (tel) {
-        // Two lines on one axis, not a bar per day. The whole question this card
-        // answers is "did the two instruments agree", and a split between them is the
-        // signature of a Google reporting fault rather than lost traffic. A single
-        // series cannot show that: the old bar chart plotted only the Analytics number,
-        // which is the one that breaks, so the day it broke looked unremarkable.
-        mk(tel.getContext('2d'), {type:'line',
-          data:{labels:T.labels, datasets:[
-            {label:'Search clicks', data:T.clicks, borderColor:'#2f62cc',
-             backgroundColor:'#2f62cc', borderWidth:2.5, fill:false, tension:.25,
-             pointRadius:0, pointHoverRadius:5, spanGaps:true},
-            {label:'Analytics engaged visits', data:T.organic, borderColor:'#d9a406',
-             backgroundColor:'#d9a406', borderWidth:2.5, fill:false, tension:.25,
-             pointRadius:0, pointHoverRadius:5, spanGaps:true}]},
-          options:{responsive:true, maintainAspectRatio:false,
-            layout:{padding:{top:14}}, interaction:{mode:'index', intersect:false},
-            scales:{y:{beginAtZero:true, grid:{color:'#f0f1f2'},
-                       ticks:{font:{size:10}, color:'#6b7280'}},
-                    x:{grid:{display:false}, ticks:{font:{size:9}, color:'#6b7280',
-                       maxRotation:0, autoSkip:true, autoSkipPadding:6}}},
-            plugins:{legend:{display:true, position:'top', align:'end',
-                       labels:{boxWidth:10, boxHeight:10, font:{size:10},
-                               color:'#6b7280', usePointStyle:true,
-                               pointStyle:'line'}},
-              tooltip:{callbacks:{afterBody:function(it){
-                var i = it[0].dataIndex;
-                return T.partial && i === T.labels.length - 1
-                  ? ['Partial day, still counting'] : [];
-              }}}}}});
-      }
-    }
+
+  var TT = d.traffic;
+  if (TT && TT.charts) {
+    Object.keys(TT.charts).forEach(function(id){
+      var el = document.getElementById(id);
+      if (!el) return;
+      var S = TT.charts[id];
+      mk(el.getContext('2d'), {type:'line',
+        data:{labels:S.labels, datasets:[
+          {label:'A normal ' + S.day + ' by this hour', data:S.base, borderColor:'#2f62cc',
+           borderWidth:2, borderDash:[6,4], pointRadius:0, tension:.25, fill:false},
+          {label:'Today', data:S.today, borderColor:'#fd605b',
+           backgroundColor:'rgba(253,96,91,.13)', borderWidth:2.5, pointRadius:0,
+           pointHoverRadius:5, tension:.25, fill:true}]},
+        options:{responsive:true, maintainAspectRatio:false,
+          interaction:{mode:'index', intersect:false},
+          scales:{
+            y:{beginAtZero:true, title:{display:true, text:'Visits so far that day',
+               font:{size:10}}, grid:{color:'#f0f1f2'},
+               ticks:{font:{size:10}, color:'#6b7280', precision:0}},
+            x:{grid:{display:false}, ticks:{font:{size:10}, color:'#6b7280',
+               maxRotation:0, autoSkip:true, autoSkipPadding:14}}},
+          plugins:{legend:{position:'bottom', labels:{boxWidth:14, boxHeight:2,
+                   font:{size:11}, usePointStyle:false}},
+            tooltip:{callbacks:{title:function(it){ return it[0].label + ' Eastern'; }}}}}});
+    });
+  }
+
     var I = d.impact;
     if (I) {
       var COL = {launch:'#c63d39', funnel:'#d9a406', content:'#6b7280'};
