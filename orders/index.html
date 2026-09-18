@@ -185,7 +185,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
   // hash of this shell, the payload carries the hash it was built for, and a mismatch
   // reloads once against a fresh URL. Without this every reader has to be told to hard
   // refresh, and most will just think the report is broken.
-  var SV = '29547b18';
+  var SV = '7f5787b5';
   // Payload source depends on where this shell is served from. On GitHub Pages the
   // payload sits next to it, so fetch same-origin. On githack the payload must come
   // from gist.githubusercontent.com directly: githack caches its own copy of every
@@ -419,12 +419,17 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
   function setStale(builtMs){
     var el = document.getElementById('stale');
     if (!el) return;
-    // 70 minutes: tolerates one missed or slow run on a 30 minute cadence, and
-    // still surfaces a dead pipeline inside the hour.
+    // 30 minutes: tolerates two missed or slow runs on a 10 minute cadence, and
+    // still surfaces a dead pipeline in half an hour. Was 70 while the cadence was
+    // 30 minutes; see "Cadence numbers" in README.md.
     var mins = Math.floor((Date.now() - builtMs)/60000);
-    if (mins > 70) {
-      el.textContent = 'These numbers are ' + Math.floor(mins/60) + 'h ' + (mins%60)
-        + 'm old, so the refresh has missed at least one run. Tell Nam.';
+    if (mins > 30) {
+      // Below an hour, say "34m old", not "0h 34m old". The hours half only earns
+      // its place once there is an hour to show, and the banner is read in a hurry.
+      var age = mins < 60 ? mins + 'm'
+                          : Math.floor(mins/60) + 'h ' + (mins%60) + 'm';
+      el.textContent = 'These numbers are ' + age
+        + ' old, so the refresh has missed at least two runs. Tell Nam.';
       el.style.display = 'block';
     } else {
       el.style.display = 'none';
@@ -441,7 +446,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
         '<div class="topbar"><h1>Testing.com Orders</h1>'
         + '<p>Customer orders and revenue. Internal test orders are excluded.</p>'
         + '<span class="pill"><span class="dot"></span>Updated ' + d.built_label
-        + ' PT &middot; refreshes every 30 minutes</span></div>'
+        + ' PT &middot; refreshes every 10 minutes</span></div>'
         + (d.notice_html || '')
         + '<section><h2>Today</h2><div class="sub">' + d.day_label
         + ' &middot; all times Pacific</div><div class="metrics">' + m + '</div></section>'
@@ -456,7 +461,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
         + '<tbody>' + d.mix_html + '</tbody></table></section>'
         + (d.pace_html || '') + (d.traffic_html || '')
         + d.attribution_html
-        + '<footer>Generated ' + d.built_label + ' Pacific &middot; refreshes every 30 minutes<br>'
+        + '<footer>Generated ' + d.built_label + ' Pacific &middot; refreshes every 10 minutes<br>'
         + 'Questions: Nam Phan</footer>';
       drawCharts(d);
   }
@@ -496,9 +501,10 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
   }
 
   load();
-  // Poll well inside the 30 minute build cadence, so an open tab is never more than a
+  // Poll well inside the 10 minute build cadence, so an open tab is never more than a
   // couple of minutes behind the pipeline. The payload is a few KB of JSON served by
-  // Pages, so the cost of being wrong about the interval is negligible.
+  // Pages, so the cost of being wrong about the interval is negligible. 90 seconds
+  // still clears the cadence comfortably, so it did not change with it.
   setInterval(load, 90000);
   // The banner ages on its own clock: with the network down, no poll ever resolves,
   // and that is exactly when a reader most needs to be told the numbers are old.
