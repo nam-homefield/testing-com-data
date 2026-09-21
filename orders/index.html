@@ -135,6 +135,10 @@ table.attr2 th:nth-child(1),table.attr2 td:nth-child(1){width:46%}
 table.attr2 th:nth-child(2),table.attr2 td:nth-child(2){width:16%}
 table.attr2 th:nth-child(3),table.attr2 td:nth-child(3){width:14%}
 table.attr2 th:nth-child(4),table.attr2 td:nth-child(4){width:24%}
+table.labs{table-layout:fixed}
+table.labs th:nth-child(1),table.labs td:nth-child(1){width:40%}
+table.labs th:nth-child(2),table.labs td:nth-child(2){width:28%}
+table.labs th:nth-child(3),table.labs td:nth-child(3){width:32%}
 h3.mini{font-size:12px;font-weight:700;color:var(--navy);text-transform:uppercase;
 letter-spacing:.04em;margin:18px 0 6px}
 tr.hot td{background:var(--good-soft)}
@@ -185,7 +189,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
   // hash of this shell, the payload carries the hash it was built for, and a mismatch
   // reloads once against a fresh URL. Without this every reader has to be told to hard
   // refresh, and most will just think the report is broken.
-  var SV = '861308d4';
+  var SV = 'adda6acc';
   // Payload source depends on where this shell is served from. On GitHub Pages the
   // payload sits next to it, so fetch same-origin. On githack the payload must come
   // from gist.githubusercontent.com directly: githack caches its own copy of every
@@ -458,7 +462,8 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
         + '<div class="spark">' + d.spark_html + '</div></section>'
         + '<section><h2>What people are buying</h2><div class="sub">Paid customer orders, last '
         + d.mix_days + ' days</div><table><thead><tr><th>Product</th><th>Orders</th></tr></thead>'
-        + '<tbody>' + d.mix_html + '</tbody></table></section>'
+        + '<tbody>' + d.mix_html + '</tbody></table>'
+        + (d.lab_html || '') + '</section>'
         + (d.pace_html || '') + (d.traffic_html || '')
         + d.attribution_html
         + '<footer>Generated ' + d.built_label + ' Pacific &middot; refreshes about every 10 minutes<br>'
