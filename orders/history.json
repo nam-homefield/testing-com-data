@@ -2239,10 +2239,10 @@
   },
   {
    "abandoned": 0,
-   "carts": 101,
+   "carts": 103,
    "checkout_visits": 46,
    "date": "2026-09-21",
-   "engaged_sessions": 2143,
+   "engaged_sessions": 2164,
    "orders": 12,
    "orders_by_hour": [
     1,
