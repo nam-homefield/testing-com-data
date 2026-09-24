@@ -2438,11 +2438,11 @@
   },
   {
    "carts": 16,
-   "checkout_visits": 11,
+   "checkout_visits": 12,
    "date": "2026-09-24",
-   "engaged_sessions": 425,
+   "engaged_sessions": 434,
    "org_checkout_visits": 9,
-   "organic_visits": 264,
+   "organic_visits": 269,
    "partial": true,
    "reached_checkout": 4
   }
