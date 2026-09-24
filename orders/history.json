@@ -2437,14 +2437,14 @@
    "revenue_cents": 223700
   },
   {
-   "carts": 14,
-   "checkout_visits": 9,
+   "carts": 16,
+   "checkout_visits": 11,
    "date": "2026-09-24",
-   "engaged_sessions": 397,
-   "org_checkout_visits": 7,
-   "organic_visits": 250,
+   "engaged_sessions": 425,
+   "org_checkout_visits": 9,
+   "organic_visits": 264,
    "partial": true,
-   "reached_checkout": 3
+   "reached_checkout": 4
   }
  ]
 }
