@@ -2504,13 +2504,13 @@
   },
   {
    "carts": 4,
-   "checkout_visits": 5,
+   "checkout_visits": 6,
    "date": "2026-09-25",
-   "engaged_sessions": 273,
-   "org_checkout_visits": 4,
-   "organic_visits": 177,
+   "engaged_sessions": 301,
+   "org_checkout_visits": 5,
+   "organic_visits": 194,
    "partial": true,
-   "reached_checkout": 0
+   "reached_checkout": 1
   }
  ]
 }
