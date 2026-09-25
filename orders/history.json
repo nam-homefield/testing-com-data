@@ -2503,12 +2503,12 @@
    "revenue_cents": 165100
   },
   {
-   "abandoned": 1,
+   "abandoned": 0,
    "carts": 41,
    "checkout_visits": 34,
    "date": "2026-09-25",
    "engaged_sessions": 1487,
-   "orders": 4,
+   "orders": 5,
    "orders_by_hour": [
     0,
     0,
@@ -2519,7 +2519,7 @@
     0,
     1,
     2,
-    1,
+    2,
     0,
     0,
     0,
@@ -2550,7 +2550,7 @@
     0,
     5100,
     47900,
-    6500,
+    21000,
     0,
     0,
     0,
@@ -2566,7 +2566,7 @@
     0,
     0
    ],
-   "revenue_cents": 59500
+   "revenue_cents": 74000
   }
  ]
 }
