@@ -2638,9 +2638,9 @@
    "carts": 16,
    "checkout_visits": 15,
    "date": "2026-09-27",
-   "engaged_sessions": 563,
+   "engaged_sessions": 585,
    "org_checkout_visits": 10,
-   "organic_visits": 392,
+   "organic_visits": 398,
    "partial": true,
    "reached_checkout": 5
   }
