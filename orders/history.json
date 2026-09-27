@@ -2636,11 +2636,11 @@
   },
   {
    "carts": 23,
-   "checkout_visits": 18,
+   "checkout_visits": 19,
    "date": "2026-09-27",
-   "engaged_sessions": 1198,
-   "org_checkout_visits": 12,
-   "organic_visits": 712,
+   "engaged_sessions": 1243,
+   "org_checkout_visits": 13,
+   "organic_visits": 725,
    "partial": true,
    "reached_checkout": 5
   }
