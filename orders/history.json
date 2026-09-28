@@ -2702,14 +2702,14 @@
    "revenue_cents": 82900
   },
   {
-   "carts": 5,
-   "checkout_visits": 6,
+   "carts": 6,
+   "checkout_visits": 7,
    "date": "2026-09-28",
-   "engaged_sessions": 232,
-   "org_checkout_visits": 5,
-   "organic_visits": 172,
+   "engaged_sessions": 249,
+   "org_checkout_visits": 6,
+   "organic_visits": 187,
    "partial": true,
-   "reached_checkout": 1
+   "reached_checkout": 2
   }
  ]
 }
