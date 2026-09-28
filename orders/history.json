@@ -2702,12 +2702,12 @@
    "revenue_cents": 82900
   },
   {
-   "carts": 10,
+   "carts": 11,
    "checkout_visits": 11,
    "date": "2026-09-28",
-   "engaged_sessions": 433,
+   "engaged_sessions": 445,
    "org_checkout_visits": 10,
-   "organic_visits": 325,
+   "organic_visits": 332,
    "partial": true,
    "reached_checkout": 3
   }
