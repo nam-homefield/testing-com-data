@@ -2704,10 +2704,10 @@
   },
   {
    "abandoned": 0,
-   "carts": 121,
-   "checkout_visits": 94,
+   "carts": 122,
+   "checkout_visits": 95,
    "date": "2026-09-28",
-   "engaged_sessions": 5943,
+   "engaged_sessions": 6007,
    "orders": 16,
    "orders_by_hour": [
     0,
@@ -2735,8 +2735,8 @@
     0,
     0
    ],
-   "org_checkout_visits": 56,
-   "organic_visits": 2863,
+   "org_checkout_visits": 57,
+   "organic_visits": 2898,
    "partial": true,
    "qa_orders": 0,
    "reached_checkout": 37,
