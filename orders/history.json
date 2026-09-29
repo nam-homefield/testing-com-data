@@ -2772,9 +2772,9 @@
    "carts": 10,
    "checkout_visits": 11,
    "date": "2026-09-29",
-   "engaged_sessions": 502,
+   "engaged_sessions": 516,
    "org_checkout_visits": 7,
-   "organic_visits": 305,
+   "organic_visits": 309,
    "partial": true,
    "reached_checkout": 8
   }
