@@ -2737,7 +2737,7 @@
    ],
    "org_checkout_visits": 63,
    "organic_visits": 3160,
-   "partial": true,
+   "partial": false,
    "qa_orders": 0,
    "reached_checkout": 38,
    "revenue_by_hour_cents": [
@@ -2767,6 +2767,16 @@
     5100
    ],
    "revenue_cents": 306300
+  },
+  {
+   "carts": 7,
+   "checkout_visits": 8,
+   "date": "2026-09-29",
+   "engaged_sessions": 264,
+   "org_checkout_visits": 4,
+   "organic_visits": 160,
+   "partial": true,
+   "reached_checkout": 5
   }
  ]
 }
