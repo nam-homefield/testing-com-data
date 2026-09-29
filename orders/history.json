@@ -2707,7 +2707,7 @@
    "carts": 82,
    "checkout_visits": 62,
    "date": "2026-09-28",
-   "engaged_sessions": 4332,
+   "engaged_sessions": 4393,
    "orders": 15,
    "orders_by_hour": [
     0,
@@ -2736,7 +2736,7 @@
     0
    ],
    "org_checkout_visits": 40,
-   "organic_visits": 1965,
+   "organic_visits": 1986,
    "partial": true,
    "qa_orders": 0,
    "reached_checkout": 16,
