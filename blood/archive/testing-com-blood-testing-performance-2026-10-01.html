@@ -73,12 +73,12 @@
   </div>
   
   <section class="bucket update">
-    <div class="bucket-head"><h2>Refresh Impact: Before vs After</h2><p class="bucket-sub">Search performance for the refreshed pages since the update, next to the baseline they held before it. Covers the 200 refreshed pages, measured against their pre-update baseline (the 4 weeks before the refresh). The 15 new pages have no before-state and are excluded from this comparison.</p></div>
-    <div class="metrics"><div class="metric"><div class="metric-label">Clicks</div><div class="metric-val">3.3K</div><span class="delta up">↑ 340.6%</span><div class="upd-pre">was 752 before</div></div><div class="metric"><div class="metric-label">Impressions</div><div class="metric-val">1.2M</div><span class="delta up">↑ 265.8%</span><div class="upd-pre">was 339.8K before</div></div><div class="metric"><div class="metric-label">Avg Position</div><div class="metric-val">12.6</div><span class="delta down">↑ 2.05 worse</span><div class="upd-pre">was 10.6 before</div></div></div>
+    <div class="bucket-head"><h2>Refresh Impact: Before vs After</h2><p class="bucket-sub">Search performance per day for the refreshed pages now, next to the baseline they held before the update. Covers the 200 refreshed pages. Both sides are per-day rates over 28 days: before = May 25 to Jun 21, after = the newest 28 finalized days, Sep 1 to Sep 28. The 15 new pages have no before-state and are excluded from this comparison. Google ranking updates fall inside these windows: May 2026 core update (before); September 2026 spam update (after). The refresh date of Jun 22, 2026 is the program's recorded date and has not been confirmed page by page.</p></div>
+    <div class="metrics"><div class="metric"><div class="metric-label">Clicks per day</div><div class="metric-val">30.5</div><span class="delta up">↑ 13.7%</span><div class="upd-pre">was 26.9 before</div></div><div class="metric"><div class="metric-label">Impressions per day</div><div class="metric-val">11.6K</div><span class="delta down">↓ 4.7%</span><div class="upd-pre">was 12.1K before</div></div><div class="metric"><div class="metric-label">Avg Position</div><div class="metric-val">12.1</div><span class="delta down">↓ 1.55 worse</span><div class="upd-pre">was 10.6 before</div></div></div>
   </section>
   <section class="bucket coverage">
-    <div class="bucket-head"><h2>Blood Testing GEO Program</h2><p class="bucket-sub">Pages published through the blood-testing GEO program. Total URLs = New plus Refreshed. In Sitemap = how many are live in the Yoast sitemap. Is Indexed = how many have earned Google impressions. New vs refreshed comes from the program record (cohort.csv).</p></div>
-    <div class="cov-grid"><div class="cov-card"><div class="cov-label">Total URLs</div><div class="cov-val">215</div></div><div class="cov-card"><div class="cov-label">New URLs</div><div class="cov-val">15</div></div><div class="cov-card"><div class="cov-label">Refreshed URLs</div><div class="cov-val">200</div></div><div class="cov-card"><div class="cov-label">In Sitemap</div><div class="cov-val">215</div></div><div class="cov-card"><div class="cov-label">Is Indexed</div><div class="cov-val">215</div></div></div>
+    <div class="bucket-head"><h2>Blood Testing GEO Program</h2><p class="bucket-sub">Pages published through the blood-testing GEO program. Total URLs = New plus Refreshed. In Sitemap = how many are live in the Yoast sitemap. Is Indexed = how many earned at least one Google impression in the last 28 finalized days, so it is a floor on what Google has indexed. New vs refreshed comes from the program record (cohort.csv).</p></div>
+    <div class="cov-grid"><div class="cov-card"><div class="cov-label">Total URLs</div><div class="cov-val">215</div></div><div class="cov-card"><div class="cov-label">New URLs</div><div class="cov-val">15</div></div><div class="cov-card"><div class="cov-label">Refreshed URLs</div><div class="cov-val">200</div></div><div class="cov-card"><div class="cov-label">In Sitemap</div><div class="cov-val">215</div></div><div class="cov-card"><div class="cov-label">Is Indexed</div><div class="cov-val">214</div></div></div>
   </section>
   
     <section class="bucket">
@@ -92,7 +92,7 @@
       <div class="metrics">
         <div class="metric"><div class="metric-label">Clicks</div><div class="metric-val">256</div><span class="delta down">↓ 0.8%</span></div>
         <div class="metric"><div class="metric-label">Impressions</div><div class="metric-val">97.1K</div><span class="delta down">↓ 7.2%</span></div>
-        <div class="metric"><div class="metric-label">Avg Position</div><div class="metric-val">9.6</div><span class="delta up">↓ 1.07 better</span></div>
+        <div class="metric"><div class="metric-label">Avg Position</div><div class="metric-val">9.6</div><span class="delta up">↑ 1.07 better</span></div>
       </div>
       <p class="cmp">Tiles and deltas compare the last finalized week (Sep 20 to Sep 26) to the week before (Sep 13 to Sep 19). The dotted point on each chart is that finalized week. The chart line shows the longer trend, so it can climb or fall over weeks while the single-week change moves the other way.</p>
       <div class="charts">
@@ -123,6 +123,6 @@ y2:{position:'right',reverse:true,grid:{display:false},border:{display:false},ti
 interaction:{intersect:false,mode:'index'}},plugins:[gmark]});
 })();</script>
     </section>
-  <footer>Sources: Google Search Console · Yoast sitemap · Generated Oct 01, 2026<br>The current week is held back until Google Search Console finalizes its data (about 3 days), so every tile, delta, and chart point reflects a fully settled week.</footer>
+  <footer>Sources: Google Search Console · Yoast sitemap · Generated Oct 01, 2026<br>A week appears only once all 7 of its days are finalized in Google Search Console, so every tile, delta, and chart point reflects a fully settled week. Section-jump rows (a URL ending in #section) are counted on their page: 4.8% of last week's impressions and 1.6% of its clicks. Google update bands come from Google's Search Status Dashboard, refreshed on each build when the feed is reachable.</footer>
 </div>
 </body></html>
