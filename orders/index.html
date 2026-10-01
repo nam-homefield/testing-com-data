@@ -147,13 +147,6 @@ tr.hot td:first-child{font-weight:600}
 font-size:12px;color:var(--ink-3);line-height:1.6}
 .stale{display:none;background:var(--coral);color:#fff;border-radius:12px;padding:13px 18px;
 margin-bottom:14px;font-size:13.5px;font-weight:600;line-height:1.5}
-/* Amber, not coral. Coral is the dead-pipeline banner and means the whole page is
-   stale. This one means the page is current and one input to it is not, which is a
-   different instruction to the reader: keep using the report, distrust one section. */
-.notice{background:#fff8e6;border:1px solid #f2dfa8;border-left:3px solid var(--amber,#eda100);
-border-radius:10px;padding:14px 18px;margin:0 0 18px;font-size:13px;line-height:1.65;
-color:#6b5514}
-.notice b{color:#4a3a0b}
 footer{font-size:11px;color:var(--ink-3);text-align:center;margin-top:22px;line-height:1.7}
 @media(max-width:560px){body{padding:16px 12px 48px}.metric .v{font-size:22px}td,th{padding:8px 6px}}
 /* A four-column table cannot hold a product name like "Lipid/Cholesterol Panel +
@@ -189,7 +182,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
   // hash of this shell, the payload carries the hash it was built for, and a mismatch
   // reloads once against a fresh URL. Without this every reader has to be told to hard
   // refresh, and most will just think the report is broken.
-  var SV = 'adda6acc';
+  var SV = '16d1b9df';
   // Payload source depends on where this shell is served from. On GitHub Pages the
   // payload sits next to it, so fetch same-origin. On githack the payload must come
   // from gist.githubusercontent.com directly: githack caches its own copy of every
