@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Testing.com SEO Performance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --navy:#00247a;--navy-ink:#001a59;--navy-soft:#edf2ff;--coral:#fd605b;--ink:#2d2d2d;--ink-3:#6b7280;--border:#e2e3e4;--bg:#f7f8fa;--surface:#fff; }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;height:100%;overflow:hidden}
+  body{font-family:'Work Sans',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
+  header{background:var(--navy);color:#fff;padding:12px 16px 0;flex:none}
+  .head-row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;max-width:1180px;margin:0 auto 10px}
+  .eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:600}
+  h1{font-size:18px;font-weight:700;letter-spacing:-.01em;margin:0;color:#fff}
+  .tabs{display:flex;gap:4px;max-width:1180px;margin:0 auto;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{appearance:none;border:0;background:rgba(255,255,255,.1);color:rgba(255,255,255,.85);font:600 14px 'Work Sans',sans-serif;padding:10px 16px;border-radius:10px 10px 0 0;cursor:pointer;white-space:nowrap;flex:none}
+  .tab:hover{background:rgba(255,255,255,.18)}
+  .tab[aria-selected="true"]{background:var(--bg);color:var(--navy);box-shadow:inset 0 3px 0 var(--coral)}
+  .tab:focus-visible{outline:2px solid var(--coral);outline-offset:-2px}
+  .panels{flex:1 1 auto;min-height:0;position:relative}
+  .panel{position:absolute;inset:0;display:none;flex-direction:column}
+  .panel.active{display:flex}
+  .panel-bar{flex:none;display:flex;justify-content:flex-end;padding:6px 16px;font-size:12px;background:var(--surface);border-bottom:1px solid var(--border)}
+  .panel-bar a{color:var(--navy);font-weight:500;text-decoration:none}
+  .panel-bar a:hover{text-decoration:underline}
+  iframe{flex:1 1 auto;width:100%;min-height:0;border:0;background:var(--bg)}
+  @media (max-width:480px){ h1{font-size:16px} .tab{padding:9px 13px;font-size:13px} }
+</style>
+</head><body>
+<header>
+  <div class="head-row"><span class="eyebrow">Testing.com</span><h1>SEO Performance</h1></div>
+  <div class="tabs" role="tablist" aria-label="Dashboards">
+    <button class="tab" role="tab" id="tab-std" data-key="std" aria-controls="panel-std">STD GEO</button>
+    <button class="tab" role="tab" id="tab-blood" data-key="blood" aria-controls="panel-blood">Blood Testing GEO</button>
+    <button class="tab" role="tab" id="tab-tests" data-key="tests" aria-controls="panel-tests">Individual Tests</button>
+    <button class="tab" role="tab" id="tab-treatments" data-key="treatments" aria-controls="panel-treatments">Treatments</button>
+  </div>
+</header>
+<main class="panels">
+  <section class="panel" id="panel-std" role="tabpanel" aria-labelledby="tab-std">
+    <div class="panel-bar"><a href="std/" target="_blank" rel="noopener">Open on its own &#8599;</a></div>
+  </section>
+  <section class="panel" id="panel-blood" role="tabpanel" aria-labelledby="tab-blood">
+    <div class="panel-bar"><a href="blood/" target="_blank" rel="noopener">Open on its own &#8599;</a></div>
+  </section>
+  <section class="panel" id="panel-tests" role="tabpanel" aria-labelledby="tab-tests">
+    <div class="panel-bar"><a href="tests/" target="_blank" rel="noopener">Open on its own &#8599;</a></div>
+  </section>
+  <section class="panel" id="panel-treatments" role="tabpanel" aria-labelledby="tab-treatments">
+    <div class="panel-bar"><a href="treatments/" target="_blank" rel="noopener">Open on its own &#8599;</a></div>
+  </section>
+</main>
+<script>
+(function () {
+  var KEYS = ['std', 'blood', 'tests', 'treatments'];
+  var TITLES = { std: 'STD GEO', blood: 'Blood Testing GEO', tests: 'Individual Tests', treatments: 'Treatments' };
+  function keyFromHash() {
+    var k = (location.hash || '').replace(/^#/, '').toLowerCase();
+    return KEYS.indexOf(k) >= 0 ? k : 'std';
+  }
+  function show(key) {
+    KEYS.forEach(function (k) {
+      var on = k === key;
+      var tab = document.getElementById('tab-' + k);
+      var panel = document.getElementById('panel-' + k);
+      tab.setAttribute('aria-selected', on ? 'true' : 'false');
+      tab.tabIndex = on ? 0 : -1;
+      panel.classList.toggle('active', on);
+      if (on && !panel.querySelector('iframe')) {
+        var f = document.createElement('iframe');
+        f.title = TITLES[k] + ' dashboard';
+        f.src = k + '/';
+        panel.appendChild(f);
+      }
+    });
+    document.title = TITLES[key] + ' | Testing.com SEO Performance';
+    var t = document.getElementById('tab-' + key);
+    if (t && t.scrollIntoView) { try { t.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch (e) {} }
+  }
+  KEYS.forEach(function (k) {
+    document.getElementById('tab-' + k).addEventListener('click', function () {
+      if (location.hash !== '#' + k) { location.hash = k; } else { show(k); }
+    });
+  });
+  document.querySelector('.tabs').addEventListener('keydown', function (e) {
+    var i = KEYS.indexOf(keyFromHash());
+    if (e.key === 'ArrowRight') { location.hash = KEYS[(i + 1) % KEYS.length]; }
+    else if (e.key === 'ArrowLeft') { location.hash = KEYS[(i + KEYS.length - 1) % KEYS.length]; }
+    else return;
+    document.getElementById('tab-' + keyFromHash()).focus();
+  });
+  window.addEventListener('hashchange', function () { show(keyFromHash()); });
+  show(keyFromHash());
+})();
+</script>
+</body></html>

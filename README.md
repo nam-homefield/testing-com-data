@@ -4,6 +4,11 @@ Public data layer for the [nam-homefield/testing-com](https://github.com/nam-hom
 
 ## Reports
 
+All four Search Console dashboards (STD GEO, Blood testing GEO, Individual tests, Treatments) are also
+available on one page with a tab for each: <https://nam-homefield.github.io/testing-com-data/>.
+Each tab links by hash (`#std`, `#blood`, `#tests`, `#treatments`) and loads that report's own page in a frame,
+so the per-report URLs below keep working unchanged. The page is the root `index.html`.
+
 | Report | What it covers | Updated |
 |---|---|---|
 | [Orders](https://nam-homefield.github.io/testing-com-data/orders/) | Revenue, orders and cart rate. Stripe for money, Junction for fulfilment, GA4 for attribution. | Hourly, automatic |
