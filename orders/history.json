@@ -2902,11 +2902,11 @@
   },
   {
    "carts": 15,
-   "checkout_visits": 10,
+   "checkout_visits": 11,
    "date": "2026-10-01",
-   "engaged_sessions": 662,
-   "org_checkout_visits": 9,
-   "organic_visits": 443,
+   "engaged_sessions": 675,
+   "org_checkout_visits": 10,
+   "organic_visits": 454,
    "partial": true,
    "reached_checkout": 0
   }
