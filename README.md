@@ -12,6 +12,7 @@ so the per-report URLs below keep working unchanged. The page is the root `index
 | Report | What it covers | Updated |
 |---|---|---|
 | [Orders](https://nam-homefield.github.io/testing-com-data/orders/) | Revenue, orders and cart rate. Stripe for money, Junction for fulfilment, GA4 for attribution. | Hourly, automatic |
+| [Weekly orders](https://nam-homefield.github.io/testing-com-data/orders-weekly/) | Orders, revenue, product mix, refunds, week by week since launch. Stripe, Junction and Thimble, GA4 for visits. | Weekly, Thursdays 5 AM ET |
 | [Session patterns](https://nam-homefield.github.io/testing-com-data/clarity/) | Checkout and navigation friction read out of Microsoft Clarity session recordings. | Manual |
 | [STD GEO](https://nam-homefield.github.io/testing-com-data/std/) | Search Console performance for the /std-testing/ geo pages, plus the refresh-vs-control read. | Weekly, Mondays |
 | [Blood testing GEO](https://nam-homefield.github.io/testing-com-data/blood/) | Search Console performance for the /blood-testing/ city pages. | Manual |
