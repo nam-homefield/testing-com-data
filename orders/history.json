@@ -2969,7 +2969,7 @@
   {
    "abandoned": 0,
    "carts": 30,
-   "checkout_visits": 19,
+   "checkout_visits": 20,
    "date": "2026-10-02",
    "engaged_sessions": 1316,
    "orders": 7,
@@ -2999,7 +2999,7 @@
     0,
     0
    ],
-   "org_checkout_visits": 11,
+   "org_checkout_visits": 12,
    "organic_visits": 809,
    "partial": true,
    "qa_orders": 0,
