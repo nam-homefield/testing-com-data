@@ -4,13 +4,17 @@ Public data layer for the [nam-homefield/testing-com](https://github.com/nam-hom
 
 ## Reports
 
-All four Search Console dashboards (STD GEO, Blood testing GEO, Individual tests, Treatments) are also
-available on one page with a tab for each: <https://nam-homefield.github.io/testing-com-data/>.
-Each tab links by hash (`#std`, `#blood`, `#tests`, `#treatments`) and loads that report's own page in a frame,
-so the per-report URLs below keep working unchanged. The page is the root `index.html`.
+The dashboard at <https://nam-homefield.github.io/testing-com-data/> shows all six page groups on one page,
+with a tab for each (STD Testing GEOs, STD Testing (Non-GEO), Individual Tests/Panels, Treatments, Blood
+Testing GEOs, Everything Else). It is the root `index.html`, and the same page is also served at
+<https://nam-homefield.github.io/testing-com-data/v2/>, so older links keep working. It is rebuilt every
+day at 7:00 by `dashboard-v2-reporting/daily_cron.sh` in the private testing-com repo, which publishes both
+URLs and checks each one live. Do not edit the root `index.html` by hand, the next run overwrites it.
+The older per-report pages below are unchanged and keep their own URLs.
 
 | Report | What it covers | Updated |
 |---|---|---|
+| [Dashboard v2](https://nam-homefield.github.io/testing-com-data/v2/) | Search Console clicks, impressions, CTR and average position for all six page groups, with 13-week charts. Same page as the root URL. | Daily, 7 AM |
 | [Orders](https://nam-homefield.github.io/testing-com-data/orders/) | Revenue, orders and cart rate. Stripe for money, Junction for fulfilment, GA4 for attribution. | Hourly, automatic |
 | [Weekly orders](https://nam-homefield.github.io/testing-com-data/orders-weekly/) | Orders, revenue, product mix, refunds, week by week since launch. Stripe, Junction and Thimble, GA4 for visits. | Weekly, Thursdays 5 AM ET |
 | [Session patterns](https://nam-homefield.github.io/testing-com-data/clarity/) | Checkout and navigation friction read out of Microsoft Clarity session recordings. | Manual |
