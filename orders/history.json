@@ -3034,13 +3034,13 @@
   },
   {
    "carts": 10,
-   "checkout_visits": 7,
+   "checkout_visits": 8,
    "date": "2026-10-03",
-   "engaged_sessions": 372,
+   "engaged_sessions": 387,
    "org_checkout_visits": 7,
-   "organic_visits": 257,
+   "organic_visits": 268,
    "partial": true,
-   "reached_checkout": 2
+   "reached_checkout": 3
   }
  ]
 }
