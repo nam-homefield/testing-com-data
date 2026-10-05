@@ -2507,7 +2507,7 @@
   {
    "abandoned": 0,
    "carts": 141,
-   "checkout_visits": 0,
+   "checkout_visits": 115,
    "date": "2026-09-25",
    "engaged_sessions": 5636,
    "orders": 13,
@@ -2537,7 +2537,7 @@
     1,
     0
    ],
-   "org_checkout_visits": 0,
+   "org_checkout_visits": 68,
    "organic_visits": 3525,
    "partial": false,
    "qa_orders": 0,
@@ -3169,7 +3169,7 @@
    "carts": 67,
    "checkout_visits": 34,
    "date": "2026-10-05",
-   "engaged_sessions": 1723,
+   "engaged_sessions": 1760,
    "orders": 3,
    "orders_by_hour": [
     0,
@@ -3198,7 +3198,7 @@
     0
    ],
    "org_checkout_visits": 18,
-   "organic_visits": 1136,
+   "organic_visits": 1157,
    "partial": true,
    "qa_orders": 1,
    "reached_checkout": 27,
