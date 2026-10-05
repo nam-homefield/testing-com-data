@@ -3101,7 +3101,7 @@
   {
    "abandoned": 0,
    "carts": 78,
-   "checkout_visits": 52,
+   "checkout_visits": 55,
    "date": "2026-10-04",
    "engaged_sessions": 2893,
    "orders": 6,
@@ -3131,7 +3131,7 @@
     0,
     0
    ],
-   "org_checkout_visits": 30,
+   "org_checkout_visits": 32,
    "organic_visits": 1963,
    "partial": true,
    "qa_orders": 0,
