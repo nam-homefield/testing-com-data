@@ -182,7 +182,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
   // hash of this shell, the payload carries the hash it was built for, and a mismatch
   // reloads once against a fresh URL. Without this every reader has to be told to hard
   // refresh, and most will just think the report is broken.
-  var SV = '16d1b9df';
+  var SV = '6c3cb0d9';
   // Payload source depends on where this shell is served from. On GitHub Pages the
   // payload sits next to it, so fetch same-origin. On githack the payload must come
   // from gist.githubusercontent.com directly: githack caches its own copy of every
@@ -416,6 +416,9 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
   function setStale(builtMs){
     var el = document.getElementById('stale');
     if (!el) return;
+    // A staging copy is frozen at build time on purpose. Its age says nothing about the
+    // live job, so it never claims the refresh missed a run (ticket 218).
+    if (window.__STAGING__) { el.style.display = 'none'; return; }
     // 30 minutes: tolerates two missed or slow runs on a 10 minute cadence, and
     // still surfaces a dead pipeline in half an hour. Was 70 while the cadence was
     // 30 minutes; see "Cadence numbers" in README.md.
