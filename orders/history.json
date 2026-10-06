@@ -3232,11 +3232,11 @@
   },
   {
    "abandoned": 0,
-   "carts": 94,
-   "checkout_visits": 32,
+   "carts": 96,
+   "checkout_visits": 33,
    "date": "2026-10-06",
-   "engaged_sessions": 1150,
-   "orders": 11,
+   "engaged_sessions": 1244,
+   "orders": 12,
    "orders_by_hour": [
     1,
     0,
@@ -3251,7 +3251,7 @@
     1,
     2,
     0,
-    0,
+    1,
     0,
     0,
     0,
@@ -3263,11 +3263,11 @@
     0,
     0
    ],
-   "org_checkout_visits": 25,
-   "organic_visits": 690,
+   "org_checkout_visits": 26,
+   "organic_visits": 752,
    "partial": true,
    "qa_orders": 0,
-   "reached_checkout": 17,
+   "reached_checkout": 18,
    "revenue_by_hour_cents": [
     6500,
     0,
@@ -3282,7 +3282,7 @@
     26500,
     44900,
     0,
-    0,
+    8500,
     0,
     0,
     0,
@@ -3294,7 +3294,7 @@
     0,
     0
    ],
-   "revenue_cents": 175500
+   "revenue_cents": 184000
   }
  ]
 }
