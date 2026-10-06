@@ -3236,12 +3236,12 @@
    "checkout_visits": 7,
    "date": "2026-10-06",
    "engaged_sessions": 202,
-   "orders": 1,
+   "orders": 2,
    "orders_by_hour": [
     1,
     0,
     0,
-    0,
+    1,
     0,
     0,
     0,
@@ -3272,7 +3272,7 @@
     6500,
     0,
     0,
-    0,
+    14500,
     0,
     0,
     0,
@@ -3294,7 +3294,7 @@
     0,
     0
    ],
-   "revenue_cents": 6500
+   "revenue_cents": 21000
   }
  ]
 }
