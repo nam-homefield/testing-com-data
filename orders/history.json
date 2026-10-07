@@ -3299,7 +3299,7 @@
   {
    "abandoned": 0,
    "carts": 61,
-   "checkout_visits": 28,
+   "checkout_visits": 29,
    "date": "2026-10-07",
    "engaged_sessions": 1822,
    "orders": 7,
@@ -3329,7 +3329,7 @@
     0,
     0
    ],
-   "org_checkout_visits": 17,
+   "org_checkout_visits": 18,
    "organic_visits": 1232,
    "partial": true,
    "qa_orders": 3,
