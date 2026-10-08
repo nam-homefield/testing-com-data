@@ -3367,8 +3367,8 @@
    "carts": 35,
    "checkout_visits": 22,
    "date": "2026-10-08",
-   "engaged_sessions": 1224,
-   "orders": 4,
+   "engaged_sessions": 1225,
+   "orders": 5,
    "orders_by_hour": [
     1,
     0,
@@ -3378,7 +3378,7 @@
     0,
     1,
     2,
-    0,
+    1,
     0,
     0,
     0,
@@ -3409,7 +3409,7 @@
     0,
     14500,
     16800,
-    0,
+    19400,
     0,
     0,
     0,
@@ -3426,7 +3426,7 @@
     0,
     0
    ],
-   "revenue_cents": 39900
+   "revenue_cents": 59300
   }
  ]
 }
