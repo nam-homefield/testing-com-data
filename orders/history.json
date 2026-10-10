@@ -3433,8 +3433,8 @@
    "carts": 145,
    "checkout_visits": 72,
    "date": "2026-10-09",
-   "engaged_sessions": 3561,
-   "orders": 14,
+   "engaged_sessions": 3593,
+   "orders": 15,
    "orders_by_hour": [
     0,
     0,
@@ -3454,7 +3454,7 @@
     0,
     1,
     0,
-    0,
+    1,
     0,
     0,
     0,
@@ -3462,7 +3462,7 @@
     0
    ],
    "org_checkout_visits": 45,
-   "organic_visits": 2243,
+   "organic_visits": 2270,
    "partial": true,
    "qa_orders": 2,
    "reached_checkout": 33,
@@ -3485,14 +3485,14 @@
     0,
     18000,
     0,
-    0,
+    14500,
     0,
     0,
     0,
     0,
     0
    ],
-   "revenue_cents": 186500
+   "revenue_cents": 201000
   }
  ]
 }
