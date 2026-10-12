@@ -3628,14 +3628,14 @@
    "revenue_cents": 81900
   },
   {
-   "carts": 11,
-   "checkout_visits": 12,
+   "carts": 13,
+   "checkout_visits": 14,
    "date": "2026-10-12",
-   "engaged_sessions": 328,
+   "engaged_sessions": 345,
    "org_checkout_visits": 11,
-   "organic_visits": 243,
+   "organic_visits": 253,
    "partial": true,
-   "reached_checkout": 2
+   "reached_checkout": 3
   }
  ]
 }
