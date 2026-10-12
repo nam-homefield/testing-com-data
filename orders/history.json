@@ -3629,11 +3629,11 @@
   },
   {
    "carts": 9,
-   "checkout_visits": 10,
+   "checkout_visits": 11,
    "date": "2026-10-12",
-   "engaged_sessions": 297,
-   "org_checkout_visits": 9,
-   "organic_visits": 219,
+   "engaged_sessions": 308,
+   "org_checkout_visits": 10,
+   "organic_visits": 227,
    "partial": true,
    "reached_checkout": 2
   }
