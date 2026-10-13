@@ -3694,11 +3694,11 @@
    "revenue_cents": 236995
   },
   {
-   "abandoned": 0,
-   "carts": 71,
+   "abandoned": 1,
+   "carts": 72,
    "checkout_visits": 48,
    "date": "2026-10-13",
-   "engaged_sessions": 1903,
+   "engaged_sessions": 1937,
    "orders": 1,
    "orders_by_hour": [
     0,
@@ -3727,7 +3727,7 @@
     0
    ],
    "org_checkout_visits": 22,
-   "organic_visits": 1147,
+   "organic_visits": 1166,
    "partial": true,
    "qa_orders": 2,
    "reached_checkout": 23,
