@@ -3694,14 +3694,14 @@
    "revenue_cents": 236995
   },
   {
-   "carts": 8,
+   "carts": 9,
    "checkout_visits": 8,
    "date": "2026-10-13",
-   "engaged_sessions": 359,
+   "engaged_sessions": 386,
    "org_checkout_visits": 7,
-   "organic_visits": 243,
+   "organic_visits": 261,
    "partial": true,
-   "reached_checkout": 0
+   "reached_checkout": 1
   }
  ]
 }
