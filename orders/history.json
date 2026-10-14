@@ -3237,6 +3237,8 @@
    "checkout_visits": 129,
    "date": "2026-10-06",
    "engaged_sessions": 6972,
+   "glp1_first": 0,
+   "glp1_renewal": 0,
    "orders": 15,
    "orders_by_hour": [
     1,
@@ -3303,6 +3305,8 @@
    "checkout_visits": 106,
    "date": "2026-10-07",
    "engaged_sessions": 6764,
+   "glp1_first": 0,
+   "glp1_renewal": 0,
    "orders": 16,
    "orders_by_hour": [
     0,
@@ -3369,6 +3373,8 @@
    "checkout_visits": 104,
    "date": "2026-10-08",
    "engaged_sessions": 6410,
+   "glp1_first": 0,
+   "glp1_renewal": 0,
    "orders": 21,
    "orders_by_hour": [
     1,
@@ -3435,6 +3441,8 @@
    "checkout_visits": 97,
    "date": "2026-10-09",
    "engaged_sessions": 5648,
+   "glp1_first": 0,
+   "glp1_renewal": 0,
    "orders": 19,
    "orders_by_hour": [
     0,
@@ -3501,6 +3509,8 @@
    "checkout_visits": 85,
    "date": "2026-10-10",
    "engaged_sessions": 3823,
+   "glp1_first": 0,
+   "glp1_renewal": 0,
    "orders": 10,
    "orders_by_hour": [
     0,
@@ -3567,6 +3577,8 @@
    "checkout_visits": 74,
    "date": "2026-10-11",
    "engaged_sessions": 4052,
+   "glp1_first": 0,
+   "glp1_renewal": 0,
    "orders": 8,
    "orders_by_hour": [
     0,
@@ -3633,6 +3645,8 @@
    "checkout_visits": 121,
    "date": "2026-10-12",
    "engaged_sessions": 6036,
+   "glp1_first": 0,
+   "glp1_renewal": 0,
    "orders": 19,
    "orders_by_hour": [
     0,
@@ -3699,6 +3713,8 @@
    "checkout_visits": 134,
    "date": "2026-10-13",
    "engaged_sessions": 6841,
+   "glp1_first": 0,
+   "glp1_renewal": 0,
    "orders": 10,
    "orders_by_hour": [
     0,
@@ -3761,10 +3777,12 @@
   },
   {
    "abandoned": 0,
-   "carts": 107,
-   "checkout_visits": 64,
+   "carts": 111,
+   "checkout_visits": 67,
    "date": "2026-10-14",
-   "engaged_sessions": 3465,
+   "engaged_sessions": 3550,
+   "glp1_first": 0,
+   "glp1_renewal": 0,
    "orders": 16,
    "orders_by_hour": [
     0,
@@ -3792,11 +3810,11 @@
     0,
     0
    ],
-   "org_checkout_visits": 33,
-   "organic_visits": 2161,
+   "org_checkout_visits": 36,
+   "organic_visits": 2217,
    "partial": true,
    "qa_orders": 0,
-   "reached_checkout": 34,
+   "reached_checkout": 36,
    "revenue_by_hour_cents": [
     0,
     0,

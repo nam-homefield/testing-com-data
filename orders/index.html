@@ -182,7 +182,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
   // hash of this shell, the payload carries the hash it was built for, and a mismatch
   // reloads once against a fresh URL. Without this every reader has to be told to hard
   // refresh, and most will just think the report is broken.
-  var SV = '6c3cb0d9';
+  var SV = 'fe1aa716';
   // Payload source depends on where this shell is served from. On GitHub Pages the
   // payload sits next to it, so fetch same-origin. On githack the payload must come
   // from gist.githubusercontent.com directly: githack caches its own copy of every
@@ -450,6 +450,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
         + (d.notice_html || '')
         + '<section><h2>Today</h2><div class="sub">' + d.day_label
         + ' &middot; all times Pacific</div><div class="metrics">' + m + '</div></section>'
+        + (d.glp1_subs_html || '')
         + '<section><h2>Orders today</h2><div class="sub">Every customer order, newest first</div>'
         + '<table class="stack"><thead><tr><th>Time</th><th>Amount</th><th>What they bought</th><th>Status</th>'
         + '</tr></thead><tbody>' + d.rows_html + '</tbody></table></section>'
@@ -459,6 +460,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
         + '<section><h2>What people are buying</h2><div class="sub">Paid customer orders, last '
         + d.mix_days + ' days</div><table><thead><tr><th>Product</th><th>Orders</th></tr></thead>'
         + '<tbody>' + d.mix_html + '</tbody></table>'
+        + (d.glp1_mix_html || '')
         + (d.lab_html || '') + '</section>'
         + (d.pace_html || '') + (d.traffic_html || '')
         + d.attribution_html
