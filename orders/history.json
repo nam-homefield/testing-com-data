@@ -3851,7 +3851,7 @@
    "engaged_sessions": 1214,
    "glp1_first": 0,
    "glp1_renewal": 0,
-   "orders": 4,
+   "orders": 5,
    "orders_by_hour": [
     0,
     1,
@@ -3861,7 +3861,7 @@
     2,
     0,
     1,
-    0,
+    1,
     0,
     0,
     0,
@@ -3881,7 +3881,7 @@
    "org_checkout_visits": 19,
    "organic_visits": 760,
    "partial": true,
-   "qa_orders": 0,
+   "qa_orders": 1,
    "reached_checkout": 7,
    "revenue_by_hour_cents": [
     0,
@@ -3892,7 +3892,7 @@
     21000,
     0,
     10500,
-    0,
+    26500,
     0,
     0,
     0,
@@ -3909,7 +3909,7 @@
     0,
     0
    ],
-   "revenue_cents": 36600
+   "revenue_cents": 63100
   }
  ]
 }
