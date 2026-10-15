@@ -3777,10 +3777,10 @@
   },
   {
    "abandoned": 0,
-   "carts": 176,
-   "checkout_visits": 114,
+   "carts": 177,
+   "checkout_visits": 124,
    "date": "2026-10-14",
-   "engaged_sessions": 6090,
+   "engaged_sessions": 6793,
    "glp1_first": 0,
    "glp1_renewal": 0,
    "orders": 19,
@@ -3810,8 +3810,8 @@
     0,
     0
    ],
-   "org_checkout_visits": 64,
-   "organic_visits": 3869,
+   "org_checkout_visits": 74,
+   "organic_visits": 4243,
    "partial": false,
    "qa_orders": 0,
    "reached_checkout": 66,
@@ -3845,13 +3845,13 @@
   },
   {
    "abandoned": 0,
-   "carts": 68,
+   "carts": 70,
    "checkout_visits": 39,
    "date": "2026-10-15",
-   "engaged_sessions": 1785,
+   "engaged_sessions": 1824,
    "glp1_first": 0,
    "glp1_renewal": 0,
-   "orders": 6,
+   "orders": 7,
    "orders_by_hour": [
     0,
     1,
@@ -3863,7 +3863,7 @@
     1,
     2,
     0,
-    0,
+    1,
     0,
     0,
     0,
@@ -3879,10 +3879,10 @@
     0
    ],
    "org_checkout_visits": 23,
-   "organic_visits": 1124,
+   "organic_visits": 1148,
    "partial": true,
    "qa_orders": 1,
-   "reached_checkout": 10,
+   "reached_checkout": 11,
    "revenue_by_hour_cents": [
     0,
     5100,
@@ -3894,7 +3894,7 @@
     10500,
     41000,
     0,
-    0,
+    5100,
     0,
     0,
     0,
@@ -3909,7 +3909,7 @@
     0,
     0
    ],
-   "revenue_cents": 77600
+   "revenue_cents": 82700
   }
  ]
 }
