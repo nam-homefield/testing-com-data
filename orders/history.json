@@ -3912,12 +3912,12 @@
    "revenue_cents": 198700
   },
   {
-   "carts": 13,
-   "checkout_visits": 10,
+   "carts": 15,
+   "checkout_visits": 11,
    "date": "2026-10-16",
-   "engaged_sessions": 503,
-   "org_checkout_visits": 10,
-   "organic_visits": 355,
+   "engaged_sessions": 534,
+   "org_checkout_visits": 11,
+   "organic_visits": 376,
    "partial": true,
    "reached_checkout": 2
   }
