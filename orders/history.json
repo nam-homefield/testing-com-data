@@ -4049,12 +4049,12 @@
    "revenue_cents": 94950
   },
   {
-   "carts": 8,
+   "carts": 9,
    "checkout_visits": 5,
    "date": "2026-10-18",
-   "engaged_sessions": 162,
+   "engaged_sessions": 174,
    "org_checkout_visits": 4,
-   "organic_visits": 113,
+   "organic_visits": 122,
    "partial": true,
    "reached_checkout": 2
   }
