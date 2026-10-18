@@ -4049,14 +4049,14 @@
    "revenue_cents": 94950
   },
   {
-   "carts": 15,
-   "checkout_visits": 9,
+   "carts": 17,
+   "checkout_visits": 10,
    "date": "2026-10-18",
-   "engaged_sessions": 351,
-   "org_checkout_visits": 7,
-   "organic_visits": 246,
+   "engaged_sessions": 359,
+   "org_checkout_visits": 8,
+   "organic_visits": 251,
    "partial": true,
-   "reached_checkout": 4
+   "reached_checkout": 5
   }
  ]
 }
