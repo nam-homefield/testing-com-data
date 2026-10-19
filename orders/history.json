@@ -4117,12 +4117,12 @@
    "revenue_cents": 87800
   },
   {
-   "carts": 5,
+   "carts": 6,
    "checkout_visits": 5,
    "date": "2026-10-19",
-   "engaged_sessions": 279,
+   "engaged_sessions": 292,
    "org_checkout_visits": 4,
-   "organic_visits": 200,
+   "organic_visits": 208,
    "partial": true,
    "reached_checkout": 0
   }
