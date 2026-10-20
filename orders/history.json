@@ -4185,12 +4185,12 @@
    "revenue_cents": 369280
   },
   {
-   "carts": 3,
-   "checkout_visits": 3,
+   "carts": 4,
+   "checkout_visits": 4,
    "date": "2026-10-20",
-   "engaged_sessions": 266,
-   "org_checkout_visits": 3,
-   "organic_visits": 191,
+   "engaged_sessions": 283,
+   "org_checkout_visits": 4,
+   "organic_visits": 202,
    "partial": true,
    "reached_checkout": 1
   }
