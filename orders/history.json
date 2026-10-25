@@ -4887,7 +4887,7 @@
    "carts": 7,
    "checkout_visits": 3,
    "date": "2026-10-25",
-   "engaged_sessions": 239,
+   "engaged_sessions": 247,
    "glp1_first": 0,
    "glp1_renewal": 0,
    "orders": 0,
@@ -4918,7 +4918,7 @@
     0
    ],
    "org_checkout_visits": 2,
-   "organic_visits": 180,
+   "organic_visits": 186,
    "partial": true,
    "qa_orders": 0,
    "reached_checkout": 0,
