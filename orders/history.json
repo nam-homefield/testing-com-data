@@ -5296,9 +5296,9 @@
   {
    "abandoned": 0,
    "carts": 27,
-   "checkout_visits": 18,
+   "checkout_visits": 19,
    "date": "2026-10-31",
-   "engaged_sessions": 1037,
+   "engaged_sessions": 1082,
    "glp1_first": 0,
    "glp1_renewal": 0,
    "orders": 2,
@@ -5329,7 +5329,7 @@
     0
    ],
    "org_checkout_visits": 10,
-   "organic_visits": 609,
+   "organic_visits": 639,
    "partial": true,
    "qa_orders": 0,
    "reached_checkout": 7,
