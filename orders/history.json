@@ -5295,10 +5295,10 @@
   },
   {
    "abandoned": 0,
-   "carts": 21,
-   "checkout_visits": 14,
+   "carts": 23,
+   "checkout_visits": 15,
    "date": "2026-10-31",
-   "engaged_sessions": 752,
+   "engaged_sessions": 786,
    "glp1_first": 0,
    "glp1_renewal": 0,
    "orders": 2,
@@ -5329,7 +5329,7 @@
     0
    ],
    "org_checkout_visits": 8,
-   "organic_visits": 451,
+   "organic_visits": 468,
    "partial": true,
    "qa_orders": 0,
    "reached_checkout": 3,
