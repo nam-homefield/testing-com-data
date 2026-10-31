@@ -5227,10 +5227,10 @@
   },
   {
    "abandoned": 0,
-   "carts": 85,
-   "checkout_visits": 58,
+   "carts": 86,
+   "checkout_visits": 59,
    "date": "2026-10-30",
-   "engaged_sessions": 3903,
+   "engaged_sessions": 3939,
    "glp1_first": 0,
    "glp1_renewal": 0,
    "orders": 13,
@@ -5260,11 +5260,11 @@
     0,
     0
    ],
-   "org_checkout_visits": 31,
-   "organic_visits": 2298,
+   "org_checkout_visits": 32,
+   "organic_visits": 2321,
    "partial": true,
    "qa_orders": 0,
-   "reached_checkout": 34,
+   "reached_checkout": 35,
    "revenue_by_hour_cents": [
     0,
     14500,
