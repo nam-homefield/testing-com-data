@@ -182,7 +182,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
   // hash of this shell, the payload carries the hash it was built for, and a mismatch
   // reloads once against a fresh URL. Without this every reader has to be told to hard
   // refresh, and most will just think the report is broken.
-  var SV = 'd5b8543c';
+  var SV = '119e295c';
   // Payload source depends on where this shell is served from. On GitHub Pages the
   // payload sits next to it, so fetch same-origin. On githack the payload must come
   // from gist.githubusercontent.com directly: githack caches its own copy of every
@@ -233,7 +233,7 @@ border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(
         }};
         mk(pel.getContext('2d'), {type:'line',
           data:{labels:P.labels, datasets:[
-            {label:'Normal day at this hour', data:P.avg, borderColor:'#2f62cc',
+            {label:P.avg_label || 'Normal day at this hour', data:P.avg, borderColor:'#2f62cc',
              borderWidth:2, borderDash:[6,4], pointRadius:0, tension:.25, fill:false},
             {label:'Today', data:P.today, borderColor:'#fd605b',
              backgroundColor:'rgba(253,96,91,.13)', borderWidth:2.5, pointRadius:0,
