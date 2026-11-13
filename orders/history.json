@@ -6113,10 +6113,10 @@
   },
   {
    "abandoned": 0,
-   "carts": 116,
-   "checkout_visits": 88,
+   "carts": 117,
+   "checkout_visits": 89,
    "date": "2026-11-12",
-   "engaged_sessions": 5214,
+   "engaged_sessions": 5281,
    "glp1_first": 0,
    "glp1_renewal": 0,
    "orders": 12,
@@ -6147,7 +6147,7 @@
     0
    ],
    "org_checkout_visits": 63,
-   "organic_visits": 3185,
+   "organic_visits": 3240,
    "partial": true,
    "qa_orders": 2,
    "reached_checkout": 39,
