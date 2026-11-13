@@ -15,25 +15,24 @@
 # behaviour we want here anyway: these are dashboards, so only the latest build
 # matters and an older one still in flight is already stale.
 #
-# The deploy step retries once on its own. Roughly 3 deploys in 100 failed with
+# A wait-for-artifact step runs before the deploy. Roughly 3 deploys in 100 failed with
 # "Fetching artifact metadata failed ... No artifacts named "github-pages" were found
 # for this workflow run" (example run 43378746073). This is most likely a race on GitHub's side:
 # upload and deploy share one job, and deploy-pages lists the run's artifacts a
 # fraction of a second after the upload finished, before the listing sees it. Upgrading
 # does not fix it. The latest deploy-pages (v5.0.1) only added backoff to its status
 # polling, and the matching upstream report, actions/deploy-pages#451, is still open.
-# A re-run of the whole workflow is no good either (a second upload makes the lookup
-# fail with "Multiple artifacts"), but a second deploy attempt in the same job is safe,
-# because it only repeats the lookup and the artifact is already there.
+# Re-running the whole workflow is no good either (a second upload makes the lookup
+# fail with "Multiple artifacts").
 #
-# How the retry works: attempt 1 has continue-on-error, so a failure does not end the
-# job. Attempt 2 runs after a 30 second wait only if attempt 1 failed, and it has no
-# continue-on-error, so if it fails too the job fails and the failure email still goes
-# out. A real, lasting failure is therefore never hidden. Neither retry step runs
-# when the run is cancelled: a step with no status function in its condition gets an
-# implicit success(), which is false once the run is cancelled, and attempt 1 reports
-# "cancelled", not "failure". So the concurrency block above still ends a superseded
-# run immediately instead of waiting out the 30 seconds and retrying.
+# The fix is narrow on purpose. After the upload, a step polls the run's artifact list
+# (the REST API, every 3 seconds, up to about 60 seconds) until "github-pages" shows
+# up, then deploy-pages runs exactly once. If the artifact never shows up, that step
+# fails with a clear message. The deploy step has no continue-on-error and is never
+# repeated, so any failure after a deployment exists (a stuck or rejected deployment,
+# a timeout) still fails the run and sends the email, and a retry can never leave an
+# "in progress deployment" lock behind. The wait step also respects the concurrency
+# block above: a cancelled run stops the step, so a superseded run ends at once.
 #
 # No Jekyll step on purpose. upload-pages-artifact serves the files exactly as pushed,
 # which is what the reports need, and the repo has no Jekyll sources.
@@ -45,6 +44,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: read   # lets the wait step list this run's artifacts
   contents: read
   pages: write
   id-token: write
@@ -58,21 +58,30 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment_retry.outputs.page_url || steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
-      # Attempt 1. A failure here is swallowed so that attempt 2 can run.
+      # Wait until the artifact is listed, so deploy-pages does not look too early.
+      - name: Wait for the artifact to be listed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for i in $(seq 1 20); do
+            n=$(gh api "repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts" \
+              --jq '[.artifacts[] | select(.name == "github-pages")] | length' || echo 0)
+            if [ "$n" -ge 1 ]; then
+              echo "Artifact github-pages is listed (check $i)."
+              sleep 5
+              exit 0
+            fi
+            echo "Artifact github-pages not listed yet (check $i of 20)."
+            sleep 3
+          done
+          echo "::error::Artifact github-pages was never listed for this run after about 60 seconds."
+          exit 1
       - id: deployment
-        uses: actions/deploy-pages@v4
-        continue-on-error: true
-      # Attempt 2, only if attempt 1 failed. This one is allowed to fail the job.
-      - name: Wait before retrying the deploy
-        if: steps.deployment.outcome == 'failure'
-        run: sleep 30
-      - id: deployment_retry
-        if: steps.deployment.outcome == 'failure'
         uses: actions/deploy-pages@v4
