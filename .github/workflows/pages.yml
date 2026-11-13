@@ -25,14 +25,18 @@
 # Re-running the whole workflow is no good either (a second upload makes the lookup
 # fail with "Multiple artifacts").
 #
-# The fix is narrow on purpose. After the upload, a step polls the run's artifact list
-# (the REST API, every 3 seconds, up to about 60 seconds) until "github-pages" shows
-# up, then deploy-pages runs exactly once. If the artifact never shows up, that step
-# fails with a clear message. The deploy step has no continue-on-error and is never
-# repeated, so any failure after a deployment exists (a stuck or rejected deployment,
-# a timeout) still fails the run and sends the email, and a retry can never leave an
-# "in progress deployment" lock behind. The wait step also respects the concurrency
-# block above: a cancelled run stops the step, so a superseded run ends at once.
+# The fix is narrow on purpose. After the upload, a step polls the same lookup that
+# deploy-pages uses (the Actions results service, Twirp ListArtifacts, called the way
+# actions/toolkit packages/artifact does it: backend IDs read from the runtime token,
+# JSON body with the snake_case field names, bearer auth) every 3 seconds, up to about
+# 60 seconds, until "github-pages" is listed. Then deploy-pages runs exactly once. If
+# the artifact never shows up, the step fails with a clear message. The deploy step has
+# no continue-on-error and is never repeated, so any failure after a deployment exists
+# (a stuck or rejected deployment, a timeout) still fails the run and sends the email,
+# and a retry can never leave an "in progress deployment" lock behind. The wait step
+# also respects the concurrency block above: a cancelled run stops the step, so a
+# superseded run ends at once. The step is an actions/github-script node action, which
+# is why it gets ACTIONS_RUNTIME_TOKEN and ACTIONS_RESULTS_URL from the runner.
 #
 # No Jekyll step on purpose. upload-pages-artifact serves the files exactly as pushed,
 # which is what the reports need, and the repo has no Jekyll sources.
@@ -44,7 +48,6 @@ on:
   workflow_dispatch:
 
 permissions:
-  actions: read   # lets the wait step list this run's artifacts
   contents: read
   pages: write
   id-token: write
@@ -65,23 +68,66 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
-      # Wait until the artifact is listed, so deploy-pages does not look too early.
+      # Wait until the artifact shows up in the same lookup deploy-pages uses.
       - name: Wait for the artifact to be listed
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          for i in $(seq 1 20); do
-            n=$(gh api "repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts" \
-              --jq '[.artifacts[] | select(.name == "github-pages")] | length' || echo 0)
-            if [ "$n" -ge 1 ]; then
-              echo "Artifact github-pages is listed (check $i)."
-              sleep 5
-              exit 0
-            fi
-            echo "Artifact github-pages not listed yet (check $i of 20)."
-            sleep 3
-          done
-          echo "::error::Artifact github-pages was never listed for this run after about 60 seconds."
-          exit 1
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const results = process.env.ACTIONS_RESULTS_URL;
+            const token = process.env.ACTIONS_RUNTIME_TOKEN;
+            if (!results || !token) {
+              core.setFailed('ACTIONS_RESULTS_URL or ACTIONS_RUNTIME_TOKEN is missing in this step.');
+              return;
+            }
+            // Backend IDs come from the token's "scp" claim, as in actions/toolkit
+            // packages/artifact/src/internal/shared/util.ts getBackendIdsFromToken.
+            let ids;
+            try {
+              const claims = JSON.parse(Buffer.from(token.split('.')[1], 'base64url').toString());
+              for (const scope of String(claims.scp || '').split(' ')) {
+                const parts = scope.split(':');
+                if (parts[0] !== 'Actions.Results') continue;
+                if (parts.length !== 3) throw new Error('unexpected Actions.Results scope');
+                ids = { workflow_run_backend_id: parts[1], workflow_job_run_backend_id: parts[2] };
+                break;
+              }
+            } catch (e) {
+              core.setFailed('Could not read the backend IDs from the runtime token: ' + e.message);
+              return;
+            }
+            if (!ids) {
+              core.setFailed('The runtime token has no Actions.Results scope.');
+              return;
+            }
+            // Same request the toolkit sends for listArtifacts() (JSON, proto field names).
+            const url = new URL('/twirp/github.actions.results.api.v1.ArtifactService/ListArtifacts', results).href;
+            const total = 20;
+            let last = 'no response';
+            for (let i = 1; i <= total; i++) {
+              try {
+                const res = await fetch(url, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+                  body: JSON.stringify(ids),
+                  signal: AbortSignal.timeout(10000),
+                });
+                if (res.ok) {
+                  const body = await res.json();
+                  const found = (body.artifacts || []).filter(a => a.name === 'github-pages');
+                  if (found.length >= 1) {
+                    core.info('Artifact github-pages is listed (check ' + i + ').');
+                    return;
+                  }
+                  last = 'artifact not listed yet';
+                } else {
+                  last = 'HTTP ' + res.status;
+                }
+              } catch (e) {
+                last = e.message;
+              }
+              core.info('Check ' + i + ' of ' + total + ': ' + last + '.');
+              if (i < total) await new Promise(r => setTimeout(r, 3000));
+            }
+            core.setFailed('Artifact github-pages was never listed by the results service after about 60 seconds (' + last + ').');
       - id: deployment
         uses: actions/deploy-pages@v4
