@@ -6460,7 +6460,7 @@
    "engaged_sessions": 5188,
    "glp1_first": 0,
    "glp1_renewal": 0,
-   "orders": 16,
+   "orders": 17,
    "orders_by_hour": [
     0,
     0,
@@ -6481,7 +6481,7 @@
     0,
     1,
     1,
-    0,
+    1,
     0,
     0,
     0,
@@ -6512,13 +6512,13 @@
     0,
     16400,
     5100,
-    0,
+    26500,
     0,
     0,
     0,
     0
    ],
-   "revenue_cents": 189880
+   "revenue_cents": 216380
   }
  ]
 }
