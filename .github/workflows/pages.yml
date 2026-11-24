@@ -58,8 +58,10 @@
 # successful deploy-pages step is a good deploy, even if a newer push cancelled the run
 # afterwards. Everything else (cancelled before the deploy ended, never started) is skipped:
 # it does not break a streak and does not extend one. Concurrency is unchanged, so a
-# cancelled run still releases the deployment lock. If the lookup itself fails, the verdict
-# job fails and sends the email, because a missed failure is worse than one extra email.
+# cancelled run still releases the deployment lock. If a lookup call throws, or this run's
+# own deploy job cannot be read as finished after about 30 seconds, the verdict job fails and
+# sends the email, because a missed failure is worse than one extra email. An earlier run
+# that cannot be read as good or bad is skipped, like a cancelled one.
 # The names the verdict reads ("deploy" and "Run actions/deploy-pages@v4") are what GitHub
 # records for a job and a step that have no name: line, so do not add one to either.
 # The test is docs/tickets/5-deploy-email-two-fails/test_pages_two_fails.py.
@@ -189,14 +191,30 @@ jobs:
               if (failed(job.conclusion)) return 'bad';
               return 'skip';
             }
-            async function deployOf(runId) {
+            async function jobsOf(runId) {
               const res = await github.rest.actions.listJobsForWorkflowRun({
                 owner, repo, run_id: runId, per_page: 100,
               });
-              return classify(res.data.jobs);
+              return res.data.jobs;
             }
 
-            const now = await deployOf(context.runId);
+            // This run's own deploy job has finished when this job starts, but its record is
+            // read over the API, so wait a little if it does not show as completed yet. If it
+            // never does, the result is unknown and the run fails, so nothing is missed quietly.
+            let now = null;
+            for (let i = 1; i <= 10 && now === null; i++) {
+              const job = (await jobsOf(context.runId)).find(j => j.name === DEPLOY_JOB);
+              if (job && job.status === 'completed') {
+                now = classify([job]);
+              } else {
+                core.info('The deploy job is not final yet (check ' + i + ' of 10).');
+                if (i < 10) await new Promise(r => setTimeout(r, 3000));
+              }
+            }
+            if (now === null) {
+              core.setFailed('Could not read the finished deploy job of this run, so its result is unknown.');
+              return;
+            }
             core.info('This deploy: ' + now + '.');
             if (now !== 'bad') return;
 
@@ -207,7 +225,7 @@ jobs:
               .filter(r => r.id < context.runId)
               .sort((a, b) => b.id - a.id);
             for (const run of earlier) {
-              const before = await deployOf(run.id);
+              const before = classify(await jobsOf(run.id));
               core.info('Run ' + run.id + ': ' + before + '.');
               if (before === 'skip') continue;
               if (before === 'bad') {

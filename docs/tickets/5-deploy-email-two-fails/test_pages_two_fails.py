@@ -12,7 +12,9 @@ What it proves, in order:
   4. The job and step names the script reads are the names GitHub recorded in those real records.
   5. Every break case turns the test red: each one is applied to the script or the workflow and
      the checks above must then fail.
-Needs python3 with PyYAML and node. No network, no secrets, nothing is deployed.
+  6. Optional, once: --live <run id>... feeds the script the real API answers (read-only gh api
+     GET calls, nothing is deployed) with context.runId set to each run id. Needs gh logged in.
+Needs python3 with PyYAML and node. The default run uses no network and no secrets.
 """
 import copy
 import itertools
@@ -139,12 +141,14 @@ HARNESS = r"""
 const fs = require('fs');
 const input = JSON.parse(fs.readFileSync(0, 'utf8'));
 const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
+globalThis.setTimeout = f => queueMicrotask(f); // the script waits 3 seconds between reads; do not wait here
 (async () => {
   const out = [];
   for (const sc of input.scenarios) {
     const jobsById = new Map();
     jobsById.set(sc.current.id, sc.current.jobs);
     for (const r of sc.history) jobsById.set(r.id, r.jobs);
+    let currentReads = 0; // sc.current.reads, when given, are the successive answers for this run's own jobs
     const failed = [];
     const infos = [];
     let error = null;
@@ -152,6 +156,10 @@ const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
       listJobsForWorkflowRun: async p => {
         if (p.owner !== 'nam-homefield' || p.repo !== 'testing-com-data') throw new Error('wrong repo');
         if (!jobsById.has(p.run_id)) throw new Error('unknown run ' + p.run_id);
+        if (p.run_id === sc.current.id && sc.current.reads) {
+          const jobs = sc.current.reads[Math.min(currentReads++, sc.current.reads.length - 1)];
+          return { data: { total_count: jobs.length, jobs } };
+        }
         return { data: { total_count: jobsById.get(p.run_id).length, jobs: jobsById.get(p.run_id) } };
       },
       listWorkflowRuns: async p => {
@@ -199,11 +207,40 @@ def logic_problems(script, scenarios):
     return problems
 
 
+CURRENT_KINDS = [k for k in KINDS if k != "cancel_before"]  # the verdict job never runs with no deploy job
+
+
 def sweep_scenarios(max_len=4):
     scs = []
     for n in range(0, max_len):  # n earlier runs, then the current run
-        for seq in itertools.product(KINDS, repeat=n + 1):
-            scs.append(scenario(" > ".join(seq), list(seq[:-1]), seq[-1]))
+        for hist in itertools.product(KINDS, repeat=n):
+            for cur in CURRENT_KINDS:
+                scs.append(scenario(" > ".join(list(hist) + [cur]), list(hist), cur))
+    return scs
+
+
+def unreadable_scenarios():
+    """This run's own deploy job read back wrongly: not final yet, never final, or missing."""
+    in_progress = copy.deepcopy(KINDS["good"])
+    in_progress[0]["status"], in_progress[0]["conclusion"] = "in_progress", None
+    for st in in_progress[0]["steps"]:
+        if st["name"] in (DEPLOY, POST, DONE):
+            st["status"], st["conclusion"] = "in_progress", None
+    scs = []
+    one = scenario("own job not final on the first read, then a failure (after a failure): loud", ["bad_deploy"], "bad_deploy")
+    one["current"]["reads"] = [in_progress, one["current"]["jobs"]]
+    scs.append(one)
+    two = scenario("own job not final on the first read, then a failure (after a good deploy): quiet", ["good"], "bad_deploy")
+    two["current"]["reads"] = [in_progress, two["current"]["jobs"]]
+    scs.append(two)
+    never = scenario("own job never final: the run fails, result unknown", ["good"], "good")
+    never["current"]["reads"] = [in_progress]
+    never["expect_loud"] = True
+    scs.append(never)
+    missing = scenario("own deploy job missing from the record: the run fails, result unknown", ["good"], "good")
+    missing["current"]["reads"] = [[]]
+    missing["expect_loud"] = True
+    scs.append(missing)
     return scs
 
 
@@ -373,6 +410,9 @@ def main():
     loud = sum(1 for s in sweep if s["expect_loud"])
     check(f"logic sweep: every sequence of {len(KINDS)} run kinds, 1 to 4 runs long",
           logic_problems(script, sweep), f"{len(sweep)} sequences, {loud} must fail the run, {len(sweep) - loud} must stay quiet")
+    unreadable = unreadable_scenarios()
+    check("logic: this run's own deploy job read back not final, or missing",
+          logic_problems(script, unreadable), f"{len(unreadable)} cases")
     replay = real_replay_scenarios()
     check("replay: real records of runs 45413361106, 45415969592, 45418761018, 43095722533 and three more cancelled runs",
           logic_problems(script, replay), f"{len(replay)} replays")
@@ -381,7 +421,8 @@ def main():
     script_breaks = [
         ("first failure fails the run",
          "if (now !== 'bad') return;", "if (now === 'bad') { core.setFailed('first'); return; }\nif (now !== 'bad') return;"),
-        ("a second or later failure passes", "core.setFailed(", "core.info("),
+        ("a second or later failure passes",
+         "core.setFailed('The deploy failed in this run", "core.info('The deploy failed in this run"),
         ("a good deploy does not reset the count",
          "if (before === 'skip') continue;", "if (before === 'skip' || before === 'good') continue;"),
         ("a skipped step hides an earlier failure (wait step failed, deploy skipped)",
@@ -394,14 +435,18 @@ def main():
          "if (deploy && deploy.conclusion === 'success') return 'good';",
          "if (deploy && deploy.conclusion === 'success' && job.conclusion === 'success') return 'good';"),
         ("a green run hides its failed deploy (reads the run conclusion)",
-         "const before = await deployOf(run.id);",
+         "const before = classify(await jobsOf(run.id));",
          "const before = run.conclusion === 'success' ? 'good' : run.conclusion === 'cancelled' ? 'skip' : 'bad';"),
         ("a cancelled run in between ends the look back",
          "if (before === 'skip') continue;", "if (before === 'skip') break;"),
-        ("this run's own failure is ignored", "const now = await deployOf(context.runId);", "const now = 'good';"),
+        ("this run's own failure is ignored", "now = classify([job]);", "now = 'good';"),
+        ("this run's own deploy job is read before it is final",
+         "if (job && job.status === 'completed') {", "if (job) {"),
+        ("an unreadable own result stays quiet",
+         "core.setFailed('Could not read the finished deploy job", "core.info('Could not read the finished deploy job"),
         ("the deploy step is read under the wrong name", "'Run actions/deploy-pages@v4'", "'Deploy'"),
     ]
-    probe = sweep + replay
+    probe = sweep + replay + unreadable
     for label, old, new in script_breaks:
         if script.count(old) != 1:
             check(f"break case: {label}", [f"could not apply: text found {script.count(old)} times, expected once"])
@@ -439,5 +484,41 @@ def main():
     return 1 if failed else 0
 
 
+def gh_get(path, *fields):
+    cmd = ["gh", "api", "-X", "GET", path]
+    for f in fields:
+        cmd += ["-f", f]
+    r = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+    if r.returncode != 0:
+        raise RuntimeError(f"gh api {path} failed: {r.stderr.strip()[:300]}")
+    return json.loads(r.stdout)
+
+
+def live(run_ids):
+    """Feed the workflow's script the real API answers, read only, for each run id."""
+    repo = "nam-homefield/testing-com-data"
+    script = verdict_script(load_workflow(WORKFLOW.read_text()))
+    # The same call, with the same parameters, that the script makes.
+    listing = gh_get(f"repos/{repo}/actions/workflows/pages.yml/runs", "branch=main", "status=completed", "per_page=30")
+    runs = listing["workflow_runs"]
+    print(f"real API: {len(runs)} completed runs on main in the 30 run window, newest id {runs[0]['id']}, oldest {runs[-1]['id']}")
+    jobs_by_id = {r["id"]: gh_get(f"repos/{repo}/actions/runs/{r['id']}/jobs", "per_page=100")["jobs"] for r in runs}
+    for rid in run_ids:
+        rid = int(rid)
+        if rid not in jobs_by_id:
+            jobs_by_id[rid] = gh_get(f"repos/{repo}/actions/runs/{rid}/jobs", "per_page=100")["jobs"]
+        sc = {"name": f"live {rid}", "current": {"id": rid, "jobs": jobs_by_id[rid]},
+              "history": [dict(id=r["id"], conclusion=r["conclusion"], status=r["status"],
+                               head_branch=r["head_branch"], jobs=jobs_by_id[r["id"]]) for r in runs]}
+        res = run_scenarios(script, [sc])[0]
+        print(f"run {rid}: " + ("script threw: " + res["error"] if res["error"] else
+              ("FAILS THE RUN: " + "; ".join(res["failed"]) if res["failed"] else "quiet (run stays green)")))
+        for line in res["infos"]:
+            print("    log: " + line)
+    return 0
+
+
 if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "--live":
+        sys.exit(live(sys.argv[2:]))
     sys.exit(main())

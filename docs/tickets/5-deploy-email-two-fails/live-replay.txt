@@ -1,0 +1,9 @@
+real API: 30 completed runs on main in the 30 run window, newest id 45424307418, oldest 45356979098
+run 45413361106: quiet (run stays green)
+    log: This deploy: good.
+run 45415969592: quiet (run stays green)
+    log: This deploy: bad.
+    log: Run 45413361106: good.
+    log: The deploy before this one worked, so this failure stays quiet.
+run 45418761018: quiet (run stays green)
+    log: This deploy: good.
