@@ -49,8 +49,9 @@
 #   2. Decide this run's result. bad = any of those steps failed. good = the deploy
 #      step succeeded, even if a newer push cancelled the run afterwards. Anything
 #      else (stopped before the deploy finished) saves nothing, so the saved result
-#      stays as it is. No saved result, or a failed restore, counts as "no earlier
-#      failure" and the log says so.
+#      stays as it is. No saved result, or a failed or damaged restore (the restore
+#      did not report the key it found), counts as "no earlier failure" and the log
+#      says so.
 #   3. Save this run's result under its own key (run id and attempt).
 #   4. Fail the run, which sends the email, only when this run and the saved one are
 #      both bad. So every failure after the first in a streak emails, until a good
@@ -186,16 +187,22 @@ jobs:
           WAIT: ${{ steps.wait.outcome }}
           DEPLOY: ${{ steps.deployment.outcome }}
           RESTORE: ${{ steps.previous.outcome }}
+          MATCHED: ${{ steps.previous.outputs.cache-matched-key }}
         run: |
+          # The restore sets cache-matched-key only when it found and unpacked an entry.
+          # A download or unpack error is only a warning and may leave a file behind,
+          # so the file is trusted only with that output set.
           file=.pages-deploy-result/result
           before=none
-          if [ -f "$file" ]; then before=$(cat "$file"); fi
+          if [ -n "$MATCHED" ] && [ -f "$file" ]; then before=$(cat "$file"); fi
           if [ "$before" != good ] && [ "$before" != bad ]; then
             before=none
-            if [ "$RESTORE" = success ]; then
-              echo "No earlier deploy result is saved. Counting it as no earlier failure."
-            else
+            if [ "$RESTORE" != success ]; then
               echo "Could not look up the earlier deploy result ($RESTORE). Counting it as no earlier failure."
+            elif [ -z "$MATCHED" ]; then
+              echo "No earlier deploy result was restored (none saved yet, or the restore did not finish). Counting it as no earlier failure."
+            else
+              echo "The restored deploy result could not be read. Counting it as no earlier failure."
             fi
           else
             echo "Earlier deploy: $before."

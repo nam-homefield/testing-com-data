@@ -1,0 +1,48 @@
+Branch file .github/workflows/pages.yml:
+  replay (45413361106, 45415969592, 45418761018) as ('good', 'fail_deploy', 'good'): email [False, False, False]
+  replay (45415969592, 43095722533, 45415969592) as ('fail_deploy', 'never_started', 'fail_deploy'): email [False, False, True]
+  replay (45415969592, 42806424818, 45415969592) as ('fail_deploy', 'cancel_deploy', 'fail_deploy'): email [False, False, True]
+  replay (45415969592, 42068254991, 45415969592) as ('fail_deploy', 'cancel_wait', 'fail_deploy'): email [False, False, True]
+  replay (45415969592, 41471386526, 45415969592) as ('fail_deploy', 'cancel_after_good', 'fail_deploy'): email [False, False, False]
+  replay (45413361106, 43095722533, 45415969592) as ('good', 'never_started', 'fail_deploy'): email [False, False, False]
+  sweep: 0 of 1110 sequences wrong (want 0); oracle emails in 475 of 1110
+  FAIL lookup case ('fail_deploy',): email [False], log 'No earlier deploy result is saved. Counting it as no earlier failure.\nThis deploy: bad.\n'
+  FAIL lookup case ('fail_deploy', 'fail_deploy'): email [False, True], log 'Earlier deploy: bad.\nThis deploy: bad.\n::error::This deploy and the one before it both failed.\n'
+Break cases (35), each must be red:
+  red: first failure fails the run (no continue-on-error on the deploy) (199 of 1110 sequences wrong, 12 problems)
+  red: first failure fails the run (no continue-on-error on checkout) (199 of 1110 sequences wrong, 5 problems)
+  red: first failure fails the run (no continue-on-error on configure) (199 of 1110 sequences wrong, 5 problems)
+  red: first failure fails the run (no continue-on-error on upload) (199 of 1110 sequences wrong, 5 problems)
+  red: first failure fails the run (no continue-on-error on wait) (199 of 1110 sequences wrong, 5 problems)
+  red: first failure fails the run (rule alerts on any bad) (955 of 1110 sequences wrong, 12 problems)
+  red: second failure passes (rule never alerts) (475 of 1110 sequences wrong, 8 problems)
+  red: good does not reset the count (50 of 1110 sequences wrong, 6 problems)
+  red: skipped step hides an earlier failure (wait not counted) (187 of 1110 sequences wrong, 5 problems)
+  red: cancel before the deploy ends changes the count (170 of 1110 sequences wrong, 5 problems)
+  red: cancel after a good deploy does not reset (decide not always) (25 of 1110 sequences wrong, 6 problems)
+  red: cancel after a good deploy does not reset (save not always) (25 of 1110 sequences wrong, 6 problems)
+  red: fail step if false (475 of 1110 sequences wrong, 8 problems)
+  red: fail step if ${{ false }} (475 of 1110 sequences wrong, 8 problems)
+  red: fail step removed (475 of 1110 sequences wrong, 8 problems)
+  red: fail step continue-on-error (475 of 1110 sequences wrong, 8 problems)
+  red: job continue-on-error (475 of 1110 sequences wrong, 8 problems)
+  red: decide step if false (475 of 1110 sequences wrong, 9 problems)
+  red: save step if false (475 of 1110 sequences wrong, 8 problems)
+  red: restore step if false (475 of 1110 sequences wrong, 8 problems)
+  red: save key without the run id (entry never replaced) (100 of 1110 sequences wrong, 6 problems)
+  red: restore keys removed (475 of 1110 sequences wrong, 8 problems)
+  red: save path differs (475 of 1110 sequences wrong, 8 problems)
+  red: restore lookup-only (never downloads) (475 of 1110 sequences wrong, 8 problems)
+  FAIL partial restore trusted (file read without a matched key): break case text not found: 'if [ -n "$MATCHED" ] && [ -f "$file" ]'
+  FAIL matched key read from the wrong step: break case text not found: '${{ steps.previous.outputs.cache-matched-key }}'
+  red: decide step working-directory (0 of 1110 sequences wrong, 3 problems)
+  red: deploy continue-on-error ${{ false }} (199 of 1110 sequences wrong, 13 problems)
+  red: save step timeout-minutes (0 of 1110 sequences wrong, 3 problems)
+  red: deploy runs after the wait failed (852 of 1110 sequences wrong, 5 problems)
+  red: upload runs after configure failed (526 of 1110 sequences wrong, 5 problems)
+  red: second upload (1107 of 1110 sequences wrong, 13 problems)
+  red: second deploy (1107 of 1110 sequences wrong, 13 problems)
+  red: cancel-in-progress off (0 of 1110 sequences wrong, 3 problems)
+  red: concurrency removed (0 of 1110 sequences wrong, 3 problems)
+  35 of 35 break cases red
+RESULT: FAIL

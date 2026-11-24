@@ -155,7 +155,7 @@ def bash(script, env, files):
     return _BASH[key]
 
 
-def run_once(wf, kind, cache, run_id, restore_error=False):
+def run_once(wf, kind, cache, run_id, restore_error=None):
     """One workflow run. Returns (conclusion, log, counts)."""
     if kind == "never_started":
         return "cancelled", "", {}
@@ -189,8 +189,12 @@ def run_once(wf, kind, cache, run_id, restore_error=False):
                     outcome = "success"
                     done.append(sk)
             elif sk == "restore":
-                outcome = "failure" if restore_error else "success"
-                if not restore_error:
+                # actions/cache v6 restoreImpl and toolkit restoreCache: a found entry sets the
+                # cache-matched-key output; lookup-only sets it but downloads nothing; an
+                # error while downloading or extracting is only a warning, sets no output, and
+                # may leave extracted files behind ("partial"); a thrown error fails the step.
+                outcome = "failure" if restore_error == "error" else "success"
+                if restore_error != "error":
                     w = step["with"]
                     path, key = template(w["path"], ctx), template(w["key"], ctx)
                     rks = [k for k in str(w.get("restore-keys", "")).splitlines() if k.strip()]
@@ -200,9 +204,12 @@ def run_once(wf, kind, cache, run_id, restore_error=False):
                         if hit:
                             break
                         hit = [e for e in same if e["key"].startswith(template(rk.strip(), ctx))]
+                    lookup_only = str(w.get("lookup-only", "false")).strip().lower() == "true"
                     if hit:
                         newest = max(hit, key=lambda e: e["seq"])
-                        for rel, text in newest["files"].items():
+                        if restore_error != "partial":
+                            outputs["cache-matched-key"] = newest["key"]
+                        for rel, text in ({} if lookup_only else newest["files"]).items():
                             (work / rel).parent.mkdir(parents=True, exist_ok=True)
                             (work / rel).write_text(text)
             elif sk == "save":
@@ -239,7 +246,7 @@ def run_once(wf, kind, cache, run_id, restore_error=False):
 def run_seq(wf, seq, restore_error_at=None):
     cache, emails, logs = [], [], []
     for i, kind in enumerate(seq):
-        conclusion, log, counts = run_once(wf, kind, cache, 1000 + i, restore_error=(i == restore_error_at))
+        conclusion, log, counts = run_once(wf, kind, cache, 1000 + i, restore_error=(restore_error_at[1] if restore_error_at and i == restore_error_at[0] else None))
         if counts.get("upload", 0) > 1 or counts.get("deploy", 0) > 1:
             raise AssertionError(f"more than one upload or deploy in one run: {counts}")
         emails.append(conclusion == "failure")
@@ -265,7 +272,7 @@ def structure(wf, text):
     extra = set(job) - {"runs-on", "environment", "steps", "continue-on-error", "if"}
     if extra:
         bad.append(f"job keys not modelled: {sorted(extra)}")
-    inputs = {"upload": {"path"}, "wait": {"script"}, "restore": {"path", "key", "restore-keys"},
+    inputs = {"upload": {"path"}, "wait": {"script"}, "restore": {"path", "key", "restore-keys", "lookup-only"},
               "save": {"path", "key"}}
     for s in steps:
         if "run" in s and "${{" in s["run"]:
@@ -315,8 +322,10 @@ def suite(text, verbose=False):
             if red <= 3:
                 problems.append(f"{' > '.join(seq)}: email {got}, want {oracle(seq)}")
     # Pass test 4: no saved result, or a failed lookup, is "no earlier failure", said in the log.
-    for seq, at, words in ((("fail_deploy",), None, "No earlier deploy result is saved"),
-                           (("fail_deploy", "fail_deploy"), 1, "Could not look up the earlier deploy result")):
+    # Pass test B (round 4): a damaged or partial restore is "no earlier failure" too.
+    for seq, at, words in ((("fail_deploy",), None, "No earlier deploy result was restored"),
+                           (("fail_deploy", "fail_deploy"), (1, "error"), "Could not look up the earlier deploy result"),
+                           (("fail_deploy", "fail_deploy"), (1, "partial"), "No earlier deploy result was restored")):
         try:
             got, logs = run_seq(wf, seq, restore_error_at=at)
             if got[-1] or words not in logs[-1] or "no earlier failure" not in logs[-1]:
@@ -395,6 +404,8 @@ BREAKS = {
     "save path differs": in_step("- name: Save this deploy's result", "path: .pages-deploy-result", "path: .pages-result"),
     # Settings the model does not read.
     "restore lookup-only (never downloads)": in_step("- name: Restore the last saved", "\n          restore-keys:", "\n          lookup-only: true\n          restore-keys:"),
+    "partial restore trusted (file read without a matched key)": edit('if [ -n "$MATCHED" ] && [ -f "$file" ]', 'if [ -f "$file" ]'),
+    "matched key read from the wrong step": edit("${{ steps.previous.outputs.cache-matched-key }}", "${{ steps.decide.outputs.cache-matched-key }}"),
     "decide step working-directory": in_step("- name: Decide this deploy's result", "\n        if: always()", "\n        if: always()\n        working-directory: /tmp"),
     "deploy continue-on-error ${{ false }}": in_step("- id: deployment", COE, "\n        continue-on-error: ${{ false }}"),
     "save step timeout-minutes": in_step("- name: Save this deploy's result", COE, COE + "\n        timeout-minutes: 0"),
