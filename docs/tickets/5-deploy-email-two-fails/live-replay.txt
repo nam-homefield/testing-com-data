@@ -1,4 +1,4 @@
-real API: 30 completed runs on main in the 30 run window, newest id 45424307418, oldest 45356979098
+real API: first page of runs on main (100 runs), using the newest 30: ids 45427123329 to 45358943079
 run 45413361106: quiet (run stays green)
     log: This deploy: good.
 run 45415969592: quiet (run stays green)

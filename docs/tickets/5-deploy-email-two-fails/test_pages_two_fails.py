@@ -6,8 +6,12 @@ Point it at another copy of the workflow with PAGES_YML=<path> (used to show it 
 
 What it proves, in order:
   1. The workflow has the shape that carries a deploy's real result to the next run (structure).
-  2. The decision script that is inside pages.yml, run as written (not a copy), gives the right
-     answer for every sequence of run kinds up to four long, against an independent oracle.
+     The deploy job has continue-on-error, the concurrency block is on the deploy job only, and the
+     verdict job and its step carry no key that could switch the decision off.
+  2. The workflow's own flags (job conditions, continue-on-error, concurrency) are applied to each
+     scenario the way GitHub applies them, and the decision script that is inside pages.yml runs as
+     written (not a copy). The answer, did the run end as failed, is checked for every sequence of
+     run kinds up to four long against an independent oracle.
   3. The unedited jobs records of four real runs give the right answer when fed to that script.
   4. The job and step names the script reads are the names GitHub recorded in those real records.
   5. Every break case turns the test red: each one is applied to the script or the workflow and
@@ -73,6 +77,7 @@ KINDS = {
     "bad_wait": with_steps(GOOD, "failure", **{WAIT: "failure", DEPLOY: "skipped"}),
     "bad_job": with_steps(GOOD, "failure", **{WAIT: "cancelled", DEPLOY: "cancelled", POST: "cancelled"}),
     "bad_post": with_steps(GOOD, "failure", **{POST: "failure"}),
+    "bad_job_after_deploy": with_steps(GOOD, "failure"),  # every step green, the job itself failed
     "cancel_before": CANCELLED_BEFORE,  # real run 43095722533
     "cancel_early": CANCEL_EARLY,  # real run 42068254991
     "cancel_mid": CANCEL_MID,  # real run 42806424818
@@ -81,7 +86,7 @@ KINDS = {
 # The oracle: what each kind means for the count. Written from the ticket, not from the script.
 MEANING = {
     "good": "good", "cancel_after_good": "good",
-    "bad_deploy": "bad", "bad_wait": "bad", "bad_job": "bad", "bad_post": "bad",
+    "bad_deploy": "bad", "bad_wait": "bad", "bad_job": "bad", "bad_post": "bad", "bad_job_after_deploy": "bad",
     "cancel_before": "skip", "cancel_early": "skip", "cancel_mid": "skip",
 }
 
@@ -116,7 +121,7 @@ def run_record(run_id, kind, loud):
             "jobs": jobs, "meaning": meaning}
 
 
-def scenario(name, history_kinds, current_kind, ids=None):
+def scenario(name, history_kinds, current_kind, ids=None, superseded=False):
     """Build one scenario: earlier runs (oldest first) and the current run."""
     n = len(history_kinds)
     ids = ids or [1000 + 10 * i for i in range(n + 1)]
@@ -128,11 +133,16 @@ def scenario(name, history_kinds, current_kind, ids=None):
     if current_kind != "cancel_before":
         cur_jobs.append({"name": "verdict", "status": "in_progress", "conclusion": None,
                          "steps": [{"name": "Set up job", "status": "completed", "conclusion": "success", "number": 1}]})
+    meaning = MEANING[current_kind]
+    deploy_result = "failure" if meaning == "bad" else ("cancelled" if current_kind.startswith("cancel") else "success")
     return {
         "name": name,
         "current": {"id": ids[n], "jobs": cur_jobs},
         "history": list(reversed(history)),  # the API lists newest first
         "expect_loud": oracle_loud(history_kinds, current_kind),
+        "deploy_result": deploy_result,  # what the deploy job really ended as
+        "needs_result": deploy_result,  # what ${{ needs.deploy.result }} would hold
+        "superseded": superseded,  # a newer push arrives after this deploy ended, while the verdict is still running
     }
 
 
@@ -163,17 +173,18 @@ globalThis.setTimeout = f => queueMicrotask(f); // the script waits 3 seconds be
         return { data: { total_count: jobsById.get(p.run_id).length, jobs: jobsById.get(p.run_id) } };
       },
       listWorkflowRuns: async p => {
-        if (p.workflow_id !== 'pages.yml' || p.branch !== 'main' || p.status !== 'completed') {
+        if (p.workflow_id !== 'pages.yml' || p.branch !== 'main' || p.per_page !== 100 || !(p.page >= 1) || 'status' in p) {
           throw new Error('unexpected listWorkflowRuns params ' + JSON.stringify(p));
         }
-        const runs = sc.history.slice(0, p.per_page).map(r => ({
+        const runs = sc.history.slice((p.page - 1) * p.per_page, p.page * p.per_page).map(r => ({
           id: r.id, conclusion: r.conclusion, status: r.status, head_branch: r.head_branch,
         }));
         return { data: { total_count: runs.length, workflow_runs: runs } };
       },
     } } };
     const context = { repo: { owner: 'nam-homefield', repo: 'testing-com-data' }, runId: sc.current.id };
-    const core = { info: m => infos.push(String(m)), setFailed: m => failed.push(String(m)) };
+    const core = { info: m => infos.push(String(m)), warning: m => infos.push('WARNING ' + m), setFailed: m => failed.push(String(m)) };
+    process.env.DEPLOY_RESULT = sc.env && sc.env.DEPLOY_RESULT !== undefined ? sc.env.DEPLOY_RESULT : '';
     try {
       await new AsyncFunction('github', 'context', 'core', input.script)(github, context, core);
     } catch (e) {
@@ -194,14 +205,70 @@ def run_scenarios(script, scenarios):
     return json.loads(r.stdout)
 
 
-def logic_problems(script, scenarios):
-    """Return a list of mismatches between the script's answer and the oracle."""
+IN_PROGRESS = copy.deepcopy(KINDS["good"])
+IN_PROGRESS[0]["status"], IN_PROGRESS[0]["conclusion"] = "in_progress", None
+for _st in IN_PROGRESS[0]["steps"]:
+    if _st["name"] in (DEPLOY, POST, DONE):
+        _st["status"], _st["conclusion"] = "in_progress", None
+
+
+def simulate(doc, script, scenarios):
+    """For each scenario: does the run end as failed (so GitHub emails)?
+
+    This follows the workflow's own flags, read from the parsed file, the way GitHub applies them:
+      - a failed deploy job fails the run unless the deploy job has continue-on-error: true
+      - a newer push cancels the whole run only when concurrency is on the workflow, and then
+        the verdict job's condition decides whether it still runs
+      - the verdict job runs when its if allows it (no if means success() of its needs)
+      - the verdict step runs unless it has an if, and its failure fails the run unless a
+        continue-on-error is set on the step or the job
+      - the verdict step's env DEPLOY_RESULT holds the deploy job's result when it is
+        ${{ needs.deploy.result }}
+    and runs the script from the file, as it stands, for every scenario where the step runs."""
+    jobs = doc["jobs"]
+    deploy, verdict = jobs["deploy"], jobs.get("verdict")
+    workflow_cancels = bool((doc.get("concurrency") or {}).get("cancel-in-progress"))
+    out = [None] * len(scenarios)
+    to_run = []
+    for i, sc in enumerate(scenarios):
+        dr = sc["deploy_result"]
+        fails = dr == "failure" and deploy.get("continue-on-error") is not True
+        step = (verdict or {}).get("steps", [None])[0] if verdict else None
+        if verdict and step is not None:
+            cancelled = workflow_cancels and (dr == "cancelled" or sc.get("superseded"))
+            cond = verdict.get("if")
+            if cond is None:
+                runs = dr == "success"
+            elif cond == "${{ !cancelled() }}":
+                runs = not cancelled
+            else:
+                runs = False
+            if "if" in step:
+                runs = False
+            if runs:
+                sc2 = dict(sc)
+                if verdict.get("needs") not in ("deploy", ["deploy"]):
+                    sc2["current"] = dict(sc["current"], reads=[IN_PROGRESS])  # it starts before the deploy ends
+                env_expr = (step.get("env") or {}).get("DEPLOY_RESULT")
+                sc2["env"] = {"DEPLOY_RESULT": sc["needs_result"] if env_expr == "${{ needs.deploy.result }}" else ""}
+                can_fail = not (step.get("continue-on-error") is True or verdict.get("continue-on-error") is True)
+                to_run.append((i, sc2, can_fail, fails))
+                continue
+        out[i] = (fails, None)
+    if to_run:
+        results = run_scenarios(script, [t[1] for t in to_run])
+        for (i, _sc2, can_fail, fails), res in zip(to_run, results):
+            step_failed = bool(res["failed"]) or bool(res["error"])
+            out[i] = (fails or (step_failed and can_fail), res["error"])
+    return out
+
+
+def logic_problems(doc, script, scenarios):
+    """Return a list of mismatches between what the workflow would do and the oracle."""
     problems = []
-    for sc, res in zip(scenarios, run_scenarios(script, scenarios)):
-        if res["error"]:
-            problems.append(f"{sc['name']}: script threw: {res['error']}")
-            continue
-        loud = bool(res["failed"])
+    for sc, (loud, error) in zip(scenarios, simulate(doc, script, scenarios)):
+        if error:
+            problems.append(f"{sc['name']}: script threw: {error}")
         if loud != sc["expect_loud"]:
             problems.append(f"{sc['name']}: expected {'FAIL (email)' if sc['expect_loud'] else 'quiet'}, got {'FAIL (email)' if loud else 'quiet'}")
     return problems
@@ -219,13 +286,30 @@ def sweep_scenarios(max_len=4):
     return scs
 
 
+def superseded_scenarios():
+    """The same sequences, up to 3 runs long, with a newer push arriving while the verdict runs."""
+    scs = []
+    for n in range(0, 3):
+        for hist in itertools.product(KINDS, repeat=n):
+            for cur in CURRENT_KINDS:
+                scs.append(scenario(" > ".join(list(hist) + [cur]) + " (newer push)", list(hist), cur, superseded=True))
+    return scs
+
+
+def long_history_scenarios():
+    """A failure, then many cancelled runs, then a failure: the cancelled runs must not hide the first."""
+    scs = []
+    for n in (40, 250):
+        sc = scenario(f"bad, {n} cancelled runs, bad", ["bad_deploy"] + ["cancel_before"] * n, "bad_deploy")
+        scs.append(sc)
+        sc = scenario(f"good, {n} cancelled runs, bad", ["good"] + ["cancel_before"] * n, "bad_deploy")
+        scs.append(sc)
+    return scs
+
+
 def unreadable_scenarios():
     """This run's own deploy job read back wrongly: not final yet, never final, or missing."""
-    in_progress = copy.deepcopy(KINDS["good"])
-    in_progress[0]["status"], in_progress[0]["conclusion"] = "in_progress", None
-    for st in in_progress[0]["steps"]:
-        if st["name"] in (DEPLOY, POST, DONE):
-            st["status"], st["conclusion"] = "in_progress", None
+    in_progress = IN_PROGRESS
     scs = []
     one = scenario("own job not final on the first read, then a failure (after a failure): loud", ["bad_deploy"], "bad_deploy")
     one["current"]["reads"] = [in_progress, one["current"]["jobs"]]
@@ -233,14 +317,14 @@ def unreadable_scenarios():
     two = scenario("own job not final on the first read, then a failure (after a good deploy): quiet", ["good"], "bad_deploy")
     two["current"]["reads"] = [in_progress, two["current"]["jobs"]]
     scs.append(two)
-    never = scenario("own job never final: the run fails, result unknown", ["good"], "good")
-    never["current"]["reads"] = [in_progress]
-    never["expect_loud"] = True
-    scs.append(never)
-    missing = scenario("own deploy job missing from the record: the run fails, result unknown", ["good"], "good")
-    missing["current"]["reads"] = [[]]
-    missing["expect_loud"] = True
-    scs.append(missing)
+    # Unreadable for good: the needs result decides. Only a failure counts, and it still needs a failure before it.
+    for reads_name, reads in (("never final", [in_progress]), ("missing", [[]])):
+        for needs, hist, loud in (("success", ["good"], False), ("success", ["bad_deploy"], False),
+                                  ("failure", ["bad_deploy"], True), ("failure", ["good"], False)):
+            sc = scenario(f"own job {reads_name}, needs result {needs}, after {hist[0]}", hist, "good")
+            sc["current"]["reads"] = reads
+            sc["needs_result"], sc["deploy_result"], sc["expect_loud"] = needs, ("failure" if needs == "failure" else "success"), loud
+            scs.append(sc)
     return scs
 
 
@@ -293,13 +377,17 @@ def structure_problems(text):
         p.append("workflow name changed (the email subject uses it)")
     if (doc["_on"] or {}).get("push", {}).get("branches") != ["main"]:
         p.append("push trigger is not main")
-    if doc.get("concurrency") != {"group": "pages", "cancel-in-progress": True}:
-        p.append("concurrency block changed (needs group pages and cancel-in-progress: true)")
+    if "concurrency" in doc:
+        p.append("concurrency is on the workflow, so a newer push can cancel the verdict job and lose the email")
     if doc.get("permissions") != {"contents": "read", "pages": "write", "id-token": "write"}:
         p.append("workflow-level permissions changed")
     if not deploy:
         p.append("no deploy job")
         return p
+    if deploy.get("concurrency") != {"group": "pages", "cancel-in-progress": True}:
+        p.append("deploy job concurrency must be group pages with cancel-in-progress: true")
+    if set(deploy) != {"continue-on-error", "concurrency", "runs-on", "environment", "steps"}:
+        p.append(f"deploy job keys changed: {sorted(deploy)}")
     if deploy.get("continue-on-error") is not True:
         p.append("deploy job lacks continue-on-error: true, so a failed deploy fails the run at once")
     if "name" in deploy:
@@ -328,11 +416,15 @@ def structure_problems(text):
         p.append("verdict job has continue-on-error, so it could never fail the run")
     if verdict.get("permissions") != {"actions": "read"}:
         p.append("verdict permissions must be exactly actions: read (it reads the jobs API)")
-    if "environment" in verdict:
-        p.append("verdict job must not use the github-pages environment")
+    if set(verdict) != {"needs", "if", "runs-on", "permissions", "steps"}:
+        p.append(f"verdict job keys must be exactly needs, if, runs-on, permissions, steps (found {sorted(verdict)})")
     vsteps = verdict.get("steps", [])
     if len(vsteps) != 1 or not str(vsteps[0].get("uses", "")).startswith("actions/github-script@"):
         p.append("verdict must be one actions/github-script step")
+    elif set(vsteps[0]) != {"name", "uses", "env", "with"} or set(vsteps[0]["with"]) != {"script"}:
+        p.append(f"verdict step has keys other than name, uses, env, with.script (found {sorted(vsteps[0])}); an if or a continue-on-error would switch the decision off")
+    elif vsteps[0]["env"] != {"DEPLOY_RESULT": "${{ needs.deploy.result }}"}:
+        p.append("verdict step env must be exactly DEPLOY_RESULT: ${{ needs.deploy.result }}")
     script = verdict_script(doc)
     if not script:
         p.append("verdict script is missing")
@@ -388,7 +480,7 @@ def main():
     script = verdict_script(doc) if doc else None
 
     # 1. structure
-    check("structure: deploy result is carried to a decision, one upload, one deploy, concurrency kept",
+    check("structure: deploy result is carried to a decision, one upload, one deploy, concurrency on the deploy job",
           structure_problems(text))
 
     # 4. names match the real records
@@ -408,14 +500,20 @@ def main():
     # 2. the whole sweep against the oracle, 3. real replays
     sweep = sweep_scenarios(4)
     loud = sum(1 for s in sweep if s["expect_loud"])
-    check(f"logic sweep: every sequence of {len(KINDS)} run kinds, 1 to 4 runs long",
-          logic_problems(script, sweep), f"{len(sweep)} sequences, {loud} must fail the run, {len(sweep) - loud} must stay quiet")
+    check(f"logic sweep, through the workflow's own flags: every sequence of {len(KINDS)} run kinds, 1 to 4 runs long",
+          logic_problems(doc, script, sweep), f"{len(sweep)} sequences, {loud} must fail the run, {len(sweep) - loud} must stay quiet")
+    newer = superseded_scenarios()
+    check("logic: the same sequences, up to 3 runs long, with a newer push while the verdict runs",
+          logic_problems(doc, script, newer), f"{len(newer)} sequences")
+    longh = long_history_scenarios()
+    check("logic: a failure, then 40 or 250 cancelled runs, then a failure",
+          logic_problems(doc, script, longh), f"{len(longh)} cases")
     unreadable = unreadable_scenarios()
     check("logic: this run's own deploy job read back not final, or missing",
-          logic_problems(script, unreadable), f"{len(unreadable)} cases")
+          logic_problems(doc, script, unreadable), f"{len(unreadable)} cases")
     replay = real_replay_scenarios()
     check("replay: real records of runs 45413361106, 45415969592, 45418761018, 43095722533 and three more cancelled runs",
-          logic_problems(script, replay), f"{len(replay)} replays")
+          logic_problems(doc, script, replay), f"{len(replay)} replays")
 
     # 5. break cases on the script
     script_breaks = [
@@ -426,9 +524,12 @@ def main():
         ("a good deploy does not reset the count",
          "if (before === 'skip') continue;", "if (before === 'skip' || before === 'good') continue;"),
         ("a skipped step hides an earlier failure (wait step failed, deploy skipped)",
-         "if (steps.some(s => failed(s.conclusion))) return 'bad';", ""),
+         "if (steps.some(s => failed(s.conclusion)) || failed(job.conclusion)) return 'bad';", ""),
+        ("a failed job whose deploy step succeeded counts as good",
+         "steps.some(s => failed(s.conclusion)) || failed(job.conclusion)", "steps.some(s => failed(s.conclusion))"),
         ("cancel before the deploy ends counts as a failure",
-         "if (failed(job.conclusion)) return 'bad';\n  return 'skip';", "return 'bad';"),
+         "if (deploy && deploy.conclusion === 'success') return 'good';\n  return 'skip';",
+         "if (deploy && deploy.conclusion === 'success') return 'good';\n  return 'bad';"),
         ("a run cancelled before any job started counts as a failure",
          "if (!job) return 'skip';", "if (!job) return 'bad';"),
         ("cancel after a good deploy does not reset it",
@@ -442,41 +543,70 @@ def main():
         ("this run's own failure is ignored", "now = classify([job]);", "now = 'good';"),
         ("this run's own deploy job is read before it is final",
          "if (job && job.status === 'completed') {", "if (job) {"),
-        ("an unreadable own result stays quiet",
-         "core.setFailed('Could not read the finished deploy job", "core.info('Could not read the finished deploy job"),
+        ("an unreadable own result is treated as a failure",
+         "Treating it as not failed.');\n    return;", "Treating it as not failed.');\n    now = 'bad';"),
+        ("an unreadable own result ignores the needs result",
+         "process.env.DEPLOY_RESULT === 'failure'", "false"),
+        ("the look back stops after the first page of runs", "if (runs.length < 100) break;", "break;"),
+        ("the look back stops after one page count", "const PAGES = 5;", "const PAGES = 1;"),
         ("the deploy step is read under the wrong name", "'Run actions/deploy-pages@v4'", "'Deploy'"),
     ]
-    probe = sweep + replay + unreadable
+    probe = sweep + replay + unreadable + longh
     for label, old, new in script_breaks:
         if script.count(old) != 1:
             check(f"break case: {label}", [f"could not apply: text found {script.count(old)} times, expected once"])
             continue
         mutated = script.replace(old, new)
-        found = logic_problems(mutated, probe)
+        found = logic_problems(doc, mutated, probe)
         must_be_red(f"break case: {label}", found, f"{len(found)} of {len(probe)} sequences go red")
 
-    # 5b. break cases on the workflow shape
+    # 5b. break cases on the workflow shape. Red means the structure check finds a problem, or the
+    # workflow's flags, run through the same sweep, give a wrong answer, or both.
+    sim_probe = sweep_scenarios(3) + newer + longh[:2] + unreadable + replay
+    verdict_head = "  verdict:\n    needs: deploy\n"
+    step_head = "      - name: Fail the run only when this deploy and the one before it both failed\n"
+    job_conc = "    concurrency:\n      group: pages\n      cancel-in-progress: true\n"
     shape_breaks = [
         ("deploy job fails the run by itself (continue-on-error removed)",
-         "    continue-on-error: true\n    runs-on: ubuntu-latest\n    environment:", "    runs-on: ubuntu-latest\n    environment:"),
-        ("verdict does not wait for deploy", "    needs: deploy\n", ""),
-        ("verdict is skipped after a failed deploy", "    if: ${{ !cancelled() }}\n", ""),
-        ("verdict cannot read the jobs API", "    permissions:\n      actions: read\n", ""),
-        ("verdict can never fail the run", "  verdict:\n    needs: deploy\n", "  verdict:\n    continue-on-error: true\n    needs: deploy\n"),
-        ("deploy step gets a name (the recorded name changes)", "      - id: deployment\n        uses: actions/deploy-pages@v4",
-         "      - name: Deploy\n        id: deployment\n        uses: actions/deploy-pages@v4"),
-        ("cancel-in-progress removed", "  cancel-in-progress: true\n", "  cancel-in-progress: false\n"),
-        ("a second upload is added", "      - uses: actions/configure-pages@v5\n",
-         "      - uses: actions/configure-pages@v5\n      - uses: actions/upload-pages-artifact@v3\n"),
-        ("the deploy step is repeated", "      - id: deployment\n        uses: actions/deploy-pages@v4",
-         "      - uses: actions/deploy-pages@v4\n      - id: deployment\n        uses: actions/deploy-pages@v4"),
+         [("    continue-on-error: true\n    # The concurrency", "    # The concurrency")]),
+        ("verdict does not wait for deploy", [("    needs: deploy\n", "")]),
+        ("verdict is skipped after a failed deploy (job condition removed)", [("    if: ${{ !cancelled() }}\n", "")]),
+        ("verdict job condition is switched off", [("    if: ${{ !cancelled() }}\n", "    if: ${{ false }}\n")]),
+        ("verdict step is switched off with an if", [(step_head, step_head + "        if: ${{ false }}\n")]),
+        ("verdict step can never fail the run (continue-on-error on the step)", [(step_head, step_head + "        continue-on-error: true\n")]),
+        ("verdict job can never fail the run (continue-on-error on the job)", [(verdict_head, "  verdict:\n    continue-on-error: true\n    needs: deploy\n")]),
+        ("verdict step loses the needs result", [("        env:\n          DEPLOY_RESULT: ${{ needs.deploy.result }}\n", "")]),
+        ("verdict cannot read the jobs API", [("    permissions:\n      actions: read\n", "")]),
+        ("deploy step gets a name (the recorded name changes)",
+         [("      - id: deployment\n        uses: actions/deploy-pages@v4", "      - name: Deploy\n        id: deployment\n        uses: actions/deploy-pages@v4")]),
+        ("cancel-in-progress removed", [("      cancel-in-progress: true\n", "      cancel-in-progress: false\n")]),
+        ("concurrency moved back to the workflow (a newer push can cancel the verdict job)",
+         [(job_conc, ""), ("jobs:\n  deploy:\n", "concurrency:\n  group: pages\n  cancel-in-progress: true\n\njobs:\n  deploy:\n")]),
+        ("a second upload is added",
+         [("      - uses: actions/configure-pages@v5\n", "      - uses: actions/configure-pages@v5\n      - uses: actions/upload-pages-artifact@v3\n")]),
+        ("the deploy step is repeated",
+         [("      - id: deployment\n        uses: actions/deploy-pages@v4",
+           "      - uses: actions/deploy-pages@v4\n      - id: deployment\n        uses: actions/deploy-pages@v4")]),
     ]
-    for label, old, new in shape_breaks:
-        if text.count(old) != 1:
-            check(f"break case: {label}", [f"could not apply: text found {text.count(old)} times, expected once"])
+    for label, edits in shape_breaks:
+        mutated, bad = text, None
+        for old, new in edits:
+            if mutated.count(old) != 1:
+                bad = f"could not apply: text found {mutated.count(old)} times, expected once ({old[:40]!r})"
+                break
+            mutated = mutated.replace(old, new)
+        if bad:
+            check(f"break case: {label}", [bad])
             continue
-        found = structure_problems(text.replace(old, new))
-        must_be_red(f"break case: {label}", found, f"{len(found)} structure problems")
+        struct = structure_problems(mutated)
+        try:
+            mdoc = load_workflow(mutated)
+            mscript = verdict_script(mdoc) or script
+            sim = logic_problems(mdoc, mscript, sim_probe)
+        except Exception as e:  # a file that no longer parses is red too
+            sim = [f"workflow no longer loads: {e}"]
+        must_be_red(f"break case: {label}", struct + sim,
+                    f"{len(struct)} structure problems, {len(sim)} of {len(sim_probe)} sequences go red")
 
     failed = RESULTS.count(False)
     print()
@@ -499,15 +629,15 @@ def live(run_ids):
     repo = "nam-homefield/testing-com-data"
     script = verdict_script(load_workflow(WORKFLOW.read_text()))
     # The same call, with the same parameters, that the script makes.
-    listing = gh_get(f"repos/{repo}/actions/workflows/pages.yml/runs", "branch=main", "status=completed", "per_page=30")
-    runs = listing["workflow_runs"]
-    print(f"real API: {len(runs)} completed runs on main in the 30 run window, newest id {runs[0]['id']}, oldest {runs[-1]['id']}")
+    listing = gh_get(f"repos/{repo}/actions/workflows/pages.yml/runs", "branch=main", "per_page=100", "page=1")
+    runs = listing["workflow_runs"][:30]  # jobs are fetched for the newest 30 only, to keep the calls few
+    print(f"real API: first page of runs on main ({len(listing['workflow_runs'])} runs), using the newest {len(runs)}: ids {runs[0]['id']} to {runs[-1]['id']}")
     jobs_by_id = {r["id"]: gh_get(f"repos/{repo}/actions/runs/{r['id']}/jobs", "per_page=100")["jobs"] for r in runs}
     for rid in run_ids:
         rid = int(rid)
         if rid not in jobs_by_id:
             jobs_by_id[rid] = gh_get(f"repos/{repo}/actions/runs/{rid}/jobs", "per_page=100")["jobs"]
-        sc = {"name": f"live {rid}", "current": {"id": rid, "jobs": jobs_by_id[rid]},
+        sc = {"name": f"live {rid}", "current": {"id": rid, "jobs": jobs_by_id[rid]}, "env": {"DEPLOY_RESULT": ""},
               "history": [dict(id=r["id"], conclusion=r["conclusion"], status=r["status"],
                                head_branch=r["head_branch"], jobs=jobs_by_id[r["id"]]) for r in runs]}
         res = run_scenarios(script, [sc])[0]
