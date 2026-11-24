@@ -33,7 +33,8 @@
 # the artifact never shows up, the step fails with a clear message. The deploy step is
 # never repeated, so a retry can never leave an "in progress deployment" lock behind.
 # The wait step also respects the concurrency block above: a cancelled run stops the
-# step, so a superseded run ends at once. The step is an actions/github-script node
+# step, so a superseded run skips its deploy at once (only the always-run steps
+# described below still run). The step is an actions/github-script node
 # action, which is why it gets ACTIONS_RUNTIME_TOKEN and ACTIONS_RESULTS_URL from the
 # runner.
 #

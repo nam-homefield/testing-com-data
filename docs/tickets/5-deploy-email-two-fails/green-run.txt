@@ -6,7 +6,7 @@ Branch file .github/workflows/pages.yml:
   replay (45415969592, 41471386526, 45415969592) as ('fail_deploy', 'cancel_after_good', 'fail_deploy'): email [False, False, False]
   replay (45413361106, 43095722533, 45415969592) as ('good', 'never_started', 'fail_deploy'): email [False, False, False]
   sweep: 0 of 1110 sequences wrong (want 0); oracle emails in 475 of 1110
-Break cases (29), each must be red:
+Break cases (33), each must be red:
   red: first failure fails the run (no continue-on-error on the deploy) (199 of 1110 sequences wrong, 11 problems)
   red: first failure fails the run (no continue-on-error on checkout) (199 of 1110 sequences wrong, 3 problems)
   red: first failure fails the run (no continue-on-error on configure) (199 of 1110 sequences wrong, 3 problems)
@@ -30,11 +30,15 @@ Break cases (29), each must be red:
   red: save key without the run id (entry never replaced) (100 of 1110 sequences wrong, 4 problems)
   red: restore keys removed (475 of 1110 sequences wrong, 6 problems)
   red: save path differs (475 of 1110 sequences wrong, 6 problems)
+  red: restore lookup-only (never downloads) (0 of 1110 sequences wrong, 1 problems)
+  red: decide step working-directory (0 of 1110 sequences wrong, 1 problems)
+  red: deploy continue-on-error ${{ false }} (199 of 1110 sequences wrong, 12 problems)
+  red: save step timeout-minutes (0 of 1110 sequences wrong, 1 problems)
   red: deploy runs after the wait failed (852 of 1110 sequences wrong, 3 problems)
   red: upload runs after configure failed (526 of 1110 sequences wrong, 3 problems)
   red: second upload (1107 of 1110 sequences wrong, 12 problems)
   red: second deploy (1107 of 1110 sequences wrong, 12 problems)
   red: cancel-in-progress off (0 of 1110 sequences wrong, 1 problems)
   red: concurrency removed (0 of 1110 sequences wrong, 1 problems)
-  29 of 29 break cases red
+  33 of 33 break cases red
 RESULT: PASS

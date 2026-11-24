@@ -223,13 +223,13 @@ def run_once(wf, kind, cache, run_id, restore_error=False):
                     (work / rel).write_text(text)
             if sid:
                 ctx["steps"][sid] = {"outcome": outcome, "outputs": outputs}
-            if outcome == "failure" and not step.get("continue-on-error"):
+            if outcome == "failure" and step.get("continue-on-error") is not True:
                 ctx["status"] = "failure"
             if kind == "cancel_after_good" and sk == "deploy":
                 ctx["cancelled"] = True
     if ctx["cancelled"]:
         conclusion = "cancelled"
-    elif ctx["status"] == "failure" and not job.get("continue-on-error"):
+    elif ctx["status"] == "failure" and job.get("continue-on-error") is not True:
         conclusion = "failure"
     else:
         conclusion = "success"
@@ -259,9 +259,27 @@ def structure(wf, text):
         n = sum(1 for s in steps if step_kind(s) == kind)
         if n != 1:
             bad.append(f"{n} {kind} steps in the file")
+    # The model reads only these keys. Anything else could change what GitHub does,
+    # so it is a failure, not something to skip.
+    job = next(iter(wf["jobs"].values()))
+    extra = set(job) - {"runs-on", "environment", "steps", "continue-on-error", "if"}
+    if extra:
+        bad.append(f"job keys not modelled: {sorted(extra)}")
+    inputs = {"upload": {"path"}, "wait": {"script"}, "restore": {"path", "key", "restore-keys"},
+              "save": {"path", "key"}}
     for s in steps:
         if "run" in s and "${{" in s["run"]:
             bad.append(f"expression inside run text of {s.get('name')}")
+        extra = set(s) - {"id", "name", "if", "uses", "with", "run", "env", "continue-on-error"}
+        if extra:
+            bad.append(f"step keys not modelled in {s.get('id') or s.get('name')}: {sorted(extra)}")
+        if "continue-on-error" in s and s["continue-on-error"] is not True:
+            bad.append(f"continue-on-error not literal true in {s.get('id') or s.get('name')}")
+        extra = set(s.get("with") or {}) - inputs.get(step_kind(s), set())
+        if extra:
+            bad.append(f"inputs not modelled in {s.get('id') or s.get('name')}: {sorted(extra)}")
+    if "continue-on-error" in job and job["continue-on-error"] is not True:
+        bad.append("job continue-on-error not literal true")
     return bad
 
 
@@ -375,6 +393,11 @@ BREAKS = {
     "save key without the run id (entry never replaced)": in_step("- name: Save this deploy's result", "-${{ github.run_id }}-${{ github.run_attempt }}", "-latest"),
     "restore keys removed": in_step("- name: Restore the last saved", "\n          restore-keys: pages-deploy-result-", ""),
     "save path differs": in_step("- name: Save this deploy's result", "path: .pages-deploy-result", "path: .pages-result"),
+    # Settings the model does not read.
+    "restore lookup-only (never downloads)": in_step("- name: Restore the last saved", "\n          restore-keys:", "\n          lookup-only: true\n          restore-keys:"),
+    "decide step working-directory": in_step("- name: Decide this deploy's result", "\n        if: always()", "\n        if: always()\n        working-directory: /tmp"),
+    "deploy continue-on-error ${{ false }}": in_step("- id: deployment", COE, "\n        continue-on-error: ${{ false }}"),
+    "save step timeout-minutes": in_step("- name: Save this deploy's result", COE, COE + "\n        timeout-minutes: 0"),
     # Broken chain and shape.
     "deploy runs after the wait failed": in_step("- id: deployment", "\n        if: steps.wait.outcome == 'success'", ""),
     "upload runs after configure failed": in_step("- id: upload", "\n        if: steps.configure.outcome == 'success'", ""),
