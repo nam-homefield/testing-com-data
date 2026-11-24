@@ -1,9 +1,0 @@
-real API: first page of runs on main (100 runs), using the newest 30: ids 45427123329 to 45358943079
-run 45413361106: quiet (run stays green)
-    log: This deploy: good.
-run 45415969592: quiet (run stays green)
-    log: This deploy: bad.
-    log: Run 45413361106: good.
-    log: The deploy before this one worked, so this failure stays quiet.
-run 45418761018: quiet (run stays green)
-    log: This deploy: good.

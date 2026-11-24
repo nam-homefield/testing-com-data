@@ -1,0 +1,13 @@
+pages.yml as on main: 955 of 1110 sequences wrong
+  FAIL fail_checkout: email [True], want [False]
+  FAIL fail_configure: email [True], want [False]
+  FAIL fail_upload: email [True], want [False]
+  FAIL lookup case ('fail_deploy',): email [True], log ''
+  FAIL lookup case ('fail_deploy', 'fail_deploy'): email [True, True], log ''
+  FAIL replay (45413361106, 45415969592, 45418761018) as ('good', 'fail_deploy', 'good'): email [False, True, False], want [False, False, False]
+  FAIL replay (45415969592, 43095722533, 45415969592) as ('fail_deploy', 'never_started', 'fail_deploy'): email [True, False, True], want [False, False, True]
+  FAIL replay (45415969592, 42806424818, 45415969592) as ('fail_deploy', 'cancel_deploy', 'fail_deploy'): email [True, False, True], want [False, False, True]
+  FAIL replay (45415969592, 42068254991, 45415969592) as ('fail_deploy', 'cancel_wait', 'fail_deploy'): email [True, False, True], want [False, False, True]
+  FAIL replay (45415969592, 41471386526, 45415969592) as ('fail_deploy', 'cancel_after_good', 'fail_deploy'): email [True, False, True], want [False, False, False]
+  FAIL replay (45413361106, 43095722533, 45415969592) as ('good', 'never_started', 'fail_deploy'): email [False, False, True], want [False, False, False]
+RESULT: FAIL

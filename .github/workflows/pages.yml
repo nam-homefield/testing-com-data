@@ -9,7 +9,7 @@
 #   Deployment request failed ... due to in progress deployment.
 #   Please cancel 28d28df first or wait for it to complete.
 #
-# The concurrency block below is the fix. A newer push cancels the older deploy, and
+# The concurrency block below is the fix. A newer push cancels the older run, and
 # actions/deploy-pages cancels its own pending deployment when cancelled, which
 # releases the lock instead of leaving it held until it times out. Superseding is the
 # behaviour we want here anyway: these are dashboards, so only the latest build
@@ -30,46 +30,34 @@
 # actions/toolkit packages/artifact does it: backend IDs read from the runtime token,
 # JSON body with the snake_case field names, bearer auth) every 3 seconds, up to about
 # 60 seconds, until "github-pages" is listed. Then deploy-pages runs exactly once. If
-# the artifact never shows up, the step fails with a clear message. The deploy step has
-# no continue-on-error and is never repeated, so any failure after a deployment exists
-# (a stuck or rejected deployment, a timeout) fails the deploy job, and a retry can never
-# leave an "in progress deployment" lock behind. The wait step
-# also respects the concurrency block above: a cancelled run stops the step, so a
-# superseded run ends at once. The step is an actions/github-script node action, which
-# is why it gets ACTIONS_RUNTIME_TOKEN and ACTIONS_RESULTS_URL from the runner.
+# the artifact never shows up, the step fails with a clear message. The deploy step is
+# never repeated, so a retry can never leave an "in progress deployment" lock behind.
+# The wait step also respects the concurrency block above: a cancelled run stops the
+# step, so a superseded run ends at once. The step is an actions/github-script node
+# action, which is why it gets ACTIONS_RUNTIME_TOKEN and ACTIONS_RESULTS_URL from the
+# runner.
 #
-# Emails (ticket 5, 2026-11-24). GitHub sends "Run failed: Deploy Pages - main" whenever a
-# run ends as failed. Since Nov 21 about 14 of 387 deploys hit the artifact error above even
-# with the wait step in place, and each was followed by a good deploy about 15 minutes
-# later, so the email was noise. Now a lone failed deploy sends nothing, and two failed
-# deploys in a row still send the email, as does every failed deploy after that until one
-# works. Two jobs do it:
-#
-#   deploy   has continue-on-error: true, so its failure does not fail the run. Its steps are
-#            untouched, so the failed step stays on record in the jobs API.
-#   verdict  runs after deploy. It reads the deploy job's steps from the jobs API for this
-#            run, and, only when this deploy failed, for the runs before it on main (newest
-#            first). It fails the run only when the nearest earlier run that counts also
-#            failed its deploy. It never reads a run's own conclusion, because a quiet
-#            failure ends green and a run conclusion would hide it from the next run.
-#
-# What counts, for the deploy job of a run: any failed step (or a failed job) is a failure,
-# so a failing wait step that leaves the deploy step skipped is still a failure. Otherwise a
-# successful deploy-pages step is a good deploy, even if a newer push cancelled the run
-# afterwards. Everything else (cancelled before the deploy ended, never started) is skipped:
-# it does not break a streak and does not extend one. A cancelled deploy still releases the
-# deployment lock. The concurrency block sits on the deploy job so that a newer push cannot
-# cancel the verdict job of a run whose deploy has already failed, which would lose the email.
-# The look back reads up to 5 pages of 100 runs, so a long run of cancelled deploys cannot
-# push an earlier failure out of the count. A failed job counts as a failure even when its
-# deploy step succeeded. If this run's own deploy job cannot be read as finished after about
-# 30 seconds, the verdict falls back to the deploy job's result from the needs context (a
-# failure counts, anything else stays quiet and logs a warning). If a lookup call throws, the
-# verdict job fails and sends the email, because a missed failure is worse than one extra
-# email. An earlier run that cannot be read as good or bad is skipped, like a cancelled one.
-# The names the verdict reads ("deploy" and "Run actions/deploy-pages@v4") are what GitHub
-# records for a job and a step that have no name: line, so do not add one to either.
-# The test is docs/tickets/5-deploy-email-two-fails/test_pages_two_fails.py.
+# Failure email only on two failed deploys in a row (ticket 5). The one-off failures
+# above are each followed by a good deploy a few minutes later, so a single failure
+# must not turn the run red, because GitHub emails on a failed run. Every step up to
+# and including the deploy has continue-on-error, so a failure keeps its own outcome
+# (steps.<id>.outcome is "failure") but does not fail the job, and each step runs only
+# when the one before it worked. After the deploy, always-run steps do this:
+#   1. Restore the newest saved result: the cache entry with the most recent creation
+#      date under the prefix pages-deploy-result- (GitHub's cache key matching rule).
+#   2. Decide this run's result. bad = any of those steps failed. good = the deploy
+#      step succeeded, even if a newer push cancelled the run afterwards. Anything
+#      else (stopped before the deploy finished) saves nothing, so the saved result
+#      stays as it is. No saved result, or a failed restore, counts as "no earlier
+#      failure" and the log says so.
+#   3. Save this run's result under its own key (run id and attempt).
+#   4. Fail the run, which sends the email, only when this run and the saved one are
+#      both bad. So every failure after the first in a streak emails, until a good
+#      deploy resets it.
+# The workflow level concurrency group keeps runs apart: GitHub's docs say "only a
+# single job or workflow using the same concurrency group will run at a time". The
+# restore also runs after the deploy steps, well after an older run's last steps. A
+# lone failure shows as a green run with a red step inside it.
 #
 # No Jekyll step on purpose. upload-pages-artifact serves the files exactly as pushed,
 # which is what the reports need, and the repo has no Jekyll sources.
@@ -85,27 +73,35 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
 jobs:
   deploy:
-    # A failed deploy must not fail the run by itself. The verdict job below decides.
-    continue-on-error: true
-    # The concurrency block is on this job, not on the workflow, so a newer push cancels an
-    # older deploy but can never cancel the verdict job of a run whose deploy already ended.
-    concurrency:
-      group: pages
-      cancel-in-progress: true
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - id: checkout
+        uses: actions/checkout@v4
+        continue-on-error: true
+      - id: configure
+        if: steps.checkout.outcome == 'success'
+        uses: actions/configure-pages@v5
+        continue-on-error: true
+      - id: upload
+        if: steps.configure.outcome == 'success'
+        uses: actions/upload-pages-artifact@v3
+        continue-on-error: true
         with:
           path: .
       # Wait until the artifact shows up in the same lookup deploy-pages uses.
       - name: Wait for the artifact to be listed
+        id: wait
+        if: steps.upload.outcome == 'success'
+        continue-on-error: true
         uses: actions/github-script@v9
         with:
           script: |
@@ -166,90 +162,68 @@ jobs:
             }
             core.setFailed('Artifact github-pages was never listed by the results service after about 60 seconds (' + last + ').');
       - id: deployment
+        if: steps.wait.outcome == 'success'
         uses: actions/deploy-pages@v4
-  verdict:
-    needs: deploy
-    if: ${{ !cancelled() }}
-    runs-on: ubuntu-latest
-    permissions:
-      actions: read
-    steps:
-      - name: Fail the run only when this deploy and the one before it both failed
-        uses: actions/github-script@v9
-        env:
-          DEPLOY_RESULT: ${{ needs.deploy.result }}
+        continue-on-error: true
+      # The two-in-a-row rule. See the header comment.
+      - name: Restore the last saved deploy result
+        id: previous
+        if: always()
+        continue-on-error: true
+        uses: actions/cache/restore@v6
         with:
-          script: |
-            // The names GitHub records for the deploy job and its deploy-pages step.
-            const DEPLOY_JOB = 'deploy';
-            const DEPLOY_STEP = 'Run actions/deploy-pages@v4';
-            const PAGES = 5;
-            const { owner, repo } = context.repo;
-            const failed = c => c === 'failure' || c === 'timed_out';
-
-            // bad: a step or the job failed. good: the deploy step finished well, even if
-            // the run was cancelled afterwards. skip: cancelled or never started.
-            function classify(jobs) {
-              const job = jobs.find(j => j.name === DEPLOY_JOB);
-              if (!job) return 'skip';
-              const steps = job.steps || [];
-              if (steps.some(s => failed(s.conclusion)) || failed(job.conclusion)) return 'bad';
-              const deploy = steps.find(s => s.name === DEPLOY_STEP);
-              if (deploy && deploy.conclusion === 'success') return 'good';
-              return 'skip';
-            }
-            async function jobsOf(runId) {
-              const res = await github.rest.actions.listJobsForWorkflowRun({
-                owner, repo, run_id: runId, per_page: 100,
-              });
-              return res.data.jobs;
-            }
-
-            // This run's own deploy job has finished when this job starts, but its record is
-            // read over the API, so wait a little if it does not show as completed yet. If it
-            // never does, the result is unknown and the run fails, so nothing is missed quietly.
-            let now = null;
-            for (let i = 1; i <= 10 && now === null; i++) {
-              const job = (await jobsOf(context.runId)).find(j => j.name === DEPLOY_JOB);
-              if (job && job.status === 'completed') {
-                now = classify([job]);
-              } else {
-                core.info('The deploy job is not final yet (check ' + i + ' of 10).');
-                if (i < 10) await new Promise(r => setTimeout(r, 3000));
-              }
-            }
-            if (now === null) {
-              // Fall back to the result the needs context gives for the deploy job.
-              if (process.env.DEPLOY_RESULT === 'failure') {
-                core.warning('Could not read the finished deploy job of this run. The needs context says it failed.');
-                now = 'bad';
-              } else {
-                core.warning('Could not read the finished deploy job of this run. Treating it as not failed.');
-                return;
-              }
-            }
-            core.info('This deploy: ' + now + '.');
-            if (now !== 'bad') return;
-
-            // Walk back through the runs before this one, newest first, 100 at a time. A run
-            // still in progress is read too: its deploy job record says what happened so far.
-            for (let page = 1; page <= PAGES; page++) {
-              const res = await github.rest.actions.listWorkflowRuns({
-                owner, repo, workflow_id: 'pages.yml', branch: 'main', per_page: 100, page,
-              });
-              const runs = res.data.workflow_runs;
-              const earlier = runs.filter(r => r.id < context.runId).sort((a, b) => b.id - a.id);
-              for (const run of earlier) {
-                const before = classify(await jobsOf(run.id));
-                core.info('Run ' + run.id + ': ' + before + '.');
-                if (before === 'skip') continue;
-                if (before === 'bad') {
-                  core.setFailed('The deploy failed in this run and in run ' + run.id + ', two in a row.');
-                } else {
-                  core.info('The deploy before this one worked, so this failure stays quiet.');
-                }
-                return;
-              }
-              if (runs.length < 100) break;
-            }
-            core.info('No earlier deploy result found, so this failure stays quiet.');
+          path: .pages-deploy-result
+          key: pages-deploy-result-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: pages-deploy-result-
+      - name: Decide this deploy's result
+        id: decide
+        if: always()
+        env:
+          CHECKOUT: ${{ steps.checkout.outcome }}
+          CONFIGURE: ${{ steps.configure.outcome }}
+          UPLOAD: ${{ steps.upload.outcome }}
+          WAIT: ${{ steps.wait.outcome }}
+          DEPLOY: ${{ steps.deployment.outcome }}
+          RESTORE: ${{ steps.previous.outcome }}
+        run: |
+          file=.pages-deploy-result/result
+          before=none
+          if [ -f "$file" ]; then before=$(cat "$file"); fi
+          if [ "$before" != good ] && [ "$before" != bad ]; then
+            before=none
+            if [ "$RESTORE" = success ]; then
+              echo "No earlier deploy result is saved. Counting it as no earlier failure."
+            else
+              echo "Could not look up the earlier deploy result ($RESTORE). Counting it as no earlier failure."
+            fi
+          else
+            echo "Earlier deploy: $before."
+          fi
+          this=
+          for outcome in "$CHECKOUT" "$CONFIGURE" "$UPLOAD" "$WAIT" "$DEPLOY"; do
+            if [ "$outcome" = failure ]; then this=bad; fi
+          done
+          if [ -z "$this" ] && [ "$DEPLOY" = success ]; then this=good; fi
+          if [ -z "$this" ]; then
+            echo "This run stopped before its deploy finished. The saved result stays as it is."
+          else
+            echo "This deploy: $this."
+            mkdir -p .pages-deploy-result
+            echo "$this" > "$file"
+          fi
+          alert=false
+          if [ "$this" = bad ] && [ "$before" = bad ]; then alert=true; fi
+          echo "result=$this" >> "$GITHUB_OUTPUT"
+          echo "alert=$alert" >> "$GITHUB_OUTPUT"
+      - name: Save this deploy's result
+        if: always() && steps.decide.outputs.result != ''
+        continue-on-error: true
+        uses: actions/cache/save@v6
+        with:
+          path: .pages-deploy-result
+          key: pages-deploy-result-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Fail the run when two deploys in a row failed
+        if: always() && steps.decide.outputs.alert == 'true'
+        run: |
+          echo "::error::This deploy and the one before it both failed."
+          exit 1

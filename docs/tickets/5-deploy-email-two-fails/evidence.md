@@ -1,47 +1,34 @@
-# Evidence for the design of ticket 5
+# Evidence for the design of ticket 5 (round 3)
 
-Everything here was read on 2026-11-24 from GitHub's own docs or from the GitHub API. Nothing was run on GitHub Actions.
+Read on 2026-11-24 from GitHub's docs (github/docs, main) and the actions/cache repo. Nothing was run on GitHub Actions.
 
-## What GitHub's docs say (docs source files in github/docs, main)
+## Design
 
-- Workflow syntax, `jobs.<job_id>.continue-on-error`: "Prevents a workflow run from failing when a job fails. Set to `true` to allow a workflow run to pass when this job fails."
-- Expressions, status check functions: "A default status check of `success()` is applied unless you include one of these functions." The verdict job uses `!cancelled()`, so a failed deploy job does not stop it. The docs recommend `!cancelled()` over `always()`.
-- Contexts, `steps.<step_id>.conclusion` and `.outcome`: with a step level `continue-on-error`, a failed step's conclusion becomes success. This is why the deploy steps get no step level `continue-on-error`. Only the job has it, and the job's steps keep their real result.
-- Workflow syntax, `jobs.<job_id>.concurrency`: "You can use `jobs.<job_id>.concurrency` to ensure that only a single job or workflow using the same concurrency group will run at a time." The concurrency concept page adds: "any additional pending runs cancel the previous one". Round 2 moves the block from the workflow to the deploy job so a newer push cancels a deploy and never the verdict job of a run whose deploy already ended.
-- Notifications for workflow runs: a notification is sent when a run completes, with its status. The email follows the run's status, so a run that ends green sends no failure email. Delivery still depends on who started the run and their notification settings (not verified).
+Each deploy saves its own result (good or bad) in GitHub's Actions cache, and the next deploy restores the newest one. All of it sits inside the one deploy job. There is no second job and no reading of other runs from GitHub's API. The rounds 1 and 2 designs read other runs' records while GitHub was still writing them, which is where every reviewer finding came from.
 
-## Precedent for a job level `continue-on-error` (real public run)
+## What the docs say, and what it is used for
 
-Repo woocommerce/woocommerce-paypal-payments, run 35720477371, workflow `weekly-builds.yml`. The job `trigger-e2e` has `continue-on-error: true` at job level (line 117 of the workflow file). In that run:
-
-- the run's conclusion is `success`
-- the job "Trigger E2E tests (all:parallel)" has conclusion `failure`
-- its step "Trigger E2E workflow" has conclusion `failure`
-
-So the jobs API keeps the failed job and failed step on record while the run ends green. That is what the verdict job reads.
+- Contexts, steps: "When a `continue-on-error` step fails, the `outcome` is `failure`, but the final `conclusion` is `success`." So the five steps up to the deploy carry step level `continue-on-error`, the job stays green, and the decide step still reads each real outcome.
+- Expressions, status check functions: "A default status check of `success()` is applied unless you include one of these functions." `always()`: "Causes the step to always execute, and returns `true`, even when canceled." So each deploy path step runs only after the one before it worked (the default `success()` plus the outcome check), and the restore, decide and save steps run even when a newer push cancels the run.
+- Workflow cancellation reference: on cancel, "the server re-evaluates `if` conditions for the unfinished steps. If the condition evaluates to `true`, the step continues to run." That is how a deploy that finished well and was then cancelled still saves "good".
+- Dependency caching reference, cache key matching: "If there are multiple partial matches for a restore key, the action returns the most recently created cache." And: "You cannot change the contents of an existing cache. Instead, you can create a new cache with a new key." So each run saves under `pages-deploy-result-<run id>-<attempt>` and restores with the prefix `pages-deploy-result-`.
+- Same page: caches are scoped to the branch, and `push` and `workflow_dispatch` runs may create caches in the default branch's scope. Entries not accessed in 7 days are removed. There is no limit on the number of entries; the size limit is 10 GB per repo. Each entry here is one word.
+- actions/cache README, cache version: the version is a hash of the `path` and the compression tool. Restore and save use the same `path`, `.pages-deploy-result`. actions/cache/restore README: `fail-on-cache-miss` defaults to `false`, so a miss is not an error. Version used: `actions/cache/restore@v6` and `actions/cache/save@v6` (latest release v6.1.0, 2026-06-26, runs on node24).
+- Concurrency (workflow syntax reusable): "ensure that only a single job or workflow using the same concurrency group will run at a time." Kept at workflow level with `cancel-in-progress: true`, as on main. With one job, nothing else needs protecting from cancel, and the restore runs after the deploy steps, well after an older run's last steps.
 
 ## Real cancelled runs of this workflow
 
-All 40 cancelled runs of `pages.yml` in this repo, jobs read from the API:
-
-| Count | Shape |
-|---|---|
-| 1 | no jobs at all (run 43095722533, cancelled before any job started) |
-| 28 | job cancelled, deploy-pages step never recorded |
-| 3 | job cancelled, deploy-pages step cancelled |
-| 7 | job cancelled, deploy-pages step succeeded (cancelled after a good deploy) |
-| 1 | run marked cancelled, job itself success with a successful deploy |
-
-None of the 40 has a failed step. So a cancelled run never looks like a failure to the verdict job. Real records of the first four shapes are in `fixtures/` and the test replays them.
-
-## Run of the real script against the real API (read only)
-
-`live-replay.txt`. The test's `--live` mode gives the script the real answers of the two API calls it makes, for runs 45413361106 (good), 45415969592 (the one failure) and 45418761018 (recovery). All three stay quiet, and the failure run finds the good run before it.
+From round 1, all 40 cancelled runs of `pages.yml` here, jobs read from the API: 1 had no jobs, 28 had the deploy step never recorded, 3 had the deploy step cancelled, 8 had the deploy step succeed. None had a failed step. So a cancel never shows as a failure outcome. Records of each shape are in `fixtures/` and the test replays them.
 
 ## Only provable after the change is on main
 
-- The verdict job starts after a failed deploy job. Only the docs above say so.
-- A newer push, with concurrency on the deploy job only, cancels the older deploy and does not stop the older run's verdict job. Only the docs above say so.
-- The verdict job's token may read runs and jobs (`actions: read`). The same calls worked here with the account's own token.
-- The verdict job's read of its own run returns the finished deploy job. The first run after the merge must log "This deploy: good." in the verdict step. If it logs that the deploy job is not final, the read is slow or wrong, and the step then falls back to the needs context result, which may show `success` for a failed continue-on-error job. That case would stay quiet, so check the log.
-- The email is really sent on the second failure and not on the first.
+- `always()` steps run after a cancel for this job (the docs above say so; it has no job level `if`).
+- A cancelled step's outcome is never `failure` (the 40 real runs above agree).
+- A push run can save to and restore from the cache. Look for "Earlier deploy: good." or "No earlier deploy result is saved" in the decide step of the first runs.
+- The email really goes out on the second failure and not the first. Delivery depends on who started the run and their settings (unverified, as the ticket says).
+
+## Known, not fixed
+
+- A failure before any step runs (job setup, runner lost) turns the run red with nothing saved, so that one emails at once.
+- A second failure cancelled in the seconds before the last step ends as cancelled, so no email for it. If its save step finished, "bad" is saved and the next failure emails.
+- If a save fails, the next run reads the result before it.

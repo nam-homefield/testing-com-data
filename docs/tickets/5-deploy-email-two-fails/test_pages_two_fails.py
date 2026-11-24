@@ -1,654 +1,431 @@
 #!/usr/bin/env python3
-"""Test for ticket 5: the "Run failed: Deploy Pages" email only on two failed deploys in a row.
+"""Ticket 5 test: the deploy emails only when two deploys in a row fail.
 
-Run it from the repo root:   python3 docs/tickets/5-deploy-email-two-fails/test_pages_two_fails.py
-Point it at another copy of the workflow with PAGES_YML=<path> (used to show it red on the old file).
+It runs the real pages.yml, step by step, the way GitHub does:
+- each step's `if` is read from the file and evaluated (status functions, the
+  default success() check, steps.<id>.outcome and outputs),
+- `continue-on-error` is read from the file for each step and for the job,
+- the decide step's own bash text from the file runs under `bash -e`,
+- the cache works as GitHub's docs describe it: an entry is never overwritten,
+  a restore tries the exact key, then a prefix of it, then each restore key as a
+  prefix, and returns the newest match with the same path; a miss is not an error.
+A run "emails" when its run ends as failure.
 
-What it proves, in order:
-  1. The workflow has the shape that carries a deploy's real result to the next run (structure).
-     The deploy job has continue-on-error, the concurrency block is on the deploy job only, and the
-     verdict job and its step carry no key that could switch the decision off.
-  2. The workflow's own flags (job conditions, continue-on-error, concurrency) are applied to each
-     scenario the way GitHub applies them, and the decision script that is inside pages.yml runs as
-     written (not a copy). The answer, did the run end as failed, is checked for every sequence of
-     run kinds up to four long against an independent oracle.
-  3. The unedited jobs records of four real runs give the right answer when fed to that script.
-  4. The job and step names the script reads are the names GitHub recorded in those real records.
-  5. Every break case turns the test red: each one is applied to the script or the workflow and
-     the checks above must then fail.
-  6. Optional, once: --live <run id>... feeds the script the real API answers (read-only gh api
-     GET calls, nothing is deployed) with context.runId set to each run id. Needs gh logged in.
-Needs python3 with PyYAML and node. The default run uses no network and no secrets.
+Usage:
+  python3 test_pages_two_fails.py               # the branch file, plus the break cases
+  python3 test_pages_two_fails.py --file F      # one other file only (for the red run)
+Needs PyYAML and bash.
 """
 import copy
 import itertools
 import json
-import os
 import re
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 import yaml
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[2]
-WORKFLOW = Path(os.environ.get("PAGES_YML", ROOT / ".github" / "workflows" / "pages.yml"))
-FIX = HERE / "fixtures"
+REPO = HERE.parents[2]
+WORKFLOW = REPO / ".github" / "workflows" / "pages.yml"
+
+KINDS = ["good", "fail_checkout", "fail_configure", "fail_upload", "fail_wait",
+         "fail_deploy", "cancel_wait", "cancel_deploy", "cancel_after_good", "never_started"]
+PATH_STEPS = ["checkout", "configure", "upload", "wait", "deploy"]
 
 
-def load_jobs(run_id):
-    return json.loads((FIX / f"jobs-{run_id}.json").read_text())["jobs"]
+# ---------- the rule, written from the ticket ----------
+def counted(kind):
+    if kind in ("good", "cancel_after_good"):
+        return "good"
+    if kind.startswith("fail_"):
+        return "bad"
+    return None  # stopped before the deploy finished: skipped when counting
 
 
-# Real GitHub records, unedited (jobs API), for the four runs named in the ticket.
-REAL_GOOD_1, REAL_BAD, REAL_GOOD_2, REAL_CANCELLED = "45413361106", "45415969592", "45418761018", "43095722533"
-GOOD = load_jobs(REAL_GOOD_1)
-BAD = load_jobs(REAL_BAD)
-GOOD_2 = load_jobs(REAL_GOOD_2)
-CANCELLED_BEFORE = load_jobs(REAL_CANCELLED)  # no jobs: cancelled before any job started
-# Three more real cancelled runs, one of each shape the 40 cancelled runs of this workflow have.
-REAL_CANCEL_EARLY, REAL_CANCEL_MID, REAL_CANCEL_AFTER = "42068254991", "42806424818", "41471386526"
-CANCEL_EARLY = load_jobs(REAL_CANCEL_EARLY)  # job cancelled before any step was recorded
-CANCEL_MID = load_jobs(REAL_CANCEL_MID)  # deploy-pages step cancelled
-CANCEL_AFTER_GOOD = load_jobs(REAL_CANCEL_AFTER)  # deploy-pages step succeeded, then the run was cancelled
-
-WAIT = "Wait for the artifact to be listed"
-DEPLOY = "Run actions/deploy-pages@v4"
-POST = "Post Run actions/checkout@v4"
-DONE = "Complete job"
-
-
-def with_steps(jobs, job_conclusion, **by_name):
-    out = copy.deepcopy(jobs)
-    out[0]["conclusion"] = job_conclusion
-    for s in out[0]["steps"]:
-        if s["name"] in by_name:
-            s["conclusion"] = by_name[s["name"]]
+def oracle(seq):
+    state, out = None, []
+    for kind in seq:
+        this = counted(kind)
+        out.append(this == "bad" and state == "bad")
+        if this:
+            state = this
     return out
 
 
-# Each kind is a deploy job as GitHub records it. Real records where one exists (good,
-# bad_deploy and all four cancel kinds), and a real record with the one field a failure of
-# that kind changes for the three failures that have not happened yet (wait, job, post).
-KINDS = {
-    "good": GOOD,
-    "bad_deploy": BAD,  # real run 45415969592
-    "bad_wait": with_steps(GOOD, "failure", **{WAIT: "failure", DEPLOY: "skipped"}),
-    "bad_job": with_steps(GOOD, "failure", **{WAIT: "cancelled", DEPLOY: "cancelled", POST: "cancelled"}),
-    "bad_post": with_steps(GOOD, "failure", **{POST: "failure"}),
-    "bad_job_after_deploy": with_steps(GOOD, "failure"),  # every step green, the job itself failed
-    "cancel_before": CANCELLED_BEFORE,  # real run 43095722533
-    "cancel_early": CANCEL_EARLY,  # real run 42068254991
-    "cancel_mid": CANCEL_MID,  # real run 42806424818
-    "cancel_after_good": CANCEL_AFTER_GOOD,  # real run 41471386526
-}
-# The oracle: what each kind means for the count. Written from the ticket, not from the script.
-MEANING = {
-    "good": "good", "cancel_after_good": "good",
-    "bad_deploy": "bad", "bad_wait": "bad", "bad_job": "bad", "bad_post": "bad", "bad_job_after_deploy": "bad",
-    "cancel_before": "skip", "cancel_early": "skip", "cancel_mid": "skip",
-}
+# ---------- expressions ----------
+TOKEN = re.compile(r"\s*(?:(always|success|cancelled|failure)\(\)|steps\.([\w-]+)\.outcome"
+                   r"|steps\.([\w-]+)\.outputs\.([\w-]+)|github\.(run_id|run_attempt)"
+                   r"|'([^']*)'|(==|!=|&&|\|\||!|\(|\)|true|false))")
 
 
-def oracle_loud(history_kinds, current_kind):
-    """Expected: does this run end as failed (so GitHub emails)?"""
-    if MEANING[current_kind] != "bad":
-        return False
-    for k in reversed(history_kinds):
-        if MEANING[k] == "skip":
-            continue
-        return MEANING[k] == "bad"
-    return False
+def evaluate(expr, ctx):
+    expr = expr.strip()
+    m = re.fullmatch(r"\$\{\{(.*)\}\}", expr, re.S)
+    if m:
+        expr = m.group(1).strip()
+    py, pos, has_status = [], 0, False
+    while pos < len(expr):
+        m = TOKEN.match(expr, pos)
+        if not m or m.end() == pos:
+            raise ValueError(f"expression form not modelled: {expr!r}")
+        pos = m.end()
+        fn, sid, oid, oname, gh, lit, op = m.groups()
+        if fn:
+            has_status = True
+            py.append(f"_{fn}()")
+        elif sid:
+            py.append(repr(ctx["steps"].get(sid, {}).get("outcome", "")))
+        elif oid:
+            py.append(repr(ctx["steps"].get(oid, {}).get("outputs", {}).get(oname, "")))
+        elif gh:
+            py.append(repr(str(ctx[gh])))
+        elif lit is not None:
+            py.append(repr(lit))
+        else:
+            py.append({"&&": " and ", "||": " or ", "!": " not ", "true": "True",
+                       "false": "False"}.get(op, op))
+    return "".join(py), has_status
 
 
-def run_record(run_id, kind, loud):
-    """A finished run as the API lists it under the new workflow: a quiet failure ends green."""
-    meaning = MEANING[kind]
-    if kind.startswith("cancel"):
-        conclusion = "cancelled"
-    else:
-        conclusion = "failure" if loud else "success"
-    verdict = {
-        "name": "verdict", "status": "completed",
-        "conclusion": "failure" if loud else ("cancelled" if kind.startswith("cancel") else "success"),
-        "steps": [{"name": "Set up job", "status": "completed", "conclusion": "success", "number": 1},
-                  {"name": "Fail the run only when this deploy and the one before it both failed",
-                   "status": "completed", "conclusion": "failure" if loud else "success", "number": 2}],
-    }
-    jobs = copy.deepcopy(KINDS[kind]) + ([] if kind == "cancel_before" else [verdict])
-    return {"id": run_id, "conclusion": conclusion, "status": "completed", "head_branch": "main",
-            "jobs": jobs, "meaning": meaning}
+def eval_if(expr, ctx):
+    if expr is None:
+        expr = "success()"
+    if isinstance(expr, bool):
+        return expr
+    code, has_status = evaluate(str(expr), ctx)
+    if not has_status:
+        code = f"_success() and ({code})"
+    funcs = {"_always": lambda: True,
+             "_success": lambda: ctx["status"] == "success" and not ctx["cancelled"],
+             "_failure": lambda: ctx["status"] == "failure",
+             "_cancelled": lambda: ctx["cancelled"]}
+    return bool(eval(code, {"__builtins__": {}}, funcs))
 
 
-def scenario(name, history_kinds, current_kind, ids=None, superseded=False):
-    """Build one scenario: earlier runs (oldest first) and the current run."""
-    n = len(history_kinds)
-    ids = ids or [1000 + 10 * i for i in range(n + 1)]
-    history = []
-    for i, k in enumerate(history_kinds):
-        loud = oracle_loud(history_kinds[:i], k)
-        history.append(run_record(ids[i], k, loud))
-    cur_jobs = copy.deepcopy(KINDS[current_kind])
-    if current_kind != "cancel_before":
-        cur_jobs.append({"name": "verdict", "status": "in_progress", "conclusion": None,
-                         "steps": [{"name": "Set up job", "status": "completed", "conclusion": "success", "number": 1}]})
-    meaning = MEANING[current_kind]
-    deploy_result = "failure" if meaning == "bad" else ("cancelled" if current_kind.startswith("cancel") else "success")
-    return {
-        "name": name,
-        "current": {"id": ids[n], "jobs": cur_jobs},
-        "history": list(reversed(history)),  # the API lists newest first
-        "expect_loud": oracle_loud(history_kinds, current_kind),
-        "deploy_result": deploy_result,  # what the deploy job really ended as
-        "needs_result": deploy_result,  # what ${{ needs.deploy.result }} would hold
-        "superseded": superseded,  # a newer push arrives after this deploy ended, while the verdict is still running
-    }
+def template(value, ctx):
+    def one(m):
+        code, _ = evaluate(m.group(1), ctx)
+        v = eval(code, {"__builtins__": {}}, {})
+        return "true" if v is True else "false" if v is False else str(v)
+    return re.sub(r"\$\{\{(.*?)\}\}", one, str(value))
 
 
-# Runs the script exactly as actions/github-script does: an async function of github, context, core.
-HARNESS = r"""
-const fs = require('fs');
-const input = JSON.parse(fs.readFileSync(0, 'utf8'));
-const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
-globalThis.setTimeout = f => queueMicrotask(f); // the script waits 3 seconds between reads; do not wait here
-(async () => {
-  const out = [];
-  for (const sc of input.scenarios) {
-    const jobsById = new Map();
-    jobsById.set(sc.current.id, sc.current.jobs);
-    for (const r of sc.history) jobsById.set(r.id, r.jobs);
-    let currentReads = 0; // sc.current.reads, when given, are the successive answers for this run's own jobs
-    const failed = [];
-    const infos = [];
-    let error = null;
-    const github = { rest: { actions: {
-      listJobsForWorkflowRun: async p => {
-        if (p.owner !== 'nam-homefield' || p.repo !== 'testing-com-data') throw new Error('wrong repo');
-        if (!jobsById.has(p.run_id)) throw new Error('unknown run ' + p.run_id);
-        if (p.run_id === sc.current.id && sc.current.reads) {
-          const jobs = sc.current.reads[Math.min(currentReads++, sc.current.reads.length - 1)];
-          return { data: { total_count: jobs.length, jobs } };
-        }
-        return { data: { total_count: jobsById.get(p.run_id).length, jobs: jobsById.get(p.run_id) } };
-      },
-      listWorkflowRuns: async p => {
-        if (p.workflow_id !== 'pages.yml' || p.branch !== 'main' || p.per_page !== 100 || !(p.page >= 1) || 'status' in p) {
-          throw new Error('unexpected listWorkflowRuns params ' + JSON.stringify(p));
-        }
-        const runs = sc.history.slice((p.page - 1) * p.per_page, p.page * p.per_page).map(r => ({
-          id: r.id, conclusion: r.conclusion, status: r.status, head_branch: r.head_branch,
-        }));
-        return { data: { total_count: runs.length, workflow_runs: runs } };
-      },
-    } } };
-    const context = { repo: { owner: 'nam-homefield', repo: 'testing-com-data' }, runId: sc.current.id };
-    const core = { info: m => infos.push(String(m)), warning: m => infos.push('WARNING ' + m), setFailed: m => failed.push(String(m)) };
-    process.env.DEPLOY_RESULT = sc.env && sc.env.DEPLOY_RESULT !== undefined ? sc.env.DEPLOY_RESULT : '';
-    try {
-      await new AsyncFunction('github', 'context', 'core', input.script)(github, context, core);
-    } catch (e) {
-      error = String(e && e.message || e);
-    }
-    out.push({ name: sc.name, failed, error, infos });
-  }
-  process.stdout.write(JSON.stringify(out));
-})();
-"""
+# ---------- steps ----------
+def step_kind(step):
+    uses, name = step.get("uses", ""), step.get("name", "")
+    for prefix, kind in (("actions/checkout@", "checkout"), ("actions/configure-pages@", "configure"),
+                         ("actions/upload-pages-artifact@", "upload"), ("actions/deploy-pages@", "deploy"),
+                         ("actions/cache/restore@", "restore"), ("actions/cache/save@", "save")):
+        if uses.startswith(prefix):
+            return kind
+    if name.startswith("Wait for the artifact"):
+        return "wait"
+    if "run" in step and not uses:
+        return "bash"
+    raise ValueError(f"step not modelled: {step}")
 
 
-def run_scenarios(script, scenarios):
-    payload = json.dumps({"script": script, "scenarios": scenarios})
-    r = subprocess.run(["node", "-e", HARNESS], input=payload, capture_output=True, text=True, timeout=300)
-    if r.returncode != 0:
-        raise RuntimeError("node failed: " + r.stderr[-800:])
-    return json.loads(r.stdout)
+def snapshot(work):
+    return {str(p.relative_to(work)): p.read_text() for p in work.rglob("*") if p.is_file()}
 
 
-IN_PROGRESS = copy.deepcopy(KINDS["good"])
-IN_PROGRESS[0]["status"], IN_PROGRESS[0]["conclusion"] = "in_progress", None
-for _st in IN_PROGRESS[0]["steps"]:
-    if _st["name"] in (DEPLOY, POST, DONE):
-        _st["status"], _st["conclusion"] = "in_progress", None
+_BASH = {}
 
 
-def simulate(doc, script, scenarios):
-    """For each scenario: does the run end as failed (so GitHub emails)?
+def bash(script, env, files):
+    """Runs a run: step under bash -e in a fresh folder holding `files`.
+    Same input, same output, so results are kept to save time."""
+    key = (script, tuple(sorted(env.items())), tuple(sorted(files.items())))
+    if key not in _BASH:
+        with tempfile.TemporaryDirectory() as d:
+            d = Path(d)
+            for rel, text in files.items():
+                (d / rel).parent.mkdir(parents=True, exist_ok=True)
+                (d / rel).write_text(text)
+            out = d / "_github_output"
+            out.write_text("")
+            p = subprocess.run(["bash", "-e", "-c", script], cwd=d, capture_output=True, text=True,
+                               env=dict(env, GITHUB_OUTPUT=str(out), PATH="/usr/bin:/bin"))
+            outputs = dict(line.split("=", 1) for line in out.read_text().splitlines() if "=" in line)
+            out.unlink()
+            _BASH[key] = (p.stdout + p.stderr, p.returncode, outputs, snapshot(d))
+    return _BASH[key]
 
-    This follows the workflow's own flags, read from the parsed file, the way GitHub applies them:
-      - a failed deploy job fails the run unless the deploy job has continue-on-error: true
-      - a newer push cancels the whole run only when concurrency is on the workflow, and then
-        the verdict job's condition decides whether it still runs
-      - the verdict job runs when its if allows it (no if means success() of its needs)
-      - the verdict step runs unless it has an if, and its failure fails the run unless a
-        continue-on-error is set on the step or the job
-      - the verdict step's env DEPLOY_RESULT holds the deploy job's result when it is
-        ${{ needs.deploy.result }}
-    and runs the script from the file, as it stands, for every scenario where the step runs."""
-    jobs = doc["jobs"]
-    deploy, verdict = jobs["deploy"], jobs.get("verdict")
-    workflow_cancels = bool((doc.get("concurrency") or {}).get("cancel-in-progress"))
-    out = [None] * len(scenarios)
-    to_run = []
-    for i, sc in enumerate(scenarios):
-        dr = sc["deploy_result"]
-        fails = dr == "failure" and deploy.get("continue-on-error") is not True
-        step = (verdict or {}).get("steps", [None])[0] if verdict else None
-        if verdict and step is not None:
-            cancelled = workflow_cancels and (dr == "cancelled" or sc.get("superseded"))
-            cond = verdict.get("if")
-            if cond is None:
-                runs = dr == "success"
-            elif cond == "${{ !cancelled() }}":
-                runs = not cancelled
-            else:
-                runs = False
-            if "if" in step:
-                runs = False
-            if runs:
-                sc2 = dict(sc)
-                if verdict.get("needs") not in ("deploy", ["deploy"]):
-                    sc2["current"] = dict(sc["current"], reads=[IN_PROGRESS])  # it starts before the deploy ends
-                env_expr = (step.get("env") or {}).get("DEPLOY_RESULT")
-                sc2["env"] = {"DEPLOY_RESULT": sc["needs_result"] if env_expr == "${{ needs.deploy.result }}" else ""}
-                can_fail = not (step.get("continue-on-error") is True or verdict.get("continue-on-error") is True)
-                to_run.append((i, sc2, can_fail, fails))
+
+def run_once(wf, kind, cache, run_id, restore_error=False):
+    """One workflow run. Returns (conclusion, log, counts)."""
+    if kind == "never_started":
+        return "cancelled", "", {}
+    job = next(iter(wf["jobs"].values()))
+    ctx = {"steps": {}, "status": "success", "cancelled": False,
+           "run_id": run_id, "run_attempt": 1}
+    log, counts, done = [], {}, []
+    if "if" in job and not eval_if(job["if"], ctx):
+        return "skipped", "", {}
+    with tempfile.TemporaryDirectory() as work:
+        work = Path(work)
+        for step in job["steps"]:
+            sk = step_kind(step)
+            sid = step.get("id")
+            if not eval_if(step.get("if"), ctx):
+                if sid:
+                    ctx["steps"][sid] = {"outcome": "skipped", "outputs": {}}
                 continue
-        out[i] = (fails, None)
-    if to_run:
-        results = run_scenarios(script, [t[1] for t in to_run])
-        for (i, _sc2, can_fail, fails), res in zip(to_run, results):
-            step_failed = bool(res["failed"]) or bool(res["error"])
-            out[i] = (fails or (step_failed and can_fail), res["error"])
-    return out
-
-
-def logic_problems(doc, script, scenarios):
-    """Return a list of mismatches between what the workflow would do and the oracle."""
-    problems = []
-    for sc, (loud, error) in zip(scenarios, simulate(doc, script, scenarios)):
-        if error:
-            problems.append(f"{sc['name']}: script threw: {error}")
-        if loud != sc["expect_loud"]:
-            problems.append(f"{sc['name']}: expected {'FAIL (email)' if sc['expect_loud'] else 'quiet'}, got {'FAIL (email)' if loud else 'quiet'}")
-    return problems
-
-
-CURRENT_KINDS = [k for k in KINDS if k != "cancel_before"]  # the verdict job never runs with no deploy job
-
-
-def sweep_scenarios(max_len=4):
-    scs = []
-    for n in range(0, max_len):  # n earlier runs, then the current run
-        for hist in itertools.product(KINDS, repeat=n):
-            for cur in CURRENT_KINDS:
-                scs.append(scenario(" > ".join(list(hist) + [cur]), list(hist), cur))
-    return scs
-
-
-def superseded_scenarios():
-    """The same sequences, up to 3 runs long, with a newer push arriving while the verdict runs."""
-    scs = []
-    for n in range(0, 3):
-        for hist in itertools.product(KINDS, repeat=n):
-            for cur in CURRENT_KINDS:
-                scs.append(scenario(" > ".join(list(hist) + [cur]) + " (newer push)", list(hist), cur, superseded=True))
-    return scs
-
-
-def long_history_scenarios():
-    """A failure, then many cancelled runs, then a failure: the cancelled runs must not hide the first."""
-    scs = []
-    for n in (40, 250):
-        sc = scenario(f"bad, {n} cancelled runs, bad", ["bad_deploy"] + ["cancel_before"] * n, "bad_deploy")
-        scs.append(sc)
-        sc = scenario(f"good, {n} cancelled runs, bad", ["good"] + ["cancel_before"] * n, "bad_deploy")
-        scs.append(sc)
-    return scs
-
-
-def unreadable_scenarios():
-    """This run's own deploy job read back wrongly: not final yet, never final, or missing."""
-    in_progress = IN_PROGRESS
-    scs = []
-    one = scenario("own job not final on the first read, then a failure (after a failure): loud", ["bad_deploy"], "bad_deploy")
-    one["current"]["reads"] = [in_progress, one["current"]["jobs"]]
-    scs.append(one)
-    two = scenario("own job not final on the first read, then a failure (after a good deploy): quiet", ["good"], "bad_deploy")
-    two["current"]["reads"] = [in_progress, two["current"]["jobs"]]
-    scs.append(two)
-    # Unreadable for good: the needs result decides. Only a failure counts, and it still needs a failure before it.
-    for reads_name, reads in (("never final", [in_progress]), ("missing", [[]])):
-        for needs, hist, loud in (("success", ["good"], False), ("success", ["bad_deploy"], False),
-                                  ("failure", ["bad_deploy"], True), ("failure", ["good"], False)):
-            sc = scenario(f"own job {reads_name}, needs result {needs}, after {hist[0]}", hist, "good")
-            sc["current"]["reads"] = reads
-            sc["needs_result"], sc["deploy_result"], sc["expect_loud"] = needs, ("failure" if needs == "failure" else "success"), loud
-            scs.append(sc)
-    return scs
-
-
-def real_replay_scenarios():
-    """Real records, in the order the runs really happened, and the two cancel cases."""
-    r = REAL_CANCELLED, REAL_GOOD_1, REAL_BAD, REAL_GOOD_2
-    ids = [int(x) for x in r]
-    scs = [
-        scenario("real: 45413361106 success after the cancelled run", ["cancel_before"], "good", ids[:2]),
-        scenario("real: 45415969592 lone failure after a good deploy", ["cancel_before", "good"], "bad_deploy", ids[:3]),
-        scenario("real: 45418761018 recovery after the failure", ["cancel_before", "good", "bad_deploy"], "good", ids),
-        # Real records, renumbered, in new orders.
-        scenario("real: bad, cancelled, bad (cancel does not reset the count)", ["bad_deploy", "cancel_before"], "bad_deploy"),
-        scenario("real: good, cancelled, bad (still one failure)", ["good", "cancel_before"], "bad_deploy"),
-        scenario("real: bad, cancelled early, bad", ["bad_deploy", "cancel_early"], "bad_deploy"),
-        scenario("real: bad, cancelled during the deploy, bad (still two in a row)", ["bad_deploy", "cancel_mid"], "bad_deploy"),
-        scenario("real: bad, cancelled after a good deploy, bad (the good deploy resets)", ["bad_deploy", "cancel_after_good"], "bad_deploy"),
-        scenario("real: good, cancelled during the deploy, bad (one failure)", ["good", "cancel_mid"], "bad_deploy"),
-        scenario("real: bad, bad (second in a row)", ["bad_deploy"], "bad_deploy"),
-        scenario("real: bad, bad, bad (third in a row)", ["bad_deploy", "bad_deploy"], "bad_deploy"),
-        scenario("real: bad, good, bad (a good deploy resets)", ["bad_deploy", "good"], "bad_deploy"),
-    ]
-    return scs
-
-
-# ---------------------------------------------------------------- structure
-
-def load_workflow(text):
-    doc = yaml.safe_load(text)
-    doc["_on"] = doc.get("on", doc.get(True))  # PyYAML reads the key "on" as True
-    return doc
-
-
-def verdict_script(doc):
-    try:
-        return doc["jobs"]["verdict"]["steps"][0]["with"]["script"]
-    except (KeyError, IndexError, TypeError):
-        return None
-
-
-def structure_problems(text):
-    p = []
-    try:
-        doc = load_workflow(text)
-    except Exception as e:  # not valid YAML
-        return [f"workflow is not valid YAML: {e}"]
-    jobs = doc.get("jobs", {})
-    deploy, verdict = jobs.get("deploy"), jobs.get("verdict")
-    if doc.get("name") != "Deploy Pages":
-        p.append("workflow name changed (the email subject uses it)")
-    if (doc["_on"] or {}).get("push", {}).get("branches") != ["main"]:
-        p.append("push trigger is not main")
-    if "concurrency" in doc:
-        p.append("concurrency is on the workflow, so a newer push can cancel the verdict job and lose the email")
-    if doc.get("permissions") != {"contents": "read", "pages": "write", "id-token": "write"}:
-        p.append("workflow-level permissions changed")
-    if not deploy:
-        p.append("no deploy job")
-        return p
-    if deploy.get("concurrency") != {"group": "pages", "cancel-in-progress": True}:
-        p.append("deploy job concurrency must be group pages with cancel-in-progress: true")
-    if set(deploy) != {"continue-on-error", "concurrency", "runs-on", "environment", "steps"}:
-        p.append(f"deploy job keys changed: {sorted(deploy)}")
-    if deploy.get("continue-on-error") is not True:
-        p.append("deploy job lacks continue-on-error: true, so a failed deploy fails the run at once")
-    if "name" in deploy:
-        p.append("deploy job has a name: line, so the job name the verdict reads is not 'deploy'")
-    steps = deploy.get("steps", [])
-    if any("continue-on-error" in s for s in steps):
-        p.append("a deploy step has continue-on-error (hides the step failure from the jobs record)")
-    uploads = [s for s in steps if str(s.get("uses", "")).startswith("actions/upload-pages-artifact")]
-    deploys = [s for s in steps if str(s.get("uses", "")).startswith("actions/deploy-pages")]
-    if len(uploads) != 1:
-        p.append(f"{len(uploads)} upload steps (must be exactly 1: a second upload breaks the lookup)")
-    if len(deploys) != 1:
-        p.append(f"{len(deploys)} deploy-pages steps (must be exactly 1: no retry, no left-over lock)")
+            counts[sk] = counts.get(sk, 0) + 1
+            outputs = {}
+            if sk in PATH_STEPS:
+                need = PATH_STEPS[:PATH_STEPS.index(sk)]
+                if sk in ("upload", "deploy") and any(done.count(k) == 0 for k in need):
+                    raise AssertionError(f"{sk} ran after an earlier step did not succeed")
+                if kind == f"cancel_{sk}":
+                    outcome = "cancelled"
+                    ctx["cancelled"] = True
+                elif kind == f"fail_{sk}":
+                    outcome = "failure"
+                else:
+                    outcome = "success"
+                    done.append(sk)
+            elif sk == "restore":
+                outcome = "failure" if restore_error else "success"
+                if not restore_error:
+                    w = step["with"]
+                    path, key = template(w["path"], ctx), template(w["key"], ctx)
+                    rks = [k for k in str(w.get("restore-keys", "")).splitlines() if k.strip()]
+                    same = [e for e in cache if e["path"] == path]
+                    hit = [e for e in same if e["key"] == key] or [e for e in same if e["key"].startswith(key)]
+                    for rk in rks:
+                        if hit:
+                            break
+                        hit = [e for e in same if e["key"].startswith(template(rk.strip(), ctx))]
+                    if hit:
+                        newest = max(hit, key=lambda e: e["seq"])
+                        for rel, text in newest["files"].items():
+                            (work / rel).parent.mkdir(parents=True, exist_ok=True)
+                            (work / rel).write_text(text)
+            elif sk == "save":
+                w = step["with"]
+                path, key = template(w["path"], ctx), template(w["key"], ctx)
+                files = {str(p.relative_to(work)): p.read_text()
+                         for p in (work / path).rglob("*") if p.is_file()} if (work / path).exists() else {}
+                outcome = "success"  # an existing key or empty path only warns
+                if files and not any(e["key"] == key for e in cache):
+                    cache.append({"seq": len(cache), "key": key, "path": path, "files": files})
+            else:  # bash
+                env = {k: template(v, ctx) for k, v in (step.get("env") or {}).items()}
+                stdout, rc, outputs, files = bash(step["run"], env, snapshot(work))
+                log.append(stdout)
+                outcome = "success" if rc == 0 else "failure"
+                for rel, text in files.items():
+                    (work / rel).parent.mkdir(parents=True, exist_ok=True)
+                    (work / rel).write_text(text)
+            if sid:
+                ctx["steps"][sid] = {"outcome": outcome, "outputs": outputs}
+            if outcome == "failure" and not step.get("continue-on-error"):
+                ctx["status"] = "failure"
+            if kind == "cancel_after_good" and sk == "deploy":
+                ctx["cancelled"] = True
+    if ctx["cancelled"]:
+        conclusion = "cancelled"
+    elif ctx["status"] == "failure" and not job.get("continue-on-error"):
+        conclusion = "failure"
     else:
-        d = deploys[0]
-        if d.get("uses") != "actions/deploy-pages@v4" or "name" in d or "if" in d or "continue-on-error" in d:
-            p.append("deploy-pages step must be 'uses: actions/deploy-pages@v4' with no name, if or continue-on-error")
-    if not verdict:
-        p.append("no verdict job, so nothing carries the deploy result to a decision")
-        return p
-    if verdict.get("needs") not in ("deploy", ["deploy"]):
-        p.append("verdict does not need deploy")
-    if verdict.get("if") != "${{ !cancelled() }}":
-        p.append("verdict condition is not '${{ !cancelled() }}' (it must run after a failed deploy, and not when cancelled)")
-    if "continue-on-error" in verdict:
-        p.append("verdict job has continue-on-error, so it could never fail the run")
-    if verdict.get("permissions") != {"actions": "read"}:
-        p.append("verdict permissions must be exactly actions: read (it reads the jobs API)")
-    if set(verdict) != {"needs", "if", "runs-on", "permissions", "steps"}:
-        p.append(f"verdict job keys must be exactly needs, if, runs-on, permissions, steps (found {sorted(verdict)})")
-    vsteps = verdict.get("steps", [])
-    if len(vsteps) != 1 or not str(vsteps[0].get("uses", "")).startswith("actions/github-script@"):
-        p.append("verdict must be one actions/github-script step")
-    elif set(vsteps[0]) != {"name", "uses", "env", "with"} or set(vsteps[0]["with"]) != {"script"}:
-        p.append(f"verdict step has keys other than name, uses, env, with.script (found {sorted(vsteps[0])}); an if or a continue-on-error would switch the decision off")
-    elif vsteps[0]["env"] != {"DEPLOY_RESULT": "${{ needs.deploy.result }}"}:
-        p.append("verdict step env must be exactly DEPLOY_RESULT: ${{ needs.deploy.result }}")
-    script = verdict_script(doc)
-    if not script:
-        p.append("verdict script is missing")
-    else:
-        if "context.runId" not in script or "listJobsForWorkflowRun" not in script:
-            p.append("verdict script does not read this run's own jobs record")
-        if re.search(r"\b(run|r)\.conclusion\b", script):
-            p.append("verdict script reads a run conclusion (a quiet failure ends green and would be hidden)")
-        want_step = None if len(deploys) != 1 else "Run " + deploys[0]["uses"]
-        if want_step and f"const DEPLOY_STEP = '{want_step}';" not in script:
-            p.append(f"verdict script does not read the deploy step by its recorded name {want_step!r}")
-        if "const DEPLOY_JOB = 'deploy';" not in script:
-            p.append("verdict script does not read the job by its recorded name 'deploy'")
-    return p
+        conclusion = "success"
+    return conclusion, "".join(log), counts
 
 
-# ---------------------------------------------------------------- the checks
-
-RESULTS = []
-
-
-def check(name, problems, detail=""):
-    ok = not problems
-    RESULTS.append(ok)
-    print(("PASS  " if ok else "FAIL  ") + name + (f"  [{detail}]" if detail else ""))
-    for line in problems[:6]:
-        print("        - " + line)
-    if len(problems) > 6:
-        print(f"        ... and {len(problems) - 6} more")
+def run_seq(wf, seq, restore_error_at=None):
+    cache, emails, logs = [], [], []
+    for i, kind in enumerate(seq):
+        conclusion, log, counts = run_once(wf, kind, cache, 1000 + i, restore_error=(i == restore_error_at))
+        if counts.get("upload", 0) > 1 or counts.get("deploy", 0) > 1:
+            raise AssertionError(f"more than one upload or deploy in one run: {counts}")
+        emails.append(conclusion == "failure")
+        logs.append(log)
+    return emails, logs
 
 
-def must_be_red(name, problems, detail=""):
-    """A break case: applying it must make the checks fail. 'problems' is what the checks found."""
-    ok = bool(problems)
-    RESULTS.append(ok)
-    print(("PASS  " if ok else "FAIL  ") + name + (f"  [{detail}]" if detail else ""))
-    if not ok:
-        print("        - the checks stayed green on this break case")
+# ---------- checks ----------
+def structure(wf, text):
+    bad = []
+    if wf.get("concurrency") != {"group": "pages", "cancel-in-progress": True}:
+        bad.append("workflow concurrency is not group pages with cancel-in-progress")
+    if len(wf.get("jobs", {})) != 1:
+        bad.append("not exactly one job")
+    steps = next(iter(wf["jobs"].values()))["steps"]
+    for kind in ("upload", "deploy"):
+        n = sum(1 for s in steps if step_kind(s) == kind)
+        if n != 1:
+            bad.append(f"{n} {kind} steps in the file")
+    for s in steps:
+        if "run" in s and "${{" in s["run"]:
+            bad.append(f"expression inside run text of {s.get('name')}")
+    return bad
+
+
+def replay_kind(run_id):
+    jobs = json.loads((HERE / "fixtures" / f"jobs-{run_id}.json").read_text())["jobs"]
+    names = {"Run actions/checkout@v4": "checkout", "Run actions/configure-pages@v5": "configure",
+             "Run actions/upload-pages-artifact@v3": "upload", "Wait for the artifact to be listed": "wait",
+             "Run actions/deploy-pages@v4": "deploy"}
+    if not jobs or not jobs[0]["steps"]:
+        return "never_started" if not jobs else "cancel_wait"
+    steps = {names[s["name"]]: s["conclusion"] for s in jobs[0]["steps"] if s["name"] in names}
+    for k in PATH_STEPS:
+        if steps.get(k) == "failure":
+            return f"fail_{k}"
+    if steps.get("deploy") == "success":
+        return "cancel_after_good" if jobs[0]["conclusion"] == "cancelled" else "good"
+    return "cancel_deploy" if steps.get("deploy") == "cancelled" else "cancel_wait"
+
+
+def suite(text, verbose=False):
+    """Returns (problems, red sequence count, sequence count)."""
+    wf = yaml.safe_load(text)
+    problems = structure(wf, text)
+    seqs = [s for n in (1, 2, 3) for s in itertools.product(KINDS, repeat=n)]
+    red = 0
+    for seq in seqs:
+        try:
+            got, _ = run_seq(wf, seq)
+        except Exception as e:  # a form the model does not know is a failure too
+            got = f"error: {e}"
+        if got != oracle(seq):
+            red += 1
+            if red <= 3:
+                problems.append(f"{' > '.join(seq)}: email {got}, want {oracle(seq)}")
+    # Pass test 4: no saved result, or a failed lookup, is "no earlier failure", said in the log.
+    for seq, at, words in ((("fail_deploy",), None, "No earlier deploy result is saved"),
+                           (("fail_deploy", "fail_deploy"), 1, "Could not look up the earlier deploy result")):
+        try:
+            got, logs = run_seq(wf, seq, restore_error_at=at)
+            if got[-1] or words not in logs[-1] or "no earlier failure" not in logs[-1]:
+                problems.append(f"lookup case {seq}: email {got}, log {logs[-1]!r}")
+        except Exception as e:
+            problems.append(f"lookup case {seq}: {e}")
+    # Real runs.
+    for ids in ((45413361106, 45415969592, 45418761018),
+                (45415969592, 43095722533, 45415969592),
+                (45415969592, 42806424818, 45415969592),
+                (45415969592, 42068254991, 45415969592),
+                (45415969592, 41471386526, 45415969592),
+                (45413361106, 43095722533, 45415969592)):
+        seq = tuple(replay_kind(i) for i in ids)
+        try:
+            got, _ = run_seq(wf, seq)
+        except Exception as e:
+            got = f"error: {e}"
+        if got != oracle(seq):
+            problems.append(f"replay {ids} as {seq}: email {got}, want {oracle(seq)}")
+        elif verbose:
+            print(f"  replay {ids} as {seq}: email {got}")
+    return problems, red, len(seqs)
+
+
+# ---------- break cases: each must turn the suite red ----------
+def edit(old, new, count=1):
+    def f(t):
+        if t.count(old) < count:
+            raise ValueError(f"break case text not found: {old!r}")
+        return t.replace(old, new, count)
+    return f
+
+
+def step_block(header):
+    """Edit one step: header is its first line, e.g. '- id: deployment'."""
+    def apply(t, fn):
+        i = t.index(header)
+        j = t.find("\n      - ", i + 1)
+        j = len(t) if j < 0 else j
+        return t[:i] + fn(t[i:j]) + t[j:]
+    return apply
+
+
+def in_step(header, old, new):
+    return lambda t: step_block(header)(t, edit(old, new))
+
+
+COE = "\n        continue-on-error: true"
+BREAKS = {
+    # The ticket's kinds.
+    "first failure fails the run (no continue-on-error on the deploy)": in_step("- id: deployment", COE, ""),
+    "first failure fails the run (no continue-on-error on checkout)": in_step("- id: checkout", COE, ""),
+    "first failure fails the run (no continue-on-error on configure)": in_step("- id: configure", COE, ""),
+    "first failure fails the run (no continue-on-error on upload)": in_step("- id: upload", COE, ""),
+    "first failure fails the run (no continue-on-error on wait)": in_step("- name: Wait for the artifact", COE, ""),
+    "first failure fails the run (rule alerts on any bad)": edit('[ "$this" = bad ] && [ "$before" = bad ]', '[ "$this" = bad ]'),
+    "second failure passes (rule never alerts)": edit("alert=true", "alert=false"),
+    "good does not reset the count": edit("then this=good; fi", "then this=; fi"),
+    "skipped step hides an earlier failure (wait not counted)": edit('"$UPLOAD" "$WAIT" "$DEPLOY"', '"$UPLOAD" "$DEPLOY"'),
+    "cancel before the deploy ends changes the count": edit('if [ "$outcome" = failure ]', 'if [ "$outcome" != success ]'),
+    "cancel after a good deploy does not reset (decide not always)": in_step("- name: Decide this deploy's result", "if: always()", "if: success()"),
+    "cancel after a good deploy does not reset (save not always)": in_step("- name: Save this deploy's result", "if: always() && ", "if: "),
+    # The check switched off.
+    "fail step if false": in_step("- name: Fail the run", "if: always() && steps.decide.outputs.alert == 'true'", "if: false"),
+    "fail step if ${{ false }}": in_step("- name: Fail the run", "if: always() && steps.decide.outputs.alert == 'true'", "if: ${{ false }}"),
+    "fail step removed": lambda t: t[:t.index("      - name: Fail the run")],
+    "fail step continue-on-error": in_step("- name: Fail the run", "\n        run: |", COE + "\n        run: |"),
+    "job continue-on-error": edit("    runs-on: ubuntu-latest\n", "    runs-on: ubuntu-latest\n    continue-on-error: true\n"),
+    "decide step if false": in_step("- name: Decide this deploy's result", "if: always()", "if: false"),
+    "save step if false": in_step("- name: Save this deploy's result", "if: always() && steps.decide.outputs.result != ''", "if: false"),
+    "restore step if false": in_step("- name: Restore the last saved", "if: always()", "if: false"),
+    # Saved state wired wrong.
+    "save key without the run id (entry never replaced)": in_step("- name: Save this deploy's result", "-${{ github.run_id }}-${{ github.run_attempt }}", "-latest"),
+    "restore keys removed": in_step("- name: Restore the last saved", "\n          restore-keys: pages-deploy-result-", ""),
+    "save path differs": in_step("- name: Save this deploy's result", "path: .pages-deploy-result", "path: .pages-result"),
+    # Broken chain and shape.
+    "deploy runs after the wait failed": in_step("- id: deployment", "\n        if: steps.wait.outcome == 'success'", ""),
+    "upload runs after configure failed": in_step("- id: upload", "\n        if: steps.configure.outcome == 'success'", ""),
+    "second upload": edit("      - id: upload\n", "      - uses: actions/upload-pages-artifact@v3\n      - id: upload\n"),
+    "second deploy": edit("      # The two-in-a-row rule.", "      - uses: actions/deploy-pages@v4\n        if: always()\n      # The two-in-a-row rule."),
+    "cancel-in-progress off": edit("cancel-in-progress: true", "cancel-in-progress: false"),
+    "concurrency removed": edit("concurrency:\n  group: pages\n  cancel-in-progress: true\n", ""),
+}
 
 
 def main():
+    if "--file" in sys.argv:
+        f = Path(sys.argv[sys.argv.index("--file") + 1])
+        problems, red, n = suite(f.read_text())
+        print(f"{f}: {red} of {n} sequences wrong")
+        for p in problems:
+            print("  FAIL", p)
+        print("RESULT:", "FAIL" if problems else "PASS")
+        return 1 if problems else 0
+
     text = WORKFLOW.read_text()
-    try:
-        shown = WORKFLOW.relative_to(ROOT)
-    except ValueError:
-        shown = f"{WORKFLOW.name} (outside the repo)"
-    print(f"workflow under test: {shown}")
-    doc = None
-    try:
-        doc = load_workflow(text)
-    except Exception:
-        pass
-    script = verdict_script(doc) if doc else None
+    print(f"Branch file {WORKFLOW.relative_to(REPO)}:")
+    problems, red, n = suite(text, verbose=True)
+    print(f"  sweep: {red} of {n} sequences wrong (want 0); oracle emails in "
+          f"{sum(any(oracle(s)) for k in (1, 2, 3) for s in itertools.product(KINDS, repeat=k))} of {n}")
+    for p in problems:
+        print("  FAIL", p)
+    failed = bool(problems)
 
-    # 1. structure
-    check("structure: deploy result is carried to a decision, one upload, one deploy, concurrency on the deploy job",
-          structure_problems(text))
-
-    # 4. names match the real records
-    names = []
-    for rid in (REAL_GOOD_1, REAL_BAD, REAL_GOOD_2, REAL_CANCEL_MID, REAL_CANCEL_AFTER):
-        jobs = load_jobs(rid)
-        if [j["name"] for j in jobs] != ["deploy"]:
-            names.append(f"run {rid}: job names {[j['name'] for j in jobs]}")
-        if DEPLOY not in [s["name"] for s in jobs[0]["steps"]]:
-            names.append(f"run {rid}: no step named {DEPLOY!r}")
-    check("names: the job 'deploy' and step 'Run actions/deploy-pages@v4' exist in the real job records", names)
-    if script is None:
-        check("logic: the decision script is inside pages.yml", ["no verdict script found, so every logic check is red"])
-        print("\nRESULT: FAIL (%d of %d checks failed)" % (RESULTS.count(False), len(RESULTS)))
-        return 1
-
-    # 2. the whole sweep against the oracle, 3. real replays
-    sweep = sweep_scenarios(4)
-    loud = sum(1 for s in sweep if s["expect_loud"])
-    check(f"logic sweep, through the workflow's own flags: every sequence of {len(KINDS)} run kinds, 1 to 4 runs long",
-          logic_problems(doc, script, sweep), f"{len(sweep)} sequences, {loud} must fail the run, {len(sweep) - loud} must stay quiet")
-    newer = superseded_scenarios()
-    check("logic: the same sequences, up to 3 runs long, with a newer push while the verdict runs",
-          logic_problems(doc, script, newer), f"{len(newer)} sequences")
-    longh = long_history_scenarios()
-    check("logic: a failure, then 40 or 250 cancelled runs, then a failure",
-          logic_problems(doc, script, longh), f"{len(longh)} cases")
-    unreadable = unreadable_scenarios()
-    check("logic: this run's own deploy job read back not final, or missing",
-          logic_problems(doc, script, unreadable), f"{len(unreadable)} cases")
-    replay = real_replay_scenarios()
-    check("replay: real records of runs 45413361106, 45415969592, 45418761018, 43095722533 and three more cancelled runs",
-          logic_problems(doc, script, replay), f"{len(replay)} replays")
-
-    # 5. break cases on the script
-    script_breaks = [
-        ("first failure fails the run",
-         "if (now !== 'bad') return;", "if (now === 'bad') { core.setFailed('first'); return; }\nif (now !== 'bad') return;"),
-        ("a second or later failure passes",
-         "core.setFailed('The deploy failed in this run", "core.info('The deploy failed in this run"),
-        ("a good deploy does not reset the count",
-         "if (before === 'skip') continue;", "if (before === 'skip' || before === 'good') continue;"),
-        ("a skipped step hides an earlier failure (wait step failed, deploy skipped)",
-         "if (steps.some(s => failed(s.conclusion)) || failed(job.conclusion)) return 'bad';", ""),
-        ("a failed job whose deploy step succeeded counts as good",
-         "steps.some(s => failed(s.conclusion)) || failed(job.conclusion)", "steps.some(s => failed(s.conclusion))"),
-        ("cancel before the deploy ends counts as a failure",
-         "if (deploy && deploy.conclusion === 'success') return 'good';\n  return 'skip';",
-         "if (deploy && deploy.conclusion === 'success') return 'good';\n  return 'bad';"),
-        ("a run cancelled before any job started counts as a failure",
-         "if (!job) return 'skip';", "if (!job) return 'bad';"),
-        ("cancel after a good deploy does not reset it",
-         "if (deploy && deploy.conclusion === 'success') return 'good';",
-         "if (deploy && deploy.conclusion === 'success' && job.conclusion === 'success') return 'good';"),
-        ("a green run hides its failed deploy (reads the run conclusion)",
-         "const before = classify(await jobsOf(run.id));",
-         "const before = run.conclusion === 'success' ? 'good' : run.conclusion === 'cancelled' ? 'skip' : 'bad';"),
-        ("a cancelled run in between ends the look back",
-         "if (before === 'skip') continue;", "if (before === 'skip') break;"),
-        ("this run's own failure is ignored", "now = classify([job]);", "now = 'good';"),
-        ("this run's own deploy job is read before it is final",
-         "if (job && job.status === 'completed') {", "if (job) {"),
-        ("an unreadable own result is treated as a failure",
-         "Treating it as not failed.');\n    return;", "Treating it as not failed.');\n    now = 'bad';"),
-        ("an unreadable own result ignores the needs result",
-         "process.env.DEPLOY_RESULT === 'failure'", "false"),
-        ("the look back stops after the first page of runs", "if (runs.length < 100) break;", "break;"),
-        ("the look back stops after one page count", "const PAGES = 5;", "const PAGES = 1;"),
-        ("the deploy step is read under the wrong name", "'Run actions/deploy-pages@v4'", "'Deploy'"),
-    ]
-    probe = sweep + replay + unreadable + longh
-    for label, old, new in script_breaks:
-        if script.count(old) != 1:
-            check(f"break case: {label}", [f"could not apply: text found {script.count(old)} times, expected once"])
-            continue
-        mutated = script.replace(old, new)
-        found = logic_problems(doc, mutated, probe)
-        must_be_red(f"break case: {label}", found, f"{len(found)} of {len(probe)} sequences go red")
-
-    # 5b. break cases on the workflow shape. Red means the structure check finds a problem, or the
-    # workflow's flags, run through the same sweep, give a wrong answer, or both.
-    sim_probe = sweep_scenarios(3) + newer + longh[:2] + unreadable + replay
-    verdict_head = "  verdict:\n    needs: deploy\n"
-    step_head = "      - name: Fail the run only when this deploy and the one before it both failed\n"
-    job_conc = "    concurrency:\n      group: pages\n      cancel-in-progress: true\n"
-    shape_breaks = [
-        ("deploy job fails the run by itself (continue-on-error removed)",
-         [("    continue-on-error: true\n    # The concurrency", "    # The concurrency")]),
-        ("verdict does not wait for deploy", [("    needs: deploy\n", "")]),
-        ("verdict is skipped after a failed deploy (job condition removed)", [("    if: ${{ !cancelled() }}\n", "")]),
-        ("verdict job condition is switched off", [("    if: ${{ !cancelled() }}\n", "    if: ${{ false }}\n")]),
-        ("verdict step is switched off with an if", [(step_head, step_head + "        if: ${{ false }}\n")]),
-        ("verdict step can never fail the run (continue-on-error on the step)", [(step_head, step_head + "        continue-on-error: true\n")]),
-        ("verdict job can never fail the run (continue-on-error on the job)", [(verdict_head, "  verdict:\n    continue-on-error: true\n    needs: deploy\n")]),
-        ("verdict step loses the needs result", [("        env:\n          DEPLOY_RESULT: ${{ needs.deploy.result }}\n", "")]),
-        ("verdict cannot read the jobs API", [("    permissions:\n      actions: read\n", "")]),
-        ("deploy step gets a name (the recorded name changes)",
-         [("      - id: deployment\n        uses: actions/deploy-pages@v4", "      - name: Deploy\n        id: deployment\n        uses: actions/deploy-pages@v4")]),
-        ("cancel-in-progress removed", [("      cancel-in-progress: true\n", "      cancel-in-progress: false\n")]),
-        ("concurrency moved back to the workflow (a newer push can cancel the verdict job)",
-         [(job_conc, ""), ("jobs:\n  deploy:\n", "concurrency:\n  group: pages\n  cancel-in-progress: true\n\njobs:\n  deploy:\n")]),
-        ("a second upload is added",
-         [("      - uses: actions/configure-pages@v5\n", "      - uses: actions/configure-pages@v5\n      - uses: actions/upload-pages-artifact@v3\n")]),
-        ("the deploy step is repeated",
-         [("      - id: deployment\n        uses: actions/deploy-pages@v4",
-           "      - uses: actions/deploy-pages@v4\n      - id: deployment\n        uses: actions/deploy-pages@v4")]),
-    ]
-    for label, edits in shape_breaks:
-        mutated, bad = text, None
-        for old, new in edits:
-            if mutated.count(old) != 1:
-                bad = f"could not apply: text found {mutated.count(old)} times, expected once ({old[:40]!r})"
-                break
-            mutated = mutated.replace(old, new)
-        if bad:
-            check(f"break case: {label}", [bad])
-            continue
-        struct = structure_problems(mutated)
+    print(f"Break cases ({len(BREAKS)}), each must be red:")
+    green = 0
+    for name, fn in BREAKS.items():
         try:
-            mdoc = load_workflow(mutated)
-            mscript = verdict_script(mdoc) or script
-            sim = logic_problems(mdoc, mscript, sim_probe)
-        except Exception as e:  # a file that no longer parses is red too
-            sim = [f"workflow no longer loads: {e}"]
-        must_be_red(f"break case: {label}", struct + sim,
-                    f"{len(struct)} structure problems, {len(sim)} of {len(sim_probe)} sequences go red")
-
-    failed = RESULTS.count(False)
-    print()
-    print("RESULT: %s (%d checks, %d failed)" % ("PASS" if not failed else "FAIL", len(RESULTS), failed))
+            broken = fn(text)
+        except ValueError as e:
+            print(f"  FAIL {name}: {e}")
+            failed = True
+            continue
+        try:
+            bp, bred, _ = suite(broken)
+        except Exception as e:
+            bp, bred = [f"error: {e}"], 0
+        state = "red" if bp else "GREEN"
+        if not bp:
+            green += 1
+        print(f"  {state}: {name} ({bred} of {n} sequences wrong, {len(bp)} problems)")
+    print(f"  {len(BREAKS) - green} of {len(BREAKS)} break cases red")
+    failed = failed or green > 0
+    print("RESULT:", "FAIL" if failed else "PASS")
     return 1 if failed else 0
 
 
-def gh_get(path, *fields):
-    cmd = ["gh", "api", "-X", "GET", path]
-    for f in fields:
-        cmd += ["-f", f]
-    r = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
-    if r.returncode != 0:
-        raise RuntimeError(f"gh api {path} failed: {r.stderr.strip()[:300]}")
-    return json.loads(r.stdout)
-
-
-def live(run_ids):
-    """Feed the workflow's script the real API answers, read only, for each run id."""
-    repo = "nam-homefield/testing-com-data"
-    script = verdict_script(load_workflow(WORKFLOW.read_text()))
-    # The same call, with the same parameters, that the script makes.
-    listing = gh_get(f"repos/{repo}/actions/workflows/pages.yml/runs", "branch=main", "per_page=100", "page=1")
-    runs = listing["workflow_runs"][:30]  # jobs are fetched for the newest 30 only, to keep the calls few
-    print(f"real API: first page of runs on main ({len(listing['workflow_runs'])} runs), using the newest {len(runs)}: ids {runs[0]['id']} to {runs[-1]['id']}")
-    jobs_by_id = {r["id"]: gh_get(f"repos/{repo}/actions/runs/{r['id']}/jobs", "per_page=100")["jobs"] for r in runs}
-    for rid in run_ids:
-        rid = int(rid)
-        if rid not in jobs_by_id:
-            jobs_by_id[rid] = gh_get(f"repos/{repo}/actions/runs/{rid}/jobs", "per_page=100")["jobs"]
-        sc = {"name": f"live {rid}", "current": {"id": rid, "jobs": jobs_by_id[rid]}, "env": {"DEPLOY_RESULT": ""},
-              "history": [dict(id=r["id"], conclusion=r["conclusion"], status=r["status"],
-                               head_branch=r["head_branch"], jobs=jobs_by_id[r["id"]]) for r in runs]}
-        res = run_scenarios(script, [sc])[0]
-        print(f"run {rid}: " + ("script threw: " + res["error"] if res["error"] else
-              ("FAILS THE RUN: " + "; ".join(res["failed"]) if res["failed"] else "quiet (run stays green)")))
-        for line in res["infos"]:
-            print("    log: " + line)
-    return 0
-
-
 if __name__ == "__main__":
-    if len(sys.argv) > 1 and sys.argv[1] == "--live":
-        sys.exit(live(sys.argv[2:]))
     sys.exit(main())
