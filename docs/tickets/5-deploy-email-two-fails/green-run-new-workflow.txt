@@ -1,0 +1,27 @@
+workflow under test: .github/workflows/pages.yml
+PASS  structure: deploy result is carried to a decision, one upload, one deploy, concurrency kept
+PASS  names: the job 'deploy' and step 'Run actions/deploy-pages@v4' exist in the real job records
+PASS  logic sweep: every sequence of 9 run kinds, 1 to 4 runs long  [7380 sequences, 2080 must fail the run, 5300 must stay quiet]
+PASS  replay: real records of runs 45413361106, 45415969592, 45418761018, 43095722533 and three more cancelled runs  [12 replays]
+PASS  break case: first failure fails the run  [1205 of 7392 sequences go red]
+PASS  break case: a second or later failure passes  [2085 of 7392 sequences go red]
+PASS  break case: a good deploy does not reset the count  [578 of 7392 sequences go red]
+PASS  break case: a skipped step hides an earlier failure (wait step failed, deploy skipped)  [910 of 7392 sequences go red]
+PASS  break case: cancel before the deploy ends counts as a failure  [1593 of 7392 sequences go red]
+PASS  break case: a run cancelled before any job started counts as a failure  [796 of 7392 sequences go red]
+PASS  break case: cancel after a good deploy does not reset it  [273 of 7392 sequences go red]
+PASS  break case: a green run hides its failed deploy (reads the run conclusion)  [1124 of 7392 sequences go red]
+PASS  break case: a cancelled run in between ends the look back  [627 of 7392 sequences go red]
+PASS  break case: this run's own failure is ignored  [2085 of 7392 sequences go red]
+PASS  break case: the deploy step is read under the wrong name  [578 of 7392 sequences go red]
+PASS  break case: deploy job fails the run by itself (continue-on-error removed)  [1 structure problems]
+PASS  break case: verdict does not wait for deploy  [1 structure problems]
+PASS  break case: verdict is skipped after a failed deploy  [1 structure problems]
+PASS  break case: verdict cannot read the jobs API  [1 structure problems]
+PASS  break case: verdict can never fail the run  [1 structure problems]
+PASS  break case: deploy step gets a name (the recorded name changes)  [1 structure problems]
+PASS  break case: cancel-in-progress removed  [1 structure problems]
+PASS  break case: a second upload is added  [1 structure problems]
+PASS  break case: the deploy step is repeated  [1 structure problems]
+
+RESULT: PASS (24 checks, 0 failed)

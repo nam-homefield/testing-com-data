@@ -1,0 +1,4 @@
+Baseline before the first edit (2026-11-24, branch ticket/5-deploy-email-two-fails off main).
+The ticket's "Checks to run" line is the builder's own test, red then green. No test exists yet,
+so there is nothing to run at the start. No actionlint on this Mac (checked: not found); skipped.
+The repo has no other checks: .github/workflows/ holds only pages.yml and there is no test folder.
