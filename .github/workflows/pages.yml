@@ -32,11 +32,37 @@
 # 60 seconds, until "github-pages" is listed. Then deploy-pages runs exactly once. If
 # the artifact never shows up, the step fails with a clear message. The deploy step has
 # no continue-on-error and is never repeated, so any failure after a deployment exists
-# (a stuck or rejected deployment, a timeout) still fails the run and sends the email,
-# and a retry can never leave an "in progress deployment" lock behind. The wait step
+# (a stuck or rejected deployment, a timeout) fails the deploy job, and a retry can never
+# leave an "in progress deployment" lock behind. The wait step
 # also respects the concurrency block above: a cancelled run stops the step, so a
 # superseded run ends at once. The step is an actions/github-script node action, which
 # is why it gets ACTIONS_RUNTIME_TOKEN and ACTIONS_RESULTS_URL from the runner.
+#
+# Emails (ticket 5, 2026-11-24). GitHub sends "Run failed: Deploy Pages - main" whenever a
+# run ends as failed. Since Nov 21 about 14 of 387 deploys hit the artifact error above even
+# with the wait step in place, and each was followed by a good deploy about 15 minutes
+# later, so the email was noise. Now a lone failed deploy sends nothing, and two failed
+# deploys in a row still send the email, as does every failed deploy after that until one
+# works. Two jobs do it:
+#
+#   deploy   has continue-on-error: true, so its failure does not fail the run. Its steps are
+#            untouched, so the failed step stays on record in the jobs API.
+#   verdict  runs after deploy. It reads the deploy job's steps from the jobs API for this
+#            run, and, only when this deploy failed, for the runs before it on main (newest
+#            first). It fails the run only when the nearest earlier run that counts also
+#            failed its deploy. It never reads a run's own conclusion, because a quiet
+#            failure ends green and a run conclusion would hide it from the next run.
+#
+# What counts, for the deploy job of a run: any failed step (or a failed job) is a failure,
+# so a failing wait step that leaves the deploy step skipped is still a failure. Otherwise a
+# successful deploy-pages step is a good deploy, even if a newer push cancelled the run
+# afterwards. Everything else (cancelled before the deploy ended, never started) is skipped:
+# it does not break a streak and does not extend one. Concurrency is unchanged, so a
+# cancelled run still releases the deployment lock. If the lookup itself fails, the verdict
+# job fails and sends the email, because a missed failure is worse than one extra email.
+# The names the verdict reads ("deploy" and "Run actions/deploy-pages@v4") are what GitHub
+# records for a job and a step that have no name: line, so do not add one to either.
+# The test is docs/tickets/5-deploy-email-two-fails/test_pages_two_fails.py.
 #
 # No Jekyll step on purpose. upload-pages-artifact serves the files exactly as pushed,
 # which is what the reports need, and the repo has no Jekyll sources.
@@ -58,6 +84,8 @@ concurrency:
 
 jobs:
   deploy:
+    # A failed deploy must not fail the run by itself. The verdict job below decides.
+    continue-on-error: true
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -131,3 +159,62 @@ jobs:
             core.setFailed('Artifact github-pages was never listed by the results service after about 60 seconds (' + last + ').');
       - id: deployment
         uses: actions/deploy-pages@v4
+  verdict:
+    needs: deploy
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+    steps:
+      - name: Fail the run only when this deploy and the one before it both failed
+        uses: actions/github-script@v9
+        with:
+          script: |
+            // The names GitHub records for the deploy job and its deploy-pages step.
+            const DEPLOY_JOB = 'deploy';
+            const DEPLOY_STEP = 'Run actions/deploy-pages@v4';
+            const LOOK_BACK = 30;
+            const { owner, repo } = context.repo;
+            const failed = c => c === 'failure' || c === 'timed_out';
+
+            // bad: a step or the job failed. good: the deploy step finished well, even if
+            // the run was cancelled afterwards. skip: cancelled or never started.
+            function classify(jobs) {
+              const job = jobs.find(j => j.name === DEPLOY_JOB);
+              if (!job) return 'skip';
+              const steps = job.steps || [];
+              if (steps.some(s => failed(s.conclusion))) return 'bad';
+              const deploy = steps.find(s => s.name === DEPLOY_STEP);
+              if (deploy && deploy.conclusion === 'success') return 'good';
+              if (failed(job.conclusion)) return 'bad';
+              return 'skip';
+            }
+            async function deployOf(runId) {
+              const res = await github.rest.actions.listJobsForWorkflowRun({
+                owner, repo, run_id: runId, per_page: 100,
+              });
+              return classify(res.data.jobs);
+            }
+
+            const now = await deployOf(context.runId);
+            core.info('This deploy: ' + now + '.');
+            if (now !== 'bad') return;
+
+            const res = await github.rest.actions.listWorkflowRuns({
+              owner, repo, workflow_id: 'pages.yml', branch: 'main', status: 'completed', per_page: LOOK_BACK,
+            });
+            const earlier = res.data.workflow_runs
+              .filter(r => r.id < context.runId)
+              .sort((a, b) => b.id - a.id);
+            for (const run of earlier) {
+              const before = await deployOf(run.id);
+              core.info('Run ' + run.id + ': ' + before + '.');
+              if (before === 'skip') continue;
+              if (before === 'bad') {
+                core.setFailed('The deploy failed in this run and in run ' + run.id + ', two in a row.');
+              } else {
+                core.info('The deploy before this one worked, so this failure stays quiet.');
+              }
+              return;
+            }
+            core.info('No earlier deploy result found, so this failure stays quiet.');
