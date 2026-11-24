@@ -6,7 +6,7 @@ Branch file .github/workflows/pages.yml:
   replay (45415969592, 41471386526, 45415969592) as ('fail_deploy', 'cancel_after_good', 'fail_deploy'): email [False, False, False]
   replay (45413361106, 43095722533, 45415969592) as ('good', 'never_started', 'fail_deploy'): email [False, False, False]
   sweep: 0 of 1110 sequences wrong (want 0); oracle emails in 475 of 1110
-Break cases (35), each must be red:
+Break cases (58, of which 23 restore step variants), each must be red:
   red: first failure fails the run (no continue-on-error on the deploy) (199 of 1110 sequences wrong, 12 problems)
   red: first failure fails the run (no continue-on-error on checkout) (199 of 1110 sequences wrong, 3 problems)
   red: first failure fails the run (no continue-on-error on configure) (199 of 1110 sequences wrong, 3 problems)
@@ -26,11 +26,11 @@ Break cases (35), each must be red:
   red: job continue-on-error (475 of 1110 sequences wrong, 6 problems)
   red: decide step if false (475 of 1110 sequences wrong, 9 problems)
   red: save step if false (475 of 1110 sequences wrong, 6 problems)
-  red: restore step if false (475 of 1110 sequences wrong, 8 problems)
+  red: restore step if false (475 of 1110 sequences wrong, 9 problems)
   red: save key without the run id (entry never replaced) (100 of 1110 sequences wrong, 4 problems)
-  red: restore keys removed (475 of 1110 sequences wrong, 6 problems)
+  red: restore keys removed (475 of 1110 sequences wrong, 7 problems)
   red: save path differs (475 of 1110 sequences wrong, 6 problems)
-  red: restore lookup-only (never downloads) (475 of 1110 sequences wrong, 6 problems)
+  red: restore lookup-only (never downloads) (475 of 1110 sequences wrong, 8 problems)
   red: partial restore trusted (file read without a matched key) (0 of 1110 sequences wrong, 1 problems)
   red: matched key read from the wrong step (475 of 1110 sequences wrong, 6 problems)
   red: decide step working-directory (0 of 1110 sequences wrong, 1 problems)
@@ -42,5 +42,28 @@ Break cases (35), each must be red:
   red: second deploy (1107 of 1110 sequences wrong, 13 problems)
   red: cancel-in-progress off (0 of 1110 sequences wrong, 1 problems)
   red: concurrency removed (0 of 1110 sequences wrong, 1 problems)
-  35 of 35 break cases red
+  red: restore step, lookup-only: true (475 of 1110 sequences wrong, 8 problems)
+  red: restore step, lookup-only: True (475 of 1110 sequences wrong, 8 problems)
+  red: restore step, lookup-only: TRUE (475 of 1110 sequences wrong, 8 problems)
+  red: restore step, lookup-only: 'true' (475 of 1110 sequences wrong, 8 problems)
+  red: restore step, lookup-only: "true" (475 of 1110 sequences wrong, 8 problems)
+  red: restore step, lookup-only: ${{ true }} (0 of 1110 sequences wrong, 2 problems)
+  red: restore step, lookup-only: ${{ 'true' }} (0 of 1110 sequences wrong, 2 problems)
+  red: restore step, lookup-only: ${{ !false }} (0 of 1110 sequences wrong, 2 problems)
+  red: restore step, lookup-only: ${{ github.run_id != '' }} (0 of 1110 sequences wrong, 2 problems)
+  red: restore step, lookup-only: ${{ 1 == 1 }} (0 of 1110 sequences wrong, 2 problems)
+  red: restore step, extra input fail-on-cache-miss: false (0 of 1110 sequences wrong, 2 problems)
+  red: restore step, extra input enableCrossOsArchive: false (0 of 1110 sequences wrong, 2 problems)
+  red: restore step, extra input lookup-only: false (0 of 1110 sequences wrong, 2 problems)
+  red: restore step, extra input restore-keys-extra: x (0 of 1110 sequences wrong, 2 problems)
+  red: restore step, expression: path: ${{ '.pages-deploy-result' }} (0 of 1110 sequences wrong, 1 problems)
+  red: restore step, expression: restore-keys: ${{ 'pages-deploy-result-' }} (0 of 1110 sequences wrong, 1 problems)
+  red: restore step, expression: -${{ github.run_id }}-${{ github.run_attempt }}${{ '' }} (0 of 1110 sequences wrong, 1 problems)
+  red: restore step, expression: if: ${{ always() }} (0 of 1110 sequences wrong, 1 problems)
+  red: restore step, expression: uses: actions/cache/restore@${{ 'v6' }} (0 of 1110 sequences wrong, 1 problems)
+  red: restore step, extra step key timeout-minutes: 0 (0 of 1110 sequences wrong, 2 problems)
+  red: restore step, extra step key env: (0 of 1110 sequences wrong, 1 problems)
+  red: restore step, extra step key working-directory: /tmp (0 of 1110 sequences wrong, 2 problems)
+  red: restore step, extra step key shell: bash (0 of 1110 sequences wrong, 2 problems)
+  58 of 58 break cases red
 RESULT: PASS

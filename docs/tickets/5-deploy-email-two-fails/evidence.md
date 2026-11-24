@@ -25,7 +25,7 @@ From round 1, all 40 cancelled runs of `pages.yml` here, jobs read from the API:
 
 - `always()` steps run after a cancel for this job (the docs above say so; it has no job level `if`).
 - A cancelled step's outcome is never `failure` (the 40 real runs above agree).
-- A push run can save to and restore from the cache. Look for "Earlier deploy: good." or "No earlier deploy result is saved" in the decide step of the first runs.
+- A push run can save to and restore from the cache. Look for "Earlier deploy: good." or "No earlier deploy result was restored (none saved yet, or the restore did not finish)" in the decide step of the first runs.
 - The email really goes out on the second failure and not the first. Delivery depends on who started the run and their settings (unverified, as the ticket says).
 
 ## Known, not fixed

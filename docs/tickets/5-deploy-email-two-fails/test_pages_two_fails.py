@@ -272,7 +272,7 @@ def structure(wf, text):
     extra = set(job) - {"runs-on", "environment", "steps", "continue-on-error", "if"}
     if extra:
         bad.append(f"job keys not modelled: {sorted(extra)}")
-    inputs = {"upload": {"path"}, "wait": {"script"}, "restore": {"path", "key", "restore-keys", "lookup-only"},
+    inputs = {"upload": {"path"}, "wait": {"script"}, "restore": {"path", "key", "restore-keys"},
               "save": {"path", "key"}}
     for s in steps:
         if "run" in s and "${{" in s["run"]:
@@ -287,7 +287,24 @@ def structure(wf, text):
             bad.append(f"inputs not modelled in {s.get('id') or s.get('name')}: {sorted(extra)}")
     if "continue-on-error" in job and job["continue-on-error"] is not True:
         bad.append("job continue-on-error not literal true")
+    # Round 5: the restore step must be exactly this. Any other key, lookup-only in any
+    # form, or any other expression could stop the download in ways the model cannot see.
+    restores = [s for s in steps if step_kind(s) == "restore"]
+    if restores != [RESTORE_STEP]:
+        bad.append(f"restore step is not exactly the expected one: {restores}")
     return bad
+
+
+RESTORE_STEP = {
+    "name": "Restore the last saved deploy result",
+    "id": "previous",
+    "if": "always()",
+    "continue-on-error": True,
+    "uses": "actions/cache/restore@v6",
+    "with": {"path": ".pages-deploy-result",
+             "key": "pages-deploy-result-${{ github.run_id }}-${{ github.run_attempt }}",
+             "restore-keys": "pages-deploy-result-"},
+}
 
 
 def replay_kind(run_id):
@@ -419,6 +436,28 @@ BREAKS = {
 }
 
 
+def restore_variants(text):
+    """Every kind of change to the restore step that must turn the test red."""
+    header = "- name: Restore the last saved"
+    last = "\n          restore-keys: pages-deploy-result-"
+    out = {}
+    for v in ("true", "True", "TRUE", "'true'", '"true"', "${{ true }}", "${{ 'true' }}",
+              "${{ !false }}", "${{ github.run_id != '' }}", "${{ 1 == 1 }}"):
+        out[f"lookup-only: {v}"] = in_step(header, last, last + f"\n          lookup-only: {v}")
+    for k in ("fail-on-cache-miss: false", "enableCrossOsArchive: false", "lookup-only: false",
+              "restore-keys-extra: x"):
+        out[f"extra input {k}"] = in_step(header, last, last + f"\n          {k}")
+    for old, new in (("path: .pages-deploy-result", "path: ${{ '.pages-deploy-result' }}"),
+                     ("restore-keys: pages-deploy-result-", "restore-keys: ${{ 'pages-deploy-result-' }}"),
+                     ("-${{ github.run_id }}-${{ github.run_attempt }}", "-${{ github.run_id }}-${{ github.run_attempt }}${{ '' }}"),
+                     ("if: always()", "if: ${{ always() }}"),
+                     ("uses: actions/cache/restore@v6", "uses: actions/cache/restore@${{ 'v6' }}")):
+        out[f"expression: {new}"] = in_step(header, old, new)
+    for k in ("timeout-minutes: 0", "env:\n          X: y", "working-directory: /tmp", "shell: bash"):
+        out[f"extra step key {k.splitlines()[0]}"] = in_step(header, "\n        with:", f"\n        {k}\n        with:")
+    return out
+
+
 def main():
     if "--file" in sys.argv:
         f = Path(sys.argv[sys.argv.index("--file") + 1])
@@ -438,9 +477,12 @@ def main():
         print("  FAIL", p)
     failed = bool(problems)
 
-    print(f"Break cases ({len(BREAKS)}), each must be red:")
+    breaks = dict(BREAKS)
+    variants = restore_variants(text)
+    breaks.update({f"restore step, {k}": f for k, f in variants.items()})
+    print(f"Break cases ({len(breaks)}, of which {len(variants)} restore step variants), each must be red:")
     green = 0
-    for name, fn in BREAKS.items():
+    for name, fn in breaks.items():
         try:
             broken = fn(text)
         except ValueError as e:
@@ -455,7 +497,7 @@ def main():
         if not bp:
             green += 1
         print(f"  {state}: {name} ({bred} of {n} sequences wrong, {len(bp)} problems)")
-    print(f"  {len(BREAKS) - green} of {len(BREAKS)} break cases red")
+    print(f"  {len(breaks) - green} of {len(breaks)} break cases red")
     failed = failed or green > 0
     print("RESULT:", "FAIL" if failed else "PASS")
     return 1 if failed else 0
