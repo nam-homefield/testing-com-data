@@ -30,13 +30,36 @@
 # actions/toolkit packages/artifact does it: backend IDs read from the runtime token,
 # JSON body with the snake_case field names, bearer auth) every 3 seconds, up to about
 # 60 seconds, until "github-pages" is listed. Then deploy-pages runs exactly once. If
-# the artifact never shows up, the step fails with a clear message. The deploy step has
-# no continue-on-error and is never repeated, so any failure after a deployment exists
-# (a stuck or rejected deployment, a timeout) still fails the run and sends the email,
-# and a retry can never leave an "in progress deployment" lock behind. The wait step
-# also respects the concurrency block above: a cancelled run stops the step, so a
-# superseded run ends at once. The step is an actions/github-script node action, which
-# is why it gets ACTIONS_RUNTIME_TOKEN and ACTIONS_RESULTS_URL from the runner.
+# the artifact never shows up, the step fails with a clear message. The deploy step is
+# never repeated, so a retry can never leave an "in progress deployment" lock behind.
+# The wait step also respects the concurrency block above: a cancelled run stops the
+# step, so a superseded run skips its deploy at once (only the always-run steps
+# described below still run). The step is an actions/github-script node
+# action, which is why it gets ACTIONS_RUNTIME_TOKEN and ACTIONS_RESULTS_URL from the
+# runner.
+#
+# Failure email only on two failed deploys in a row (ticket 5). The one-off failures
+# above are each followed by a good deploy a few minutes later, so a single failure
+# must not turn the run red, because GitHub emails on a failed run. Every step up to
+# and including the deploy has continue-on-error, so a failure keeps its own outcome
+# (steps.<id>.outcome is "failure") but does not fail the job, and each step runs only
+# when the one before it worked. After the deploy, always-run steps do this:
+#   1. Restore the newest saved result: the cache entry with the most recent creation
+#      date under the prefix pages-deploy-result- (GitHub's cache key matching rule).
+#   2. Decide this run's result. bad = any of those steps failed. good = the deploy
+#      step succeeded, even if a newer push cancelled the run afterwards. Anything
+#      else (stopped before the deploy finished) saves nothing, so the saved result
+#      stays as it is. No saved result, or a failed or damaged restore (the restore
+#      did not report the key it found), counts as "no earlier failure" and the log
+#      says so.
+#   3. Save this run's result under its own key (run id and attempt).
+#   4. Fail the run, which sends the email, only when this run and the saved one are
+#      both bad. So every failure after the first in a streak emails, until a good
+#      deploy resets it.
+# The workflow level concurrency group keeps runs apart: GitHub's docs say "only a
+# single job or workflow using the same concurrency group will run at a time". The
+# restore also runs after the deploy steps, well after an older run's last steps. A
+# lone failure shows as a green run with a red step inside it.
 #
 # No Jekyll step on purpose. upload-pages-artifact serves the files exactly as pushed,
 # which is what the reports need, and the repo has no Jekyll sources.
@@ -63,13 +86,24 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - id: checkout
+        uses: actions/checkout@v4
+        continue-on-error: true
+      - id: configure
+        if: steps.checkout.outcome == 'success'
+        uses: actions/configure-pages@v5
+        continue-on-error: true
+      - id: upload
+        if: steps.configure.outcome == 'success'
+        uses: actions/upload-pages-artifact@v3
+        continue-on-error: true
         with:
           path: .
       # Wait until the artifact shows up in the same lookup deploy-pages uses.
       - name: Wait for the artifact to be listed
+        id: wait
+        if: steps.upload.outcome == 'success'
+        continue-on-error: true
         uses: actions/github-script@v9
         with:
           script: |
@@ -130,4 +164,74 @@ jobs:
             }
             core.setFailed('Artifact github-pages was never listed by the results service after about 60 seconds (' + last + ').');
       - id: deployment
+        if: steps.wait.outcome == 'success'
         uses: actions/deploy-pages@v4
+        continue-on-error: true
+      # The two-in-a-row rule. See the header comment.
+      - name: Restore the last saved deploy result
+        id: previous
+        if: always()
+        continue-on-error: true
+        uses: actions/cache/restore@v6
+        with:
+          path: .pages-deploy-result
+          key: pages-deploy-result-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: pages-deploy-result-
+      - name: Decide this deploy's result
+        id: decide
+        if: always()
+        env:
+          CHECKOUT: ${{ steps.checkout.outcome }}
+          CONFIGURE: ${{ steps.configure.outcome }}
+          UPLOAD: ${{ steps.upload.outcome }}
+          WAIT: ${{ steps.wait.outcome }}
+          DEPLOY: ${{ steps.deployment.outcome }}
+          RESTORE: ${{ steps.previous.outcome }}
+          MATCHED: ${{ steps.previous.outputs.cache-matched-key }}
+        run: |
+          # The restore sets cache-matched-key only when it found and unpacked an entry.
+          # A download or unpack error is only a warning and may leave a file behind,
+          # so the file is trusted only with that output set.
+          file=.pages-deploy-result/result
+          before=none
+          if [ -n "$MATCHED" ] && [ -f "$file" ]; then before=$(cat "$file"); fi
+          if [ "$before" != good ] && [ "$before" != bad ]; then
+            before=none
+            if [ "$RESTORE" != success ]; then
+              echo "Could not look up the earlier deploy result ($RESTORE). Counting it as no earlier failure."
+            elif [ -z "$MATCHED" ]; then
+              echo "No earlier deploy result was restored (none saved yet, or the restore did not finish). Counting it as no earlier failure."
+            else
+              echo "The restored deploy result could not be read. Counting it as no earlier failure."
+            fi
+          else
+            echo "Earlier deploy: $before."
+          fi
+          this=
+          for outcome in "$CHECKOUT" "$CONFIGURE" "$UPLOAD" "$WAIT" "$DEPLOY"; do
+            if [ "$outcome" = failure ]; then this=bad; fi
+          done
+          if [ -z "$this" ] && [ "$DEPLOY" = success ]; then this=good; fi
+          if [ -z "$this" ]; then
+            echo "This run stopped before its deploy finished. The saved result stays as it is."
+          else
+            echo "This deploy: $this."
+            mkdir -p .pages-deploy-result
+            echo "$this" > "$file"
+          fi
+          alert=false
+          if [ "$this" = bad ] && [ "$before" = bad ]; then alert=true; fi
+          echo "result=$this" >> "$GITHUB_OUTPUT"
+          echo "alert=$alert" >> "$GITHUB_OUTPUT"
+      - name: Save this deploy's result
+        if: always() && steps.decide.outputs.result != ''
+        continue-on-error: true
+        uses: actions/cache/save@v6
+        with:
+          path: .pages-deploy-result
+          key: pages-deploy-result-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Fail the run when two deploys in a row failed
+        if: always() && steps.decide.outputs.alert == 'true'
+        run: |
+          echo "::error::This deploy and the one before it both failed."
+          exit 1

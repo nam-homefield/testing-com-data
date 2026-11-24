@@ -1,0 +1,8 @@
+== round 4 test on a copy with lookup-only: ${{ true }}
+pages-lookup-expr.yml: 0 of 1110 sequences wrong
+RESULT: PASS
+== round 5 test on the same copy
+pages-lookup-expr.yml: 0 of 1110 sequences wrong
+  FAIL inputs not modelled in previous: ['lookup-only']
+  FAIL restore step is not exactly the expected one: [{'name': 'Restore the last saved deploy result', 'id': 'previous', 'if': 'always()', 'continue-on-error': True, 'uses': 'actions/cache/restore@v6', 'with': {'path': '.pages-deploy-result', 'key': 'pages-deploy-result-${{ github.run_id }}-${{ github.run_attempt }}', 'restore-keys': 'pages-deploy-result-', 'lookup-only': '${{ true }}'}}]
+RESULT: FAIL
