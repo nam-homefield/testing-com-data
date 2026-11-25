@@ -6937,7 +6937,7 @@
    "engaged_sessions": 5449,
    "glp1_first": 0,
    "glp1_renewal": 0,
-   "orders": 11,
+   "orders": 12,
    "orders_by_hour": [
     1,
     0,
@@ -6962,7 +6962,7 @@
     0,
     0,
     0,
-    0
+    1
    ],
    "org_checkout_visits": 44,
    "organic_visits": 3027,
@@ -6993,9 +6993,9 @@
     0,
     0,
     0,
-    0
+    24600
    ],
-   "revenue_cents": 154100
+   "revenue_cents": 178700
   }
  ]
 }
