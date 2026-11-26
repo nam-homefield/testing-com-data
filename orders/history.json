@@ -7064,6 +7064,16 @@
     0
    ],
    "revenue_cents": 250200
+  },
+  {
+   "carts": 6,
+   "checkout_visits": 2,
+   "date": "2026-11-26",
+   "engaged_sessions": 148,
+   "org_checkout_visits": 1,
+   "organic_visits": 100,
+   "partial": false,
+   "reached_checkout": 2
   }
  ]
 }
